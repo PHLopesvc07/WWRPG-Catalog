@@ -85,20 +85,47 @@ export class SpellController {
     this.applyFiltersAndRender();
   }
 
+  // ─── helper: carrega o arquivo atual (mesmo sem abrir a aba IV) ──────────
+  async _fetchCurrentArchive() {
+    try {
+      return await DatabaseService.fetchCollection('./feiticos', 'indice_feiticos.json');
+    } catch {
+      return []; // arquivo ainda não existe
+    }
+  }
+
+  // ─── helper: funde existentes + novos e baixa indice consolidado ─────────
+  _mergeAndExport(existingSpells, newSpells, label = 'indice_feiticos') {
+    const byName = new Map();
+    // existentes primeiro (base), novos sobrescrevem se mesmo nome
+    [...existingSpells, ...newSpells].forEach(s => byName.set(s.name, s));
+    const merged = [...byName.values()];
+    DatabaseService.saveRecord(merged, label);
+    return merged.length;
+  }
+
   saveSpell(e, form) {
     e.preventDefault();
     const data = {
-      name: document.getElementById('s-name').value,
-      cat:  document.getElementById('s-cat').value,
-      lvl:  document.getElementById('s-lvl').value,
-      tipo: document.getElementById('s-tipo').value,
-      pronuncia: document.getElementById('s-pronunciation'),
-      desc: document.getElementById('s-desc').value,
+      name:          document.getElementById('s-name').value,
+      cat:           document.getElementById('s-cat').value,
+      lvl:           document.getElementById('s-lvl').value,
+      tipo:          document.getElementById('s-tipo').value,
+      pronunciation: document.getElementById('s-pronunciation')?.value || '',
+      desc:          document.getElementById('s-desc').value,
     };
     if (data.tipo === 'N/A') delete data.tipo;
-    DatabaseService.saveRecord(data, `feitico_${data.name}`);
-    alert(`O manuscrito de "${data.name}" foi gerado!\nMova para 'feiticos' e adicione no indice.`);
-    form.reset();
+    if (!data.pronunciation) delete data.pronunciation;
+
+    this._fetchCurrentArchive().then(existing => {
+      const total = this._mergeAndExport(existing, [data]);
+      alert(
+        `✓ Feitiço "${data.name}" adicionado!\n` +
+        `O arquivo "indice_feiticos.json" contém agora ${total} feitiço(s).\n\n` +
+        `Substitua 'feiticos/indice_feiticos.json' pelo arquivo baixado.`
+      );
+      form.reset();
+    });
   }
 
   // ─── Importação em Massa ──────────────────────────────────────────────────
@@ -139,6 +166,7 @@ export class SpellController {
         errors.push(`Item ${i + 1} ("${s.name || '?'}"): campos ausentes — ${missing.join(', ')}`);
       } else {
         if (!s.tipo) delete s.tipo;
+        if (!s.pronunciation) delete s.pronunciation;
         valid.push(s);
       }
     });
@@ -163,7 +191,7 @@ export class SpellController {
         <td>${s.cat}</td>
         <td>${s.lvl}</td>
         <td>${s.tipo ?? '—'}</td>
-        <td>${s.pronuncia ?? '—'}</td>
+        <td style="font-size:0.82rem;opacity:0.8;">${s.pronunciation ?? '—'}</td>
       </tr>`).join('');
 
     tbody.querySelectorAll('.btn-remove-bulk').forEach(btn => {
@@ -186,26 +214,15 @@ export class SpellController {
 
     if (!toImport.length) return alert('Nenhum feitiço para importar.');
 
-    const safe = n => n.replace(/[^a-z0-9_]/gi, '_').toLowerCase();
-
-    toImport.forEach((spell, i) => {
-      setTimeout(() => DatabaseService.saveRecord(spell, `feitico_${spell.name}`), i * 300);
-    });
-
-    const existingFiles = this.archive.map(s => `feitico_${safe(s.name)}.json`);
-    const newFiles      = toImport.map(s => `feitico_${safe(s.name)}.json`);
-    const merged        = [...new Set([...existingFiles, ...newFiles])];
-
-    setTimeout(() => {
-      DatabaseService.saveRecord(merged, 'indice_feiticos');
+    this._fetchCurrentArchive().then(existing => {
+      const total = this._mergeAndExport(existing, toImport);
       alert(
-        `✓ ${toImport.length} feitiço(s) gerado(s)!\n\n` +
-        `Próximos passos:\n` +
-        `1. Mova os arquivos feitico_*.json para a pasta 'feiticos/'\n` +
-        `2. Substitua 'indice_feiticos.json' pelo arquivo baixado`
+        `✓ ${toImport.length} feitiço(s) importado(s)!\n` +
+        `O arquivo "indice_feiticos.json" contém agora ${total} feitiço(s).\n\n` +
+        `Substitua 'feiticos/indice_feiticos.json' pelo arquivo baixado.`
       );
       this.cancelBulkImport();
-    }, toImport.length * 300 + 400);
+    });
   }
 
   cancelBulkImport() {
@@ -337,10 +354,10 @@ export class SpellController {
           <span class="attr-badge">${s.cat}</span>
           <span class="attr-badge" style="border-color:var(--magic-gold);">Nível ${s.lvl}</span>
           <span class="attr-badge">⚅ ${ld.dice}</span>
-          <span class="attr-badge">${s.pronuncia}</span>
           <span class="attr-badge">ϟ ${ld.actions}</span>
           <span class="attr-badge">★ ${conjAttr}</span>
           ${s.tipo ? `<span class="attr-badge" style="border-color:#555;color:#aaa;">${s.tipo}</span>` : ''}
+          ${s.pronunciation ? `<span class="attr-badge" style="border-color:#555;font-style:italic;">${s.pronunciation}</span>` : ''}
         </div>
         <div class="bureaucracy-box" style="padding:10px;margin-bottom:15px;">
           <h3 style="margin-top:0;font-size:1rem;color:var(--magic-gold);">Tabela de Teste — ${ld.dice}</h3>
