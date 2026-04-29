@@ -1,4 +1,3 @@
-
 import { DatabaseService } from '../services/database.js';
 
 // ─── Tabelas derivadas do sistema de regras ────────────────────────────────
@@ -287,6 +286,8 @@ export class SpellController {
     filtered.forEach(spell => {
       const li = document.createElement('li');
       li.className = 'creature-item';
+      li.style.cursor = 'pointer';
+      li.onclick = () => this.renderDetails(spell);
 
       if (this.isListMode) {
         const cb = document.createElement('input');
@@ -304,7 +305,6 @@ export class SpellController {
       const span = document.createElement('span');
       span.className = 'creature-item-title';
       span.textContent = `${spell.name} (Nível ${spell.lvl})`;
-      span.onclick = () => this.renderDetails(spell);
       li.appendChild(span);
 
       if (!this.isListMode) {
