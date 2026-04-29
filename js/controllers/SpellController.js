@@ -35,7 +35,8 @@ function buildEffectsRows(tipo, fx) {
     'Defesa': { key: 'def',  label: '⛊ Defesa', color: '#2980b9' },
     'Cura':   { key: 'cure', label: '❤︎ Cura',  color: '#27ae60' },
   };
-  const show = tipo ? [tipo] : ['Dano', 'Defesa', 'Cura'];
+  // Se tipo não existe no cfg, exibe todas as linhas (fallback seguro)
+  const show = (tipo && cfg[tipo]) ? [tipo] : ['Dano', 'Defesa', 'Cura'];
   return show.map(t => {
     const { key, label, color } = cfg[t];
     return `<tr>
