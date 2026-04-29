@@ -295,3 +295,51 @@ label {
     border-color: var(--magic-gold);
     color: var(--magic-gold);
 }
+
+/* ── Scroll na lista lateral do arquivo ─────────────────────────────── */
+#archive-spell-list,
+#archive-list {
+    max-height: 60vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--magic-gold) var(--input-bg-dark);
+}
+
+#archive-spell-list::-webkit-scrollbar,
+#archive-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+#archive-spell-list::-webkit-scrollbar-track,
+#archive-list::-webkit-scrollbar-track {
+    background: var(--input-bg-dark);
+    border-radius: 3px;
+}
+
+#archive-spell-list::-webkit-scrollbar-thumb,
+#archive-list::-webkit-scrollbar-thumb {
+    background-color: var(--magic-gold);
+    border-radius: 3px;
+}
+
+/* ── Scroll em todas as listas laterais do arquivo ──────────────────── */
+.creature-list {
+    max-height: 60vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--magic-gold) var(--input-bg-dark);
+}
+
+.creature-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.creature-list::-webkit-scrollbar-track {
+    background: var(--input-bg-dark);
+    border-radius: 3px;
+}
+
+.creature-list::-webkit-scrollbar-thumb {
+    background-color: var(--magic-gold);
+    border-radius: 3px;
+}
