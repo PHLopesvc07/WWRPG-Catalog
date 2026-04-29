@@ -1,3 +1,1128 @@
 [
-  
+  {
+    "name": "Abaffiato",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "A-ba-fi-á-to",
+    "desc": "É capaz de produzir um zumbido no ouvido de pessoas próximas, de modo que elas não consigam escutar conversas ou barulhos feitos pelo(s) usuário(s) do feitiço."
+  },
+  {
+    "name": "Animus Novandi",
+    "cat": "Transfiguração",
+    "lvl": "5",
+    "tipo": "Utilitário",
+    "pronuncia": "A-ba-fi-á-to",
+    "desc": "Faz com que objetos não-mágicos façam suas devidas ações sozinhos."
+  },
+  {
+    "name": "Amato Animo Animato Animagus",
+    "cat": "Transfiguração",
+    "lvl": "7",
+    "tipo": "Utilitário",
+    "pronuncia": "ah-MAEH-toh ah-Ni-moh ah-ni-MAEH-toh an-e-MAEY-jius",
+    "desc": "É o encantamento utilizado no para se tornar um Animago, um bruxo capaz de se transformar em um animal específico à vontade. O processo é longo, perigoso e exige manter uma folha de mandrágora na boca por um mês, seguido por poções e recitação diária do feitiço. \nO Feitiço: O encantamento deve ser recitado ao amanhecer e ao anoitecer, com a ponta da varinha no peito, sobre o coração. \nO Ritual: Envolve manter uma folha de mandrágora na boca por um mês (da lua cheia à próxima), adicionar a folha e um fio de cabelo a um frasco, expor a orvalho e luz solar, e esperar uma tempestade de raios. \nSegundo Batimento: Se feito corretamente, o bruxo sentirá um segundo batimento cardíaco antes da transformação final. \nFinalização: Durante uma tempestade, o bruxo bebe a poção vermelha sangue, o que causa uma dor intensa e permite a transformação. \nAparência: O animal é determinado pela personalidade do bruxo, não por escolha."
+  },
+  {
+    "name": "Aparatar e Desaparatar",
+    "cat": "Charme",
+    "lvl": "7",
+    "tipo": "Utilitário",
+    "desc": "Feitiço não-verbal sem uso de varinha. Serve para se \"teletransportar\" de um lugar até outro. \nÉ considerado difícil, complexo e perigoso devido à necessidade de precisão mental absoluta, controle mágico rigoroso e o risco físico de falha, sendo necessário ter 17 anos e uma licença do Ministério da Magia. \nÉ necessário que o conjurador domine os \"Três D's\": \n1. Destinação: Saber precisamente para onde vai. \n2. Determinação: Vontade inabalável de chegar lá. \n3. Deliberação: Se mover calmamente e estar focado. \nRisco de Estrunchamento: No caso de uma falha o conjurador recebe o dano equivalente á: 2L+1M em uma falha, 3L+2M em um desastre, podendo estar sujeito a danos profundo em membros | Injúria Específica: (C) Estrunchado."
+  },
+  {
+    "name": "Arania Exumai",
+    "cat": "Charme",
+    "lvl": "3",
+    "pronuncia": "Arã-nhia Eks-su-mai",
+    "desc": "É um feitiço de banimento usado para repelir, afastar ou explodir aranhas e acromântulas."
+  },
+  {
+    "name": "Araniasortia",
+    "cat": "Transfiguração",
+    "lvl": "1",
+    "pronuncia": "Arã-nhia-sÓr-ti-ah",
+    "desc": "Conjura qualquer aracnídeo (em níveis menores conjura aranhas pequenas de jardim, podendo ser conjurado nos níveis 4, 5 e 6 para o surgimento de aranhas maiores de acordo com a tabela de tamanhos)."
+  },
+  {
+    "name": "Harmonia Nectere Passus",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "Har-MO-nia Nec-TE-ria PAs-sus",
+    "desc": "serve para restabelecer passagens mágicas quebradas"
+  },
+  {
+    "name": "Aguamenti",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "AH-guah-MEN-ti",
+    "desc": "Produz um jato d'água controlado mentalmente. | Injúria Específica: (C) Encharcado"
+  },
+  {
+    "name": "Appare Vestigium",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "desc": "É um encantamento que revela e ilumina traços de atividades mágicas recentes. Mostra pegadas mágicas e marcas de trilhas em uma área."
+  },
+  {
+    "name": "Alohomora",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "A-lô-ho-MOH-ra",
+    "desc": "Usado para destrancar portas trancadas por chaves comuns, e não trancadas por magia."
+  },
+  {
+    "name": "Ascendio",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "A-CÊN-dio",
+    "desc": "Joga o conjurador para cima, propulsionando-o rapidamente para o alto. Usado por Harry Potter na segunda tarefa do Torneio Tribruxo para emergir do lago."
+  },
+  {
+    "name": "Erecto",
+    "cat": "Charme",
+    "lvl": "4",
+    "tipo": "Utilitário",
+    "pronuncia": "e-REH-cto",
+    "desc": "Ergue e monta estruturas, tendas, andaimes e objetos similares de forma automática."
+  },
+  {
+    "name": "Glisseo",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "GLI-sio",
+    "desc": "Torna superfícies ásperas e acidentadas — como degraus de escadas — em superfícies planas e lisas, criando um escorregador. Contra-feitiço: Duro."
+  },
+  {
+    "name": "Impervius",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "im-PER-vi-ous",
+    "desc": "Torna o objeto alvo completamente impermeável, repelindo água, névoa e outras substâncias líquidas."
+  },
+  {
+    "name": "Lacarnum Inflamari",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "La-CAR-num In-fla-MA-re",
+    "desc": "Produz chamas azuladas e quentes que podem ser recolhidas num frasco."
+  },
+  {
+    "name": "Lumos",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "LU-mus",
+    "desc": "Feitiço básico para iluminar a ponta da varinha."
+  },
+  {
+    "name": "Lumos Maxima",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "LU-mus Mak-si-mÁ",
+    "desc": "É uma variação mais poderosa do feitiço de iluminação Lumos, utilizada para criar uma luz intensa e ofuscante a partir da ponta da varinha."
+  },
+  {
+    "name": "Orchideous",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "or-KI-de-us",
+    "desc": "Conjura um buquê de flores na ponta da varinha."
+  },
+  {
+    "name": "Pack",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "PÁ-ck",
+    "desc": "Arruma e organiza malas e bagagens automaticamente, fazendo com que os itens se dobrem e se acomodem por conta própria."
+  },
+  {
+    "name": "Pericullum",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Pe-RI-cu-lum",
+    "desc": "Lança centelhas ou fogos de artifício vermelhos para o céu, servindo como sinal de socorro ou marcador de posição."
+  },
+  {
+    "name": "Peskipiksi Pesternomi",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Pesky pixie, pester no me!",
+    "desc": "Faz Diabretes da Cornualha fugirem ou ao menos desistirem de fazer travessuras."
+  },
+  {
+    "name": "Quenterralopus",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "quen-te-RRA-po-lus",
+    "desc": "Faz a varinha liberar uma corrente de ar quente, podendo secar superfícies, aquecer ambientes ou descongelar objetos."
+  },
+  {
+    "name": "Relaxo",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Re-LAKS-oh",
+    "desc": "Faz com que algo que esteja preso ou segurando outra coisa solte-se imediatamente. Útil para libertar objetos presos ou abrir garras e armadilhas."
+  },
+  {
+    "name": "Sonorus",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "so-NO-rus",
+    "desc": "Aumenta magicamente o volume da voz do conjurador, permitindo que seja ouvida por grandes multidões. Contra-feitiço: Quietus."
+  },
+  {
+    "name": "Uediuósi",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "Uedi-UÁ-zi",
+    "desc": "arremessa descontroladamente e em grande velocidade pequenos objetos(Pode ser conjurado nos níveis 3, 5 e 6 para arremessar objetos maiores e mais pesados)"
+  },
+  {
+    "name": "Verdimillious",
+    "cat": "Charme",
+    "lvl": "1",
+    "pronuncia": "Ver-di-MI-llious",
+    "desc": "É uma magia que é usada para atacar. Ela se manifesta pela forma de um jato de luz ou um raio verde. Outro uso para este feitiço é desvendar objetos escondidos pelas Artes das Trevas."
+  },
+  {
+    "name": "Wingardium Leviosa",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "win-gar-di-um",
+    "desc": "Faz objetos levitarem baixas alturas."
+  },
+  {
+    "name": "Accio",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Ah-qui-ô",
+    "desc": "Feitiço Convocatório; é usado para chamar itens de longa distância para as mãos do bruxo. Tem precisão aumentada caso o nome do objeto requerido seja conjurado após a pronúncia do feitiço."
+  },
+  {
+    "name": "Aqua Eructo",
+    "cat": "Charme",
+    "lvl": "2",
+    "pronuncia": "Ah-KWA-er-UK-to",
+    "desc": "Produz um jato de água controlado. Também pode ser usado para criar uma barreira de água (lvl 5). Usado em conjunto com Ebublio contra salamandras."
+  },
+  {
+    "name": "Carpe Retractum",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "car-PE re-TRAC-tum",
+    "desc": "Conjura uma corrente de luz roxa/laranja avermelhada que se prende ao alvo, puxando-o em direção ao conjurador — ou puxando o conjurador em direção ao alvo, caso ele seja pesado ou fixo. Variação de curto alcance do Accio. | Injúria Específica: (C) Puxado"
+  },
+  {
+    "name": "Colloportus",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "col-lo-PÓR-tus",
+    "desc": "Sela magicamente portas e objetos com fechadura, impedindo-os de serem abertos por meios normais. Contra-encantamento de Alohomora."
+  },
+  {
+    "name": "Diffindo",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "dif-FIN-doh",
+    "desc": "Inverso do feitiço Reparo. Feitiço utilizado para cortar coisas"
+  },
+  {
+    "name": "Reparo",
+    "cat": "Transfiguração",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "Re-páh-rô",
+    "desc": "Concerta objetos quebrados"
+  },
+  {
+    "name": "Diminuendo",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "di-mi-nu-EM-do",
+    "desc": "Diminui instantaneamente o tamanho de um objeto ou ser para apenas alguns centímetros. Pode ser usado em criaturas e objetos."
+  },
+  {
+    "name": "Engorgio",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "en-GOR-dio",
+    "desc": "Faz com que algo cresça e aumente de tamanho de forma desproporcional. O contra-feitiço é Reducio/Diminuendo. (pode aumentar a categoria de um objeto, no caso de um acerto cresce 1 tamanho, no caso de um crítico cresce 2 tamanhos)"
+  },
+  {
+    "name": "Expelliarmus",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Éks-Pe-Li-Ar-Mus",
+    "desc": "Feitiço de Desarmamento que produz um raio vermelho, também é usado para jogar o adversário longe(caso o usuário do feitiço mire na pessoa em vez de mirar na arma, seja varinha ou outra coisa), às vezes fazendo-o desmaiar. (este feitiço faz com que o alvo role um teste de lábia, em caso de um desastre faz com que a varinha perca uma das regras [1d5])"
+  },
+  {
+    "name": "Fogus Menteo",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "FÓ-gus MÊN-te-Ô",
+    "desc": "Conjura fogo magicamente. A intensidade das chamas é controlada diretamente pela mente do conjurador."
+  },
+  {
+    "name": "Lumos Solem",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "LU-mos SÓ-lem",
+    "desc": "Cria uma luz intensa que imita a luz solar, irradiando a partir da varinha. Pode ser direcionada para iluminar locais específicos a partir de cima. Pode ser utilizada para deter a Mimosa Mimbletonia e outros seres sensíveis à luz solar."
+  },
+  {
+    "name": "Mobiliarbus",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Mow-BILL-i-ARE-bus",
+    "desc": "Move árvores e outras plantas grandes de lugar, arrastando-as levemente pelo ar ou pelo chão."
+  },
+  {
+    "name": "Peso de Pena",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "PE-so de PE-na",
+    "desc": "Reduz drasticamente o peso de um objeto, fazendo-o pesar como uma pena. Útil para transportar cargas pesadas."
+  },
+  {
+    "name": "Protego",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Proteção",
+    "pronuncia": "pro-TE-go",
+    "desc": "Este feitiço faz com que os feitiços menores ricocheteiem em quem os usou. (pode ser conjurado no nível 3)"
+  },
+  {
+    "name": "Revellio",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Revele seus segredos",
+    "desc": "Conhecido como o Encantamento Revelador, desmascara segredos, identidades e coisas ocultas."
+  },
+  {
+    "name": "Specialis Revelio",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Spe-ci-A-lis Re-VE-lio",
+    "desc": "Revela encantamentos, poções e propriedades ocultas em objetos, indicando se são verdadeiros ou falsificados. Hermione usa para verificar livros suspeitos."
+  },
+  {
+    "name": "Cave Inimicum",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Proteção",
+    "pronuncia": "CA-ve-INI-mi-cum",
+    "desc": "Cria uma \"barreira\" protetora em volta de algum lugar, que não permite que quem esteja fora dessa barreira veja o que acontece por dentro da mesma."
+  },
+  {
+    "name": "Desilusório Camaninvisibilis",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "CA-ma-nin-vi-Si-BE-Lis",
+    "desc": "Causa um efeito similar ao de um camaleão no alvo: ele passa a refletir o ambiente ao redor, tornando-se extremamente difícil de notar, mas sem ficar completamente invisível."
+  },
+  {
+    "name": "Herbivicus",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "her-BÍ-vi-cus",
+    "desc": "Faz com que a planta envolvida pelo feitiço cresça rapidamente."
+  },
+  {
+    "name": "Homenum Revelio",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "ho-ME-num re-VE-lioh",
+    "desc": "Esse encantamento revela presenças humanas."
+  },
+  {
+    "name": "Immobilus",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "i-MÓ-bi-lus",
+    "desc": "Usado para paralisar criaturas/pessoas. Semelhante ao Petrificus Totalus. | Injúria Específica: (C) Paralisado"
+  },
+  {
+    "name": "Silencio",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "Si-LEN-si-oh",
+    "desc": "Faz com que o alvo fique em silêncio. | Injúria Específica: (C) Silenciado"
+  },
+  {
+    "name": "Cistem Aperio",
+    "cat": "Charme",
+    "lvl": "4",
+    "tipo": "Utilitário",
+    "pronuncia": "cIS-têm-APé-rIO",
+    "desc": "Estoura localidades, como uma caixa trancada por exemplo ou a varinha de uma pessoa. (Em caso de um crítico retira 2 regras da varinha do alvo de uma vez [2d5])"
+  },
+  {
+    "name": "Confundus",
+    "cat": "Charme",
+    "lvl": "5",
+    "tipo": "Ataque",
+    "pronuncia": "con-FUn-dos",
+    "desc": "É um feitiço para confundir a mente da vitima de varias formas diferentes, o feitiço pode ser usado de inúmeras maneiras, seja para fazer alguém errar o'que ia dizer, ou se confundir durante um duelo, é um feitiço que envolve a confusão mental rápida de alguém, é considerada uma magia de alto nível, pois pode ser usada legalmente, e com muita capacidade, é quase como um Impérios. | Injúria Específica: (C) Desorientado"
+  },
+  {
+    "name": "Conjurius Army",
+    "cat": "Charme",
+    "lvl": "4",
+    "tipo": "Proteção",
+    "pronuncia": "con-JU-rius Ar-my",
+    "desc": "Conjura uma proteção temporária que pode ser utilizada para se defender de qualquer feitiço lampejo, conjurando uma espécie de escudo para se defender de feitiços mais poderosos e uma pequena parede transparente que pode defender de feitiços mais fracos e simples."
+  },
+  {
+    "name": "Deffodio",
+    "cat": "Charme",
+    "lvl": "4",
+    "tipo": "Utilitário",
+    "pronuncia": "de-FOH-di-o",
+    "desc": "Este feitiço faz com que entalhes profundos apareçam no objeto alvejado. Usado para escavar terra, pedra e outros materiais com facilidade. (Pode ser utilizado para destruir objetos)"
+  },
+  {
+    "name": "Salvio Hexia",
+    "cat": "Charme",
+    "lvl": "4",
+    "tipo": "Proteção",
+    "pronuncia": "SAL-vio-HÉ-ks-ah",
+    "desc": "Um feitiço de proteção semelhante a um campo de força, um poderoso encantamento protetor, com até mesmo conjuradores pouco habilidosos sendo capazes de produzir um encantamento que proteja uma pequena área contra a maioria das maldições. Quanto mais poderoso o conjurador, mais feitiços poderosos ele será capaz de bloquear e maior a área protegida pelo feitiço."
+  },
+  {
+    "name": "Speculum",
+    "cat": "Charme",
+    "lvl": "4",
+    "tipo": "Proteção",
+    "pronuncia": "spe-CU-lum",
+    "desc": "Produz um efeito que ricocheteia o feitiço de volta para o bruxo que o lançou, não funciona com Maldições Imperdoáveis, não funciona com danos físicos."
+  },
+  {
+    "name": "Aresto Momentum",
+    "cat": "Charme",
+    "lvl": "5",
+    "tipo": "Proteção",
+    "pronuncia": "ARESto MomenTUM",
+    "desc": "é um feitiço conhecido como \"feitiço de desaceleração\" ou \"charme de frenagem\", usado para diminuir a velocidade de objetos ou pessoas em queda. Ele serve para interromper o ímpeto, tornando movimentos lentos. | Injúria Específica: (C) Desacelerado"
+  },
+  {
+    "name": "Expecto Patronum",
+    "cat": "Charme",
+    "lvl": "5",
+    "tipo": "Proteção",
+    "pronuncia": "Éks-péK-to Pa-trO-NouM",
+    "desc": "É um feitiço defensivo que conjura um patrono, um ser mágico feito de energia positiva que toma a forma de um animal prateado, único para cada bruxo. É a única defesa conhecida contra dementadores. Para conjurá-lo, é preciso concentrar-se em um pensamento positivo. Pode ser usado também como uma forma de comunicação entre bruxos, visto que em diversas passagens dos livros o bruxo conjura o patrono que leva mensagens, avisos, recados (como se o bruxo gravasse uma mensagem de voz no patrono) ou até para proteger outros lugares. Também serve como ataque contra os dementadores em sua forma redonda e também é como se fosse uma grande explosão de uma luz branca e azul."
+  },
+  {
+    "name": "Extencio",
+    "cat": "Charme",
+    "lvl": "5",
+    "tipo": "Utilitário",
+    "pronuncia": "ex-tên-si-Ô",
+    "desc": "Faz com que algum tipo de depósito possua mais espaço sem que se perceba."
+  },
+  {
+    "name": "Partis Temporous",
+    "cat": "Charme",
+    "lvl": "5",
+    "tipo": "Utilitário",
+    "pronuncia": "par-TIS TEM-po-RUS",
+    "desc": "Divide temporariamente campos de proteção exemplo: anel de fogo."
+  },
+  {
+    "name": "Protego Horribilis",
+    "cat": "Charme",
+    "lvl": "5",
+    "tipo": "Proteção",
+    "pronuncia": "pro-TÊ-go ho-RRI-bi-lis",
+    "desc": "um feitiço de proteção avançado e extremamente poderoso utilizado para criar barreiras mágicas defensivas contra magias das trevas."
+  },
+  {
+    "name": "Protego Maxima",
+    "cat": "Charme",
+    "lvl": "5",
+    "tipo": "Proteção",
+    "pronuncia": "pro-TÊ-go Má-xi-ma",
+    "desc": "é uma variação extremamente poderosa do Feitiço Escudo (Protego). Utilizado para proteção de grandes áreas, ele cria uma barreira mágica quase impenetrável, geralmente conjurado em conjunto com Fianto Duri e Repello Inimicum para reforçar defesas"
+  },
+  {
+    "name": "Protego Totalum",
+    "cat": "Charme",
+    "lvl": "5",
+    "tipo": "Proteção",
+    "pronuncia": "pro-TÊ-go to-TA-llum",
+    "desc": "é um feitiço de proteção de longa duração utilizado para defender áreas, habitações ou acampamentos. Ele cria uma barreira mágica que repele intrusos e feitiços só desfeito quando alguém lança o reverte."
+  },
+  {
+    "name": "Element circa",
+    "cat": "Charme",
+    "lvl": "6",
+    "pronuncia": "ele-mÊn-te CIR-ka",
+    "desc": "Faz que o elemento mencionado torne-se possível de \"controlar\", um feitiço muito difícil, que exige alto nível experiente em magia."
+  },
+  {
+    "name": "Fianto Duri",
+    "cat": "Charme",
+    "lvl": "6",
+    "tipo": "Proteção",
+    "pronuncia": "Fi-AN-to DU-ri",
+    "desc": "Cria uma proteção no local lançado, mais sólida de acordo com sua pronúncia. Cria uma barreira protetora que desintegra todos que passarem por ela. | Injúria Específica: (C) Desintegrar"
+  },
+  {
+    "name": "Fidelius",
+    "cat": "Charme",
+    "lvl": "6",
+    "tipo": "Utilitário",
+    "pronuncia": "fi-DÉ-Lius",
+    "desc": "Esse feitiço complexo guarda uma informação secreta dentro da alma do bruxo \"recipiente\", conhecido como \"fiel do segredo\". A Informação é então inacessível, até que o fiel do segredo escolha revelá-la; nem mesmo aqueles que conseguiram que a informação lhes fosse revelada poderão revelá-la para outros."
+  },
+  {
+    "name": "Flagrate",
+    "cat": "Transfiguração",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "lag-RAH-tay",
+    "desc": "Este feitiço marca letras no ar com fogo, as letras flutuam e podem ser movidas pelo conjurador"
+  },
+  {
+    "name": "Locomotor Mortis",
+    "cat": "Transfiguração",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Lo-co-MO-tor MOR-tis.",
+    "desc": "É azaração simples, seu efeito é de colar as pernas do oponente uma na outra por alguns minutos. | Injúria Específica: (C) Pernas Coladas"
+  },
+  {
+    "name": "Skurge",
+    "cat": "Transfiguração",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "SKUR-ge",
+    "desc": "Usado para limpar algo."
+  },
+  {
+    "name": "Tunteli Tintagel",
+    "cat": "Transfiguração",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Tun-TE-li Tin-ta-Gel",
+    "desc": "Corta cordas e correntes."
+  },
+  {
+    "name": "Vera Verto",
+    "cat": "Transfiguração",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Véra Verto",
+    "desc": "Este Feitiço transforma animais em cálices de água"
+  },
+  {
+    "name": "Avifors",
+    "cat": "Transfiguração",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "a-VI-fors",
+    "desc": "Este feitiço faz com que o alvo se transforme em pássaros."
+  },
+  {
+    "name": "Lapifors",
+    "cat": "Transfiguração",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "LA-pi-fors",
+    "desc": "É parecido com o feitiço Lapifors, mas este feitiços faz com que transforme pequenas estátuas de dragão em pequenos dragões de verdade, podendo controlá-los."
+  },
+  {
+    "name": "Obscuro",
+    "cat": "Transfiguração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "obs-CU-ro",
+    "desc": "Cria uma venda nos olhos do alvo, impedindo-o de ver | Injúria Específica: (C) Vendado"
+  },
+  {
+    "name": "Riddikulus",
+    "cat": "Transfiguração",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Ri-DIK-uh-lous",
+    "desc": "Usado para transformar o Bicho-Papão em algo menos aterrorizante ou algo engraçado que o Bruxo esteja pensando."
+  },
+  {
+    "name": "Sponjify",
+    "cat": "Transfiguração",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "s-PON-ji-FY",
+    "desc": "Cria uma espécie de plataforma que permite a quem pular nela,atingir grandes alturas."
+  },
+  {
+    "name": "Animus Imágio",
+    "cat": "Transfiguração",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "Â-nimus i-MÁ-gÍ-Ô",
+    "desc": "Cria uma imagem animada, ou da vida a uma já existente."
+  },
+  {
+    "name": "Evanesco",
+    "cat": "Transfiguração",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "eh-van-ES-ko",
+    "desc": "Faz coisas pequenas se desintegrarem."
+  },
+  {
+    "name": "Homorfo",
+    "cat": "Transfiguração",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "ho-MOR-fo",
+    "desc": "Faz com que um Animago transfigurado volte à forma normal."
+  },
+  {
+    "name": "Melofors",
+    "cat": "Transfiguração",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "MÉ-loh-fors",
+    "desc": "Faz a cabeça da vítima transformar-se em uma abóbora. | Injúria Específica: C) Cabeça de Abóbora"
+  },
+  {
+    "name": "Pullus",
+    "cat": "Transfiguração",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "PÚ-lUs",
+    "desc": "Transforma o adversário numa galinha. | Injúria Específica: (C) Galinha"
+  },
+  {
+    "name": "Serpensórtia",
+    "cat": "Transfiguração",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "SER-pen-sÓr-ti-ah",
+    "desc": "Produz uma cobra que salta da ponta da varinha de quem conjurou o feitiço."
+  },
+  {
+    "name": "Draconifors",
+    "cat": "Transfiguração",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "Dra-CO-ni-fors",
+    "desc": "Draconifors"
+  },
+  {
+    "name": "Geminio",
+    "cat": "Transfiguração",
+    "lvl": "4",
+    "tipo": "Utilitário",
+    "pronuncia": "ge-MI-nio",
+    "desc": "Feitiço dos Gêmeos; quando lançado sobre um objeto, este se multiplica ao ser tocado."
+  },
+  {
+    "name": "Portus",
+    "cat": "Transfiguração",
+    "lvl": "5",
+    "tipo": "Utilitário",
+    "pronuncia": "POR-tus",
+    "desc": "Transforma um objeto numa chave de portal."
+  },
+  {
+    "name": "Animus Corpus",
+    "cat": "Transfiguração",
+    "lvl": "6",
+    "tipo": "Utilitário",
+    "pronuncia": "Ah-ni-MOO-s Cor-poo-s",
+    "desc": "O feitiço tem a capacidade de encantar algo inanimado, pode ser usado por exemplo para criar pássaros feitos de folhas, também usado para dar \"vida\" ao pomo de ouro e os balaços, o feitiço pode ser usado de incontáveis maneiras, até para criar Inferis."
+  },
+  {
+    "name": "Piertotum Locomotor",
+    "cat": "Transfiguração",
+    "lvl": "6",
+    "tipo": "Utilitário",
+    "pronuncia": "Pier-TO-tum",
+    "desc": "Dá vida a coisas como armaduras ou estátuas para que fiquem em seu comando."
+  },
+  {
+    "name": "Densaugeo",
+    "cat": "Azaração",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "den-SAW-ji-oh",
+    "desc": "Esse feitiço faz com que os dentes da vítima cresçam rapidamente. | Injúria Específica: (C) Dentuço"
+  },
+  {
+    "name": "Flipendo",
+    "cat": "Azaração",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "Fli-pén-do",
+    "desc": "Empurra um objeto ou pessoa para não muito distante,pode ser usado como feitiço de duelo."
+  },
+  {
+    "name": "Fedorinni",
+    "cat": "Azaração",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "Fe-DO-ri-Ni",
+    "desc": "Deixa o alvo fedorento. | Injúria Específica: (C) Fedorento"
+  },
+  {
+    "name": "Rictusempra",
+    "cat": "Azaração",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "RIK-too-SEM-pra",
+    "desc": "Funciona como um grande soco na barriga, mas caso falhe funciona como um feitiço que da um ataque de cócegas no oponente. | Injúria Específica: (C) Crise de Riso"
+  },
+  {
+    "name": "Trip",
+    "cat": "Azaração",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "TRI-P",
+    "desc": "Faz o alvo tropeçar"
+  },
+  {
+    "name": "Cara-de-lesma",
+    "cat": "Azaração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "Ca-ra-de-les-ma",
+    "desc": "A vítima vomita lesmas. | Injúria Específica: (C) Vomitando Lesmas"
+  },
+  {
+    "name": "Ebublio",
+    "cat": "Azaração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "eh-BUH-blioh",
+    "desc": "cria bolhas gigantes que flutuam e podem aprisionar um alvo | Injúria Específica: (C) Aprisionado"
+  },
+  {
+    "name": "Everte Statum",
+    "cat": "Azaração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "e-vÉrt ist-ÁH-Tium",
+    "desc": "Joga o adversário longe, enquanto dá piruetas no ar."
+  },
+  {
+    "name": "Furnunculus",
+    "cat": "Azaração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "fur-NUN-cu-lus",
+    "desc": "Faz furúnculos aparecerem na vítima. | Injúria Específica: (C) Furúnculos"
+  },
+  {
+    "name": "Langlock",
+    "cat": "Azaração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "LAng-lock",
+    "desc": "Cola a língua do oponente em seu céu da boca. | Injúria Específica: (C) Língua Presa"
+  },
+  {
+    "name": "Tarantallegra",
+    "cat": "Azaração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "Ta-RAN-ta-LE-gra",
+    "desc": "Faz o oponente dançar sem parar | Injúria Específica: (C) Dança Incontrolável"
+  },
+  {
+    "name": "Oppugno",
+    "cat": "Maldição Menor",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "o-PUG-no",
+    "desc": "Faz qualquer coisa atacar alguém (Pode ser conjurado nos níveis 3, 5 e 6 para instigar objetos maiores)"
+  },
+  {
+    "name": "Alarte Ascendere",
+    "cat": "Maldição Menor",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "a-LAr-te as-cen-de-RAE",
+    "desc": "Faz o alvo ascender e depois cair no chão com um estrondo."
+  },
+  {
+    "name": "Azaração Ferreteante",
+    "cat": "Maldição Menor",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "N/A",
+    "desc": "Desconfigura o rosto da vítima. | Injúria Específica: (C) Rosto Desfigurado"
+  },
+  {
+    "name": "Conjunctivitus",
+    "cat": "Maldição Menor",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "Con-juncti-VI-tus",
+    "desc": "Atordoa o alvo, ressecando seus olhos e secretando remela ao redor deles. | Injúria Específica: (C) Conjuntivite"
+  },
+  {
+    "name": "Estupefaça",
+    "cat": "Maldição Menor",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "es-tu-pe-fah-ça",
+    "desc": "Joga a vítima para longe. Faz a pessoa desmaiar. Um rojão de luz azul (personagens em geral), laranja parecendo fogo (personagens malignos) | Injúria Específica: (C) Desmaiado"
+  },
+  {
+    "name": "Petrificus Totalus",
+    "cat": "Maldição Menor",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "pe-tri-FIH-cus",
+    "desc": "Paralisa o alvo. É comum as pessoas dizerem que o feitiço petrifica o alvo, o que é um erro, pois petrificar é transformar em pedra, como ocorre com a lava expelida dos vulcões ou fissuras marítimas, após ser resfriada. | Injúria Específica: (C) Petrificado"
+  },
+  {
+    "name": "Bombarda",
+    "cat": "Maldição Menor",
+    "lvl": "4",
+    "tipo": "Ataque",
+    "pronuncia": "bom-BAR-da",
+    "desc": "cria uma energia explosiva que ao tocar, ou ser lançada em um alvo o explode como se fosse uma bomba e desfaz um escudo."
+  },
+  {
+    "name": "Estupore",
+    "cat": "Maldição Menor",
+    "lvl": "4",
+    "tipo": "Ataque",
+    "pronuncia": "ES-TU-po-re",
+    "desc": "Este feitiço, assim como Estupefaça, mantém o alvo inconsciente, embora o Estupefaça deixe a vítima desacordada apenas se usado por três ou mais varinhas, e seu efeito principal seja lançar a vítima para longe.\nNotas: O feitiço é inútil contra gigantes. Seu contra-feitiço é Ennervate. | Injúria Específica: (C) Atordoado"
+  },
+  {
+    "name": "Expulso",
+    "cat": "Maldição Menor",
+    "lvl": "4",
+    "tipo": "Ataque",
+    "pronuncia": "Ex-púlso",
+    "desc": "Funciona de modo parecido com o feitiço Reducto, mas com intensidade menor. Aparenta uma pequena explosão de ar ou pressão."
+  },
+  {
+    "name": "Bombarda Maxima",
+    "cat": "Maldição Menor",
+    "lvl": "5",
+    "tipo": "Ataque",
+    "pronuncia": "bom-BAr-da MÁ-xi-ma",
+    "desc": "Feitiço bombarda maximizado. cria uma energia explosiva que ao tocar, ou ser lançada em um alvo o explode como se fosse uma bomba e desfaz um escudo."
+  },
+  {
+    "name": "Reducto",
+    "cat": "Maldição",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "Re-DUCK-tow",
+    "desc": "Desintegra ou destrói objetos sólidos que estiverem no caminho do lançador."
+  },
+  {
+    "name": "Repello Aparatio",
+    "cat": "Maldição",
+    "lvl": "4",
+    "tipo": "Proteção",
+    "pronuncia": "re-PEH-lo apa-RÁ-ti-Ô",
+    "desc": "Usado para prevenir aparatação e desaparatação numa área por determinado tempo. Resumindo, pode ser usado para prevenir um inimigo de entrar em uma área de defesa, ou usado para trancar um inimigo numa área."
+  },
+  {
+    "name": "Deprimo",
+    "cat": "Maldição",
+    "lvl": "5",
+    "tipo": "Ataque",
+    "pronuncia": "DEH-prih-moh",
+    "desc": "Este feitiço cria uma pressão descendente imensa em seu alvo, o que pode causar uma violenta ruptura."
+  },
+  {
+    "name": "Glacius",
+    "cat": "Maldição",
+    "lvl": "5",
+    "tipo": "Ataque",
+    "pronuncia": "GLA-cius",
+    "desc": "Congela algum(a) objeto/criatura. | Injúria Específica: (C) Congelando"
+  },
+  {
+    "name": "Incarcerous Nerus",
+    "cat": "Maldição",
+    "lvl": "5",
+    "tipo": "Ataque",
+    "pronuncia": "inCARcerus NÉrus",
+    "desc": "Cria cordas negras que tentam esmagar os ossos da vítima e enforcar. | Injúria Específica: (C) Enforcado"
+  },
+  {
+    "name": "Incarcerous",
+    "cat": "Maldição",
+    "lvl": "4",
+    "tipo": "Utilitário",
+    "pronuncia": "inCARcerus",
+    "desc": "Cria cordas que se prendem ao corpo da vítima. de forma abstrata que apenas a vitima sente | Injúria Especifica: (C) Aprisionado"
+  },
+  {
+    "name": "Legilimens",
+    "cat": "Maldição",
+    "lvl": "5",
+    "tipo": "Ataque",
+    "pronuncia": "Le-GI-li-mens",
+    "desc": "Permite ao bruxo penetrar na mente da vítima, podendo ver memórias e emoções."
+  },
+  {
+    "name": "Maldição de Antonio Dolohov",
+    "cat": "Maldição",
+    "lvl": "5",
+    "tipo": "Ataque",
+    "pronuncia": "N/A",
+    "desc": "Produz algo semelhante a uma nuvem roxa que causa danos de forma semelhante ao Sectumsempra(funcionando como uma espada invisível que causa cortes profundos e hemorragias graves no alvo), porém os danos são internos. | Injúria Específica: (C) Dano Interno Grave"
+  },
+  {
+    "name": "Obliviate",
+    "cat": "Maldição",
+    "lvl": "5",
+    "tipo": "Ataque",
+    "pronuncia": "o-bli-vi-A-te",
+    "desc": "Altera/Apaga a memória do alvo. | Injúria Específica: (C) Amnésia Total"
+  },
+  {
+    "name": "Orbis",
+    "cat": "Maldição",
+    "lvl": "5",
+    "tipo": "Ataque",
+    "pronuncia": "Ôrbis",
+    "desc": "Faz a vitima rodopiar em um redemoinho, sendo posteriormente desintegrada, caso não seja \"destruída\" antes.\nNota: O feitiço só pode ser usado em criaturas que estejam sendo levitadas pelo Wingardium Leviosa."
+  },
+  {
+    "name": "Repello Trouxatum",
+    "cat": "Maldição",
+    "lvl": "5",
+    "tipo": "Proteção",
+    "pronuncia": "re-PEH-lo TROU-xa-tun",
+    "desc": "Usado para afastar os trouxas do local/objeto enfeitiçado."
+  },
+  {
+    "name": "Transmogrify",
+    "cat": "Maldição",
+    "lvl": "5",
+    "tipo": "Ataque",
+    "pronuncia": "Trans-mô-gri-fAi",
+    "desc": "mata pequenos animais. Tortura Transmogrifiana."
+  },
+  {
+    "name": "Confringo",
+    "cat": "Maldição",
+    "lvl": "6",
+    "tipo": "Ataque",
+    "pronuncia": "con-FRIN-go",
+    "desc": "Dispara um rojão de luz roxo/violeta explodindo tudo o que atinge. | Injúria Específica: (C) Queimado"
+  },
+  {
+    "name": "Fogomaldito",
+    "cat": "Maldição",
+    "lvl": "6",
+    "tipo": "Ataque",
+    "pronuncia": "Fogomal-DI-tus",
+    "desc": "Faz um fogo poderoso em forma de monstros, que pode se tornar incontrolável e fatal se o poder mental do bruxo conjurador for baixo. | Injúria Específica: (C) Queimadura Grave"
+  },
+  {
+    "name": "Protego Nerus",
+    "cat": "Maldição",
+    "lvl": "6",
+    "tipo": "Proteção",
+    "pronuncia": "N/A",
+    "desc": "Faz uma proteção negra que pode se defender de qualquer feitiço."
+  },
+  {
+    "name": "Repello Inimicum",
+    "cat": "Maldição",
+    "lvl": "6",
+    "tipo": "Proteção",
+    "pronuncia": "re-PEH-lo INi-mi-cum",
+    "desc": "Utilizado para desintegrar os inimigos que entrem em contato com o feitiço | Injúria Específica: (C) Desintegrado"
+  },
+  {
+    "name": "Avada Kedavra",
+    "cat": "Maldição",
+    "lvl": "7",
+    "tipo": "Ataque",
+    "pronuncia": "N/A",
+    "desc": "É a Maldição da Morte, uma das três Maldições Imperdoáveis. Ela causa morte instantânea e indolor com um jato de luz verde, sem deixar vestígios ou ferimentos no corpo. O uso resulta em prisão perpétua em Azkaban e é indefensável por meios mágicos."
+  },
+  {
+    "name": "Crucio",
+    "cat": "Maldição",
+    "lvl": "7",
+    "tipo": "Ataque",
+    "pronuncia": "N/A",
+    "desc": "é uma das três Maldições Imperdoáveis, conhecida como a \"maldição da tortura\". Ela inflige dor física e psicológica extrema e excruciante à vítima, muitas vezes descrita como ossos queimando ou facas perfurando o corpo, sem causar danos físicos visíveis. A mais excruciante dor que um ser vivo pode sentir, é completamente desumana e pode ter causas irreversíveis na mente da vítima | Injúria Específica: (C) Dor Insuportável"
+  },
+  {
+    "name": "Imperio",
+    "cat": "Maldição",
+    "lvl": "7",
+    "tipo": "Ataque",
+    "pronuncia": "N/A",
+    "desc": "É uma das três Maldições Imperdoáveis, usada para controlar totalmente as ações de uma vítima. Quando conjurada, o alvo entra em um estado de transe, sentindo-se calmo e sem ansiedade, obedecendo cegamente ao lançador. Seu uso em humanos resulta em prisão perpétua em Azkaban. | Injúria Específica: (C) Controlado"
+  },
+  {
+    "name": "Dessendio",
+    "cat": "Contrafeitiço",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "deh-SEN-doh",
+    "desc": "Faz com que o objeto ou pessoa alvejada mova-se para baixo. Contra-feitiço de Ascendio."
+  },
+  {
+    "name": "Duro",
+    "cat": "Contrafeitiço",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "DU-ro",
+    "desc": "Reverte o efeito do Glisseo, restaurando superfícies à sua forma original. Também pode endurecer objetos moles."
+  },
+  {
+    "name": "Nox",
+    "cat": "Contrafeitiço",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "NÓ-ks",
+    "desc": "É o contrafeitiço dos feitiços Lumos, ele apaga a luz gerada na ponta da varinha"
+  },
+  {
+    "name": "Reparifrage",
+    "cat": "Contrafeitiço",
+    "lvl": "1",
+    "desc": "Desfaz uma transfiguração. Destranfiguração (o feitiço deve ser conjurado em níveis equivalentes para reverter transfigurações mais complexas)"
+  },
+  {
+    "name": "Quietus",
+    "cat": "Contrafeitiço",
+    "lvl": "1",
+    "tipo": "Proteção",
+    "pronuncia": "QuiE-tuss",
+    "desc": "Faz a voz, cujo volume foi aumentado magicamente, voltar ao normal. É o contrário do Sonorus."
+  },
+  {
+    "name": "Deletrius",
+    "cat": "Contrafeitiço",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "de-Lit-ri-us",
+    "desc": "Um feitiço para apagar transcrições feitas com tinta ou talhadas em pedra."
+  },
+  {
+    "name": "Finite Incantatem",
+    "cat": "Contrafeitiço",
+    "lvl": "2",
+    "tipo": "Proteção",
+    "pronuncia": "fi-NI-te in-can-TATEM",
+    "desc": "Usado para acabar com o efeito de um feitiço usado numa pessoa ou numa coisa."
+  },
+  {
+    "name": "Liberacorpus",
+    "cat": "Contrafeitiço",
+    "lvl": "2",
+    "tipo": "Cura",
+    "pronuncia": "Li-be-ra-Cor-pus",
+    "desc": "O feitiço oposto de Levicorpus. Faz com que a pessoa levitada seja calmamente solta no chão"
+  },
+  {
+    "name": "Vipera Evanesca",
+    "cat": "Contrafeitiço",
+    "lvl": "2",
+    "tipo": "Proteção",
+    "pronuncia": "vi-PE-ra e-va-NES-ca",
+    "desc": "Faz uma serpente criada por um feitiço desaparecer(é uma variação do feitiço Evanesco, direcionado para serpentes)."
+  },
+  {
+    "name": "Meteorolojinx Recanto",
+    "cat": "Contrafeitiço",
+    "lvl": "3",
+    "tipo": "Proteção",
+    "pronuncia": "Me-Te-oro-lo-jiNX",
+    "desc": "Normaliza efeitos meteorológicos em lugares fechados."
+  },
+  {
+    "name": "Reverto",
+    "cat": "Contrafeitiço",
+    "lvl": "4",
+    "pronuncia": "re-vÉr-tOW",
+    "desc": "Destrói o Protego Totalum, desintegrando completamente a barreira protetora"
+  },
+  {
+    "name": "Episkey",
+    "cat": "Cura",
+    "lvl": "1",
+    "tipo": "Cura",
+    "pronuncia": "eh-PIS-ki",
+    "desc": "Usado para curar machucados menores (pode ser conjurado em nível 3)"
+  },
+  {
+    "name": "Ferula",
+    "cat": "Cura",
+    "lvl": "1",
+    "tipo": "Cura",
+    "pronuncia": "FE-ru-la",
+    "desc": "Cria bandagens num machucado."
+  },
+  {
+    "name": "Anapneo",
+    "cat": "Cura",
+    "lvl": "2",
+    "tipo": "Cura",
+    "pronuncia": "A-NAH-pneo",
+    "desc": "Limpar a traqueia respiratória e a boca, se estiver bloqueada."
+  },
+  {
+    "name": "Ennervate",
+    "cat": "Cura",
+    "lvl": "2",
+    "tipo": "Cura",
+    "pronuncia": "e-ner-Va-te",
+    "desc": "Um feitiço que faz com que a pessoa que o recebeu \"acorde\". Pode ser usado, por exemplo, numa pessoa que foi estuporada."
+  },
+  {
+    "name": "Braquium Emendo",
+    "cat": "Cura",
+    "lvl": "3",
+    "tipo": "Cura",
+    "pronuncia": "Bra-qui-um E-men-do",
+    "desc": "Se o nome do feitiço for pronunciado corretamente pode curar um osso quebrado do braço. | Injúria Específica: (C) Osso Remendado"
+  }
 ]
