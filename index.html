@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arquivo Geral do Ministério da Magia — W&W RPG</title>
     
-    <!-- Fontes Clássicas do Sistema W&W -->
+    <!-- Fontes Oficiais WWRPG-Ficha & Design System -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@700&family=Space+Grotesk:wght@400;600;700&family=Special+Elite&display=swap" rel="stylesheet">
     
     <!-- CSS Modularizado -->
     <link rel="stylesheet" href="./css/variables.css">
@@ -20,45 +20,59 @@
     <script type="module" src="./js/main.js" defer></script>
 </head>
 <body>
+    <script>
+        const savedTheme = localStorage.getItem('wwrpg-theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+        } else if (savedTheme === 'terminal') {
+            document.body.classList.add('terminal-mode');
+        }
+    </script>
 
     <div class="parchment-container">
         
-        <!-- CABEÇALHO DO MINISTÉRIO -->
+        <!-- CABEÇALHO OFICIAL DO MINISTÉRIO (PADRÃO WWRPG-FICHA) -->
         <header class="ministry-header">
-            <h1>Arquivo Geral do Ministério da Magia</h1>
-            <h2>D.R.C.C.M. • C.E.F. • Herbologia Mágica • Catálogo Alquímico (W&W RPG)</h2>
-            
-            <!-- NAVEGAÇÃO DOS 4 ESPAÇOS DE CATÁLOGO -->
-            <nav class="catalog-nav">
-                <div class="nav-group">
-                    <span class="nav-group-label">📚 Arquivos de Consulta:</span>
-                    <div class="nav-buttons-row">
-                        <button class="tab-btn active" data-target="tab-arquivo-criaturas">
-                            🐾 Animais Mágicos <span id="count-badge-creatures" class="nav-count-badge">92</span>
-                        </button>
-                        <button class="tab-btn" data-target="tab-arquivo-feiticos">
-                            🪄 Feitiços <span id="count-badge-spells" class="nav-count-badge">210</span>
-                        </button>
-                        <button class="tab-btn" data-target="tab-arquivo-plantas">
-                            🌿 Plantas <span id="count-badge-plants" class="nav-count-badge">44</span>
-                        </button>
-                        <button class="tab-btn" data-target="tab-arquivo-pocoes">
-                            ⚗️ Poções <span id="count-badge-potions" class="nav-count-badge">166</span>
-                        </button>
-                    </div>
-                </div>
+            <div class="theme-controls">
+                <button type="button" id="btn-theme-toggle" class="btn-gold btn-theme-toggle" aria-label="Alternar Modo de Leitura" title="Alternar Modo Claro / Escuro (WWRPG-Ficha)">
+                    🌙
+                </button>
+                <button type="button" id="btn-terminal-toggle" class="btn-teal btn-theme-toggle" aria-label="Alternar Modo Terminal" title="Alternar Modo Terminal Tático (design.md)">
+                    ⚡
+                </button>
+            </div>
 
-                <div class="nav-group">
-                    <span class="nav-group-label">🪶 Registro & Importação Ministerial:</span>
-                    <div class="nav-buttons-row">
-                        <button class="tab-btn" data-target="tab-registro-criaturas">+ Registrar Animal</button>
-                        <button class="tab-btn" data-target="tab-registro-feiticos">+ Registrar Feitiço</button>
-                        <button class="tab-btn" data-target="tab-registro-plantas">+ Registrar Planta</button>
-                        <button class="tab-btn" data-target="tab-registro-pocoes">+ Registrar Poção</button>
-                    </div>
-                </div>
-            </nav>
+            <div class="header-titles">
+                <h1>Ministério da Magia</h1>
+                <h2>Arquivo Geral de Catalogação • D.R.C.C.M. • C.E.F. • Herbologia • Alquimia</h2>
+                <p>Formulário Oficial de Consulta e Registro Mágico — Sistema W&W RPG</p>
+            </div>
         </header>
+
+        <!-- NAVEGAÇÃO EM ABAS DE PASTA BUROCRÁTICA -->
+        <nav class="tabs-nav" aria-label="Navegação dos Arquivos do Ministério">
+            <button class="tab-btn active" data-target="tab-arquivo-criaturas">
+                I. Animais Mágicos <span id="count-badge-creatures" class="nav-count-badge">92</span>
+            </button>
+            <button class="tab-btn" data-target="tab-arquivo-feiticos">
+                II. Feitiços <span id="count-badge-spells" class="nav-count-badge">210</span>
+            </button>
+            <button class="tab-btn" data-target="tab-arquivo-plantas">
+                III. Plantas <span id="count-badge-plants" class="nav-count-badge">44</span>
+            </button>
+            <button class="tab-btn" data-target="tab-arquivo-pocoes">
+                IV. Poções <span id="count-badge-potions" class="nav-count-badge">166</span>
+            </button>
+
+            <div class="sub-actions-bar">
+                <button class="tab-btn tab-btn-reg" data-target="tab-registro-criaturas">+ Registrar Animal</button>
+                <button class="tab-btn tab-btn-reg" data-target="tab-registro-feiticos">+ Registrar Feitiço</button>
+                <button class="tab-btn tab-btn-reg" data-target="tab-registro-plantas">+ Registrar Planta</button>
+                <button class="tab-btn tab-btn-reg" data-target="tab-registro-pocoes">+ Registrar Poção</button>
+            </div>
+        </nav>
+
+        <div class="main-content-shell">
 
         <!-- =====================================================================
              ESPAÇO 1A: ARQUIVO DE ANIMAIS / CRIATURAS MÁGICAS (D.R.C.C.M.)
@@ -845,6 +859,7 @@
             </div>
         </main>
 
+        </div>
     </div>
 
 </body>

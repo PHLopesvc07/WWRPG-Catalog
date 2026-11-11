@@ -1,8 +1,122 @@
+/* ==========================================================================
+   VARIABLES.CSS — SISTEMA DE DESIGN WWRPG (FICHA & CATÁLOGO)
+   Integra a paleta oficial de WWRPG-ficha (Pergaminho / Modo Escuro)
+   e os tokens táticos de Terminal descritos no design.md.
+   ========================================================================== */
+
 :root {
+    /* Paleta Oficial WWRPG-Ficha (Modo Claro / Pergaminho Ministerial) */
+    --parchment: #F2EBBF;
+    --bg-parchment: #F2EBBF;
+    --bg-parchment-dark: #e5dcab;
+    --ink: #5C4B51;
+    --ink-primary: #5C4B51;
+    --ink-secondary: #6e5a61;
+    --border-color: #5C4B51;
+
+    --stamp-red: #F06060;
+    --magic-gold: #F3B562;
+    --muted-teal: #8CBEB2;
+
+    --accent-gold: #F3B562;
+    --accent-crimson: #F06060;
+    --accent-teal: #8CBEB2;
+    --accent-purple: #5C4B51;
+    --accent-emerald: #5CB85C;
+
+    /* Tipografia Oficial WWRPG-Ficha */
+    --font-typewriter: 'Special Elite', 'Courier New', monospace;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'Special Elite', 'Courier New', monospace;
+    --font-mono: 'JetBrains Mono', 'Special Elite', monospace;
+
+    /* Textura Oficial de Fundo */
+    --bg-pergaminho: url('../assets/img/FundoPerg.jpg');
+    --surface-box-bg: rgba(255, 255, 255, 0.32);
+    --input-bg: transparent;
+    --input-border: rgba(92, 75, 81, 0.85);
+    --placeholder-color: rgba(92, 75, 81, 0.55);
+
+    /* Cores de Categorias de Feitiços (WWRPG-Ficha) */
+    --cat-transfiguracao: #D9534F;
+    --cat-feitico: #e69622;
+    --cat-azaracao: #d1b504;
+    --cat-maldicao-menor: #5CB85C;
+    --cat-maldicao: #279ebd;
+    --cat-contra-feitico: #428BCA;
+    --cat-cura: #9E6EA1;
+}
+
+/* ==========================================================================
+   MODO ESCURO OFICIAL DO WWRPG-FICHA (body.dark-mode)
+   ========================================================================== */
+body.dark-mode {
+    --bg-pergaminho: url('../assets/img/FundoPergPreto.jpg');
     --ink: #A3CCAB;
+    --ink-primary: #A3CCAB;
+    --ink-secondary: #82ad8b;
+    --border-color: #A3CCAB;
+
     --parchment: #14140F;
+    --bg-parchment: #14140F;
+    --bg-parchment-dark: #053D38;
+
+    --muted-teal: #34675C;
     --magic-gold: #F26800;
-    --input-bg-dark: #053D38;
-    --bg-body: #0a0a08;
-    --border-color: #2a3b32;
+    --stamp-red: #F26800;
+
+    --accent-gold: #F26800;
+    --accent-crimson: #F26800;
+    --accent-teal: #34675C;
+    --accent-purple: #A3CCAB;
+
+    --surface-box-bg: rgba(5, 61, 56, 0.35);
+    --input-bg: #053D38;
+    --input-border: rgba(163, 204, 171, 0.35);
+    --placeholder-color: rgba(163, 204, 171, 0.5);
+}
+
+/* ==========================================================================
+   MODO TERMINAL TÁTICO (Tokens literais do design.md — body.terminal-mode)
+   ========================================================================== */
+body.terminal-mode {
+    --bg-pergaminho: none;
+    --surface-canvas: #0a0e16;
+    --surface-panel: #0f131c;
+    --surface-container-low: #141923;
+    --surface-container-high: #1e2433;
+    --surface-container-highest: #2a3245;
+
+    --parchment: #0f131c;
+    --bg-parchment: #0f131c;
+    --bg-parchment-dark: #141923;
+
+    --ink: #f1f5f9;
+    --ink-primary: #f1f5f9;
+    --ink-secondary: #94a3b8;
+    --text-muted: #475569;
+    --border-color: rgba(0, 240, 255, 0.28);
+
+    --accent-cyan: #00f0ff;
+    --accent-gold: #ffd043;
+    --accent-purple: #a855f7;
+    --accent-crimson: #ff3b5c;
+    --accent-emerald: #10b981;
+    --accent-teal: #00f0ff;
+
+    --magic-gold: #00f0ff;
+    --muted-teal: #1e2433;
+    --stamp-red: #ff3b5c;
+
+    --font-typewriter: 'Space Grotesk', 'Inter', sans-serif;
+    --font-serif: 'Space Grotesk', 'Rajdhani', sans-serif;
+    --font-heading: 'Space Grotesk', 'Rajdhani', sans-serif;
+    --font-body: 'Space Grotesk', 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --surface-box-bg: rgba(20, 25, 35, 0.78);
+    --input-bg: #1e2433;
+    --input-border: rgba(0, 240, 255, 0.3);
+    --placeholder-color: #475569;
 }
