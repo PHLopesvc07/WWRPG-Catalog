@@ -23,30 +23,15 @@
 
     <div class="parchment-container">
         
-        <!-- CABEÇALHO DO MINISTÉRIO E PAINEL DE CONEXÃO FIREBASE -->
+        <!-- CABEÇALHO DO MINISTÉRIO -->
         <header class="ministry-header">
             <h1>Arquivo Geral do Ministério da Magia</h1>
             <h2>D.R.C.C.M. • C.E.F. • Herbologia Mágica • Catálogo Alquímico (W&W RPG)</h2>
-
-            <div class="firebase-bar">
-                <div class="firebase-status-pill">
-                    <span id="fb-status-dot" class="status-dot status-warning"></span>
-                    <span id="fb-status-text">Conectando ao Firebase (wwcatalog-10546)...</span>
-                </div>
-                <div class="firebase-actions">
-                    <button type="button" id="btn-sync-firebase" class="btn-fb-action" title="Envia todos os 512 registros oficiais (Animais, Feitiços, Plantas e Poções) para o Firebase Firestore">
-                        ☁️ Sincronizar Compêndios com Firebase
-                    </button>
-                    <button type="button" id="btn-open-fb-modal" class="btn-fb-secondary" title="Ver Regras do Firestore e Configuração do Projeto">
-                        ⚙️ Regras & Config Firebase
-                    </button>
-                </div>
-            </div>
             
             <!-- NAVEGAÇÃO DOS 4 ESPAÇOS DE CATÁLOGO -->
             <nav class="catalog-nav">
                 <div class="nav-group">
-                    <span class="nav-group-label">📚 Arquivos de Consulta (Carregamento Individual):</span>
+                    <span class="nav-group-label">📚 Arquivos de Consulta:</span>
                     <div class="nav-buttons-row">
                         <button class="tab-btn active" data-target="tab-arquivo-criaturas">
                             🐾 Animais Mágicos <span id="count-badge-creatures" class="nav-count-badge">92</span>
@@ -353,12 +338,12 @@
                 <h3 class="section-title mt-20">5. Descrição Física, Habitat e Temperamento</h3>
                 <textarea id="reg-descricao" class="ink-textarea" rows="5" placeholder="Descreva os hábitos, habitat, alimentação e particularidades mágicas da espécie..."></textarea>
 
-                <button type="submit" class="btn-submit mt-20">📜 Catalogar Criatura no Firebase & Arquivo</button>
+                <button type="submit" class="btn-submit mt-20">📜 Catalogar Criatura no Arquivo Ministerial</button>
             </form>
 
             <div class="bureaucracy-box mt-20">
                 <h3 class="section-title">Importação em Massa de Criaturas (JSON)</h3>
-                <p>Cole uma lista JSON de criaturas ou selecione um arquivo <code>.json</code> para importar em lote diretamente para o Firebase Firestore.</p>
+                <p>Cole uma lista JSON de criaturas ou selecione um arquivo <code>.json</code> para importar em lote no catálogo.</p>
                 <textarea id="bulk-creature-input" class="ink-textarea mt-10" rows="5" placeholder='[{"nome": "Pelúcio", "classificacao": "XXX", "licenca": "Comum", "tipo": "Neutro", ...}]'></textarea>
                 <div class="form-row mt-10" style="align-items: center;">
                     <label style="flex: 1;">Ou carregue um arquivo JSON:
@@ -520,12 +505,12 @@
                 <h3 class="section-title mt-20">2. Descrição, Mecânica e Regras do Feitiço</h3>
                 <textarea id="spell-desc" class="ink-textarea" rows="5" required placeholder="Descreva os efeitos visuais, mecânica de jogo, dano/cura e testes exigidos..."></textarea>
 
-                <button type="submit" class="btn-submit mt-20">🪄 Catalogar Feitiço no Firebase & Grimório</button>
+                <button type="submit" class="btn-submit mt-20">🪄 Catalogar Feitiço no Grimório Ministerial</button>
             </form>
 
             <div class="bureaucracy-box mt-20">
                 <h3 class="section-title">Importação em Massa de Feitiços (JSON)</h3>
-                <p>Cole uma lista JSON de feitiços ou selecione um arquivo <code>.json</code> para importar em lote para o Firebase Firestore.</p>
+                <p>Cole uma lista JSON de feitiços ou selecione um arquivo <code>.json</code> para importar em lote no catálogo.</p>
                 <textarea id="bulk-spell-input" class="ink-textarea mt-10" rows="5" placeholder='[{"name": "Lumos", "pronuncia": "LU-mos", "cat": "Charme", "lvl": "1", "tipo": "Utilitário", "condicao": "Nenhuma", "desc": "Ilumina a ponta da varinha."}]'></textarea>
                 <div class="form-row mt-10" style="align-items: center;">
                     <label style="flex: 1;">Ou carregue um arquivo JSON:
@@ -670,12 +655,12 @@
                 <h3 class="section-title mt-20">3. Peculiaridades Técnicas, Colheita & Mecânica de Efeito</h3>
                 <textarea id="plant-peculiaridades" class="ink-textarea" rows="5" placeholder="Detalhe o nível de herbologia, CD de manejo, efeito imediato e aplicações alquímicas..."></textarea>
 
-                <button type="submit" class="btn-submit mt-20">🌿 Catalogar Planta no Firebase & Herbário</button>
+                <button type="submit" class="btn-submit mt-20">🌿 Catalogar Planta no Herbário Ministerial</button>
             </form>
 
             <div class="bureaucracy-box mt-20">
                 <h3 class="section-title">Importação em Massa de Plantas (JSON)</h3>
-                <p>Cole uma lista JSON de plantas mágicas ou selecione um arquivo <code>.json</code> para importar em lote para o Firebase Firestore.</p>
+                <p>Cole uma lista JSON de plantas mágicas ou selecione um arquivo <code>.json</code> para importar em lote no catálogo.</p>
                 <textarea id="bulk-plant-input" class="ink-textarea mt-10" rows="5" placeholder='[{"nome": "Mandrágora (Mandrake)", "categoria": "difícil de adquirir", "descricao": "...", "peculiaridades": "..."}]'></textarea>
                 <div class="form-row mt-10" style="align-items: center;">
                     <label style="flex: 1;">Ou carregue um arquivo JSON:
@@ -844,12 +829,12 @@
                     </label>
                 </div>
 
-                <button type="submit" class="btn-submit mt-20">⚗️ Catalogar Poção no Firebase & Boticário</button>
+                <button type="submit" class="btn-submit mt-20">⚗️ Catalogar Poção no Catálogo Alquímico</button>
             </form>
 
             <div class="bureaucracy-box mt-20">
                 <h3 class="section-title">Importação em Massa de Poções (JSON)</h3>
-                <p>Cole uma lista JSON de poções ou selecione um arquivo <code>.json</code> para importar em lote para o Firebase Firestore.</p>
+                <p>Cole uma lista JSON de poções ou selecione um arquivo <code>.json</code> para importar em lote no catálogo.</p>
                 <textarea id="bulk-potion-input" class="ink-textarea mt-10" rows="5" placeholder='[{"tipo": "Poção", "nome": "Felix Felicis", "nível": 7, "efeito": "...", "ingredientes": "...", "descrição": "...", "sistema": {"tempo_preparo": "6 meses", "duracao": "12 horas", "dificuldade_cd": 26, "administracao": "Ingestão"}}]'></textarea>
                 <div class="form-row mt-10" style="align-items: center;">
                     <label style="flex: 1;">Ou carregue um arquivo JSON:
@@ -860,73 +845,6 @@
             </div>
         </main>
 
-    </div>
-
-    <!-- MODAL DE CONFIGURAÇÃO FIREBASE & REGRAS DO FIRESTORE -->
-    <div id="firebase-config-modal" class="modal-backdrop hidden">
-        <div class="modal-card bureaucracy-box">
-            <div class="modal-header">
-                <h3 class="section-title" style="margin: 0;">⚙️ Conexão Firebase Firestore (`wwcatalog-10546`)</h3>
-                <button type="button" id="btn-close-fb-modal" class="btn-danger">X</button>
-            </div>
-
-            <div class="modal-body mt-10">
-                <p><strong>1. Regras de Segurança do Firestore (`firestore.rules`):</strong> Cole as regras abaixo na aba <strong>Regras</strong> do Console do Firebase e clique em <strong>Publicar</strong> para habilitar a leitura e gravação das 4 coleções (<code>creatures</code>, <code>spells</code>, <code>plants</code>, <code>potions</code> e <code>_indexes</code>):</p>
-                
-                <pre id="firestore-rules-code" class="code-block">rules_version = '2';
-
-service cloud.firestore {
-  match /databases/{database}/documents {
-
-    function isValidCatalogWrite() {
-      return request.resource.data.keys().size() &gt; 0
-             &amp;&amp; request.resource.data.keys().size() &lt;= 40;
-    }
-
-    match /creatures/{creatureId} {
-      allow read: if true;
-      allow create, update: if isValidCatalogWrite() &amp;&amp; (request.resource.data.nome is string);
-      allow delete: if true;
-    }
-
-    match /spells/{spellId} {
-      allow read: if true;
-      allow create, update: if isValidCatalogWrite() &amp;&amp; (request.resource.data.name is string);
-      allow delete: if true;
-    }
-
-    match /plants/{plantId} {
-      allow read: if true;
-      allow create, update: if isValidCatalogWrite() &amp;&amp; (request.resource.data.nome is string);
-      allow delete: if true;
-    }
-
-    match /potions/{potionId} {
-      allow read: if true;
-      allow create, update: if isValidCatalogWrite() &amp;&amp; (request.resource.data.nome is string);
-      allow delete: if true;
-    }
-
-    match /_indexes/{collectionName} {
-      allow read, write: if true;
-    }
-
-    match /{document=**} {
-      allow read, write: if false;
-    }
-  }
-}</pre>
-                <button type="button" id="btn-copy-firestore-rules" class="btn-secondary mt-10">📋 Copiar Regras do Firestore</button>
-
-                <hr class="ministry-divider">
-
-                <p><strong>2. Objeto de Configuração do Projeto (`firebaseConfig`):</strong> O projeto já está pré-conectado a <code>wwcatalog-10546</code>. Caso deseje incluir chaves adicionais (<code>apiKey</code>, <code>appId</code>), cole abaixo:</p>
-                <textarea id="fb-custom-config-input" class="ink-textarea mt-10" rows="5"></textarea>
-                <div class="form-row mt-10" style="justify-content: flex-end;">
-                    <button type="button" id="btn-save-fb-config" class="btn-submit" style="width: auto; padding: 10px 24px;">💾 Salvar Configuração</button>
-                </div>
-            </div>
-        </div>
     </div>
 
 </body>

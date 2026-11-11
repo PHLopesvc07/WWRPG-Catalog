@@ -111,11 +111,7 @@ export class PotionController {
         this.editingId = null;
         await this.loadCatalog(true);
 
-        alert(
-            result.savedToCloud
-                ? `Poção "${potionData.nome}" catalogada e sincronizada no Firebase Firestore!`
-                : `Poção "${potionData.nome}" salva no catálogo local!`
-        );
+        alert(`Poção "${potionData.nome}" catalogada com sucesso no Catálogo Alquímico!`);
     }
 
     async handleBulkImport() {

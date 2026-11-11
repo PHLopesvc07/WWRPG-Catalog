@@ -2,7 +2,7 @@
 
 Aplicação web modular de catalogação, consulta rápida, filtragem avançada e exportação oficial de registros para o sistema de RPG de mesa **Witches & Wizards (W&W)**.
 
-Conectada ao **Google Firebase Cloud Firestore (`wwcatalog-10546`)** e projetada com **Arquitetura de Carregamento Individual Sob Demanda (Two-Tier Lazy Loading)** para garantir inicialização instantânea mesmo com mais de **512 registros oficiais** e dezenas de ilustrações.
+Projetada com **Arquitetura de Carregamento Individual Sob Demanda (Two-Tier Lazy Loading)** para garantir inicialização instantânea mesmo com mais de **512 registros oficiais** e dezenas de ilustrações.
 
 ---
 
@@ -34,78 +34,10 @@ O sistema contempla espaços dedicados de **Arquivo de Consulta** e **Registro /
 Para evitar o download pesado de coleções inteiras na abertura da página, o serviço [`js/services/database.js`](./js/services/database.js) implementa o carregamento em duas camadas (**Two-Tier On-Demand Loading**):
 
 1. **Camada 1 — Índice Leve (`fetchCatalogIndex`):**
-   * Ao abrir qualquer catálogo, o sistema lê apenas o documento de resumo (`_indexes/{collectionName}` no Firestore e `indice.json` local), contendo somente os campos necessários para a listagem lateral e filtros (`id`, `nome`/`name`, `classificacao`/`lvl`/`categoria`/`tipo`).
+   * Ao abrir qualquer catálogo, o sistema lê apenas o documento de resumo (`indice.json` e índice remoto), contendo somente os campos necessários para a listagem lateral e filtros (`id`, `nome`/`name`, `classificacao`/`lvl`/`categoria`/`tipo`).
    * A renderização e filtragem de centenas de itens ocorrem em **menos de 10 ms**.
 2. **Camada 2 — Carregamento Individual Sob Demanda (`fetchItemById`):**
-   * A ficha completa de um item (descrições extensas, habilidades, ingredientes, prontuário veterinário e imagem) é requisitada **individualmente apenas quando o usuário clica no item desejado** (`doc(db, collectionName, id)` no Firebase Firestore ou `./<pasta>/itens/<id>.json` local), sendo armazenada em um cache em memória (`Map`) para releitura instantânea (`0 ms`).
-
----
-
-## 🔥 Configuração do Firebase Cloud Firestore (`wwcatalog-10546`)
-
-O projeto está pré-configurado em [`js/services/firebaseConfig.js`](./js/services/firebaseConfig.js) para conectar-se ao banco de dados Cloud Firestore do projeto **`wwcatalog-10546`**.
-
-### Regras de Segurança do Firestore ([`firestore.rules`](./firestore.rules))
-
-No Console do Firebase (**Firestore Database → Regras**), publique as regras abaixo para habilitar a leitura e gravação das 4 coleções do catálogo e de seus índices leves:
-
-```cel
-rules_version = '2';
-
-service cloud.firestore {
-  match /databases/{database}/documents {
-
-    function isValidCatalogWrite() {
-      return request.resource.data.keys().size() > 0
-             && request.resource.data.keys().size() <= 40;
-    }
-
-    // 1. Catálogo de Animais / Criaturas Mágicas (D.R.C.C.M.)
-    match /creatures/{creatureId} {
-      allow read: if true;
-      allow create, update: if isValidCatalogWrite()
-                            && (request.resource.data.nome is string);
-      allow delete: if true;
-    }
-
-    // 2. Grande Compêndio de Feitiçaria (C.E.F.)
-    match /spells/{spellId} {
-      allow read: if true;
-      allow create, update: if isValidCatalogWrite()
-                            && (request.resource.data.name is string);
-      allow delete: if true;
-    }
-
-    // 3. Compêndio de Herbologia e Botânica Mágica
-    match /plants/{plantId} {
-      allow read: if true;
-      allow create, update: if isValidCatalogWrite()
-                            && (request.resource.data.nome is string);
-      allow delete: if true;
-    }
-
-    // 4. Catálogo Alquímico de Poções
-    match /potions/{potionId} {
-      allow read: if true;
-      allow create, update: if isValidCatalogWrite()
-                            && (request.resource.data.nome is string);
-      allow delete: if true;
-    }
-
-    // 5. Índices Leves de Catálogo (para carregamento rápido da barra lateral)
-    match /_indexes/{collectionName} {
-      allow read, write: if true;
-    }
-
-    // Bloqueia qualquer outra coleção não listada explicitamente
-    match /{document=**} {
-      allow read, write: if false;
-    }
-  }
-}
-```
-
-> 💡 **Sincronização em 1 Clique:** Após publicar as regras acima no Console do Firebase, clique no botão **`☁️ Sincronizar Compêndios com Firebase`** no topo do site para enviar automaticamente todos os **512 registros oficiais** (92 Animais, 210 Feitiços, 44 Plantas e 166 Poções) para o Firestore em lotes otimizados (`writeBatch`).
+   * A ficha completa de um item (descrições extensas, habilidades, ingredientes, prontuário veterinário e imagem) é requisitada **individualmente apenas quando o usuário clica no item desejado**, sendo armazenada em um cache em memória (`Map`) para releitura instantânea (`0 ms`).
 
 ---
 
@@ -113,18 +45,17 @@ service cloud.firestore {
 
 ```text
 WWcatalog/
-├── index.html                      # Interface principal com os 4 espaços de catálogo e modal Firebase
-├── firestore.rules                 # Regras de segurança do Cloud Firestore (wwcatalog-10546)
+├── index.html                      # Interface principal com os 4 espaços de catálogo
 ├── README.md                       # Documentação oficial do sistema
 ├── assets/
 │   └── animais/                    # 91 retratos individuais de criaturas mágicas (carregamento lazy)
 ├── css/
 │   ├── variables.css               # Paleta de cores de pergaminho, selos e tipografia
 │   ├── base.css                    # Reset e regras tipográficas globais
-│   ├── layout.css                  # Grids responsivos, barra Firebase e navegação departamental
-│   └── components.css              # Fichas ministeriais, cartões de habilidade, selos e modal
+│   ├── layout.css                  # Grids responsivos e navegação departamental
+│   └── components.css              # Fichas ministeriais, cartões de habilidade e selos
 ├── js/
-│   ├── main.js                     # Inicialização dos 4 controladores e barra de sincronização Firebase
+│   ├── main.js                     # Inicialização dos 4 controladores de catálogo
 │   ├── controllers/
 │   │   ├── TabController.js        # Alternância entre os 8 painéis (4 Arquivos + 4 Registros)
 │   │   ├── CreatureController.js   # CRUD, filtros e carregamento individual de Animais (D.R.C.C.M.)
@@ -132,13 +63,13 @@ WWcatalog/
 │   │   ├── PlantController.js      # CRUD, filtros e carregamento individual de Plantas (Herbologia)
 │   │   └── PotionController.js     # CRUD, filtros e carregamento individual de Poções (Alquimia)
 │   ├── services/
-│   │   ├── firebaseConfig.js       # Configuração do projeto Firebase (wwcatalog-10546)
-│   │   └── database.js             # Camada híbrida Firestore + carregamento individual sob demanda
+│   │   ├── firebaseConfig.js       # Configuração interna de conexão com o banco de dados
+│   │   └── database.js             # Camada de persistência e carregamento individual sob demanda
 │   └── utils/
 │       └── helpers.js              # Sanitização, compressão de imagens via Canvas e exportação JSON
 ├── dados/
 │   ├── indice.json                 # Índice leve das 92 criaturas mágicas
-│   ├── catalogo_criaturas.json     # Compêndio completo de criaturas para sincronização
+│   ├── catalogo_criaturas.json     # Compêndio completo de criaturas
 │   └── itens/                      # 92 arquivos JSON individuais (<id>.json)
 ├── feiticos/
 │   ├── indice.json                 # Índice leve dos 210 feitiços

@@ -228,11 +228,7 @@ export class CreatureController {
         if (injContainer) injContainer.innerHTML = "";
 
         await this.loadCatalog(true);
-        alert(
-            result.savedToCloud
-                ? `Criatura "${creatureData.nome}" catalogada e sincronizada no Firebase Firestore!`
-                : `Criatura "${creatureData.nome}" salva no catálogo local!`
-        );
+        alert(`Criatura "${creatureData.nome}" catalogada com sucesso no Arquivo Ministerial!`);
     }
 
     async handleBulkImport() {

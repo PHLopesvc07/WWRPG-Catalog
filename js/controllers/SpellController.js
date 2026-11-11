@@ -103,11 +103,7 @@ export class SpellController {
         this.editingId = null;
         await this.loadCatalog(true);
 
-        alert(
-            result.savedToCloud
-                ? `Feitiço "${spellData.name}" catalogado e sincronizado no Firebase Firestore!`
-                : `Feitiço "${spellData.name}" salvo no catálogo local!`
-        );
+        alert(`Feitiço "${spellData.name}" catalogado com sucesso no Grimório Ministerial!`);
     }
 
     async handleBulkImport() {

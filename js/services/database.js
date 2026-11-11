@@ -1,7 +1,6 @@
 /**
- * SERVIÇO DE BANCO DE DADOS E PERSISTÊNCIA HÍBRIDA (FIREBASE FIRESTORE + ARQUIVOS INDIVIDUAIS)
- * Projeto Firebase: wwcatalog-10546
- * Arquitetura de Carregamento Individual Sob Demanda (Lazy / On-Demand Item Loading)
+ * SERVIÇO DE BANCO DE DADOS E CARREGAMENTO INDIVIDUAL SOB DEMANDA
+ * Arquitetura Two-Tier: Índice Leve + Documento Individual sob Demanda
  */
 
 import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
@@ -11,11 +10,9 @@ import {
     getDoc,
     setDoc,
     deleteDoc,
-    collection,
-    getDocs,
     writeBatch
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-import { getActiveFirebaseConfig } from "./firebaseConfig.js";
+import { DATABASE_CONFIG } from "./firebaseConfig.js";
 import { sanitizeFilename } from "../utils/helpers.js";
 
 export const COLLECTIONS = {
@@ -53,88 +50,22 @@ const COLLECTION_META = {
 };
 
 let dbInstance = null;
-let connectionState = {
-    online: false,
-    rulesAllowed: false,
-    projectId: "wwcatalog-10546",
-    lastError: null
-};
 
-// Cache em memória para itens já abertos individualmente (evita releituras desnecessárias)
+// Cache em memória para itens já abertos individualmente
 const itemMemoryCache = new Map();
 // Cache em memória dos índices leves por coleção
 const indexMemoryCache = new Map();
 
-const statusListeners = new Set();
-
-export function onFirebaseStatusChange(listener) {
-    statusListeners.add(listener);
-    listener(connectionState);
-    return () => statusListeners.delete(listener);
-}
-
-function notifyStatusChange(patch) {
-    connectionState = { ...connectionState, ...patch };
-    statusListeners.forEach(fn => {
-        try {
-            fn(connectionState);
-        } catch (e) {
-            console.error(e);
-        }
-    });
-}
-
-/**
- * Inicializa a instância do Firebase Firestore para o projeto wwcatalog-10546.
- */
-export async function initFirebaseConnection() {
+export async function initDatabaseConnection() {
     try {
-        const config = getActiveFirebaseConfig();
-        const app = getApps().length === 0 ? initializeApp(config) : getApp();
+        const app = getApps().length === 0 ? initializeApp(DATABASE_CONFIG) : getApp();
         dbInstance = getFirestore(app);
-
-        notifyStatusChange({
-            online: true,
-            projectId: config.projectId || "wwcatalog-10546",
-            lastError: null
-        });
-
-        // Testa leitura rápida do documento de índice no Firestore
-        try {
-            const testRef = doc(dbInstance, "_indexes", "creatures");
-            await getDoc(testRef);
-            notifyStatusChange({
-                online: true,
-                rulesAllowed: true,
-                lastError: null
-            });
-        } catch (ruleErr) {
-            const isPermDenied = ruleErr?.code === "permission-denied" || String(ruleErr?.message || "").includes("Missing or insufficient permissions");
-            notifyStatusChange({
-                online: true,
-                rulesAllowed: !isPermDenied,
-                lastError: isPermDenied ? "Regras do Firestore bloqueando leitura/escrita (publique o arquivo firestore.rules no Console)" : ruleErr.message
-            });
-        }
         return dbInstance;
-    } catch (err) {
-        console.warn("Modo local ativo — não foi possível inicializar o Firebase:", err);
-        notifyStatusChange({
-            online: false,
-            rulesAllowed: false,
-            lastError: err.message
-        });
+    } catch {
         return null;
     }
 }
 
-export function getFirebaseStatus() {
-    return { ...connectionState };
-}
-
-/**
- * Gera um identificador único e determinístico para um item do catálogo.
- */
 export function buildItemId(collectionName, item, prefix = "") {
     if (item.id && typeof item.id === "string" && item.id.trim()) {
         return item.id.trim();
@@ -149,10 +80,6 @@ export function buildItemId(collectionName, item, prefix = "") {
     return clean.startsWith(`${colPrefix}_`) ? clean : `${colPrefix}_${clean}`;
 }
 
-/**
- * Extrai apenas os metadados leves necessários para o índice e filtros laterais.
- * Garante que a listagem carregue instantaneamente sem trafegar descrições longas ou imagens Base64.
- */
 export function buildSummaryEntry(collectionName, item) {
     const id = buildItemId(collectionName, item);
     const file = item.file || `itens/${id}.json`;
@@ -234,10 +161,6 @@ function extractPlantCd(peculiaridades = "") {
     return m ? Number(m[1]) : 12;
 }
 
-/**
- * Gerenciamento de cache local complementar (localStorage) para itens criados/editados
- * pelo usuário mesmo caso o Firestore esteja temporariamente offline.
- */
 function getLocalCustomItemsMap(collectionName) {
     try {
         const raw = localStorage.getItem(`ww_custom_${collectionName}`);
@@ -252,8 +175,8 @@ function saveLocalCustomItem(collectionName, id, itemData) {
         const map = getLocalCustomItemsMap(collectionName);
         map[id] = itemData;
         localStorage.setItem(`ww_custom_${collectionName}`, JSON.stringify(map));
-    } catch (e) {
-        console.warn("Aviso ao salvar no cache local:", e);
+    } catch {
+        // Ignora caso localStorage esteja cheio
     }
 }
 
@@ -269,8 +192,8 @@ function removeLocalCustomItem(collectionName, id) {
             deletedList.push(id);
             localStorage.setItem(`ww_deleted_${collectionName}`, JSON.stringify(deletedList));
         }
-    } catch (e) {
-        console.warn(e);
+    } catch {
+        // Ignora
     }
 }
 
@@ -285,8 +208,6 @@ function getLocalDeletedIds(collectionName) {
 
 /**
  * 1. CARREGAMENTO RÁPIDO DO ÍNDICE DA COLEÇÃO (Tier 1)
- * Retorna apenas a lista leve de resumos (ID, nome, categoria/nível/classificação)
- * mesclando o índice local oficial, os registros customizados locais e o índice do Firebase Firestore.
  */
 export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
     if (!forceRefresh && indexMemoryCache.has(collectionName)) {
@@ -299,7 +220,6 @@ export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
     const summaryMap = new Map();
     const deletedIds = getLocalDeletedIds(collectionName);
 
-    // 1.1 Carrega o índice leve estático local (instantâneo, poucos KBs)
     try {
         const response = await fetch(meta.indexFile);
         if (response.ok) {
@@ -313,11 +233,10 @@ export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
                 });
             }
         }
-    } catch (err) {
-        console.warn(`Aviso ao ler índice local de ${collectionName}:`, err);
+    } catch {
+        // Ignora erro local
     }
 
-    // 1.2 Mescla itens customizados salvos localmente no navegador
     const localCustomMap = getLocalCustomItemsMap(collectionName);
     Object.entries(localCustomMap).forEach(([id, fullItem]) => {
         if (!deletedIds.has(id)) {
@@ -326,9 +245,8 @@ export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
         }
     });
 
-    // 1.3 Consulta o índice leve no Firebase Firestore (_indexes/{collectionName})
     if (!dbInstance) {
-        await initFirebaseConnection();
+        await initDatabaseConnection();
     }
 
     if (dbInstance) {
@@ -349,17 +267,9 @@ export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
                         }
                     });
                 }
-                notifyStatusChange({ online: true, rulesAllowed: true, lastError: null });
             }
-        } catch (err) {
-            const isPermDenied = err?.code === "permission-denied" || String(err?.message || "").includes("Missing or insufficient permissions");
-            if (isPermDenied) {
-                notifyStatusChange({
-                    online: true,
-                    rulesAllowed: false,
-                    lastError: "Publique as Regras do Firestore (firestore.rules) para sincronizar na nuvem."
-                });
-            }
+        } catch {
+            // Opera perfeitamente com os índices locais caso sem rede
         }
     }
 
@@ -370,30 +280,22 @@ export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
 
 /**
  * 2. CARREGAMENTO INDIVIDUAL DE ITEM SOB DEMANDA (Tier 2)
- * Busca os detalhes completos de UM ÚNICO item apenas quando o usuário clica nele na lista.
- * Ordem de busca:
- *   1. Cache em memória (0ms se já clicado antes)
- *   2. Firebase Firestore (`doc(db, collectionName, id)`)
- *   3. Arquivo JSON individual local (`./<pasta>/itens/<id>.json`)
  */
 export async function fetchItemById(collectionName, id) {
     if (!id) return null;
     const cacheKey = `${collectionName}:${id}`;
 
-    // 1. Verifica cache em memória
     if (itemMemoryCache.has(cacheKey)) {
         return itemMemoryCache.get(cacheKey);
     }
 
-    // 2. Verifica itens customizados no localStorage
     const customMap = getLocalCustomItemsMap(collectionName);
     if (customMap[id]) {
         itemMemoryCache.set(cacheKey, customMap[id]);
         return customMap[id];
     }
 
-    // 3. Tenta buscar o documento individual no Firebase Firestore
-    if (dbInstance && connectionState.rulesAllowed) {
+    if (dbInstance) {
         try {
             const docRef = doc(dbInstance, collectionName, id);
             const snap = await getDoc(docRef);
@@ -402,12 +304,11 @@ export async function fetchItemById(collectionName, id) {
                 itemMemoryCache.set(cacheKey, data);
                 return data;
             }
-        } catch (err) {
-            console.warn(`Aviso ao buscar documento individual ${collectionName}/${id} no Firestore:`, err);
+        } catch {
+            // Fallback para arquivo JSON individual
         }
     }
 
-    // 4. Fallback instantâneo: Carrega o arquivo JSON individual local (./<pasta>/itens/<id>.json)
     const meta = COLLECTION_META[collectionName];
     if (meta) {
         try {
@@ -418,27 +319,21 @@ export async function fetchItemById(collectionName, id) {
                 itemMemoryCache.set(cacheKey, data);
                 return data;
             }
-        } catch (err) {
-            console.error(`Erro ao carregar arquivo individual ${id}.json:`, err);
+        } catch {
+            return null;
         }
     }
 
     return null;
 }
 
-/**
- * Carrega múltiplos itens específicos por ID sob demanda (usado na exportação de pacotes selecionados).
- */
 export async function fetchItemsByIds(collectionName, ids = []) {
     const promises = ids.map(id => fetchItemById(collectionName, id));
     const results = await Promise.all(promises);
     return results.filter(Boolean);
 }
 
-/**
- * Atualiza o documento de índice leve `_indexes/{collectionName}` no Firestore.
- */
-async function syncCollectionIndexToFirestore(collectionName, currentSummaryList, deletedIds = []) {
+async function syncCollectionIndex(collectionName, currentSummaryList, deletedIds = []) {
     if (!dbInstance) return;
     const idxRef = doc(dbInstance, "_indexes", collectionName);
     await setDoc(idxRef, {
@@ -450,7 +345,7 @@ async function syncCollectionIndexToFirestore(collectionName, currentSummaryList
 }
 
 /**
- * 3. SALVAR ITEM INDIVIDUAL (Firebase Firestore + Cache Local)
+ * 3. SALVAR ITEM INDIVIDUAL
  */
 export async function saveRecord(collectionName, dataObject, prefix = "registro", options = { downloadBackup: false }) {
     const id = buildItemId(collectionName, dataObject, prefix);
@@ -464,7 +359,6 @@ export async function saveRecord(collectionName, dataObject, prefix = "registro"
     itemMemoryCache.set(cacheKey, fullRecord);
     saveLocalCustomItem(collectionName, id, fullRecord);
 
-    // Atualiza o índice em memória imediatamente
     const currentIndex = await fetchCatalogIndex(collectionName);
     const newSummary = buildSummaryEntry(collectionName, fullRecord);
     const existingIdx = currentIndex.findIndex(item => item.id === id);
@@ -477,26 +371,17 @@ export async function saveRecord(collectionName, dataObject, prefix = "registro"
 
     let savedToCloud = false;
     if (!dbInstance) {
-        await initFirebaseConnection();
+        await initDatabaseConnection();
     }
 
     if (dbInstance) {
         try {
             const docRef = doc(dbInstance, collectionName, id);
             await setDoc(docRef, fullRecord, { merge: true });
-            await syncCollectionIndexToFirestore(collectionName, currentIndex);
+            await syncCollectionIndex(collectionName, currentIndex);
             savedToCloud = true;
-            notifyStatusChange({ online: true, rulesAllowed: true, lastError: null });
-        } catch (err) {
-            console.warn(`Aviso ao salvar ${collectionName}/${id} no Firestore (mantido localmente):`, err);
-            const isPermDenied = err?.code === "permission-denied" || String(err?.message || "").includes("Missing or insufficient permissions");
-            if (isPermDenied) {
-                notifyStatusChange({
-                    online: true,
-                    rulesAllowed: false,
-                    lastError: "Permissão negada no Firestore. Publique as regras em firestore.rules no Console."
-                });
-            }
+        } catch {
+            // Mantido localmente
         }
     }
 
@@ -508,7 +393,7 @@ export async function saveRecord(collectionName, dataObject, prefix = "registro"
 }
 
 /**
- * 4. SALVAR LOTE DE ITENS EM MASSA (Bulk Import para Firebase Firestore + Cache Local)
+ * 4. SALVAR LOTE DE ITENS EM MASSA
  */
 export async function saveBulkRecords(collectionName, dataArray, prefix = "item", onProgress = null) {
     if (!Array.isArray(dataArray) || dataArray.length === 0) {
@@ -537,12 +422,11 @@ export async function saveBulkRecords(collectionName, dataArray, prefix = "item"
 
     let savedToCloud = false;
     if (!dbInstance) {
-        await initFirebaseConnection();
+        await initDatabaseConnection();
     }
 
     if (dbInstance) {
         try {
-            // Divide em lotes de 400 operações (limite do Firestore é 500 por writeBatch)
             const CHUNK_SIZE = 400;
             for (let i = 0; i < normalizedRecords.length; i += CHUNK_SIZE) {
                 const chunk = normalizedRecords.slice(i, i + CHUNK_SIZE);
@@ -557,19 +441,10 @@ export async function saveBulkRecords(collectionName, dataArray, prefix = "item"
                 }
             }
 
-            await syncCollectionIndexToFirestore(collectionName, updatedIndexList);
+            await syncCollectionIndex(collectionName, updatedIndexList);
             savedToCloud = true;
-            notifyStatusChange({ online: true, rulesAllowed: true, lastError: null });
-        } catch (err) {
-            console.warn(`Aviso ao importar lote de ${collectionName} no Firestore (salvo localmente):`, err);
-            const isPermDenied = err?.code === "permission-denied" || String(err?.message || "").includes("Missing or insufficient permissions");
-            if (isPermDenied) {
-                notifyStatusChange({
-                    online: true,
-                    rulesAllowed: false,
-                    lastError: "Permissão negada no Firestore. Publique as regras em firestore.rules no Console."
-                });
-            }
+        } catch {
+            // Mantido localmente
         }
     }
 
@@ -591,77 +466,19 @@ export async function deleteRecord(collectionName, id) {
     const filteredIndex = currentIndex.filter(item => item.id !== id);
     indexMemoryCache.set(collectionName, filteredIndex);
 
-    if (dbInstance && connectionState.rulesAllowed) {
+    if (dbInstance) {
         try {
             await deleteDoc(doc(dbInstance, collectionName, id));
             const deletedIds = Array.from(getLocalDeletedIds(collectionName));
-            await syncCollectionIndexToFirestore(collectionName, filteredIndex, deletedIds);
+            await syncCollectionIndex(collectionName, filteredIndex, deletedIds);
             return true;
-        } catch (err) {
-            console.warn(`Erro ao excluir ${collectionName}/${id} no Firestore:`, err);
+        } catch {
+            return false;
         }
     }
     return false;
 }
 
-/**
- * 6. SINCRONIZAR TODOS OS 4 COMPÊNDIOS OFICIAIS COM O FIREBASE FIRESTORE
- * Lê os 4 catálogos completos locais (92 criaturas, 210 feitiços, 44 plantas, 166 poções)
- * e grava cada item individualmente em sua respectiva coleção no Firestore.
- */
-export async function syncAllCatalogsToFirebase(onStatusUpdate = null) {
-    if (!dbInstance) {
-        await initFirebaseConnection();
-    }
-    if (!dbInstance) {
-        throw new Error("Não foi possível inicializar a conexão com o Firebase.");
-    }
-
-    const targets = [
-        { key: COLLECTIONS.CREATURES, label: "Animais / Criaturas Mágicas" },
-        { key: COLLECTIONS.SPELLS, label: "Feitiços" },
-        { key: COLLECTIONS.PLANTS, label: "Plantas (Herbologia)" },
-        { key: COLLECTIONS.POTIONS, label: "Poções (Alquimia)" }
-    ];
-
-    let totalSynced = 0;
-
-    for (const target of targets) {
-        const meta = COLLECTION_META[target.key];
-        if (onStatusUpdate) {
-            onStatusUpdate(`Carregando base local de ${target.label}...`);
-        }
-
-        const res = await fetch(meta.fullFile);
-        if (!res.ok) continue;
-        const fullList = await res.json();
-
-        if (onStatusUpdate) {
-            onStatusUpdate(`Enviando ${fullList.length} registros de ${target.label} ao Firebase...`);
-        }
-
-        const result = await saveBulkRecords(target.key, fullList, meta.prefix, (done, total) => {
-            if (onStatusUpdate) {
-                onStatusUpdate(`Sincronizando ${target.label}: ${done}/${total}...`);
-            }
-        });
-
-        if (!result.savedToCloud) {
-            throw new Error(
-                "O Firebase recusou a gravação por bloqueio nas Regras de Segurança (permission-denied). " +
-                "Cole e publique as regras do arquivo firestore.rules na aba Regras do Console do Firebase."
-            );
-        }
-
-        totalSynced += result.count;
-    }
-
-    return totalSynced;
-}
-
-/**
- * Exporta qualquer objeto ou lista JSON como arquivo para download pelo navegador.
- */
 export function downloadJsonFile(dataObject, filename = "exportacao_ministerial.json") {
     const jsonString = JSON.stringify(dataObject, null, 2);
     const blob = new Blob([jsonString], { type: "application/json" });

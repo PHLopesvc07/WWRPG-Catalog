@@ -139,11 +139,7 @@ export class PlantController {
         if (label) label.textContent = "Anexar Ilustração Botânica";
 
         await this.loadCatalog(true);
-        alert(
-            result.savedToCloud
-                ? `Planta "${plantData.nome}" catalogada e sincronizada no Firebase Firestore!`
-                : `Planta "${plantData.nome}" salva no catálogo local!`
-        );
+        alert(`Planta "${plantData.nome}" catalogada com sucesso no Herbário Ministerial!`);
     }
 
     async handleBulkImport() {

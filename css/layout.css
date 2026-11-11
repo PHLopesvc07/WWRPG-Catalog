@@ -30,56 +30,6 @@
     margin-bottom: 14px;
 }
 
-/* Barra de Conexão Firebase */
-.firebase-bar {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    background: rgba(74, 53, 37, 0.08);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    padding: 8px 14px;
-    margin-bottom: 16px;
-}
-
-.firebase-status-pill {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--ink-primary);
-}
-
-.status-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-.status-online {
-    background-color: #27ae60;
-    box-shadow: 0 0 6px #27ae60;
-}
-
-.status-warning {
-    background-color: #d35400;
-    box-shadow: 0 0 6px #e67e22;
-}
-
-.status-offline {
-    background-color: #8b1e1e;
-}
-
-.firebase-actions {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
 /* Navegação dos 4 Espaços de Catálogo */
 .catalog-nav {
     display: flex;
