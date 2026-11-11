@@ -1,0 +1,11 @@
+{
+  "id": "feitico_wingardium_leviosa",
+  "name": "Wingardium Leviosa",
+  "cat": "Charme",
+  "lvl": "1",
+  "tipo": "Utilitário",
+  "pronuncia": "Uin-GAR-di-um Le-vi-O-sa",
+  "pronunciation": "Uin-GAR-di-um Le-vi-O-sa",
+  "condicao": "Nenhuma",
+  "desc": "Faz objetos levitarem baixas alturas."
+}

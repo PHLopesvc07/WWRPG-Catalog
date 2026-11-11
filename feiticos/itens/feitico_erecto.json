@@ -1,0 +1,11 @@
+{
+  "id": "feitico_erecto",
+  "name": "Erecto",
+  "cat": "Charme",
+  "lvl": "4",
+  "tipo": "Utilitário",
+  "pronuncia": "E-REC-to",
+  "pronunciation": "E-REC-to",
+  "condicao": "Nenhuma",
+  "desc": "Ergue e monta estruturas, tendas, andaimes e objetos similares de forma automática."
+}

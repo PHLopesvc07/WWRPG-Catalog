@@ -1,0 +1,11 @@
+{
+  "id": "feitico_reparo",
+  "name": "Reparo",
+  "cat": "Transfiguração",
+  "lvl": "3",
+  "tipo": "Utilitário",
+  "pronuncia": "Re-PA-ro",
+  "pronunciation": "Re-PA-ro",
+  "condicao": "Nenhuma",
+  "desc": "Concerta objetos quebrados"
+}

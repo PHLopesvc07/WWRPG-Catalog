@@ -1,0 +1,64 @@
+{
+  "id": "merpeople",
+  "num": 57,
+  "nome": "Merpeople (Sereianos)",
+  "classificacao": "XXXX",
+  "licenca": "Magizoologista",
+  "porte": "Grande",
+  "tamanho": "1.8 metros",
+  "peso": "85 kg",
+  "origem": "Natural",
+  "locomocao": "Aquáticos",
+  "velocidade": "Natação: 6.4m | Terrestre: 1.0m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Consciente",
+  "descricao": "Os merpeople (sereianos) existem em todo o mundo, embora variem de aparência como os humanos. Seus hábitos e costumes permanecem tão misteriosos quanto os do centauro, embora os bruxos que aprendam o serêiaco nos falem de Ver nota de rodapé sobre a classificação do centauro. comunidades excepcionalmente organizadas, cujo tamanho varia conforme a localização, havendo algumas com habitações muito bem construídas. Do mesmo modo que os centauros, os sereianos abriram mão da condição de \"seres\" em favor da de \"animais\" (veja Introdução). Os sereianos mais antigos de que se tem registro são conhecidos pelo nome de sereias (Grécia) e é nas águas mais tépidas que encontramos as belas sereias descritas na literatura trouxa e representadas em suas pinturas. Os selkies da Escócia e os merrows da Irlanda são menos belos, mas revelam o mesmo amor à música comum a todos os sereianos. Geografia: @Mundial (águas frias e quentes)",
+  "atributos": {
+    "corpo": 2,
+    "destreza": 2,
+    "vitalidade": 3,
+    "instinto": 3,
+    "carisma": 1,
+    "inteligencia": 2,
+    "sabedoria": 5
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Estocada com Tridente de Pedra",
+      "desc": "Ataque com tridente afiado de pedra ou coral na água. Rola `1d8 + Corpo` de dano físico e causa **[C: Sangramento]**.",
+      "rolagem": "1d8 + Corpo"
+    },
+    "reacao": {
+      "nome": "Aparada de Lança",
+      "desc": "Apara golpes físicos usando o cabo de sua lança ou tridente. Gasta 1 ação e rola `1d30 + Destreza + 2` contra ataque corpo a corpo.",
+      "rolagem": "1d30 + Destreza + 2"
+    },
+    "ambiente": {
+      "nome": "Redemoinho Subaquático Coletivo",
+      "desc": "Se houver mais de 3 sereianos na água, podem unir forças para criar correnteza em raio de 6m. Alvos na área são arrastados 4m.",
+      "rolagem": "CD 20 Corpo"
+    },
+    "extra": {
+      "nome": "Linguagem das Águas (Sereiano)",
+      "desc": "Canta melodias belíssimas debaixo d'água, mas fora dela emite ruídos estridentes que ensurdecem e causam desorientação temporária.",
+      "rolagem": "CD 18 Vontade"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 3
+    },
+    "media": {
+      "curr": 0,
+      "max": 3
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 3
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/merpeople.jpg",
+  "fotoBase64": "./assets/animais/merpeople.jpg"
+}

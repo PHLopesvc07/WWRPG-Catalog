@@ -1,0 +1,24 @@
+{
+  "id": "pocao_antidote_to_veritaserum",
+  "nome": "Antídoto para Veritaserum (Antidote to Veritaserum)",
+  "tipo": "Antídoto",
+  "nivel": 6,
+  "nível": 6,
+  "efeito": "Neutraliza de forma fulminante a coerção mística do Veritaserum, permitindo ao indivíduo recuperar o livre-arbítrio vocal, resistir a interrogatórios ou simular respostas sob efeito do soro.",
+  "ingredientes": "Extrato de Jobberknoll invertido, raiz de lírio d'água encantado, casca de figueira do deserto, essência de oclumência alquímica.",
+  "descricao": "Fluido translúcido com leve brilho nacarado e gosto amargo metálico. Seu preparo é extremamente sigiloso, utilizado por diplomatas e agentes secretos que operam em zonas de alto risco ministerial.",
+  "descrição": "Fluido translúcido com leve brilho nacarado e gosto amargo metálico. Seu preparo é extremamente sigiloso, utilizado por diplomatas e agentes secretos que operam em zonas de alto risco ministerial.",
+  "sistema": {
+    "tempo_preparo": "12 horas",
+    "duracao": "Instantâneo / Concede imunidade a Veritaserum por 1 hora se tomado preventivamente",
+    "dificuldade_cd": 22,
+    "administracao": "Ingestão (gotas sublinguais)"
+  },
+  "meta": {
+    "slug": "antidote-to-veritaserum",
+    "nome_original": "Antidote to Veritaserum",
+    "dificuldade_original": "Advanced",
+    "caracteristicas_originais": null,
+    "wiki": "https://harrypotter.fandom.com/wiki/Antidote_to_Veritaserum"
+  }
+}

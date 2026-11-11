@@ -1,0 +1,11 @@
+{
+  "id": "feitico_fogomaldito",
+  "name": "Fogomaldito",
+  "cat": "Maldição",
+  "lvl": "6",
+  "tipo": "Ataque",
+  "pronuncia": "Fo-go-mal-DI-to (Pes-tis In-CEN-di-um)",
+  "pronunciation": "Fo-go-mal-DI-to (Pes-tis In-CEN-di-um)",
+  "condicao": "(C) Queimadura Grave",
+  "desc": "Faz um fogo poderoso em forma de monstros, que pode se tornar incontrolável e fatal se o poder mental do bruxo conjurador for baixo. | Injúria Específica: (C) Queimadura Grave"
+}

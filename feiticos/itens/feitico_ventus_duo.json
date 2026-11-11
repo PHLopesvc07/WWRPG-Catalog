@@ -1,0 +1,11 @@
+{
+  "id": "feitico_ventus_duo",
+  "name": "Ventus Duo",
+  "cat": "Charme",
+  "lvl": "3",
+  "tipo": "Ataque",
+  "pronuncia": "VEN-tus DU-o",
+  "pronunciation": "VEN-tus DU-o",
+  "condicao": "(C) Derrubado",
+  "desc": "Conjura uma rajada huracanada de vento contínuo que arremessa bruxos e objetos pesados para trás, desestabiliza vassouras e dissipa cortinas de fumaça. | Injúria Específica: (C) Derrubado"
+}

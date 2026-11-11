@@ -1,0 +1,64 @@
+{
+  "id": "griffin",
+  "num": 39,
+  "nome": "Griffin (Grifo)",
+  "classificacao": "XXXX",
+  "licenca": "Magizoologista",
+  "porte": "Grande",
+  "tamanho": "3.2 metros",
+  "peso": "650 kg",
+  "origem": "Natural",
+  "locomocao": "Aquaéros",
+  "velocidade": "Voo: 9.5m | Terrestre: 2.5m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Bestial",
+  "descricao": "O grifo é originário da Grécia e tem as pernas dianteira e uma grande cabeça de águia, mas o corpo e as pernas traseiras de leão. Tal como as esfinges (ver adiante), os grifos são com freqüência empregados pelos bruxos para guardar tesouros. E embora ele seja feroz, sabe-se de bruxos que têm feito amizade com esse animal. O grifos se alimentam de carne crua. Geografia: @Grécia",
+  "atributos": {
+    "corpo": 5,
+    "destreza": 3,
+    "vitalidade": 5,
+    "instinto": 4,
+    "carisma": -4,
+    "inteligencia": -1,
+    "sabedoria": 3
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Garrada de Águia / Mordida",
+      "desc": "Combina garras dianteiras afiadas de águia com bico dilacerante. Rola `2d6 + Corpo` de dano físico e causa **[C: Sangramento]**.",
+      "rolagem": "2d6 + Corpo"
+    },
+    "reacao": {
+      "nome": "Aparada de Asas",
+      "desc": "Apara golpes físicos usando as asas musculosas e emplumadas. Gasta 1 ação e rola `1d30 + Destreza + 2` contra teste de ataque do inimigo.",
+      "rolagem": "1d30 + Destreza + 2"
+    },
+    "ambiente": {
+      "nome": "Rajada de Voo Ascendente",
+      "desc": "Ao alçar voo rapidamente, cria ventania em raio de 5m. Alvos na área devem passar em Destreza CD 20 ou caem de costas devido ao deslocamento de ar.",
+      "rolagem": "CD 20 Destreza"
+    },
+    "extra": {
+      "nome": "Guardião Fiel de Tesouros",
+      "desc": "Sempre alerta. Rola testes de percepção sensorial baseados em visão ou faro com +5 de vantagem, sendo impossível surpreendê-lo.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 3
+    },
+    "media": {
+      "curr": 0,
+      "max": 3
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 3
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/griffin.jpg",
+  "fotoBase64": "./assets/animais/griffin.jpg"
+}

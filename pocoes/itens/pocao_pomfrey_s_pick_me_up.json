@@ -1,0 +1,24 @@
+{
+  "id": "pocao_pomfrey_s_pick_me_up",
+  "nome": "Revigorante de Madame Pomfrey (Pomfrey's Pick-Me-Up)",
+  "tipo": "Tônico (Medicinal)",
+  "nivel": 1,
+  "nível": 1,
+  "efeito": "Tônico restaurador geral para estudantes esgotados por exames ou dores de cabeça, devolvendo o bom humor, a cor às bochechas e a energia física de imediato.",
+  "ingredientes": "Casca de canela mágica, infusão de hortelã, favas de cacau de Castelobruxo, água de nascente pura.",
+  "descricao": "Líquido castanho com delicioso aroma de chocolate quente e especiarias de inverno.",
+  "descrição": "Líquido castanho com delicioso aroma de chocolate quente e especiarias de inverno.",
+  "sistema": {
+    "tempo_preparo": "30 minutos",
+    "duracao": "4 horas",
+    "dificuldade_cd": 12,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "pomfrey-s-pick-me-up",
+    "nome_original": "Pomfrey's Pick-Me-Up",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Emerald-green colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Pomfrey's_Pick-Me-Up"
+  }
+}

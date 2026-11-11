@@ -1,0 +1,11 @@
+{
+  "id": "feitico_mobiliarbus",
+  "name": "Mobiliarbus",
+  "cat": "Charme",
+  "lvl": "2",
+  "tipo": "Utilitário",
+  "pronuncia": "Mo-bi-li-AR-bus",
+  "pronunciation": "Mo-bi-li-AR-bus",
+  "condicao": "Nenhuma",
+  "desc": "Move árvores e outras plantas grandes de lugar, arrastando-as levemente pelo ar ou pelo chão."
+}

@@ -1,0 +1,2102 @@
+[
+  {
+    "id": "feitico_abaffiato",
+    "file": "itens/feitico_abaffiato.json",
+    "name": "Abaffiato",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "A-ba-fi-A-to",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_animus_novandi",
+    "file": "itens/feitico_animus_novandi.json",
+    "name": "Animus Novandi",
+    "cat": "Transfiguração",
+    "lvl": "5",
+    "tipo": "Utilitário",
+    "pronuncia": "A-ni-mus No-VAN-di",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_amato_animo_animato_animagus",
+    "file": "itens/feitico_amato_animo_animato_animagus.json",
+    "name": "Amato Animo Animato Animagus",
+    "cat": "Transfiguração",
+    "lvl": "7",
+    "tipo": "Utilitário",
+    "pronuncia": "A-MA-to A-NI-mo A-ni-MA-to A-ni-MA-gus",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_aparatar_e_desaparatar",
+    "file": "itens/feitico_aparatar_e_desaparatar.json",
+    "name": "Aparatar e Desaparatar",
+    "cat": "Charme",
+    "lvl": "7",
+    "tipo": "Utilitário",
+    "pronuncia": "Não-verbal (Foco mental)",
+    "condicao": "(C) Estrunchado"
+  },
+  {
+    "id": "feitico_arania_exumai",
+    "file": "itens/feitico_arania_exumai.json",
+    "name": "Arania Exumai",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "A-RA-nha Eks-SU-mai",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_araniasortia",
+    "file": "itens/feitico_araniasortia.json",
+    "name": "Araniasortia",
+    "cat": "Transfiguração",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "A-ra-nha-SOR-ti-a",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_harmonia_nectere_passus",
+    "file": "itens/feitico_harmonia_nectere_passus.json",
+    "name": "Harmonia Nectere Passus",
+    "cat": "Charme",
+    "lvl": "4",
+    "tipo": "Utilitário",
+    "pronuncia": "Har-MO-ni-a Nec-TE-re PAS-sus",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_aguamenti",
+    "file": "itens/feitico_aguamenti.json",
+    "name": "Aguamenti",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "A-gua-MEN-ti",
+    "condicao": "(C) Encharcado"
+  },
+  {
+    "id": "feitico_appare_vestigium",
+    "file": "itens/feitico_appare_vestigium.json",
+    "name": "Appare Vestigium",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "A-PA-re Ves-TI-gi-um",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_alohomora",
+    "file": "itens/feitico_alohomora.json",
+    "name": "Alohomora",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "A-lo-ho-MO-ra",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_ascendio",
+    "file": "itens/feitico_ascendio.json",
+    "name": "Ascendio",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "As-CEN-di-o",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_erecto",
+    "file": "itens/feitico_erecto.json",
+    "name": "Erecto",
+    "cat": "Charme",
+    "lvl": "4",
+    "tipo": "Utilitário",
+    "pronuncia": "E-REC-to",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_glisseo",
+    "file": "itens/feitico_glisseo.json",
+    "name": "Glisseo",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "GLI-se-o",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_impervius",
+    "file": "itens/feitico_impervius.json",
+    "name": "Impervius",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Im-PER-vi-us",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_lacarnum_inflamari",
+    "file": "itens/feitico_lacarnum_inflamari.json",
+    "name": "Lacarnum Inflamari",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "La-CAR-num In-fla-MA-ri",
+    "condicao": "(C) Em Chamas"
+  },
+  {
+    "id": "feitico_lumos",
+    "file": "itens/feitico_lumos.json",
+    "name": "Lumos",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "LU-mos",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_lumos_maxima",
+    "file": "itens/feitico_lumos_maxima.json",
+    "name": "Lumos Maxima",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "LU-mos MAK-si-ma",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_orchideous",
+    "file": "itens/feitico_orchideous.json",
+    "name": "Orchideous",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Or-qui-DE-us",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_pack",
+    "file": "itens/feitico_pack.json",
+    "name": "Pack",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "PEK",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_pericullum",
+    "file": "itens/feitico_pericullum.json",
+    "name": "Pericullum",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Pe-RI-cu-lum",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_peskipiksi_pesternomi",
+    "file": "itens/feitico_peskipiksi_pesternomi.json",
+    "name": "Peskipiksi Pesternomi",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Pes-ki-PIK-si Pes-ter-NO-mi",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_quenterralopus",
+    "file": "itens/feitico_quenterralopus.json",
+    "name": "Quenterralopus",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Quen-ter-RA-lo-pus",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_relaxo",
+    "file": "itens/feitico_relaxo.json",
+    "name": "Relaxo",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Re-LAK-so",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_sonorus",
+    "file": "itens/feitico_sonorus.json",
+    "name": "Sonorus",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "So-NO-rus",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_uediuosi",
+    "file": "itens/feitico_uediuosi.json",
+    "name": "Uediuósi",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "Ue-di-U-A-si",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_verdimillious",
+    "file": "itens/feitico_verdimillious.json",
+    "name": "Verdimillious",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Ver-di-MI-li-us",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_wingardium_leviosa",
+    "file": "itens/feitico_wingardium_leviosa.json",
+    "name": "Wingardium Leviosa",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Uin-GAR-di-um Le-vi-O-sa",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_accio",
+    "file": "itens/feitico_accio.json",
+    "name": "Accio",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "A-qui-o",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_aqua_eructo",
+    "file": "itens/feitico_aqua_eructo.json",
+    "name": "Aqua Eructo",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "A-kua E-RUC-to",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_carpe_retractum",
+    "file": "itens/feitico_carpe_retractum.json",
+    "name": "Carpe Retractum",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "CAR-pe Re-TRAC-tum",
+    "condicao": "(C) Puxado"
+  },
+  {
+    "id": "feitico_colloportus",
+    "file": "itens/feitico_colloportus.json",
+    "name": "Colloportus",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "Co-lo-POR-tus",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_diffindo",
+    "file": "itens/feitico_diffindo.json",
+    "name": "Diffindo",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Di-FIN-do",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_reparo",
+    "file": "itens/feitico_reparo.json",
+    "name": "Reparo",
+    "cat": "Transfiguração",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "Re-PA-ro",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_diminuendo",
+    "file": "itens/feitico_diminuendo.json",
+    "name": "Diminuendo",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Di-mi-nu-EN-do",
+    "condicao": "(C) Encolhido"
+  },
+  {
+    "id": "feitico_engorgio",
+    "file": "itens/feitico_engorgio.json",
+    "name": "Engorgio",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "En-GOR-gi-o",
+    "condicao": "(C) Agigantado"
+  },
+  {
+    "id": "feitico_expelliarmus",
+    "file": "itens/feitico_expelliarmus.json",
+    "name": "Expelliarmus",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Eks-pe-li-AR-mus",
+    "condicao": "(C) Desarmado"
+  },
+  {
+    "id": "feitico_fogus_menteo",
+    "file": "itens/feitico_fogus_menteo.json",
+    "name": "Fogus Menteo",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "FO-gus Men-TE-o",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_lumos_solem",
+    "file": "itens/feitico_lumos_solem.json",
+    "name": "Lumos Solem",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "LU-mos SO-lem",
+    "condicao": "(C) Cegado"
+  },
+  {
+    "id": "feitico_mobiliarbus",
+    "file": "itens/feitico_mobiliarbus.json",
+    "name": "Mobiliarbus",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Mo-bi-li-AR-bus",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_peso_de_pena",
+    "file": "itens/feitico_peso_de_pena.json",
+    "name": "Peso de Pena",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "PE-so de PE-na",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_protego",
+    "file": "itens/feitico_protego.json",
+    "name": "Protego",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Proteção",
+    "pronuncia": "Pro-TE-go",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_revellio",
+    "file": "itens/feitico_revellio.json",
+    "name": "Revellio",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Re-VE-li-o",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_specialis_revelio",
+    "file": "itens/feitico_specialis_revelio.json",
+    "name": "Specialis Revelio",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Spe-ci-A-lis Re-VE-li-o",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_cave_inimicum",
+    "file": "itens/feitico_cave_inimicum.json",
+    "name": "Cave Inimicum",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Proteção",
+    "pronuncia": "CA-ve I-ni-MI-cum",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_desilusorio_camaninvisibilis",
+    "file": "itens/feitico_desilusorio_camaninvisibilis.json",
+    "name": "Desilusório Camaninvisibilis",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "Ca-ma-nin-vi-si-BI-lis",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_herbivicus",
+    "file": "itens/feitico_herbivicus.json",
+    "name": "Herbivicus",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "Her-BI-vi-cus",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_homenum_revelio",
+    "file": "itens/feitico_homenum_revelio.json",
+    "name": "Homenum Revelio",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "HO-me-num Re-VE-li-o",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_immobilus",
+    "file": "itens/feitico_immobilus.json",
+    "name": "Immobilus",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "I-MO-bi-lus",
+    "condicao": "(C) Paralisado"
+  },
+  {
+    "id": "feitico_silencio",
+    "file": "itens/feitico_silencio.json",
+    "name": "Silencio",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "Si-LEN-ci-o",
+    "condicao": "(C) Silenciado"
+  },
+  {
+    "id": "feitico_cistem_aperio",
+    "file": "itens/feitico_cistem_aperio.json",
+    "name": "Cistem Aperio",
+    "cat": "Charme",
+    "lvl": "4",
+    "tipo": "Utilitário",
+    "pronuncia": "CIS-tem A-PE-ri-o",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_confundus",
+    "file": "itens/feitico_confundus.json",
+    "name": "Confundus",
+    "cat": "Charme",
+    "lvl": "4",
+    "tipo": "Ataque",
+    "pronuncia": "Con-FUN-dus",
+    "condicao": "(C) Confuso"
+  },
+  {
+    "id": "feitico_conjurius_army",
+    "file": "itens/feitico_conjurius_army.json",
+    "name": "Conjurius Army",
+    "cat": "Charme",
+    "lvl": "4",
+    "tipo": "Proteção",
+    "pronuncia": "Con-JU-ri-us AR-mi",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_deffodio",
+    "file": "itens/feitico_deffodio.json",
+    "name": "Deffodio",
+    "cat": "Charme",
+    "lvl": "4",
+    "tipo": "Utilitário",
+    "pronuncia": "De-FO-di-o",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_salvio_hexia",
+    "file": "itens/feitico_salvio_hexia.json",
+    "name": "Salvio Hexia",
+    "cat": "Charme",
+    "lvl": "4",
+    "tipo": "Proteção",
+    "pronuncia": "SAL-vi-o HEK-si-a",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_speculum",
+    "file": "itens/feitico_speculum.json",
+    "name": "Speculum",
+    "cat": "Charme",
+    "lvl": "4",
+    "tipo": "Proteção",
+    "pronuncia": "SPE-cu-lum",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_aresto_momentum",
+    "file": "itens/feitico_aresto_momentum.json",
+    "name": "Aresto Momentum",
+    "cat": "Charme",
+    "lvl": "5",
+    "tipo": "Proteção",
+    "pronuncia": "A-RES-to Mo-MEN-tum",
+    "condicao": "(C) Desacelerado"
+  },
+  {
+    "id": "feitico_expecto_patronum",
+    "file": "itens/feitico_expecto_patronum.json",
+    "name": "Expecto Patronum",
+    "cat": "Charme",
+    "lvl": "5",
+    "tipo": "Proteção",
+    "pronuncia": "Eks-PEC-to Pa-TRO-num",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_extencio",
+    "file": "itens/feitico_extencio.json",
+    "name": "Extencio",
+    "cat": "Charme",
+    "lvl": "5",
+    "tipo": "Utilitário",
+    "pronuncia": "Eks-TEN-si-o",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_partis_temporous",
+    "file": "itens/feitico_partis_temporous.json",
+    "name": "Partis Temporous",
+    "cat": "Charme",
+    "lvl": "5",
+    "tipo": "Utilitário",
+    "pronuncia": "PAR-tis Tem-PO-rus",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_protego_horribilis",
+    "file": "itens/feitico_protego_horribilis.json",
+    "name": "Protego Horribilis",
+    "cat": "Charme",
+    "lvl": "5",
+    "tipo": "Proteção",
+    "pronuncia": "Pro-TE-go Hor-RI-bi-lis",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_protego_maxima",
+    "file": "itens/feitico_protego_maxima.json",
+    "name": "Protego Maxima",
+    "cat": "Charme",
+    "lvl": "5",
+    "tipo": "Proteção",
+    "pronuncia": "Pro-TE-go MAK-si-ma",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_protego_totalum",
+    "file": "itens/feitico_protego_totalum.json",
+    "name": "Protego Totalum",
+    "cat": "Charme",
+    "lvl": "5",
+    "tipo": "Proteção",
+    "pronuncia": "Pro-TE-go To-TA-lum",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_element_circa",
+    "file": "itens/feitico_element_circa.json",
+    "name": "Element circa",
+    "cat": "Charme",
+    "lvl": "6",
+    "tipo": "Proteção",
+    "pronuncia": "E-le-men-te CIR-ca",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_fianto_duri",
+    "file": "itens/feitico_fianto_duri.json",
+    "name": "Fianto Duri",
+    "cat": "Charme",
+    "lvl": "6",
+    "tipo": "Proteção",
+    "pronuncia": "Fi-AN-to DU-ri",
+    "condicao": "(C) Desintegrar"
+  },
+  {
+    "id": "feitico_fidelius",
+    "file": "itens/feitico_fidelius.json",
+    "name": "Fidelius",
+    "cat": "Charme",
+    "lvl": "6",
+    "tipo": "Utilitário",
+    "pronuncia": "Fi-DE-li-us",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_flagrate",
+    "file": "itens/feitico_flagrate.json",
+    "name": "Flagrate",
+    "cat": "Transfiguração",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Fla-GRA-te",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_locomotor_mortis",
+    "file": "itens/feitico_locomotor_mortis.json",
+    "name": "Locomotor Mortis",
+    "cat": "Transfiguração",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Lo-co-MO-tor MOR-tis",
+    "condicao": "(C) Pernas Coladas"
+  },
+  {
+    "id": "feitico_skurge",
+    "file": "itens/feitico_skurge.json",
+    "name": "Skurge",
+    "cat": "Transfiguração",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "SKUR-dji",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_tunteli_tintagel",
+    "file": "itens/feitico_tunteli_tintagel.json",
+    "name": "Tunteli Tintagel",
+    "cat": "Transfiguração",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Tun-TE-li Tin-ta-GEL",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_vera_verto",
+    "file": "itens/feitico_vera_verto.json",
+    "name": "Vera Verto",
+    "cat": "Transfiguração",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "VE-ra VER-to",
+    "condicao": "(C) Transfigurado em Cálice"
+  },
+  {
+    "id": "feitico_avifors",
+    "file": "itens/feitico_avifors.json",
+    "name": "Avifors",
+    "cat": "Transfiguração",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "A-vi-FORS",
+    "condicao": "(C) Transfigurado em Pássaro"
+  },
+  {
+    "id": "feitico_lapifors",
+    "file": "itens/feitico_lapifors.json",
+    "name": "Lapifors",
+    "cat": "Transfiguração",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "La-pi-FORS",
+    "condicao": "(C) Transfigurado em Coelho"
+  },
+  {
+    "id": "feitico_obscuro",
+    "file": "itens/feitico_obscuro.json",
+    "name": "Obscuro",
+    "cat": "Transfiguração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "Obs-CU-ro",
+    "condicao": "(C) Vendado"
+  },
+  {
+    "id": "feitico_riddikulus",
+    "file": "itens/feitico_riddikulus.json",
+    "name": "Riddikulus",
+    "cat": "Transfiguração",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Ri-DI-cu-lus",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_sponjify",
+    "file": "itens/feitico_sponjify.json",
+    "name": "Sponjify",
+    "cat": "Transfiguração",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Spon-JI-fai",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_animus_imagio",
+    "file": "itens/feitico_animus_imagio.json",
+    "name": "Animus Imágio",
+    "cat": "Transfiguração",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "A-ni-mus I-MA-gi-o",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_evanesco",
+    "file": "itens/feitico_evanesco.json",
+    "name": "Evanesco",
+    "cat": "Transfiguração",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "E-va-NES-co",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_homorfo",
+    "file": "itens/feitico_homorfo.json",
+    "name": "Homorfo",
+    "cat": "Transfiguração",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "Ho-MOR-fo",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_melofors",
+    "file": "itens/feitico_melofors.json",
+    "name": "Melofors",
+    "cat": "Transfiguração",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "Me-lo-FORS",
+    "condicao": "(C) Cabeça de Abóbora"
+  },
+  {
+    "id": "feitico_pullus",
+    "file": "itens/feitico_pullus.json",
+    "name": "Pullus",
+    "cat": "Transfiguração",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "PU-lus",
+    "condicao": "(C) Galinha"
+  },
+  {
+    "id": "feitico_serpensortia",
+    "file": "itens/feitico_serpensortia.json",
+    "name": "Serpensórtia",
+    "cat": "Transfiguração",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "Ser-pen-SOR-ti-a",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_draconifors",
+    "file": "itens/feitico_draconifors.json",
+    "name": "Draconifors",
+    "cat": "Transfiguração",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "Dra-co-ni-FORS",
+    "condicao": "(C) Transfigurado em Dragão Menor"
+  },
+  {
+    "id": "feitico_geminio",
+    "file": "itens/feitico_geminio.json",
+    "name": "Geminio",
+    "cat": "Transfiguração",
+    "lvl": "4",
+    "tipo": "Utilitário",
+    "pronuncia": "Ge-MI-ni-o",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_portus",
+    "file": "itens/feitico_portus.json",
+    "name": "Portus",
+    "cat": "Transfiguração",
+    "lvl": "5",
+    "tipo": "Utilitário",
+    "pronuncia": "POR-tus",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_animus_corpus",
+    "file": "itens/feitico_animus_corpus.json",
+    "name": "Animus Corpus",
+    "cat": "Transfiguração",
+    "lvl": "6",
+    "tipo": "Utilitário",
+    "pronuncia": "A-ni-mus COR-pus",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_piertotum_locomotor",
+    "file": "itens/feitico_piertotum_locomotor.json",
+    "name": "Piertotum Locomotor",
+    "cat": "Transfiguração",
+    "lvl": "6",
+    "tipo": "Utilitário",
+    "pronuncia": "Pi-er-TO-tum Lo-co-MO-tor",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_densaugeo",
+    "file": "itens/feitico_densaugeo.json",
+    "name": "Densaugeo",
+    "cat": "Azaração",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "Den-SAU-ge-o",
+    "condicao": "(C) Dentuço"
+  },
+  {
+    "id": "feitico_flipendo",
+    "file": "itens/feitico_flipendo.json",
+    "name": "Flipendo",
+    "cat": "Azaração",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "Fli-PEN-do",
+    "condicao": "(C) Derrubado"
+  },
+  {
+    "id": "feitico_fedorinni",
+    "file": "itens/feitico_fedorinni.json",
+    "name": "Fedorinni",
+    "cat": "Azaração",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "Fe-do-RI-ni",
+    "condicao": "(C) Fedorento"
+  },
+  {
+    "id": "feitico_rictusempra",
+    "file": "itens/feitico_rictusempra.json",
+    "name": "Rictusempra",
+    "cat": "Azaração",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "Ric-tu-SEM-pra",
+    "condicao": "(C) Crise de Riso"
+  },
+  {
+    "id": "feitico_trip",
+    "file": "itens/feitico_trip.json",
+    "name": "Trip",
+    "cat": "Azaração",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "TRI-pi",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_cara_de_lesma",
+    "file": "itens/feitico_cara_de_lesma.json",
+    "name": "Cara-de-lesma",
+    "cat": "Azaração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "Ca-ra de Les-ma",
+    "condicao": "(C) Vomitando Lesmas"
+  },
+  {
+    "id": "feitico_ebublio",
+    "file": "itens/feitico_ebublio.json",
+    "name": "Ebublio",
+    "cat": "Azaração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "E-BU-bli-o",
+    "condicao": "(C) Aprisionado"
+  },
+  {
+    "id": "feitico_everte_statum",
+    "file": "itens/feitico_everte_statum.json",
+    "name": "Everte Statum",
+    "cat": "Azaração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "E-VER-te STA-tum",
+    "condicao": "(C) Arremessado"
+  },
+  {
+    "id": "feitico_furnunculus",
+    "file": "itens/feitico_furnunculus.json",
+    "name": "Furnunculus",
+    "cat": "Azaração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "Fur-NUN-cu-lus",
+    "condicao": "(C) Furúnculos"
+  },
+  {
+    "id": "feitico_langlock",
+    "file": "itens/feitico_langlock.json",
+    "name": "Langlock",
+    "cat": "Azaração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "LANG-lok",
+    "condicao": "(C) Língua Presa"
+  },
+  {
+    "id": "feitico_tarantallegra",
+    "file": "itens/feitico_tarantallegra.json",
+    "name": "Tarantallegra",
+    "cat": "Azaração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "Ta-ran-ta-LE-gra",
+    "condicao": "(C) Dança Incontrolável"
+  },
+  {
+    "id": "feitico_oppugno",
+    "file": "itens/feitico_oppugno.json",
+    "name": "Oppugno",
+    "cat": "Maldição Menor",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "O-PUG-no",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_alarte_ascendere",
+    "file": "itens/feitico_alarte_ascendere.json",
+    "name": "Alarte Ascendere",
+    "cat": "Maldição Menor",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "A-LAR-te As-cen-DE-re",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_azaracao_ferreteante",
+    "file": "itens/feitico_azaracao_ferreteante.json",
+    "name": "Azaração Ferreteante",
+    "cat": "Maldição Menor",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "Não-verbal (Gesto de estocada)",
+    "condicao": "(C) Rosto Desfigurado"
+  },
+  {
+    "id": "feitico_conjunctivitus",
+    "file": "itens/feitico_conjunctivitus.json",
+    "name": "Conjunctivitus",
+    "cat": "Maldição Menor",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "Con-junc-ti-VI-tus",
+    "condicao": "(C) Conjuntivite"
+  },
+  {
+    "id": "feitico_estupefaca",
+    "file": "itens/feitico_estupefaca.json",
+    "name": "Estupefaça",
+    "cat": "Maldição Menor",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "Es-tu-pe-FA-ça",
+    "condicao": "(C) Desmaiado"
+  },
+  {
+    "id": "feitico_petrificus_totalus",
+    "file": "itens/feitico_petrificus_totalus.json",
+    "name": "Petrificus Totalus",
+    "cat": "Maldição Menor",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "Pe-TRI-fi-cus To-TA-lus",
+    "condicao": "(C) Petrificado"
+  },
+  {
+    "id": "feitico_bombarda",
+    "file": "itens/feitico_bombarda.json",
+    "name": "Bombarda",
+    "cat": "Maldição Menor",
+    "lvl": "4",
+    "tipo": "Ataque",
+    "pronuncia": "Bom-BAR-da",
+    "condicao": "(C) Atordoado"
+  },
+  {
+    "id": "feitico_estupore",
+    "file": "itens/feitico_estupore.json",
+    "name": "Estupore",
+    "cat": "Maldição Menor",
+    "lvl": "4",
+    "tipo": "Ataque",
+    "pronuncia": "Es-tu-PO-re",
+    "condicao": "(C) Atordoado"
+  },
+  {
+    "id": "feitico_expulso",
+    "file": "itens/feitico_expulso.json",
+    "name": "Expulso",
+    "cat": "Maldição Menor",
+    "lvl": "4",
+    "tipo": "Ataque",
+    "pronuncia": "Eks-PUL-so",
+    "condicao": "(C) Arremessado"
+  },
+  {
+    "id": "feitico_bombarda_maxima",
+    "file": "itens/feitico_bombarda_maxima.json",
+    "name": "Bombarda Maxima",
+    "cat": "Maldição Menor",
+    "lvl": "5",
+    "tipo": "Ataque",
+    "pronuncia": "Bom-BAR-da MAK-si-ma",
+    "condicao": "(C) Concussão"
+  },
+  {
+    "id": "feitico_reducto",
+    "file": "itens/feitico_reducto.json",
+    "name": "Reducto",
+    "cat": "Maldição",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "Re-DUC-to",
+    "condicao": "(C) Pulverizado"
+  },
+  {
+    "id": "feitico_repello_aparatio",
+    "file": "itens/feitico_repello_aparatio.json",
+    "name": "Repello Aparatio",
+    "cat": "Maldição",
+    "lvl": "4",
+    "tipo": "Proteção",
+    "pronuncia": "Re-PE-lo A-pa-ra-CI-o",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_deprimo",
+    "file": "itens/feitico_deprimo.json",
+    "name": "Deprimo",
+    "cat": "Maldição",
+    "lvl": "5",
+    "tipo": "Ataque",
+    "pronuncia": "De-PRI-mo",
+    "condicao": "(C) Soterrado"
+  },
+  {
+    "id": "feitico_glacius",
+    "file": "itens/feitico_glacius.json",
+    "name": "Glacius",
+    "cat": "Maldição",
+    "lvl": "5",
+    "tipo": "Ataque",
+    "pronuncia": "GLA-ci-us",
+    "condicao": "(C) Congelando"
+  },
+  {
+    "id": "feitico_incarcerous_nerus",
+    "file": "itens/feitico_incarcerous_nerus.json",
+    "name": "Incarcerous Nerus",
+    "cat": "Maldição",
+    "lvl": "5",
+    "tipo": "Ataque",
+    "pronuncia": "In-car-CE-rus NE-rus",
+    "condicao": "(C) Enforcado"
+  },
+  {
+    "id": "feitico_incarcerous",
+    "file": "itens/feitico_incarcerous.json",
+    "name": "Incarcerous",
+    "cat": "Maldição",
+    "lvl": "4",
+    "tipo": "Utilitário",
+    "pronuncia": "In-car-CE-rus",
+    "condicao": "(C) Aprisionado"
+  },
+  {
+    "id": "feitico_legilimens",
+    "file": "itens/feitico_legilimens.json",
+    "name": "Legilimens",
+    "cat": "Maldição",
+    "lvl": "5",
+    "tipo": "Ataque",
+    "pronuncia": "Le-GI-li-mens",
+    "condicao": "(C) Mente Invadida"
+  },
+  {
+    "id": "feitico_maldicao_de_antonio_dolohov",
+    "file": "itens/feitico_maldicao_de_antonio_dolohov.json",
+    "name": "Maldição de Antonio Dolohov",
+    "cat": "Maldição",
+    "lvl": "5",
+    "tipo": "Ataque",
+    "pronuncia": "Não-verbal (Golpe cortante com varinha)",
+    "condicao": "(C) Dano Interno Grave"
+  },
+  {
+    "id": "feitico_obliviate",
+    "file": "itens/feitico_obliviate.json",
+    "name": "Obliviate",
+    "cat": "Maldição",
+    "lvl": "5",
+    "tipo": "Ataque",
+    "pronuncia": "O-bli-vi-A-te",
+    "condicao": "(C) Amnésia Total"
+  },
+  {
+    "id": "feitico_orbis",
+    "file": "itens/feitico_orbis.json",
+    "name": "Orbis",
+    "cat": "Maldição",
+    "lvl": "5",
+    "tipo": "Ataque",
+    "pronuncia": "OR-bis",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_repello_trouxatum",
+    "file": "itens/feitico_repello_trouxatum.json",
+    "name": "Repello Trouxatum",
+    "cat": "Maldição",
+    "lvl": "5",
+    "tipo": "Proteção",
+    "pronuncia": "Re-PE-lo Trou-XA-tum",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_transmogrify",
+    "file": "itens/feitico_transmogrify.json",
+    "name": "Transmogrify",
+    "cat": "Maldição",
+    "lvl": "5",
+    "tipo": "Ataque",
+    "pronuncia": "Trans-mo-gri-FAI",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_confringo",
+    "file": "itens/feitico_confringo.json",
+    "name": "Confringo",
+    "cat": "Maldição",
+    "lvl": "6",
+    "tipo": "Ataque",
+    "pronuncia": "Con-FRIN-go",
+    "condicao": "(C) Queimado"
+  },
+  {
+    "id": "feitico_fogomaldito",
+    "file": "itens/feitico_fogomaldito.json",
+    "name": "Fogomaldito",
+    "cat": "Maldição",
+    "lvl": "6",
+    "tipo": "Ataque",
+    "pronuncia": "Fo-go-mal-DI-to (Pes-tis In-CEN-di-um)",
+    "condicao": "(C) Queimadura Grave"
+  },
+  {
+    "id": "feitico_protego_nerus",
+    "file": "itens/feitico_protego_nerus.json",
+    "name": "Protego Nerus",
+    "cat": "Maldição",
+    "lvl": "6",
+    "tipo": "Proteção",
+    "pronuncia": "Pro-TE-go NE-rus",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_repello_inimicum",
+    "file": "itens/feitico_repello_inimicum.json",
+    "name": "Repello Inimicum",
+    "cat": "Maldição",
+    "lvl": "6",
+    "tipo": "Proteção",
+    "pronuncia": "Re-PE-lo I-ni-MI-cum",
+    "condicao": "(C) Desintegrado"
+  },
+  {
+    "id": "feitico_avada_kedavra",
+    "file": "itens/feitico_avada_kedavra.json",
+    "name": "Avada Kedavra",
+    "cat": "Maldição",
+    "lvl": "7",
+    "tipo": "Ataque",
+    "pronuncia": "A-VA-da Ke-DA-vra",
+    "condicao": "(C) Morte Instantânea"
+  },
+  {
+    "id": "feitico_crucio",
+    "file": "itens/feitico_crucio.json",
+    "name": "Crucio",
+    "cat": "Maldição",
+    "lvl": "7",
+    "tipo": "Ataque",
+    "pronuncia": "CRU-ci-o",
+    "condicao": "(C) Dor Insuportável"
+  },
+  {
+    "id": "feitico_imperio",
+    "file": "itens/feitico_imperio.json",
+    "name": "Imperio",
+    "cat": "Maldição",
+    "lvl": "7",
+    "tipo": "Ataque",
+    "pronuncia": "Im-PE-ri-o",
+    "condicao": "(C) Controlado"
+  },
+  {
+    "id": "feitico_dessendio",
+    "file": "itens/feitico_dessendio.json",
+    "name": "Dessendio",
+    "cat": "Contrafeitiço",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "De-SEN-do",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_duro",
+    "file": "itens/feitico_duro.json",
+    "name": "Duro",
+    "cat": "Contrafeitiço",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "DU-ro",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_nox",
+    "file": "itens/feitico_nox.json",
+    "name": "Nox",
+    "cat": "Contrafeitiço",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "NOKS",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_reparifrage",
+    "file": "itens/feitico_reparifrage.json",
+    "name": "Reparifrage",
+    "cat": "Contrafeitiço",
+    "lvl": "1",
+    "tipo": "Contrafeitiço",
+    "pronuncia": "Re-pa-ri-FAR-ge",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_quietus",
+    "file": "itens/feitico_quietus.json",
+    "name": "Quietus",
+    "cat": "Contrafeitiço",
+    "lvl": "1",
+    "tipo": "Proteção",
+    "pronuncia": "Qui-E-tus",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_deletrius",
+    "file": "itens/feitico_deletrius.json",
+    "name": "Deletrius",
+    "cat": "Contrafeitiço",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "De-LE-tri-us",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_finite_incantatem",
+    "file": "itens/feitico_finite_incantatem.json",
+    "name": "Finite Incantatem",
+    "cat": "Contrafeitiço",
+    "lvl": "2",
+    "tipo": "Proteção",
+    "pronuncia": "Fi-NI-te In-can-TA-tem",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_liberacorpus",
+    "file": "itens/feitico_liberacorpus.json",
+    "name": "Liberacorpus",
+    "cat": "Contrafeitiço",
+    "lvl": "2",
+    "tipo": "Cura",
+    "pronuncia": "Li-be-ra-COR-pus",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_vipera_evanesca",
+    "file": "itens/feitico_vipera_evanesca.json",
+    "name": "Vipera Evanesca",
+    "cat": "Contrafeitiço",
+    "lvl": "2",
+    "tipo": "Proteção",
+    "pronuncia": "VI-pe-ra E-va-NES-ca",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_meteorolojinx_recanto",
+    "file": "itens/feitico_meteorolojinx_recanto.json",
+    "name": "Meteorolojinx Recanto",
+    "cat": "Contrafeitiço",
+    "lvl": "3",
+    "tipo": "Proteção",
+    "pronuncia": "Me-te-o-ro-LO-jinks Re-CAN-to",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_reverto",
+    "file": "itens/feitico_reverto.json",
+    "name": "Reverto",
+    "cat": "Contrafeitiço",
+    "lvl": "4",
+    "tipo": "Contrafeitiço",
+    "pronuncia": "Re-VER-to",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_episkey",
+    "file": "itens/feitico_episkey.json",
+    "name": "Episkey",
+    "cat": "Cura",
+    "lvl": "1",
+    "tipo": "Cura",
+    "pronuncia": "E-PIS-kei",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_ferula",
+    "file": "itens/feitico_ferula.json",
+    "name": "Ferula",
+    "cat": "Cura",
+    "lvl": "1",
+    "tipo": "Cura",
+    "pronuncia": "FE-ru-la",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_anapneo",
+    "file": "itens/feitico_anapneo.json",
+    "name": "Anapneo",
+    "cat": "Cura",
+    "lvl": "2",
+    "tipo": "Cura",
+    "pronuncia": "A-NAP-ne-o",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_ennervate",
+    "file": "itens/feitico_ennervate.json",
+    "name": "Ennervate",
+    "cat": "Cura",
+    "lvl": "2",
+    "tipo": "Cura",
+    "pronuncia": "E-ner-VA-te",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_braquium_emendo",
+    "file": "itens/feitico_braquium_emendo.json",
+    "name": "Braquium Emendo",
+    "cat": "Cura",
+    "lvl": "3",
+    "tipo": "Cura",
+    "pronuncia": "BRA-qui-um E-MEN-do",
+    "condicao": "(C) Osso Remendado"
+  },
+  {
+    "id": "feitico_anteoculatia",
+    "file": "itens/feitico_anteoculatia.json",
+    "name": "Anteoculatia",
+    "cat": "Azaração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "An-te-o-cu-LA-ci-a",
+    "condicao": "(C) Galhadas na Cabeça"
+  },
+  {
+    "id": "feitico_avenseguim",
+    "file": "itens/feitico_avenseguim.json",
+    "name": "Avenseguim",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "A-ven-SE-guim",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_depulso",
+    "file": "itens/feitico_depulso.json",
+    "name": "Depulso",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "De-PUL-so",
+    "condicao": "(C) Derrubado"
+  },
+  {
+    "id": "feitico_baubillious",
+    "file": "itens/feitico_baubillious.json",
+    "name": "Baubillious",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "Bau-BI-li-us",
+    "condicao": "(C) Ofuscado"
+  },
+  {
+    "id": "feitico_avis",
+    "file": "itens/feitico_avis.json",
+    "name": "Avis",
+    "cat": "Transfiguração",
+    "lvl": "3",
+    "tipo": "Utilitário",
+    "pronuncia": "A-vis",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_chamas_azuis_bluebell_flames",
+    "file": "itens/feitico_chamas_azuis_bluebell_flames.json",
+    "name": "Chamas Azuis (Bluebell Flames)",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "IG-nis Se-RU-le-us",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_circumrota",
+    "file": "itens/feitico_circumrota.json",
+    "name": "Circumrota",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Cir-cum-RO-ta",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_colovaria",
+    "file": "itens/feitico_colovaria.json",
+    "name": "Colovaria",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Co-lo-VA-ri-a",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_crinus_muto",
+    "file": "itens/feitico_crinus_muto.json",
+    "name": "Crinus Muto",
+    "cat": "Transfiguração",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "CRI-nus MU-to",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_mucus_ad_nauseam",
+    "file": "itens/feitico_mucus_ad_nauseam.json",
+    "name": "Mucus ad Nauseam",
+    "cat": "Maldição Menor",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "MU-cus ad NAU-se-am",
+    "condicao": "(C) Coriza Incessante"
+  },
+  {
+    "id": "feitico_molliare",
+    "file": "itens/feitico_molliare.json",
+    "name": "Molliare",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Proteção",
+    "pronuncia": "Mo-li-A-re",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_levicorpus",
+    "file": "itens/feitico_levicorpus.json",
+    "name": "Levicorpus",
+    "cat": "Azaração",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "Le-vi-COR-pus (Não-verbal)",
+    "condicao": "(C) Suspenso"
+  },
+  {
+    "id": "feitico_surgito",
+    "file": "itens/feitico_surgito.json",
+    "name": "Surgito",
+    "cat": "Contrafeitiço",
+    "lvl": "4",
+    "tipo": "Utilitário",
+    "pronuncia": "SUR-gi-to",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_ducklifors",
+    "file": "itens/feitico_ducklifors.json",
+    "name": "Ducklifors",
+    "cat": "Transfiguração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "Da-cli-FORS",
+    "condicao": "(C) Transfigurado em Pato"
+  },
+  {
+    "id": "feitico_epoximise",
+    "file": "itens/feitico_epoximise.json",
+    "name": "Epoximise",
+    "cat": "Transfiguração",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "E-pok-si-MI-se",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_finestra",
+    "file": "itens/feitico_finestra.json",
+    "name": "Finestra",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Fi-NES-tra",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_incendio",
+    "file": "itens/feitico_incendio.json",
+    "name": "Incendio",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "In-CEN-di-o",
+    "condicao": "(C) Em Chamas"
+  },
+  {
+    "id": "feitico_flagrante",
+    "file": "itens/feitico_flagrante.json",
+    "name": "Flagrante",
+    "cat": "Maldição",
+    "lvl": "4",
+    "tipo": "Proteção",
+    "pronuncia": "Fla-GRAN-te",
+    "condicao": "(C) Queimado"
+  },
+  {
+    "id": "feitico_flintifors",
+    "file": "itens/feitico_flintifors.json",
+    "name": "Flintifors",
+    "cat": "Transfiguração",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Flin-ti-FORS",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_nebulus",
+    "file": "itens/feitico_nebulus.json",
+    "name": "Nebulus",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Proteção",
+    "pronuncia": "NE-bu-lus",
+    "condicao": "(C) Visão Obscurecida"
+  },
+  {
+    "id": "feitico_fracto_strata",
+    "file": "itens/feitico_fracto_strata.json",
+    "name": "Fracto Strata",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "FRAC-to STRA-ta",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_fumos",
+    "file": "itens/feitico_fumos.json",
+    "name": "Fumos",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Proteção",
+    "pronuncia": "FU-mos",
+    "condicao": "(C) Visão Obscurecida"
+  },
+  {
+    "id": "feitico_fumos_duo",
+    "file": "itens/feitico_fumos_duo.json",
+    "name": "Fumos Duo",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Proteção",
+    "pronuncia": "FU-mos DU-o",
+    "condicao": "(C) Visão Obscurecida"
+  },
+  {
+    "id": "feitico_celescere",
+    "file": "itens/feitico_celescere.json",
+    "name": "Celescere",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Se-les-CE-re",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_calvorio",
+    "file": "itens/feitico_calvorio.json",
+    "name": "Calvorio",
+    "cat": "Azaração",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "Cal-VO-ri-o",
+    "condicao": "(C) Calvo"
+  },
+  {
+    "id": "feitico_redactum_skullus",
+    "file": "itens/feitico_redactum_skullus.json",
+    "name": "Redactum Skullus",
+    "cat": "Azaração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "Re-DAC-tum SKU-lus",
+    "condicao": "(C) Cabeça Encolhida"
+  },
+  {
+    "id": "feitico_herbifors",
+    "file": "itens/feitico_herbifors.json",
+    "name": "Herbifors",
+    "cat": "Transfiguração",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Her-bi-FORS",
+    "condicao": "(C) Coberto de Flores"
+  },
+  {
+    "id": "feitico_illegibilus",
+    "file": "itens/feitico_illegibilus.json",
+    "name": "Illegibilus",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "I-le-GI-bi-lus",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_impedimenta",
+    "file": "itens/feitico_impedimenta.json",
+    "name": "Impedimenta",
+    "cat": "Azaração",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "Im-pe-di-MEN-ta",
+    "condicao": "(C) Movimento Impedido"
+  },
+  {
+    "id": "feitico_inanimatus_conjurus",
+    "file": "itens/feitico_inanimatus_conjurus.json",
+    "name": "Inanimatus Conjurus",
+    "cat": "Transfiguração",
+    "lvl": "5",
+    "tipo": "Utilitário",
+    "pronuncia": "I-na-ni-MA-tus Con-JU-rus",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_incendio_duo",
+    "file": "itens/feitico_incendio_duo.json",
+    "name": "Incendio Duo",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "In-CEN-di-o DU-o",
+    "condicao": "(C) Em Chamas"
+  },
+  {
+    "id": "feitico_incendio_tria",
+    "file": "itens/feitico_incendio_tria.json",
+    "name": "Incendio Tria",
+    "cat": "Charme",
+    "lvl": "4",
+    "tipo": "Ataque",
+    "pronuncia": "In-CEN-di-o TRI-a",
+    "condicao": "(C) Queimadura Grave"
+  },
+  {
+    "id": "feitico_inflatus",
+    "file": "itens/feitico_inflatus.json",
+    "name": "Inflatus",
+    "cat": "Azaração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "In-FLA-tus",
+    "condicao": "(C) Inflado"
+  },
+  {
+    "id": "feitico_informous",
+    "file": "itens/feitico_informous.json",
+    "name": "Informous",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "In-FOR-mus",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_tribuomnus",
+    "file": "itens/feitico_tribuomnus.json",
+    "name": "Tribuomnus",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Tri-bu-OM-nus",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_entomorphis",
+    "file": "itens/feitico_entomorphis.json",
+    "name": "Entomorphis",
+    "cat": "Maldição Menor",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "En-to-MOR-fis",
+    "condicao": "(C) Mutação Insectóide"
+  },
+  {
+    "id": "feitico_locomotor_wibbly",
+    "file": "itens/feitico_locomotor_wibbly.json",
+    "name": "Locomotor Wibbly",
+    "cat": "Azaração",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "Lo-co-MO-tor UIB-li",
+    "condicao": "(C) Pernas de Gelatina"
+  },
+  {
+    "id": "feitico_sectumsempra",
+    "file": "itens/feitico_sectumsempra.json",
+    "name": "Sectumsempra",
+    "cat": "Maldição",
+    "lvl": "6",
+    "tipo": "Ataque",
+    "pronuncia": "Sec-tum-SEM-pra",
+    "condicao": "(C) Sangrando Profundamente"
+  },
+  {
+    "id": "feitico_levioso",
+    "file": "itens/feitico_levioso.json",
+    "name": "Levioso",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Le-vi-O-so",
+    "condicao": "(C) Suspenso"
+  },
+  {
+    "id": "feitico_locomotor",
+    "file": "itens/feitico_locomotor.json",
+    "name": "Locomotor",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Lo-co-MO-tor",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_lumos_duo",
+    "file": "itens/feitico_lumos_duo.json",
+    "name": "Lumos Duo",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "LU-mos DU-o",
+    "condicao": "(C) Ofuscado"
+  },
+  {
+    "id": "feitico_magicus_extremos",
+    "file": "itens/feitico_magicus_extremos.json",
+    "name": "Magicus Extremos",
+    "cat": "Charme",
+    "lvl": "4",
+    "tipo": "Utilitário",
+    "pronuncia": "MA-gi-cus Eks-TRE-mos",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_mobilicorpus",
+    "file": "itens/feitico_mobilicorpus.json",
+    "name": "Mobilicorpus",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Mo-bi-li-COR-pus",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_morsmordre",
+    "file": "itens/feitico_morsmordre.json",
+    "name": "Morsmordre",
+    "cat": "Maldição",
+    "lvl": "6",
+    "tipo": "Utilitário",
+    "pronuncia": "Mors-MOR-dre",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_multicorfors",
+    "file": "itens/feitico_multicorfors.json",
+    "name": "Multicorfors",
+    "cat": "Transfiguração",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Mul-ti-cor-FORS",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_mutatio_skullus",
+    "file": "itens/feitico_mutatio_skullus.json",
+    "name": "Mutatio Skullus",
+    "cat": "Azaração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "Mu-TA-ci-o SKU-lus",
+    "condicao": "(C) Crânio Deformado"
+  },
+  {
+    "id": "feitico_dissendium",
+    "file": "itens/feitico_dissendium.json",
+    "name": "Dissendium",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Di-SEN-di-um",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_aberto",
+    "file": "itens/feitico_aberto.json",
+    "name": "Aberto",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "A-BER-to",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_oscausi",
+    "file": "itens/feitico_oscausi.json",
+    "name": "Oscausi",
+    "cat": "Maldição Menor",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "Os-CAU-si",
+    "condicao": "(C) Boca Selada"
+  },
+  {
+    "id": "feitico_piscifors",
+    "file": "itens/feitico_piscifors.json",
+    "name": "Piscifors",
+    "cat": "Transfiguração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "Pis-ci-FORS",
+    "condicao": "(C) Transfigurado em Peixe"
+  },
+  {
+    "id": "feitico_prior_incantato",
+    "file": "itens/feitico_prior_incantato.json",
+    "name": "Prior Incantato",
+    "cat": "Charme",
+    "lvl": "4",
+    "tipo": "Utilitário",
+    "pronuncia": "PRI-or In-can-TA-to",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_vermillious",
+    "file": "itens/feitico_vermillious.json",
+    "name": "Vermillious",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Ver-mi-LI-us",
+    "condicao": "(C) Ofuscado"
+  },
+  {
+    "id": "feitico_reparifors",
+    "file": "itens/feitico_reparifors.json",
+    "name": "Reparifors",
+    "cat": "Cura",
+    "lvl": "2",
+    "tipo": "Cura",
+    "pronuncia": "Re-pa-ri-FORS",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_aparecium",
+    "file": "itens/feitico_aparecium.json",
+    "name": "Aparecium",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "A-pa-RE-ci-um",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_scourgify",
+    "file": "itens/feitico_scourgify.json",
+    "name": "Scourgify",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "Eskur-ji-FAI",
+    "condicao": "(C) Boca de Sabão"
+  },
+  {
+    "id": "feitico_reducio",
+    "file": "itens/feitico_reducio.json",
+    "name": "Reducio",
+    "cat": "Charme",
+    "lvl": "2",
+    "tipo": "Utilitário",
+    "pronuncia": "Re-DU-ci-o",
+    "condicao": "(C) Encolhido"
+  },
+  {
+    "id": "feitico_cantis",
+    "file": "itens/feitico_cantis.json",
+    "name": "Cantis",
+    "cat": "Azaração",
+    "lvl": "2",
+    "tipo": "Ataque",
+    "pronuncia": "CAN-tis",
+    "condicao": "(C) Canto Incontrolável"
+  },
+  {
+    "id": "feitico_sternius",
+    "file": "itens/feitico_sternius.json",
+    "name": "Sternius",
+    "cat": "Azaração",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "STER-ni-us",
+    "condicao": "(C) Crise de Espirros"
+  },
+  {
+    "id": "feitico_colloshoo",
+    "file": "itens/feitico_colloshoo.json",
+    "name": "Colloshoo",
+    "cat": "Azaração",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "Co-lo-SHU",
+    "condicao": "(C) Pés Presos"
+  },
+  {
+    "id": "feitico_tentaclifors",
+    "file": "itens/feitico_tentaclifors.json",
+    "name": "Tentaclifors",
+    "cat": "Transfiguração",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "Ten-ta-cli-FORS",
+    "condicao": "(C) Cabeça de Tentáculo"
+  },
+  {
+    "id": "feitico_titillando",
+    "file": "itens/feitico_titillando.json",
+    "name": "Titillando",
+    "cat": "Azaração",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "Ti-ti-LAN-do",
+    "condicao": "(C) Cócegas Debilitantes"
+  },
+  {
+    "id": "feitico_mimblewimble",
+    "file": "itens/feitico_mimblewimble.json",
+    "name": "Mimblewimble",
+    "cat": "Maldição Menor",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "MIM-bol-UIM-bol",
+    "condicao": "(C) Língua Atada"
+  },
+  {
+    "id": "feitico_ventus",
+    "file": "itens/feitico_ventus.json",
+    "name": "Ventus",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "VEN-tus",
+    "condicao": "(C) Desequilibrado"
+  },
+  {
+    "id": "feitico_ventus_duo",
+    "file": "itens/feitico_ventus_duo.json",
+    "name": "Ventus Duo",
+    "cat": "Charme",
+    "lvl": "3",
+    "tipo": "Ataque",
+    "pronuncia": "VEN-tus DU-o",
+    "condicao": "(C) Derrubado"
+  },
+  {
+    "id": "feitico_vermiculus",
+    "file": "itens/feitico_vermiculus.json",
+    "name": "Vermiculus",
+    "cat": "Transfiguração",
+    "lvl": "1",
+    "tipo": "Ataque",
+    "pronuncia": "Ver-MI-cu-lus",
+    "condicao": "(C) Transfigurado em Minhoca"
+  },
+  {
+    "id": "feitico_vulnera_sanentur",
+    "file": "itens/feitico_vulnera_sanentur.json",
+    "name": "Vulnera Sanentur",
+    "cat": "Cura",
+    "lvl": "5",
+    "tipo": "Cura",
+    "pronuncia": "Vul-NE-ra Sa-NEN-tur",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_tergeo",
+    "file": "itens/feitico_tergeo.json",
+    "name": "Tergeo",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "TER-ge-o",
+    "condicao": "Nenhuma"
+  },
+  {
+    "id": "feitico_point_me_me_mostre",
+    "file": "itens/feitico_point_me_me_mostre.json",
+    "name": "Point Me (Me Mostre)",
+    "cat": "Charme",
+    "lvl": "1",
+    "tipo": "Utilitário",
+    "pronuncia": "POIN-ti MI (Me Mostre)",
+    "condicao": "Nenhuma"
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "id": "pocao_death_cap_draught",
+  "nome": "Poção de Chapéu-da-Morte (Death-Cap Draught)",
+  "tipo": "Veneno",
+  "nivel": 5,
+  "nível": 5,
+  "efeito": "Veneno fúngico fulminante. Após um período de latência enganoso de algumas horas sem sintomas, desencadeia cólicas intestinais atrozes, necrose hepática e renal irreversível se não for tratado com bezoares e antídotos de alto nível.",
+  "ingredientes": "Cogumelo Chapéu-da-Morte (Amanita phalloides), raiz de meixueira, veneno de sapo-cururu mágico.",
+  "descricao": "Líquido límpido e incolor, sem cheiro perceptível, tornando sua detecção em alimentos quase impossível sem encantamentos reveladores de veneno.",
+  "descrição": "Líquido límpido e incolor, sem cheiro perceptível, tornando sua detecção em alimentos quase impossível sem encantamentos reveladores de veneno.",
+  "sistema": {
+    "tempo_preparo": "5 horas",
+    "duracao": "Período de latência de 2 horas / Efeito letal progressivo",
+    "dificuldade_cd": 20,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "death-cap-draught",
+    "nome_original": "Death-Cap Draught",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Red in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Death-Cap_Draught"
+  }
+}

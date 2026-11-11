@@ -1,0 +1,11 @@
+{
+  "id": "feitico_dessendio",
+  "name": "Dessendio",
+  "cat": "Contrafeitiço",
+  "lvl": "1",
+  "tipo": "Utilitário",
+  "pronuncia": "De-SEN-do",
+  "pronunciation": "De-SEN-do",
+  "condicao": "Nenhuma",
+  "desc": "Faz com que o objeto ou pessoa alvejada mova-se para baixo. Contra-feitiço de Ascendio."
+}

@@ -1,0 +1,24 @@
+{
+  "id": "pocao_truth_serum",
+  "nome": "Soro da Verdade Menor (Truth Serum)",
+  "tipo": "Poção (Coerção Mental Menor)",
+  "nivel": 4,
+  "nível": 4,
+  "efeito": "Força o consumidor a responder com honestidade a perguntas diretas, dificultando mentiras conscientes (embora uma mente treinada em oclumência ou com forte força de vontade possa resistir a perguntas sutis, diferentemente do Veritaserum).",
+  "ingredientes": "Penas de Jobberknoll moídas, folhas de menta silvestre, raízes de lírio da verdade, essência de asfódelo.",
+  "descricao": "Líquido límpido e incolor com cheiro amargo característico. Versão comum e curricular mais branda que o lendário Veritaserum.",
+  "descrição": "Líquido límpido e incolor com cheiro amargo característico. Versão comum e curricular mais branda que o lendário Veritaserum.",
+  "sistema": {
+    "tempo_preparo": "4 horas",
+    "duracao": "30 minutos",
+    "dificuldade_cd": 18,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "truth-serum",
+    "nome_original": "Truth Serum",
+    "dificuldade_original": null,
+    "caracteristicas_originais": null,
+    "wiki": "https://harrypotter.fandom.com/wiki/Truth_Serum"
+  }
+}

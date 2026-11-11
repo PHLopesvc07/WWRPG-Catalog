@@ -1,0 +1,11 @@
+{
+  "id": "feitico_portus",
+  "name": "Portus",
+  "cat": "Transfiguração",
+  "lvl": "5",
+  "tipo": "Utilitário",
+  "pronuncia": "POR-tus",
+  "pronunciation": "POR-tus",
+  "condicao": "Nenhuma",
+  "desc": "Transforma um objeto numa chave de portal."
+}

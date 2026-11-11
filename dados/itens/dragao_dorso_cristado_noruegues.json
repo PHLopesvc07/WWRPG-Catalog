@@ -1,0 +1,64 @@
+{
+  "id": "dragao_dorso_cristado_noruegues",
+  "num": 21,
+  "nome": "Dragão - Dorso-Cristado Norueguês (Norwegian Ridgeback)",
+  "classificacao": "XXXXX",
+  "licenca": "Não permitido",
+  "porte": "Grande",
+  "tamanho": "12.0 metros",
+  "peso": "2.8 Toneladas",
+  "origem": "Natural",
+  "locomocao": "Aquaéros",
+  "velocidade": "Voo: 8.0m | Terrestre: 2.2m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Bestial",
+  "descricao": "O Dorso-Cristado Norueguês assemelha-se ao Rabo-Córneo na maioria das suas características, mas em vez de espinhos na cauda, apresenta cristas negras bastante salientes por todo o dorso. Excepcionalmente agressivo com outros de sua espécie, é hoje uma das raças de dragões mais raras do mundo. Ataca a maioria dos mamíferos terrestres de grande porte e, curiosamente, alimenta-se também de criaturas marinhas. Relatos contam que um exemplar capturou um filhote de baleia na Noruega em 1802. Seus ovos são pretos e os filhotes desenvolvem a capacidade de expelir fogo muito cedo (de um a três meses de idade). Geografia: @Noruega",
+  "atributos": {
+    "corpo": 9,
+    "destreza": 2,
+    "vitalidade": 9,
+    "instinto": 5,
+    "carisma": -5,
+    "inteligencia": -2,
+    "sabedoria": 1
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Mordida Crestada",
+      "desc": "Mordida violenta apoiada por cristas dorsais negras e pontiagudas. Rola `2d10 + Corpo` de dano físico e causa **[C: Perfuração]**.",
+      "rolagem": "2d10 + Corpo"
+    },
+    "reacao": {
+      "nome": "Bate de Asas Cortantes",
+      "desc": "Asas pontiagudas afastam atacantes corporais. Gasta 1 ação e rola `1d30 + Corpo` contra ataque físico. Se vencer, repele o alvo 3m e causa `1d6` dano.",
+      "rolagem": "1d30 + Corpo"
+    },
+    "ambiente": {
+      "nome": "Sopro de Flamas Azuis",
+      "desc": "Expele jato concentrado de fogo azul em linha reta de 15m. Alvos sofrem `2d8` de dano de fogo e as estruturas atingidas começam a queimar vigorosamente.",
+      "rolagem": "CD 20 + Instinto"
+    },
+    "extra": {
+      "nome": "Instinto Territorial Agressivo",
+      "desc": "Ganha +2 em todas as rolagens de dano físico se estiver defendendo sua ninhada, caverna ou ninho designado.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 10
+    },
+    "media": {
+      "curr": 0,
+      "max": 10
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 10
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/dragao-dorso-cristado-noruegues.jpg",
+  "fotoBase64": "./assets/animais/dragao-dorso-cristado-noruegues.jpg"
+}

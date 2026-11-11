@@ -1,0 +1,11 @@
+{
+  "id": "feitico_aqua_eructo",
+  "name": "Aqua Eructo",
+  "cat": "Charme",
+  "lvl": "2",
+  "tipo": "Ataque",
+  "pronuncia": "A-kua E-RUC-to",
+  "pronunciation": "A-kua E-RUC-to",
+  "condicao": "Nenhuma",
+  "desc": "Produz um jato de água controlado. Também pode ser usado para criar uma barreira de água (lvl 5). Usado em conjunto com Ebublio contra salamandras."
+}

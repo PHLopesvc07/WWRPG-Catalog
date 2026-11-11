@@ -1,0 +1,24 @@
+{
+  "id": "pocao_potion_for_dreamless_sleep",
+  "nome": "Poção do Sono sem Sonhos (Potion for Dreamless Sleep)",
+  "tipo": "Poção (Sedativo Avançado)",
+  "nivel": 5,
+  "nível": 5,
+  "efeito": "Induz um sono profundo, restaurador e totalmente desprovido de sonhos ou pesadelos, permitindo que a mente e o corpo se recuperem de traumas graves e exaustão severa.",
+  "ingredientes": "Ramos de lavanda, pó de pedra da lua, infusão de absinto, xarope de heléboro e favas de dormideira.",
+  "descricao": "Líquido roxo-escuro suave e sedoso. Não deve ser consumida por noites consecutivas para evitar dependência física e entorpecimento mental.",
+  "descrição": "Líquido roxo-escuro suave e sedoso. Não deve ser consumida por noites consecutivas para evitar dependência física e entorpecimento mental.",
+  "sistema": {
+    "tempo_preparo": "3 horas e 30 minutos",
+    "duracao": "8 horas de sono ininterrupto",
+    "dificuldade_cd": 20,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "potion-for-dreamless-sleep",
+    "nome_original": "Potion for Dreamless Sleep",
+    "dificuldade_original": "Advanced",
+    "caracteristicas_originais": "Purple in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Potion_for_Dreamless_Sleep"
+  }
+}

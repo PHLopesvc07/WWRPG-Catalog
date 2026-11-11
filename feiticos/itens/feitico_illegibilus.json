@@ -1,0 +1,11 @@
+{
+  "id": "feitico_illegibilus",
+  "name": "Illegibilus",
+  "cat": "Charme",
+  "lvl": "1",
+  "tipo": "Utilitário",
+  "pronuncia": "I-le-GI-bi-lus",
+  "pronunciation": "I-le-GI-bi-lus",
+  "condicao": "Nenhuma",
+  "desc": "Transforma qualquer texto escrito em uma caligrafia ilegível e rabiscada, impossibilitando a leitura de segredos até que seja desfeita por um contrafeitiço."
+}

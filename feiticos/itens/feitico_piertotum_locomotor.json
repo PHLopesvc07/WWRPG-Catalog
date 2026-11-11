@@ -1,0 +1,11 @@
+{
+  "id": "feitico_piertotum_locomotor",
+  "name": "Piertotum Locomotor",
+  "cat": "Transfiguração",
+  "lvl": "6",
+  "tipo": "Utilitário",
+  "pronuncia": "Pi-er-TO-tum Lo-co-MO-tor",
+  "pronunciation": "Pi-er-TO-tum Lo-co-MO-tor",
+  "condicao": "Nenhuma",
+  "desc": "Dá vida a coisas como armaduras ou estátuas para que fiquem em seu comando."
+}

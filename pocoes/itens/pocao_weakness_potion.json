@@ -1,0 +1,24 @@
+{
+  "id": "pocao_weakness_potion",
+  "nome": "Poção do Enfraquecimento (Weakness Potion)",
+  "tipo": "Poção / Gás Debilitante",
+  "nivel": 3,
+  "nível": 3,
+  "efeito": "Libera vapores amarelados que drenam a força física e a rigidez muscular de quem os inalar, reduzindo pela metade o dano físico e impondo fraqueza muscular aos afetados.",
+  "ingredientes": "Casca de salgueiro podre, bile de lesma mágica, pó de chumbo alquímico, água estagnada.",
+  "descricao": "Líquido amarelado opaco que borbulha liberando fumaça densa e pesada que desce para o chão.",
+  "descrição": "Líquido amarelado opaco que borbulha liberando fumaça densa e pesada que desce para o chão.",
+  "sistema": {
+    "tempo_preparo": "2 horas",
+    "duracao": "10 minutos",
+    "dificuldade_cd": 16,
+    "administracao": "Inalação de Vapores ou Ingestão"
+  },
+  "meta": {
+    "slug": "weakness-potion",
+    "nome_original": "Weakness Potion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Yellowish in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Weakness_Potion"
+  }
+}

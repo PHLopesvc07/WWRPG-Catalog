@@ -1,0 +1,64 @@
+{
+  "id": "clabbert",
+  "num": 12,
+  "nome": "Clabbert (Claberto)",
+  "classificacao": "XX",
+  "licenca": "Comum",
+  "porte": "Médio",
+  "tamanho": "1.2 metros",
+  "peso": "20 kg",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "4.5m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Neutro",
+  "descricao": "O clabbert (claberto) é um criatura arbórea, que lembra uma cruza de mico com sapo. Teve origem no sul dos Estados Unidos, embora há muito tempo tenha sido exportado para o mundo inteiro. Sua pele lisa e sem pêlos é malhada de verde, as mãos e os pés são palmados e os braços e pernas longos e flexíveis, o que permite ao bicho se balançar de um galho para outro com a agilidade de um orangotango. Sua cabeça tem pequenos chifres e uma boca larga, que parece estar rindo, cheia de dentes afiados como uma navalha. O animal alimenta-se principalmente de pequenos lagartos e aves. Sua característica marcante é uma enorme pústula no maio da testa eu fica vermelha e faísca quando o bicho percebe um perigo. No passado, os Na ausência de magia, sabe -se que os chizácaros at acam objetos elétricos por dentro (para compreender melhor o que é eletricidade, veja Vida doméstica e hábitos sociais dos trouxas britânicos , de Wilhelm Wigworthy, Ed. Livrinhos Vermelhos, 1987). As infestações de chizácaros explicam os defeitos intrigant es de muitos artefatos elétricos trouxas relativamente novos. bruxos americanos mantinham clabertos em seus jardins para dar sinal antecipado da aproximação dos trouxas, mas a Confederação Internacional dos Bruxos criou multas que reduziram muito tal prática. A visão à noite de uma árvore cheia de pústulas brilhantes, embora decorativa, atraía muitos trouxas querendo saber por que seus vizinhos continuavam a acender os enfeites de Natal em junho. Geografia: @América do Sul",
+  "atributos": {
+    "corpo": 0,
+    "destreza": 3,
+    "vitalidade": 1,
+    "instinto": 3,
+    "carisma": 2,
+    "inteligencia": -1,
+    "sabedoria": 2
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Mordida do Pântano",
+      "desc": "Mordida rápida com dentes afiados enquanto salta entre galhos. Rola `1d6 + Corpo` de dano físico.",
+      "rolagem": "1d6 + Corpo"
+    },
+    "reacao": {
+      "nome": "Alerta da Pústula Testa",
+      "desc": "A pústula em sua testa brilha intensamente ao detectar hostilidade. Gasta 1 ação para rolar `1d30 + Instinto + 4` para desviar de emboscadas ou ataques.",
+      "rolagem": "1d30 + Instinto + 4"
+    },
+    "ambiente": {
+      "nome": "Agilidade Arborícola",
+      "desc": "Move-se com velocidade extraordinária pelos galhos altos. Ignora terreno difícil em copas de árvores e ganha cobertura parcial (+2 Defesa).",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Salto Surpresa",
+      "desc": "Dá saltos espetaculares de até 8 metros. Pode desferir uma investida contra um alvo no chão rolando garras com vantagem.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 3
+    },
+    "media": {
+      "curr": 0,
+      "max": 3
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 3
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/clabbert.jpg",
+  "fotoBase64": "./assets/animais/clabbert.jpg"
+}

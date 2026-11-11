@@ -1,0 +1,24 @@
+{
+  "id": "pocao_mopsus_potion",
+  "nome": "Poção de Mopso (Mopsus Potion)",
+  "tipo": "Poção (Adivinhação / Telecinese)",
+  "nivel": 5,
+  "nível": 5,
+  "efeito": "Concede vislumbres premonitórios do futuro imediato (como a capacidade de antecipar ataques em combate) e desperta habilidades telecinéticas menores de atração e repulsão de objetos.",
+  "ingredientes": "Olhos de coruja mágica secos, raízes de lírio da adivinhação, pó de pedra de ametista, folhas de chá encantadas.",
+  "descricao": "Líquido violeta-azulado luminoso criado em honra ao lendário vidente Mopsus, famoso por sua precisão oracular na antiguidade grega.",
+  "descrição": "Líquido violeta-azulado luminoso criado em honra ao lendário vidente Mopsus, famoso por sua precisão oracular na antiguidade grega.",
+  "sistema": {
+    "tempo_preparo": "5 horas",
+    "duracao": "1 hora",
+    "dificuldade_cd": 20,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "mopsus-potion",
+    "nome_original": "Mopsus Potion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": null,
+    "wiki": "https://harrypotter.fandom.com/wiki/Mopsus_Potion"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "planta_snargaluff",
+  "nome": "Snargaluff",
+  "categoria": "Difícil de Adquirir",
+  "nivel": "6",
+  "manejo_cd": 18,
+  "manejo": "CD 18 (Herbologia em dupla). Exige obrigatoriamente Luvas de Couro de Dragão e protetores de dentes. Um bruxo deve distrair e conter as gavinhas espinhosas enquanto o outro enfia o braço no buraco central para arrancar a vagem pulsante de Snargaluff.",
+  "efeito": "",
+  "uso_alquimico": "",
+  "classificacao_ministerial": "Artigo Perigoso Classe B (Difícil de Adquirir).",
+  "descricao": "Planta espinhosa e perigosa que se camufla perfeitamente na forma de um toco de árvore podre e inofensivo. No entanto, quando uma criatura se aproxima, o toco ganha vida e dispara gavinhas grossas e cheias de espinhos afiados para laçar o agressor e puxá-lo para dentro de seu tronco oco. Em seu interior, esconde vagens pulsantes do tamanho de toranjas com tubérculos esverdeados que contêm seiva viva.",
+  "peculiaridades": "• Nível de Herbologia: Nível 6 (Especialista / N.I.E.M. / 6º Ano).\n• Manejo & Colheita: CD 18 (Herbologia em dupla). Exige obrigatoriamente Luvas de Couro de Dragão e protetores de dentes. Um bruxo deve distrair e conter as gavinhas espinhosas enquanto o outro enfia o braço no buraco central para arrancar a vagem pulsante de Snargaluff.\n• Combate & Efeito Hostil: Suas vinhas causam dano de 2L+1M e impõem a condição (C) Aprisionado por Espinhos. As vagens colhidas podem ser arremessadas em combate, explodindo ao impacto e arremessando fragmentos pontiagudos (como usado na Batalha de Hogwarts).\n• Classificação Ministerial: Artigo Perigoso Classe B (Difícil de Adquirir).",
+  "fotoBase64": ""
+}

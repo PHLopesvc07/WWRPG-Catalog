@@ -1,105 +1,168 @@
-# WWRPG - Catalog (Registo de Animais Mágicos e Feitiços)
+# 📜 Arquivo Geral do Ministério da Magia — W&W RPG Catalog
 
-O **Registo de Animais Mágicos e Feitiços** é um catálogo digital imersivo desenvolvido para auxiliar nas sessões de RPG de mesa baseadas no universo de Harry Potter (Wizarding World). Ele roda diretamente no navegador e serve tanto como um criador de fichas quanto como um motor de busca para inserir novas criaturas e encantamentos na sua campanha.
+Aplicação web modular de catalogação, consulta rápida, filtragem avançada e exportação oficial de registros para o sistema de RPG de mesa **Witches & Wizards (W&W)**.
 
-Com uma interface inspirada na burocracia do Ministério da Magia (Departamento para Regulamentação e Controle das Criaturas Mágicas e Departamento de Execução das Leis da Magia), a ferramenta permite padronizar a criação de monstros, feras, seres mágicos e agora, o arsenal mágico dos bruxos.
-
----
-
-## Funcionalidades
-
-### I. Aba de Registo de Criaturas (Criação)
-* **Formulário Completo:** Campos para dados de identificação (tamanho, peso, origem, tipo de locomoção, interação).
-* **Classificação Oficial:** Sistema de classificação do Ministério da Magia (X a XXXXX) e exigência de licença.
-* **Sistema de Atributos Dinâmico:** Os atributos base (Corpo, Destreza, Vitalidade) são fixos, mas atributos mentais e sociais (Instinto, Carisma, Inteligência, Sabedoria) aparecem dinamicamente dependendo do "Tipo da Criatura" (Bestial, Neutro, Consciente).
-* **Processamento Visual:** Upload de imagem da criatura com conversão automática para `Base64` direto no navegador (não requer servidor de imagens).
-* **Exportação Mágica:** Gera e faz o download de um ficheiro `.json` perfeitamente formatado com todos os dados da criatura.
-
-### II. Aba de Arquivo de Criaturas (Consulta)
-* **Leitura Automatizada:** Busca e lista todos os ficheiros `.json` de criaturas registadas no sistema.
-* **Filtros Avançados:** Filtre o índice por Tipo, Classificação M.M., Locomoção, Origem e Interação.
-* **Ordenação:** Organize o índice em ordem alfabética (A-Z ou Z-A).
-* **Dossiê Detalhado:** Ao clicar numa criatura no índice, visualize a foto, atributos como insígnias e a descrição completa num painel lateral.
-
-### III. Aba de Registo de Feitiços (Criação)
-* **Formulário Mágico:** Registo padronizado de magias, definindo o Nome, Categoria (Feitiço, Azaração, Maldição, Cura, etc.) e o Nível de Domínio (1 a 7).
-* **Geração de Manuscrito:** Exporta o feitiço formulado diretamente para um ficheiro `.json` estruturado.
-
-### IV. Aba de Arquivo de Feitiços (Consulta e Listas)
-* **Catálogo de Feitiços:** Consulta automática ao diretório de feitiços com filtros rápidos por Categoria e Nível.
-* **Extração Individual:** Botão rápido para descarregar o `.json` de qualquer feitiço existente na base de dados.
-* **Criador de Listas Múltiplas:** Uma ferramenta inovadora que permite ativar um "Modo de Lista". Selecione múltiplos feitiços usando caixas de seleção (*checkboxes*) — navegando livremente pelos filtros sem perder a seleção — e exporte um único ficheiro `.json` consolidado com todo o seu arsenal mágico selecionado.
+Conectada ao **Google Firebase Cloud Firestore (`wwcatalog-10546`)** e projetada com **Arquitetura de Carregamento Individual Sob Demanda (Two-Tier Lazy Loading)** para garantir inicialização instantânea mesmo com mais de **512 registros oficiais** e dezenas de ilustrações.
 
 ---
 
-## Tecnologias Utilizadas
+## 🏛️ Os 4 Espaços de Catálogo Ministerial
 
-Este é um projeto *Front-end Vanilla*, leve e sem dependências pesadas, focado na facilidade de hospedagem (como o GitHub Pages):
-* **HTML5:** Estrutura semântica e acessível.
-* **CSS3:** Estilização responsiva utilizando *CSS Variables* para manter o esquema de cores em tons de pergaminho, tinta e ouro mágico.
-* **JavaScript (Vanilla):** Lógica de interface, manipulação de ficheiros (FileReader), requisições assíncronas (Fetch API), manipulação de `Set` para preservação de estados e filtros de arrays.
+O sistema contempla espaços dedicados de **Arquivo de Consulta** e **Registro / Importação em Massa** para cada um dos 4 pilares do sistema W&W RPG:
+
+### 1. 🐾 Catálogo de Animais & Criaturas Mágicas (D.R.C.C.M.) — *92 Espécies Oficiais*
+* **Identificação Ministerial:** Espécie Mágica, Classificação do Ministério (`X`, `XX`, `XXX`, `XXXX`, `XXXXX`, `XX-XXXX`), Licença exigida (`Comum`, `Magizoologista`, `Não permitido`), Porte (`Pequeno`, `Médio`, `Grande`, `Enorme`), Tamanho/Peso adulto, Origem (`Natural`, `Artificial`), Locomoção (`Terrestres`, `Aéreos`, `Aquáticos`, `Aquaéros`), **Velocidade de Ação**, Interação (`Pacífico`, `Agressivo`) e Tipo (`Simples`, `Neutro`, `Consciente`, `Bestial`).
+* **Atributos Físicos e Animais (`-5` a `+10`):** `Corpo`, `Destreza`, `Vitalidade`, `Instinto`, `Carisma`, `Inteligência` e `Sabedoria`.
+* **Habilidades Especiais de Combate & Instinto:** Quatro categorias táticas (`⚔️ Dano`, `🛡️ Reação`, `🌪️ Ambiente` e `✨ Extra`) com nome, fórmula de rolagem/CD e descrição mecânica.
+* **Prontuário Médico-Veterinário:** Limites de Injúria `Leve`, `Média`, `Pesada` e condições customizadas.
+* **Galeria de Retratos (`assets/animais/`):** Ilustrações carregadas individualmente (`loading="lazy"`) apenas quando a criatura é selecionada.
+
+### 2. 🪄 Grande Compêndio de Feitiçaria (C.E.F.) — *210 Feitiços Oficiais*
+* **Dados Catalogados:** Nome do Encantamento (`name`), Pronúncia Fonética (`pronuncia`), Categoria Mágica (`Charme`, `Transfiguração`, `Azaração`, `Maldição Menor`, `Maldição`, `Contrafeitiço`, `Cura`), Nível de Dificuldade (`1` a `7`), Natureza (`Ataque`, `Proteção`, `Cura`, `Utilitário`, `Contrafeitiço`), **Condição Aplicada (`condicao`, ex: `(C) Desarmado`)** e Descrição completa (`desc`).
+* **Mapeamento Automático de Perícia (W&W):** Associa automaticamente a categoria do feitiço à perícia de conjuração correspondente na ficha de personagem (`Prática`, `Transfiguração`, `DCAT`, `Dificuldade/Lógica`, `Cura`).
+
+### 3. 🌿 Compêndio de Herbologia & Botânica Mágica — *44 Plantas Oficiais*
+* **Dados Catalogados:** Nome Popular / Inglês / Científico (`nome`), Disponibilidade Ministerial (`Popular` ou `Difícil de Adquirir`), Nível de Herbologia (`1` a `7`), Dificuldade de Manejo e Colheita (`CD`), Descrição Morfológica (`descricao`) e Peculiaridades Técnicas (`peculiaridades`: EPIs exigidos, mecânica/efeito imediato, uso alquímico e classificação de sementes).
+
+### 4. ⚗️ Catálogo Alquímico de Poções — *166 Compostos Oficiais*
+* **Dados Catalogados:** Nome (`nome`), Classificação (`Poção`, `Elixir`, `Antídoto`, `Veneno`, `Filtro do Amor`, `Solução`, `Pomada`, `Pasta`, `Tônico`, `Gás Alquímico`), Nível Alquímico (`1` a `7`), Parâmetros de Sistema (`sistema.dificuldade_cd`, `sistema.tempo_preparo`, `sistema.duracao`, `sistema.administracao`), Efeito Mecânico (`efeito`), Ingredientes do Caldeirão (`ingredientes`), Características Físicas/Aroma/Lore (`descricao`) e Metadados de Referência (`meta`).
 
 ---
 
-## Como Usar e Adicionar Novos Registos
+## ⚡ Arquitetura de Carregamento Individual (Alta Performance)
 
-Como o sistema não possui uma base de dados tradicional (SQL/NoSQL), ele utiliza a estrutura de pastas do projeto para atuar como o arquivo oficial do Ministério. É imperativo o uso de um servidor local (ex: *Live Server* do VS Code) para que o navegador consiga ler os ficheiros devido às políticas de segurança (CORS).
+Para evitar o download pesado de coleções inteiras na abertura da página, o serviço [`js/services/database.js`](./js/services/database.js) implementa o carregamento em duas camadas (**Two-Tier On-Demand Loading**):
 
-### Para Registar uma Criatura Mágica:
-1. Abra o sistema e vá à aba **I. Registrar Criatura**.
-2. Preencha todos os dados e adicione uma foto.
-3. Clique em **"Carimbar e Salvar Arquivo"**. O navegador fará o download de um ficheiro `.json` (ex: `dragao_rabo_corneo.json`).
-4. Mova este ficheiro para dentro da pasta `dados/` no diretório do seu projeto.
-5. Abra o ficheiro `dados/indice.json` e adicione o nome exato do novo ficheiro na lista. Exemplo:
-   ```json
-   [
-     "dragao.json",
-     "basilisco.json",
-     "dragao_rabo_corneo.json"
-   ]
+1. **Camada 1 — Índice Leve (`fetchCatalogIndex`):**
+   * Ao abrir qualquer catálogo, o sistema lê apenas o documento de resumo (`_indexes/{collectionName}` no Firestore e `indice.json` local), contendo somente os campos necessários para a listagem lateral e filtros (`id`, `nome`/`name`, `classificacao`/`lvl`/`categoria`/`tipo`).
+   * A renderização e filtragem de centenas de itens ocorrem em **menos de 10 ms**.
+2. **Camada 2 — Carregamento Individual Sob Demanda (`fetchItemById`):**
+   * A ficha completa de um item (descrições extensas, habilidades, ingredientes, prontuário veterinário e imagem) é requisitada **individualmente apenas quando o usuário clica no item desejado** (`doc(db, collectionName, id)` no Firebase Firestore ou `./<pasta>/itens/<id>.json` local), sendo armazenada em um cache em memória (`Map`) para releitura instantânea (`0 ms`).
 
-### Para Registar um Feitiço:
-1. Abra o sistema e vá à aba **I. Registrar Feitiço**.
-2. Preencha todos os dados.
-3. Clique em **"Carimbar e Salvar Arquivo"**. O navegador fará o download de um ficheiro `.json` (ex: `feitico_expelliarmus.json`).
-4. Mova este ficheiro para dentro da pasta `feiticos/` no diretório do seu projeto.
-5. Abra o ficheiro `feiticos/indice_feiticos.json` e adicione o nome exato do novo ficheiro na lista. Exemplo:
-   ```json
-   [
-     "feitico_lumos.json",
-     "feitico_expelliarmus.json"
-   ]
-## Arquitetura e Tecnologias Utilizadas
+---
 
-Este projeto adota uma arquitetura **Front-end Vanilla** robusta e modularizada, baseada nos princípios de *Clean Code*, *DRY* (Don't Repeat Yourself) e *Separação de Preocupações* (SoC). Não há dependências de frameworks externos (sem React, Vue ou bibliotecas de terceiros), mantendo a aplicação leve e de fácil hospedagem (como no GitHub Pages).
+## 🔥 Configuração do Firebase Cloud Firestore (`wwcatalog-10546`)
 
-* **HTML5:** Estrutura semântica e acessível, com carregamento modular via `<script type="module">`.
-* **CSS3 Modularizado:** Estilos divididos por responsabilidade (`variables.css`, `base.css`, `layout.css` e `components.css`). Utilização de *CSS Variables* (Design Tokens) para manter o esquema de cores em tons de pergaminho, tinta e ouro mágico centralizado.
-* **JavaScript ES6+ (Padrão MVC):** * **Controllers:** Classes independentes (`TabController`, `CreatureController`, `SpellController`) gerenciam a lógica de UI e regras de negócio.
-  * **Services:** Abstração da camada de dados (`database.js`) para manipulação de leitura/escrita (*Fetch API* e download de blobs).
-  * **Comunicação Desacoplada:** Utilização de `CustomEvent` nativos para comunicação reativa entre módulos independentes (Event-Driven UI).
-  * **Utils:** Funções puras utilitárias (ex: conversão *FileReader*) centralizadas para evitar repetição de código.
+O projeto está pré-configurado em [`js/services/firebaseConfig.js`](./js/services/firebaseConfig.js) para conectar-se ao banco de dados Cloud Firestore do projeto **`wwcatalog-10546`**.
 
-### Estrutura de Diretórios
+### Regras de Segurança do Firestore ([`firestore.rules`](./firestore.rules))
+
+No Console do Firebase (**Firestore Database → Regras**), publique as regras abaixo para habilitar a leitura e gravação das 4 coleções do catálogo e de seus índices leves:
+
+```cel
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isValidCatalogWrite() {
+      return request.resource.data.keys().size() > 0
+             && request.resource.data.keys().size() <= 40;
+    }
+
+    // 1. Catálogo de Animais / Criaturas Mágicas (D.R.C.C.M.)
+    match /creatures/{creatureId} {
+      allow read: if true;
+      allow create, update: if isValidCatalogWrite()
+                            && (request.resource.data.nome is string);
+      allow delete: if true;
+    }
+
+    // 2. Grande Compêndio de Feitiçaria (C.E.F.)
+    match /spells/{spellId} {
+      allow read: if true;
+      allow create, update: if isValidCatalogWrite()
+                            && (request.resource.data.name is string);
+      allow delete: if true;
+    }
+
+    // 3. Compêndio de Herbologia e Botânica Mágica
+    match /plants/{plantId} {
+      allow read: if true;
+      allow create, update: if isValidCatalogWrite()
+                            && (request.resource.data.nome is string);
+      allow delete: if true;
+    }
+
+    // 4. Catálogo Alquímico de Poções
+    match /potions/{potionId} {
+      allow read: if true;
+      allow create, update: if isValidCatalogWrite()
+                            && (request.resource.data.nome is string);
+      allow delete: if true;
+    }
+
+    // 5. Índices Leves de Catálogo (para carregamento rápido da barra lateral)
+    match /_indexes/{collectionName} {
+      allow read, write: if true;
+    }
+
+    // Bloqueia qualquer outra coleção não listada explicitamente
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+```
+
+> 💡 **Sincronização em 1 Clique:** Após publicar as regras acima no Console do Firebase, clique no botão **`☁️ Sincronizar Compêndios com Firebase`** no topo do site para enviar automaticamente todos os **512 registros oficiais** (92 Animais, 210 Feitiços, 44 Plantas e 166 Poções) para o Firestore em lotes otimizados (`writeBatch`).
+
+---
+
+## 📂 Estrutura de Diretórios
+
 ```text
-📦 wwrpg-catalog
- ┣ 📂 css
- ┃ ┣ 📜 main.css          # Ponto de entrada CSS
- ┃ ┣ 📜 variables.css     # Design Tokens
- ┃ ┣ 📜 base.css          # Resets e estilos nativos
- ┃ ┣ 📜 layout.css        # Estruturas de macro-layout
- ┃ ┗ 📜 components.css    # UI Kits (botões, inputs, cards)
- ┣ 📂 dados               # Ficheiros JSON do arquivo de Criaturas
- ┣ 📂 feiticos            # Ficheiros JSON do arquivo de Feitiços
- ┣ 📂 js
- ┃ ┣ 📂 controllers
- ┃ ┃ ┣ 📜 TabController.js
- ┃ ┃ ┣ 📜 CreatureController.js
- ┃ ┃ ┗ 📜 SpellController.js
- ┃ ┣ 📂 services
- ┃ ┃ ┗ 📜 database.js     # Camada de abstração de Dados
- ┃ ┣ 📂 utils
- ┃ ┃ ┗ 📜 helpers.js      # Funções auxiliares (DRY)
- ┃ ┗ 📜 main.js           # Ponto de entrada JS (Bootstrapper)
- ┣ 📜 index.html
- ┗ 📜 README.md
+WWcatalog/
+├── index.html                      # Interface principal com os 4 espaços de catálogo e modal Firebase
+├── firestore.rules                 # Regras de segurança do Cloud Firestore (wwcatalog-10546)
+├── README.md                       # Documentação oficial do sistema
+├── assets/
+│   └── animais/                    # 91 retratos individuais de criaturas mágicas (carregamento lazy)
+├── css/
+│   ├── variables.css               # Paleta de cores de pergaminho, selos e tipografia
+│   ├── base.css                    # Reset e regras tipográficas globais
+│   ├── layout.css                  # Grids responsivos, barra Firebase e navegação departamental
+│   └── components.css              # Fichas ministeriais, cartões de habilidade, selos e modal
+├── js/
+│   ├── main.js                     # Inicialização dos 4 controladores e barra de sincronização Firebase
+│   ├── controllers/
+│   │   ├── TabController.js        # Alternância entre os 8 painéis (4 Arquivos + 4 Registros)
+│   │   ├── CreatureController.js   # CRUD, filtros e carregamento individual de Animais (D.R.C.C.M.)
+│   │   ├── SpellController.js      # CRUD, filtros e carregamento individual de Feitiços (C.E.F.)
+│   │   ├── PlantController.js      # CRUD, filtros e carregamento individual de Plantas (Herbologia)
+│   │   └── PotionController.js     # CRUD, filtros e carregamento individual de Poções (Alquimia)
+│   ├── services/
+│   │   ├── firebaseConfig.js       # Configuração do projeto Firebase (wwcatalog-10546)
+│   │   └── database.js             # Camada híbrida Firestore + carregamento individual sob demanda
+│   └── utils/
+│       └── helpers.js              # Sanitização, compressão de imagens via Canvas e exportação JSON
+├── dados/
+│   ├── indice.json                 # Índice leve das 92 criaturas mágicas
+│   ├── catalogo_criaturas.json     # Compêndio completo de criaturas para sincronização
+│   └── itens/                      # 92 arquivos JSON individuais (<id>.json)
+├── feiticos/
+│   ├── indice.json                 # Índice leve dos 210 feitiços
+│   ├── indice_feiticos.json        # Compêndio completo de feitiços
+│   └── itens/                      # 210 arquivos JSON individuais (<id>.json)
+├── plantas/
+│   ├── indice.json                 # Índice leve das 44 plantas mágicas
+│   ├── indice_plantas.json         # Compêndio completo de herbologia
+│   └── itens/                      # 44 arquivos JSON individuais (<id>.json)
+└── pocoes/
+    ├── indice.json                 # Índice leve das 166 poções alquímicas
+    ├── indice_pocoes.json          # Compêndio completo de poções
+    └── itens/                      # 166 arquivos JSON individuais (<id>.json)
+```
+
+---
+
+## 🚀 Como Executar Localmente
+
+Por utilizar módulos nativos do JavaScript (`ES6 Modules`) e requisições `fetch` para carregamento individual de arquivos JSON, abra o diretório utilizando qualquer servidor HTTP estático:
+
+1. **VS Code (Live Server):** Clique em *"Go Live"* na barra inferior com o `index.html` aberto.
+2. **Python:**
+   ```bash
+   python -m http.server 8080
+   ```
+   E acesse `http://localhost:8080` no navegador.

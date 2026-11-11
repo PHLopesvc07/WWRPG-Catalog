@@ -1,0 +1,11 @@
+{
+  "id": "feitico_expulso",
+  "name": "Expulso",
+  "cat": "Maldição Menor",
+  "lvl": "4",
+  "tipo": "Ataque",
+  "pronuncia": "Eks-PUL-so",
+  "pronunciation": "Eks-PUL-so",
+  "condicao": "(C) Arremessado",
+  "desc": "Funciona de modo parecido com o feitiço Reducto, mas com intensidade menor. Aparenta uma pequena explosão de ar ou pressão. | Injúria Específica: (C) Arremessado"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "feitico_speculum",
+  "name": "Speculum",
+  "cat": "Charme",
+  "lvl": "4",
+  "tipo": "Proteção",
+  "pronuncia": "SPE-cu-lum",
+  "pronunciation": "SPE-cu-lum",
+  "condicao": "Nenhuma",
+  "desc": "Produz um efeito que ricocheteia o feitiço de volta para o bruxo que o lançou, não funciona com Maldições Imperdoáveis, não funciona com danos físicos."
+}

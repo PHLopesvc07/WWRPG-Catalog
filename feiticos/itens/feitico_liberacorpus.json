@@ -1,0 +1,11 @@
+{
+  "id": "feitico_liberacorpus",
+  "name": "Liberacorpus",
+  "cat": "Contrafeitiço",
+  "lvl": "2",
+  "tipo": "Cura",
+  "pronuncia": "Li-be-ra-COR-pus",
+  "pronunciation": "Li-be-ra-COR-pus",
+  "condicao": "Nenhuma",
+  "desc": "O feitiço oposto de Levicorpus. Faz com que a pessoa levitada seja calmamente solta no chão"
+}

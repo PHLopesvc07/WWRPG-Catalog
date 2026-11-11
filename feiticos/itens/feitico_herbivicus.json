@@ -1,0 +1,11 @@
+{
+  "id": "feitico_herbivicus",
+  "name": "Herbivicus",
+  "cat": "Charme",
+  "lvl": "3",
+  "tipo": "Utilitário",
+  "pronuncia": "Her-BI-vi-cus",
+  "pronunciation": "Her-BI-vi-cus",
+  "condicao": "Nenhuma",
+  "desc": "Faz com que a planta envolvida pelo feitiço cresça rapidamente."
+}

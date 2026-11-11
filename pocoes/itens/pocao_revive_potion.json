@@ -1,0 +1,24 @@
+{
+  "id": "pocao_revive_potion",
+  "nome": "Poção do Despertar / Reviver (Revive Potion)",
+  "tipo": "Poção (Revigorante / Despertar)",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Desperta instantaneamente vítimas nocauteadas, desacordadas por pancadas físicas ou sob efeito de feitiços de atordoamento comuns (como Estupefaça).",
+  "ingredientes": "Pó de pimenta ardente, folhas de hortelã-pimenta moídas, água com gás encantada.",
+  "descricao": "Líquido vermelho brilhante com cheiro picante que faz arder o nariz ao ser destampado.",
+  "descrição": "Líquido vermelho brilhante com cheiro picante que faz arder o nariz ao ser destampado.",
+  "sistema": {
+    "tempo_preparo": "1 hora",
+    "duracao": "Instantâneo",
+    "dificuldade_cd": 14,
+    "administracao": "Ingestão ou Gotas no Nariz"
+  },
+  "meta": {
+    "slug": "revive-potion",
+    "nome_original": "Revive Potion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Red",
+    "wiki": "https://harrypotter.fandom.com/wiki/Revive_Potion"
+  }
+}

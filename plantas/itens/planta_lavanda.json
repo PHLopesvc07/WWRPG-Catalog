@@ -1,0 +1,14 @@
+{
+  "id": "planta_lavanda",
+  "nome": "Lavanda (Lavender / Lavandula angustifolia)",
+  "categoria": "Popular",
+  "nivel": "1",
+  "manejo_cd": 10,
+  "manejo": "CD 10 (Herbologia). Exige exposição direta ao sol. Hastes florais secas mantêm propriedades por anos.",
+  "efeito": "",
+  "uso_alquimico": "Ingrediente da Poção do Sono sem Sonhos e Poções Calmantes.",
+  "classificacao_ministerial": "Artigo Comerciável Livre (Popular).",
+  "descricao": "Subarbusto perene com hastes florais arroxeadas de perfume suave e relaxante. Acalma espíritos agitados, reduz batimentos cardíacos acelerados por sustos e harmoniza vapores voláteis em caldeirões de poções emocionais.",
+  "peculiaridades": "• Nível de Herbologia: Nível 1 (Aprendiz / 1º Ano).\n• Manejo & Colheita: CD 10 (Herbologia). Exige exposição direta ao sol. Hastes florais secas mantêm propriedades por anos.\n• Uso Alquímico: Ingrediente da Poção do Sono sem Sonhos e Poções Calmantes.\n• Classificação Ministerial: Artigo Comerciável Livre (Popular).",
+  "fotoBase64": ""
+}

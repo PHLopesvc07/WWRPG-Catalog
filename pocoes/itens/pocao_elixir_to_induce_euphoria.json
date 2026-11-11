@@ -1,0 +1,24 @@
+{
+  "id": "pocao_elixir_to_induce_euphoria",
+  "nome": "Elixir para Induzir Euforia (Elixir to Induce Euphoria)",
+  "tipo": "Elixir",
+  "nivel": 5,
+  "nível": 5,
+  "efeito": "Provoca um estado imediato de radiante felicidade, contentamento eufórico e autoconfiança contagiante, dissipando depressões e medos. O bebedor tende a cantar alto e puxar narizes alheios se o raminho de hortelã-pimenta não for equilibrado.",
+  "ingredientes": "Raminhos de hortelã-pimenta (peppermint), folhas de alisoto picadas, espinhos de porco-espinho, fava de absinto macerada.",
+  "descricao": "Líquido amarelo-solar luminoso que emite um pequeno arco-íris sobre o caldeirão quando concluído com perfeição. Preparado por Harry Potter no 6º ano sob as instruções anotadas pelo Príncipe Mestiço.",
+  "descrição": "Líquido amarelo-solar luminoso que emite um pequeno arco-íris sobre o caldeirão quando concluído com perfeição. Preparado por Harry Potter no 6º ano sob as instruções anotadas pelo Príncipe Mestiço.",
+  "sistema": {
+    "tempo_preparo": "3 horas",
+    "duracao": "4 horas",
+    "dificuldade_cd": 20,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "elixir-to-induce-euphoria",
+    "nome_original": "Elixir to Induce Euphoria",
+    "dificuldade_original": "Advanced",
+    "caracteristicas_originais": "Sunshine yellow in colour, Emits rainbow when finished",
+    "wiki": "https://harrypotter.fandom.com/wiki/Elixir_to_Induce_Euphoria"
+  }
+}

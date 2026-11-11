@@ -1,0 +1,64 @@
+{
+  "id": "porlock",
+  "num": 70,
+  "nome": "Porlock (Pocotó)",
+  "classificacao": "XXX",
+  "licenca": "Comum",
+  "porte": "Médio",
+  "tamanho": "Médio",
+  "peso": "Médio",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "3.0m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Neutro",
+  "descricao": "O porlock (pocotó) é um guardião de cavalos encontrável em Dorset, uma região da Inglaterra, e no sul da Irlanda. Tem o corpo coberto por uma pelagem comprida e, na cabeça, uma maçaroca de pêlos duros além de um nariz excepcionalmente grande. Suas patas são cascos fendidos. Seus braços são pequenos e terminam em quatro dedos curtos e grossos. Quando adultos, atingem cerca de sessenta centímetros de altura e se alimentam de capim. O pocotó é acanhado e vive para proteger os cavalos. Ele pode ser encontrado escolhido no meio do feno dos estábulos ou então se escondendo no meio da manada. Os pocótos desconfiam dos humanos e sempre se afastam quando eles se aproximam. Geografia: @Mundial",
+  "atributos": {
+    "corpo": 0,
+    "destreza": 0,
+    "vitalidade": 1,
+    "instinto": 0,
+    "carisma": 1,
+    "inteligencia": -2,
+    "sabedoria": 0
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Coice de Patas de Cabra",
+      "desc": "Desfere coices tímidos com suas duas pernas curtas terminadas em cascos de cabra. Rola `1d6 + Corpo` de dano físico.",
+      "rolagem": "1d6 + Corpo"
+    },
+    "reacao": {
+      "nome": "Corrida para o Estábulo",
+      "desc": "Gasta 1 ação para disparar em direção ao feno ao menor barulho. Rola `1d30 + Destreza + 2` para anular ataques corporais de intrusos.",
+      "rolagem": "1d30 + Destreza + 2"
+    },
+    "ambiente": {
+      "nome": "Proteção de Cavalos",
+      "desc": "Acalma cavalos e hipogrifos no estábulo. Montarias adjacentes ao Pocotó são imunes a condições de pânico ou medo mágico na rodada.",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Tímido com Humanos",
+      "desc": "Foge desesperadamente de bruxos desconhecidos. Requer teste de Empatia com Animais CD 21 para aproximação pacífica e amigável.",
+      "rolagem": "CD 21 Carisma"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 3
+    },
+    "media": {
+      "curr": 0,
+      "max": 3
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 3
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/porlock.jpg",
+  "fotoBase64": "./assets/animais/porlock.jpg"
+}

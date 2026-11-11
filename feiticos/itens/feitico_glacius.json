@@ -1,0 +1,11 @@
+{
+  "id": "feitico_glacius",
+  "name": "Glacius",
+  "cat": "Maldição",
+  "lvl": "5",
+  "tipo": "Ataque",
+  "pronuncia": "GLA-ci-us",
+  "pronunciation": "GLA-ci-us",
+  "condicao": "(C) Congelando",
+  "desc": "Congela algum(a) objeto/criatura. | Injúria Específica: (C) Congelando"
+}

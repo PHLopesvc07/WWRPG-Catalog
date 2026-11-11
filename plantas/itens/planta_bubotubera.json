@@ -1,0 +1,14 @@
+{
+  "id": "planta_bubotubera",
+  "nome": "Bubotúbera (Bubotuber)",
+  "categoria": "Difícil de Adquirir",
+  "nivel": "4",
+  "manejo_cd": 16,
+  "manejo": "CD 16 (Herbologia). EXIGE OBRIGATORIAMENTE Luvas de Couro de Dragão grossas. O pus puro não diluído tem efeito corrosivo em pele humana viva: o contato direto queima a carne, causando erupções bolhosas horríveis e impondo a condição (C) Queimado por Pus (1L de dano e desvantagem em testes de tato por 24 horas).",
+  "efeito": "",
+  "uso_alquimico": "Ingrediente de cosméticos médicos e pomadas dermatológicas de Madame Pomfrey.",
+  "classificacao_ministerial": "Artigo Controlado Classe B (Difícil de Adquirir).",
+  "descricao": "Planta grotesca de coloração preta e aspecto de lesma gigante erguida verticalmente para fora da terra, coberta por grandes bolhas e pústulas brilhantes cheias de um pus verde-amarelado espesso com forte cheiro de petróleo. Quando espremido e devidamente purificado, seu pus é o remédio mais eficaz conhecido contra qualquer tipo de acne e furúnculos mágicos.",
+  "peculiaridades": "• Nível de Herbologia: Nível 4 (Avançado I / 4º Ano).\n• Manejo & Colheita: CD 16 (Herbologia). EXIGE OBRIGATORIAMENTE Luvas de Couro de Dragão grossas. O pus puro não diluído tem efeito corrosivo em pele humana viva: o contato direto queima a carne, causando erupções bolhosas horríveis e impondo a condição (C) Queimado por Pus (1L de dano e desvantagem em testes de tato por 24 horas).\n• Uso Alquímico: Ingrediente de cosméticos médicos e pomadas dermatológicas de Madame Pomfrey.\n• Classificação Ministerial: Artigo Controlado Classe B (Difícil de Adquirir).",
+  "fotoBase64": ""
+}

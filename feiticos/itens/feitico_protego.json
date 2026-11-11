@@ -1,0 +1,11 @@
+{
+  "id": "feitico_protego",
+  "name": "Protego",
+  "cat": "Charme",
+  "lvl": "2",
+  "tipo": "Proteção",
+  "pronuncia": "Pro-TE-go",
+  "pronunciation": "Pro-TE-go",
+  "condicao": "Nenhuma",
+  "desc": "Este feitiço faz com que os feitiços menores ricocheteiem em quem os usou. (pode ser conjurado no nível 3)"
+}

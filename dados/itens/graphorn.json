@@ -1,0 +1,64 @@
+{
+  "id": "graphorn",
+  "num": 38,
+  "nome": "Graphorn (Arpéu)",
+  "classificacao": "XXXX",
+  "licenca": "Não permitido",
+  "porte": "Grande",
+  "tamanho": "3.0 metros",
+  "peso": "1.5 Toneladas",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "3.0m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Bestial",
+  "descricao": "O arpéu é encontrado nas regiões montanhosas da Europa. Animal de grande porte, púrpura-acinzentado e provido de corcova, o arpéu tem dois chifres muito longos e afiados, caminha sobre enormes pés de quatro dedos e tem uma natureza extremamente agressiva. Os trasgos montanheses são por vezes vistos montando em arpéus, embora estes animais pareçam não tolerar as tentativas de domá-los, pois é muito comum encontrar um trasgo coberto de cicatrizes feitas por arpéus. Seus chifres moídos são empregados em muitas poções, embora tal ingrediente seja caríssimo dada a dificuldade de obtê-la. O couro é ainda mais grosso que o de um dragão e repele a maioria dos feitiços. Geografia: @Regiões montanhosas da Europa",
+  "atributos": {
+    "corpo": 9,
+    "destreza": 0,
+    "vitalidade": 9,
+    "instinto": 3,
+    "carisma": -4,
+    "inteligencia": -2,
+    "sabedoria": 3
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Patada Espessa / Chifrada",
+      "desc": "Ataque violento com chifres afiados e patas maciças de quatro dedos. Rola `2d8 + Corpo` de dano físico e causa **[C: Traumatismo]**.",
+      "rolagem": "2d8 + Corpo"
+    },
+    "reacao": {
+      "nome": "Casca Blindada de Arpéu",
+      "desc": "Pele rochosa mais dura que a de dragões repele feitiços. Gasta 1 ação e rola `1d30 + Vitalidade + 4` para anular feitiços diretos.",
+      "rolagem": "1d30 + Vitalidade + 4"
+    },
+    "ambiente": {
+      "nome": "Pisão Abalador",
+      "desc": "Pisa fortemente no solo rochoso, abrindo fendas rasas e levantando poeira em área de 4m. Inimigos devem passar em Corpo CD 20 ou perdem o equilíbrio.",
+      "rolagem": "CD 20 Corpo"
+    },
+    "extra": {
+      "nome": "Montaria de Guerra Magizoológica",
+      "desc": "Extremamente agressivo e difícil de domesticar. Se adestrado, confere +3 de bônus em testes de carga e transporte físico pesado.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 3
+    },
+    "media": {
+      "curr": 0,
+      "max": 3
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 3
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/Graphorn.webp",
+  "fotoBase64": "./assets/animais/Graphorn.webp"
+}

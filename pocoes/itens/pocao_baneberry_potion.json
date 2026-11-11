@@ -1,0 +1,24 @@
+{
+  "id": "pocao_baneberry_potion",
+  "nome": "Poção de Bagas-da-Morte (Baneberry Potion)",
+  "tipo": "Veneno",
+  "nivel": 3,
+  "nível": 3,
+  "efeito": "Veneno orgânico debilitante. Provoca cólicas estomacais intensas, sudorese fria, visão turva e redução acentuada da força física do alvo por várias horas.",
+  "ingredientes": "Bagas-da-morte (Baneberries - Actaea), folhas de beladona, raiz de heléboro esmagada.",
+  "descricao": "Fluido de cor escarlate-escura com gosto acre e metálico. As bagas-da-morte são notoriamente venenosas tanto no mundo bruxo quanto trouxa, exigindo colheita com luvas de proteção.",
+  "descrição": "Fluido de cor escarlate-escura com gosto acre e metálico. As bagas-da-morte são notoriamente venenosas tanto no mundo bruxo quanto trouxa, exigindo colheita com luvas de proteção.",
+  "sistema": {
+    "tempo_preparo": "2 horas",
+    "duracao": "6 horas",
+    "dificuldade_cd": 16,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "baneberry-potion",
+    "nome_original": "Baneberry Potion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Blood red",
+    "wiki": "https://harrypotter.fandom.com/wiki/Baneberry_Potion"
+  }
+}

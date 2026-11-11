@@ -1,0 +1,64 @@
+{
+  "id": "flobberworm",
+  "num": 33,
+  "nome": "Flobberworm (Verme-Cego)",
+  "classificacao": "X",
+  "licenca": "Comum",
+  "porte": "Pequeno",
+  "tamanho": "25 cm",
+  "peso": "400 g",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "0.8m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Simples",
+  "descricao": "O flobberworm (verme-cego) vive em valas úmidas. Animal de cor castanha que chega a atingir vinte e cinco centímetros de comprimento, ele se mexe muito pouco. Suas duas extremidades são indistinguíveis uma da outra. E ambas produzem um muco que é, por vezes, usado para engrossar poções. O alimento preferido do verme-cego é a alface, embora ele coma praticamente qualquer vegetal. Geografia: @Valas úmidas em todo o mundo",
+  "atributos": {
+    "corpo": -3,
+    "destreza": -3,
+    "vitalidade": -1,
+    "instinto": -2,
+    "carisma": -1,
+    "inteligencia": -4,
+    "sabedoria": -3
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Inerte / Sem Ataque",
+      "desc": "Não possui dentes ou garras. Não causa dano físico ou mágico de nenhuma natureza.",
+      "rolagem": "0"
+    },
+    "reacao": {
+      "nome": "Contração de Muco",
+      "desc": "Gasta 1 ação para contrair seu corpo viscoso. Rola `1d30 + Vitalidade` para tentar escorregar de amarras físicas simples ou redes.",
+      "rolagem": "1d30 + Vitalidade"
+    },
+    "ambiente": {
+      "nome": "Acúmulo de Muco Lubrificante",
+      "desc": "Secreta um muco espesso no solo ao seu redor (raio de 1.5m). O terreno torna-se extremamente escorregadio (Destreza CD 16 ou cai de costas).",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Ingrediente de Poções",
+      "desc": "Seu muco é usado para engrossar poções. É a criatura mais fácil de manusear do mundo mágico, garantindo sucesso automático em adestramento.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 1
+    },
+    "media": {
+      "curr": 0,
+      "max": 1
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 1
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/Flobberworm.webp",
+  "fotoBase64": "./assets/animais/Flobberworm.webp"
+}

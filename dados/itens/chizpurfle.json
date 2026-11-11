@@ -1,0 +1,64 @@
+{
+  "id": "chizpurfle",
+  "num": 11,
+  "nome": "Chizpurfle (Chizácaro)",
+  "classificacao": "XX",
+  "licenca": "Comum",
+  "porte": "Pequeno",
+  "tamanho": "1.5 mm",
+  "peso": "0.1 g",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "3.0m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Simples",
+  "descricao": "O chizpurfle (chizácaro) é um pequeno parasita de até um milímetro e meio de altura com a aparência de um caranguejo e dotado de grandes presas. É atraído pela magia e pode infestar o pêlo e as penas de criaturas como os crupes e agoureiros. Penetra também a habitação de bruxos e ataca objetos mágicos tais como varinhas, que ele rói gradualmente até o cerne mágico, ou então se instala em caldeirões sujos, onde engole qualquer restinho de poção. Embora o chizácaro possa ser eliminado facilmente com qualquer das poções patenteadas à venda no mercado, várias infestações podem exigir uma visita da Subdivisão de Pragas do Departamento para Regulamentação e Controle das Criaturas Mágicas, pois o chizácaro quando inchado por substâncias mágicas torna-se muito difícil de combater. Geografia: @Mundial (infestações em residências de bruxos)",
+  "atributos": {
+    "corpo": -2,
+    "destreza": 0,
+    "vitalidade": -2,
+    "instinto": 1,
+    "carisma": -1,
+    "inteligencia": -3,
+    "sabedoria": -1
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Mordida Roedora",
+      "desc": "Morde ferozmente, focando em metais ou fontes mágicas. Rola `1d4 + Destreza` de dano físico leve e descarrega baterias mágicas.",
+      "rolagem": "1d4 + Destreza"
+    },
+    "reacao": {
+      "nome": "Carcaça Parasitária",
+      "desc": "Salta sobre o atacante e se fixa. Gasta 1 ação para rolar `1d30 + Destreza` contra ataque físico. Se vencer, agarra-se ao alvo (+2 na Defesa do Chizácaro).",
+      "rolagem": "1d30 + Destreza"
+    },
+    "ambiente": {
+      "nome": "Sobrecarga de Caldeirões",
+      "desc": "Atraído por poções em cozimento, pula dentro delas provocando a explosão imediata do caldeirão de estanho ou cobre, espalhando poção fervente.",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Dreno de Varina",
+      "desc": "Se fixado a uma varinha por mais de 2 turnos, consome a energia mágica do condutor, dando desvantagem no próximo feitiço do bruxo.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 3
+    },
+    "media": {
+      "curr": 0,
+      "max": 3
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 3
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/chizpurfle.jpg",
+  "fotoBase64": "./assets/animais/chizpurfle.jpg"
+}

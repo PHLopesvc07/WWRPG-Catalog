@@ -1,0 +1,64 @@
+{
+  "id": "grindylow",
+  "num": 40,
+  "nome": "Grindylow (Grindylow)",
+  "classificacao": "XX",
+  "licenca": "Comum",
+  "porte": "Médio",
+  "tamanho": "1.1 metros",
+  "peso": "15 kg",
+  "origem": "Natural",
+  "locomocao": "Aquáticos",
+  "velocidade": "Natação: 5.2m | Terrestre: 0.8m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Simples",
+  "descricao": "Demônio aquático de chifres e pele verde-clara, o grindylow é encontrado em lagos da Grã-Bretanha e Irlanda. Alimenta-se de pequenos peixes e é igualmente agressivo com bruxos e trouxas, embora se saiba que os merpeople (sereianos) são capazes de domesticá-los. O grindylow tem dedos muito longos que embora possuam grande força são facilmente quebráveis. Geografia: @Lagos da Grã-Bretanha e Irlanda",
+  "atributos": {
+    "corpo": 0,
+    "destreza": 1,
+    "vitalidade": 0,
+    "instinto": 2,
+    "carisma": -3,
+    "inteligencia": -2,
+    "sabedoria": 0
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Aperto de Dedos Longos / Mordida",
+      "desc": "Agarra a vítima com dedos longos e quebradiços, mordendo-a. Rola `1d6 + Corpo` de dano físico na água.",
+      "rolagem": "1d6 + Corpo"
+    },
+    "reacao": {
+      "nome": "Recuo Aquático Rápido",
+      "desc": "Impulsiona-se para trás na água pantanosa. Gasta 1 ação e rola `1d30 + Destreza + 3` para anular ataques corporais subaquáticos.",
+      "rolagem": "1d30 + Destreza + 3"
+    },
+    "ambiente": {
+      "nome": "Correnteza de Algas",
+      "desc": "Embora viva em algas marinhas, consegue enredar a perna de nadadores usando plantas aquáticas (CD `18 + Instinto` em Destreza para escapar).",
+      "rolagem": "CD 18 + Instinto"
+    },
+    "extra": {
+      "nome": "Fraqueza nos Dedos",
+      "desc": "Seus dedos longos são extremamente fáceis de quebrar se agarrados. Inimigos ganham +3 de bônus para escapar de seu aperto se focarem nos dedos.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 3
+    },
+    "media": {
+      "curr": 0,
+      "max": 3
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 3
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/grindylow.jpg",
+  "fotoBase64": "./assets/animais/grindylow.jpg"
+}

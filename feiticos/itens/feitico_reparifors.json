@@ -1,0 +1,11 @@
+{
+  "id": "feitico_reparifors",
+  "name": "Reparifors",
+  "cat": "Cura",
+  "lvl": "2",
+  "tipo": "Cura",
+  "pronuncia": "Re-pa-ri-FORS",
+  "pronunciation": "Re-pa-ri-FORS",
+  "condicao": "Nenhuma",
+  "desc": "Feitiço curativo que reverte males mágicos menores causados por azarações, curando crises de espirro, furúnculos, paralisias de membros e lábios fundidos. | Cura Condição: (C) Furúnculos / Espirros / Lábios Selados"
+}

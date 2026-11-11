@@ -1,0 +1,11 @@
+{
+  "id": "feitico_lumos",
+  "name": "Lumos",
+  "cat": "Charme",
+  "lvl": "1",
+  "tipo": "Utilitário",
+  "pronuncia": "LU-mos",
+  "pronunciation": "LU-mos",
+  "condicao": "Nenhuma",
+  "desc": "Feitiço básico para iluminar a ponta da varinha."
+}

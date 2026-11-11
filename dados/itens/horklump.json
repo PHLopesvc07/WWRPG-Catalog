@@ -1,0 +1,64 @@
+{
+  "id": "horklump",
+  "num": 43,
+  "nome": "Horklump (Tolete)",
+  "classificacao": "X",
+  "licenca": "Comum",
+  "porte": "Pequeno",
+  "tamanho": "15 cm",
+  "peso": "800 g",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "0.8m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Simples",
+  "descricao": "O horklump (tolete) teve origem na Escandinávia, mas hoje é encontrado em todo o norte europeu. Lembra um cogumelo carnudo e rosado coberto de pêlos ralos, negros e duros. Procriador prodigioso, ele cobre um jardim de tamanho médio em questão de dias. O tolete lança tentáculos vigorosos na terra em lugar de raízes à procura do seu alimento preferido, as minhocas. Por sua vez, ele é uma iguaria apreciada pelos gnomos, mas não tem nenhum outro uso conhecido. Geografia: @Escandinávia",
+  "atributos": {
+    "corpo": -3,
+    "destreza": -3,
+    "vitalidade": 0,
+    "instinto": -3,
+    "carisma": -1,
+    "inteligencia": -4,
+    "sabedoria": -2
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Espinhos Venenosos Estáticos",
+      "desc": "Espeta quem tenta pisar ou tocá-lo com seus espinhos. Rola `1d4 + Vitalidade` de dano e causa **[C: Coceira Venenosa]**.",
+      "rolagem": "1d4 + Vitalidade"
+    },
+    "reacao": {
+      "nome": "Retração Subterrânea",
+      "desc": "Gasta 1 ação para afundar parcialmente na terra macia. Rola `1d30 + Vitalidade` para absorver metade do dano de golpes físicos cortantes.",
+      "rolagem": "1d30 + Vitalidade"
+    },
+    "ambiente": {
+      "nome": "Infestação de Solo",
+      "desc": "Multiplica-se rapidamente cobrindo o solo de cogumelos rosados e espinhosos. Transforma o gramado em terreno perigoso e escorregadio.",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Praga Indesejada",
+      "desc": "Alimento favorito de gnomos. Sua secreção pode ser pulverizada para atrair pragas domésticas se o magizoologista desejar.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 1
+    },
+    "media": {
+      "curr": 0,
+      "max": 1
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 1
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/horklump.jpg",
+  "fotoBase64": "./assets/animais/horklump.jpg"
+}

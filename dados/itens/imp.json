@@ -1,0 +1,64 @@
+{
+  "id": "imp",
+  "num": 44,
+  "nome": "Imp (Diabinho)",
+  "classificacao": "XX",
+  "licenca": "Comum",
+  "porte": "Pequeno",
+  "tamanho": "20 cm",
+  "peso": "1.5 kg",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "2.0m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Simples",
+  "descricao": "O imp (diabinho) só é encontrado na Grã-Bretanha e na Irlanda. Por sua vez é confundido com o diabrete. Os dois têm a mesma altura (entre quinze e vinte centímetros), embora o diabinho não seja capaz de voar como o diabrete e nem seja tão colorido (o diabinho normalmente varia de marrom-escuro a preto). No entanto, ambos têm o mesmo senso de humor grotesco. Seu terreno preferido é úmido e pantanoso, e com freqüência é visto próximo às margens de rios onde se diverte empurrando e fazendo tropeçar os incautos. O diabinho se alimenta de pequenos insetos e tem hábitos de acasalamento muito semelhantes aos das fadas, embora não teça casulos; seus filhotes nascem totalmente formados com cerca de dois centímetros e meio de altura. Geografia: @Grã-Bretanha e Irlanda",
+  "atributos": {
+    "corpo": -1,
+    "destreza": 2,
+    "vitalidade": -1,
+    "instinto": 1,
+    "carisma": 0,
+    "inteligencia": -2,
+    "sabedoria": -1
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Beliscão e Chute Inconveniente",
+      "desc": "Ataca pregando peças físicas irritantes. Rola `1d4 + Destreza` de dano físico.",
+      "rolagem": "1d4 + Destreza"
+    },
+    "reacao": {
+      "nome": "Salto Escapista Escarninho",
+      "desc": "Pula de um lado para o outro rindo alto. Gasta 1 ação e rola `1d30 + Destreza + 3` para desviar de tentativas de captura ou redes.",
+      "rolagem": "1d30 + Destreza + 3"
+    },
+    "ambiente": {
+      "nome": "Arremesso de Lama",
+      "desc": "Atira lama ou pedriscos nos olhos do oponente, dando desvantagem no próximo feitiço do bruxo devido à perda momentânea de visão.",
+      "rolagem": "CD 18 Destreza"
+    },
+    "extra": {
+      "nome": "Humor Travesso",
+      "desc": "Habita margens de rios pantanosos. Consegue roubar pequenos objetos leves da mão de bruxos desatentos com teste de Destreza bem-sucedido.",
+      "rolagem": "1d30 + Destreza"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 1
+    },
+    "media": {
+      "curr": 0,
+      "max": 1
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 1
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/imp.jpg",
+  "fotoBase64": "./assets/animais/imp.jpg"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "feitico_anapneo",
+  "name": "Anapneo",
+  "cat": "Cura",
+  "lvl": "2",
+  "tipo": "Cura",
+  "pronuncia": "A-NAP-ne-o",
+  "pronunciation": "A-NAP-ne-o",
+  "condicao": "Nenhuma",
+  "desc": "Limpar a traqueia respiratória e a boca, se estiver bloqueada."
+}

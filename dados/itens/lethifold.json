@@ -1,0 +1,64 @@
+{
+  "id": "lethifold",
+  "num": 52,
+  "nome": "Lethifold (Mortalha-Viva)",
+  "classificacao": "XXXXX",
+  "licenca": "Não permitido",
+  "porte": "Grande",
+  "tamanho": "2.5 metros",
+  "peso": "2.0 kg (leve como tecido)",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "7.2m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Bestial",
+  "descricao": "A lethifold (mortalha-viva) é, felizmente, uma criatura rara, encontrada somente em climas tropicais. Lembra um manto negro de pouco mais de um centímetro de espessura (mais grosso quando acabou de matar e digerir uma vítima) que rasteja pelo chão durante a noite. A noticia mais antiga que se tem uma mortalha-viva foi descrita pelo bruxo Flávio Belby, que teve a sorte de sobreviver a um ataque desse animal em 1782 quando passava as férias em Papua, na Nova Guiné. Por volta de uma hora da manhã, quando eu começava finalmente a me sentir, ouvi um farfalhar muito próximo. Acreditando que eram apenas as folhas da árvore lá fora, mudei de posição na cama, deixando as costas viradas para a janela, e avistei o que pareceu ser uma sombra disforme deslizando pela porta do meu quarto. Fiquei parado, tentando sonolentamente adivinhar o que produzia tal sombra em um quarto iluminado apenas pelo luar. Sem dúvida a minha imobilidade levou a mortalha-viva a acreditar que sua vítima potencial estava adormecida, Para meu horror, a sombra começou a subir sorrateiramente em minha cama, e senti o seu peso leve sobre mim. Parecia apenas um manto preto ondulante, suas pontas farfalhavam levemente enquanto ela avançava para mim. Paralisado de medo, senti o seu toque úmido no meu queixo antes de me sentar com um movimento brusco. A coisa tentou me sufocar, subindo inexoravelmente pelo meu rosto, tampando minha boca e as narinas, mas eu continuei a me debater, sentindo o tempo todo a sua friagem envolvente sobre mim. Incapaz de pedir socorro, tateei à procura da minha varinha. Tonto porque a coisa se colava ao meu rosto, incapaz de inspirar concentrei todas as minhas forças para lhe lançar um Feitiço Estuporante, e então, como este não fosse suficiente para dominar a criatura, embora tivesse aberto um buraco na porta do meu quarto - tentei uma Azaração de Impedimento, que também de nada adiantou. Ainda me debatendo como um louco, me virei de lado e caí pesadamente no chão, agora envolto pela mortalha. Eu sabia que estava preste a perder completamente a consciência, sufocado. Desesperado, reuni minha última reserva de energia. Apontei a varinha para longe de mim, para as dobras letais da criatura, procurando trazer à lembrança o dia em que fui eleito presidente do Clube de Bexigas da minha cidade, e executei um Feitiço Patrono. Quase na mesma hora senti o ar fresco no meu rosto. Ergui os olhos e vi a sombra letal ser atirada no ar pelos chifres do meu Patrono. Ela voou pelo quarto e deslizou depressa para longe da vista. Conforme Belby revela tão dramaticamente, o Patrono é o único feitiço conhecido para repelir uma mortalha-viva. Mas, uma vez que ela sempre ataca pessoas adormecidas, suas vítimas raramente têm chance de usar a magia para se defender. Depois que a presa foi sufocada, o animal a digere ali mesmo na cama. Sai, então, da casa ligeiramente mais grossa e gorda do que entrou, sem deixar para trás o menor vestígio de si ou de sua vítima. Geografia: @Regiões tropicais",
+  "atributos": {
+    "corpo": 4,
+    "destreza": 4,
+    "vitalidade": 3,
+    "instinto": 4,
+    "carisma": -4,
+    "inteligencia": -2,
+    "sabedoria": 2
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Sufocamento de Mortalha",
+      "desc": "Desce sobre o alvo adormecido ou imobilizado e o sufoca. Rola `1d12 + Corpo` por turno. Alvo começa a sufocar (perde Vitalidade).",
+      "rolagem": "1d12 + Corpo"
+    },
+    "reacao": {
+      "nome": "Deslizar Sombrio",
+      "desc": "Corpo bidimensional escorrega pelo ar como manto. Gasta 1 ação e rola `1d30 + Destreza + 4` para evitar ataques físicos diretos.",
+      "rolagem": "1d30 + Destreza + 4"
+    },
+    "ambiente": {
+      "nome": "Manto de Escuridão",
+      "desc": "Espera e mescla-se com sombras de tetos e paredes. Inimigos têm desvantagem absoluta para detectá-lo sem feitiços de iluminação extrema.",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Vulnerabilidade ao Patronum",
+      "desc": "Seu corpo de trevas é imune à maioria dos feitiços ordinários de ataque, mas é repelido instantaneamente pelo Feitiço do Patrono.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 3
+    },
+    "media": {
+      "curr": 0,
+      "max": 3
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 3
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/lethifold.jpg",
+  "fotoBase64": "./assets/animais/lethifold.jpg"
+}

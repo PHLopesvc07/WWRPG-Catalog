@@ -1,0 +1,24 @@
+{
+  "id": "pocao_rat_spleen_mixture",
+  "nome": "Mistura de Baço de Rato (Rat Spleen Mixture)",
+  "tipo": "Base Alquímica / Solução Reagente",
+  "nivel": 1,
+  "nível": 1,
+  "efeito": "Solução pré-alquímica cáustica e estabilizadora de reações voláteis em caldeirão. Neutraliza a acidez excessiva de venenos em fase de destilação.",
+  "ingredientes": "Baços de rato finamente picados, vinagre destilado mágico, sal marinho purificado.",
+  "descricao": "Caldo acinzentado de cheiro forte preservado em potes de boticário.",
+  "descrição": "Caldo acinzentado de cheiro forte preservado em potes de boticário.",
+  "sistema": {
+    "tempo_preparo": "30 minutos",
+    "duracao": "Reagente de preparo",
+    "dificuldade_cd": 12,
+    "administracao": "Aditivo de Caldeirão"
+  },
+  "meta": {
+    "slug": "rat-spleen-mixture",
+    "nome_original": "Rat Spleen Mixture",
+    "dificuldade_original": null,
+    "caracteristicas_originais": null,
+    "wiki": "https://harrypotter.fandom.com/wiki/Rat_Spleen_Mixture"
+  }
+}

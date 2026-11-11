@@ -1,0 +1,11 @@
+{
+  "id": "feitico_incarcerous_nerus",
+  "name": "Incarcerous Nerus",
+  "cat": "Maldição",
+  "lvl": "5",
+  "tipo": "Ataque",
+  "pronuncia": "In-car-CE-rus NE-rus",
+  "pronunciation": "In-car-CE-rus NE-rus",
+  "condicao": "(C) Enforcado",
+  "desc": "Cria cordas negras que tentam esmagar os ossos da vítima e enforcar. | Injúria Específica: (C) Enforcado"
+}

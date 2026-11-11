@@ -1,0 +1,64 @@
+{
+  "id": "knarl",
+  "num": 49,
+  "nome": "Knarl (Ouriço)",
+  "classificacao": "XXX",
+  "licenca": "Comum",
+  "porte": "Médio",
+  "tamanho": "25 cm",
+  "peso": "1.4 kg",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "1.8m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Neutro",
+  "descricao": "O knarl (ouriço) (Europa Setentrional e América do Norte) é em geral confundido pelos trouxas com o porco-espinho. As duas espécies são de fato indistinguíveis, exceto por uma diferença importante em seu comportamento: se deixarmos comida no jardim para um porcoespinho, ele a aceitará e apreciará o presente; por outro lado, se oferecermos comida a um ouriço, ele irá supor que o dono da casa está tentando atraí-lo para uma cilada, e destruirá as plantas e ornamentos do jardim da casa. Muitas crianças trouxas já foram acusadas de vandalismo quando o verdadeiro culpado foi um ouriço. Geografia: @Europa Setentrional e América do Norte",
+  "atributos": {
+    "corpo": 0,
+    "destreza": 1,
+    "vitalidade": 0,
+    "instinto": 2,
+    "carisma": 1,
+    "inteligencia": -2,
+    "sabedoria": 0
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Picada de Espinhos Irritados",
+      "desc": "Se contrai em bola espinhosa ao menor sinal de perturbação. Rola `1d6 + Vitalidade` de dano físico perfurante.",
+      "rolagem": "1d6 + Vitalidade"
+    },
+    "reacao": {
+      "nome": "Casca de Espinhos Estática",
+      "desc": "Enrola-se defensivamente. Gasta 1 ação para rolar `1d30 + Vitalidade + 2` contra ataque corporal. Se vencer, atacante sofre `1d4` de dano.",
+      "rolagem": "1d30 + Vitalidade + 2"
+    },
+    "ambiente": {
+      "nome": "Destruição de Plantações",
+      "desc": "Acredita que o dono do jardim quer envenená-lo e destrói plantas e hortas adjacentes, gerando detritos e dificultando a locomoção.",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Paranoia Silvestre",
+      "desc": "Extremamente desconfiado. Se receber comida de um bruxo, rola Instinto CD 20. Se falhar, entra em fúria defensiva e ataca o benfeitor.",
+      "rolagem": "CD 20 Instinto"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 1
+    },
+    "media": {
+      "curr": 0,
+      "max": 1
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 1
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/knarl.jpg",
+  "fotoBase64": "./assets/animais/knarl.jpg"
+}

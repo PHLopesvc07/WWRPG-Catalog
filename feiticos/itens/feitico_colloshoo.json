@@ -1,0 +1,11 @@
+{
+  "id": "feitico_colloshoo",
+  "name": "Colloshoo",
+  "cat": "Azaração",
+  "lvl": "1",
+  "tipo": "Ataque",
+  "pronuncia": "Co-lo-SHU",
+  "pronunciation": "Co-lo-SHU",
+  "condicao": "(C) Pés Presos",
+  "desc": "Azaração dos Sapatos Colados. Gruda instantaneamente a sola dos sapatos da vítima ao piso com cola mágica viscosa, reduzindo seu deslocamento a 0. | Injúria Específica: (C) Pés Presos"
+}

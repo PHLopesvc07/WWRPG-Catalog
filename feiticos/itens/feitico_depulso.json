@@ -1,0 +1,11 @@
+{
+  "id": "feitico_depulso",
+  "name": "Depulso",
+  "cat": "Charme",
+  "lvl": "2",
+  "tipo": "Ataque",
+  "pronuncia": "De-PUL-so",
+  "pronunciation": "De-PUL-so",
+  "condicao": "(C) Derrubado",
+  "desc": "O Feitiço de Expulsão, contrafeitiço direto do Accio. Dispara uma onda de repulsão cinética violenta que arremessa objetos ou adversários para longe com força de impacto. | Injúria Específica: (C) Derrubado"
+}

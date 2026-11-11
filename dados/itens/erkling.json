@@ -1,0 +1,64 @@
+{
+  "id": "erkling",
+  "num": 29,
+  "nome": "Erkling (Elfo-Da-Bavária)",
+  "classificacao": "XXXX",
+  "licenca": "Magizoologista",
+  "porte": "Médio",
+  "tamanho": "90 cm",
+  "peso": "14 kg",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "2.0m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Neutro",
+  "descricao": "O elfo-da-bavária teve origem na Floresta Negra, na Alemanha. É maior que um gnomo (uns noventa centímetros em média), tem queixo fino e uma gargalhada que encanta principalmente crianças, a quem ele tenta atrair para longe de seus guardiões a fim de as comer. O controle rigoroso exercido pelo Ministério da Magia alemão reduziu drasticamente as mortes causadas pelos elfos-da-bavária nos séculos mais recentes. O último ataque de que se tem notícia foi ao bruxo Bruno Schmidt, de seis anos de idade, que resultou na morte do elfo quando o bruxinho lhe deu uma forte pancada na cabeça com o caldeirão desmontável do pai. Geografia: @Bavária, Alemanha",
+  "atributos": {
+    "corpo": 1,
+    "destreza": 2,
+    "vitalidade": 2,
+    "instinto": 3,
+    "carisma": -4,
+    "inteligencia": -1,
+    "sabedoria": 1
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Garrada Aguda / Picada",
+      "desc": "Garras finas direcionadas ao rosto de crianças ou aventureiros. Rola `1d6 + Destreza` de dano físico e pode aplicar **[C: Hemorragia Leve]**.",
+      "rolagem": "1d6 + Destreza"
+    },
+    "reacao": {
+      "nome": "Gargalhada Distrativa",
+      "desc": "Gargalha agudamente ao ser atacado por feitiço. Gasta 1 ação e rola `1d30 + Carisma` contra a CD da magia, fazendo o feixe desviar do alvo.",
+      "rolagem": "1d30 + Carisma"
+    },
+    "ambiente": {
+      "nome": "Emboscada Arborícola",
+      "desc": "Esconde-se em arbustos espinhosos bávaros. Oponentes adjacentes sofrem `1d4` de dano perfurante ao tentar se aproximar ou atacar em combate corpo a corpo.",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Balbucio Sedutor de Crianças",
+      "desc": "Emite sons alegres e infantis para atrair presas. Humanos devem passar em teste de Vontade CD `18 + Sabedoria` ou andam em direção ao Erkling desarmados.",
+      "rolagem": "CD 18 + Sabedoria"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 1
+    },
+    "media": {
+      "curr": 0,
+      "max": 1
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 1
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/erkling.webp",
+  "fotoBase64": "./assets/animais/erkling.webp"
+}

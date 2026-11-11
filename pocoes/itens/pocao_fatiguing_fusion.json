@@ -1,0 +1,24 @@
+{
+  "id": "pocao_fatiguing_fusion",
+  "nome": "Fusão Fatigante (Fatiguing Fusion)",
+  "tipo": "Poção (Debilitante)",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Drena a estamina física e a vitalidade do alvo em minutos, impondo cansaço muscular severo, redução de deslocamento e desvantagem em testes físicos de força e destreza.",
+  "ingredientes": "Folhas de salgueiro murchas, pó de pedra pesada, bile de preguiça mágica, água estagnada.",
+  "descricao": "Solução cinzenta e viscosa com cheiro de mofo. Utilizada para cansar perseguidores ou amansar bestas agressivas.",
+  "descrição": "Solução cinzenta e viscosa com cheiro de mofo. Utilizada para cansar perseguidores ou amansar bestas agressivas.",
+  "sistema": {
+    "tempo_preparo": "1 hora e 15 minutos",
+    "duracao": "2 horas",
+    "dificuldade_cd": 14,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "fatiguing-fusion",
+    "nome_original": "Fatiguing Fusion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Green-coloured smoke",
+    "wiki": "https://harrypotter.fandom.com/wiki/Fatiguing_Fusion"
+  }
+}

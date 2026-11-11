@@ -1,0 +1,11 @@
+{
+  "id": "feitico_conjunctivitus",
+  "name": "Conjunctivitus",
+  "cat": "Maldição Menor",
+  "lvl": "3",
+  "tipo": "Ataque",
+  "pronuncia": "Con-junc-ti-VI-tus",
+  "pronunciation": "Con-junc-ti-VI-tus",
+  "condicao": "(C) Conjuntivite",
+  "desc": "Atordoa o alvo, ressecando seus olhos e secretando remela ao redor deles. | Injúria Específica: (C) Conjuntivite"
+}

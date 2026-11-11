@@ -1,0 +1,64 @@
+{
+  "id": "glumbumble",
+  "num": 36,
+  "nome": "Glumbumble (Besouro-Da-Melancolia)",
+  "classificacao": "XXX",
+  "licenca": "Comum",
+  "porte": "Pequeno",
+  "tamanho": "1.5 cm",
+  "peso": "0.2 g",
+  "origem": "Natural",
+  "locomocao": "Aéreos",
+  "velocidade": "Voo: 5.0m | Terrestre: 1.5m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Simples",
+  "descricao": "O glubumblee (besouro-da-melancolia, norte da Europa) é um inseto voador, cinzento, de corpo peludo; produz uma secreção que induz a melancolia e é usado como antídoto para a histeria causada pela ingestão das folhas de aliquente. Sabe-se que esse besouro pode infestar colméias com efeitos Úrico, o Excêntrico, certa vez tentou provar que o canto do fiuum era na realidade benéfico à saúd e e escutou -o durante três meses sem interrupção. Infelizmente, ele não conseguiu convencer o conselho o Conselho de Bruxos, ao qual relatou suas descobertas por chegou à reunião, usando apenas um chinó ou meia - peruca, que a um exame mais atento os conselh eiros descobriram ser um texugo morto. desastrosos para o mel. Ele faz ninho em lugares escuros e protegidos tais como o oco das árvores e grutas. Alimenta-se de urtigas. Geografia: @Norte da Europa",
+  "atributos": {
+    "corpo": -3,
+    "destreza": 0,
+    "vitalidade": -3,
+    "instinto": 0,
+    "carisma": 0,
+    "inteligencia": -4,
+    "sabedoria": -1
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Zumbido Depressivo",
+      "desc": "Zume próximo ao ouvido do alvo, drenando sua energia vital. Rola `1d4 + Inteligência` de dano mental.",
+      "rolagem": "1d4 + Inteligência"
+    },
+    "reacao": {
+      "nome": "Esquiva de Voo Lento",
+      "desc": "Esquiva-se pesadamente no ar. Gasta 1 ação e rola `1d30 + Destreza + 1` para desviar de golpes corporais rasos.",
+      "rolagem": "1d30 + Destreza + 1"
+    },
+    "ambiente": {
+      "nome": "Nuvem de Melancolia",
+      "desc": "Gera uma substância melosa que induz apatia em área de 3m. Alvos devem passar em Vontade CD `16 + Sabedoria` ou perdem 1 ação na rodada.",
+      "rolagem": "CD 16 + Sabedoria"
+    },
+    "extra": {
+      "nome": "Arruinador de Colmeias",
+      "desc": "Sua presença secreta destrói o mel de colmeias próximas. Seus fluidos neutralizam poções excitantes ou estimulantes se misturados.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 1
+    },
+    "media": {
+      "curr": 0,
+      "max": 1
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 1
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/glumbumble.jpg",
+  "fotoBase64": "./assets/animais/glumbumble.jpg"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "pocao_emerald_potion",
+  "nome": "Poção Esmeralda / Bebida do Desespero (Emerald Potion / Drink of Despair)",
+  "tipo": "Poção das Trevas / Veneno Psíquico",
+  "nivel": 7,
+  "nível": 7,
+  "efeito": "Não pode ser transfigurada, recolhida com as mãos ou evaporada por feitiços; deve ser bebida até o fim. Provoca sede ardente agonizante na garganta, dores viscerais atrozes e faz o bebedor reviver os piores terrores e memórias traumáticas da sua vida em um delírio febril desesperador.",
+  "ingredientes": "Substâncias arcanas sombrias desconhecidas, água do lago dos inferi, sangue de sacrifício, veneno necrótico.",
+  "descricao": "Líquido verde-esmeralda fosforescente que brilha sinistramente nas trevas. Desenvolvida por Lord Voldemort para proteger o medalhão de Salazar Slytherin na caverna marinha, forçando o intruso a beber a bacia inteira para ter acesso à Horcrux.",
+  "descrição": "Líquido verde-esmeralda fosforescente que brilha sinistramente nas trevas. Desenvolvida por Lord Voldemort para proteger o medalhão de Salazar Slytherin na caverna marinha, forçando o intruso a beber a bacia inteira para ter acesso à Horcrux.",
+  "sistema": {
+    "tempo_preparo": "Rito das Trevas Inviolável",
+    "duracao": "Duração do tormento dura horas; fraqueza mental pode durar dias",
+    "dificuldade_cd": 25,
+    "administracao": "Ingestão forçada via concha mágica"
+  },
+  "meta": {
+    "slug": "emerald-potion",
+    "nome_original": "Emerald Potion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Emerald green in colour, Glows phosphorescently",
+    "wiki": "https://harrypotter.fandom.com/wiki/Emerald_Potion"
+  }
+}

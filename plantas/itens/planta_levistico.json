@@ -1,0 +1,14 @@
+{
+  "id": "planta_levistico",
+  "nome": "Levístico (Lovage / Levisticum officinale)",
+  "categoria": "Popular",
+  "nivel": "2",
+  "manejo_cd": 10,
+  "manejo": "CD 10 (Herbologia). Folhas colhidas pela manhã e raízes secas ao ar livre.",
+  "efeito": "",
+  "uso_alquimico": "Ingrediente clássico da Poção da Confusão (Confusing and Befuddling Draughts).",
+  "classificacao_ministerial": "Artigo Comerciável Livre (Popular).",
+  "descricao": "Erva alta e vigorosa de folhas triangulares e sabor que lembra o aipo. Além de tempero doméstico, o levístico é renomado na herbologia avançada por inflamar a imaginação e a loquacidade desenfreada, sendo muito eficaz na elaboração de misturas que desestabilizam o foco intelectual de oponentes.",
+  "peculiaridades": "• Nível de Herbologia: Nível 2 (Iniciante / 2º Ano).\n• Manejo & Colheita: CD 10 (Herbologia). Folhas colhidas pela manhã e raízes secas ao ar livre.\n• Uso Alquímico: Ingrediente clássico da Poção da Confusão (Confusing and Befuddling Draughts).\n• Classificação Ministerial: Artigo Comerciável Livre (Popular).",
+  "fotoBase64": ""
+}

@@ -1,0 +1,24 @@
+{
+  "id": "pocao_everlasting_elixirs",
+  "nome": "Elixires Eternos (Everlasting Elixirs)",
+  "tipo": "Elixir",
+  "nivel": 6,
+  "nível": 6,
+  "efeito": "Classe refinada de elixires cujos efeitos não se dissipam com o passar das horas ou dias, fixando no organismo ou no objeto tratado a propriedade mágica de forma duradoura ou perpétua.",
+  "ingredientes": "Orvalho colhido em solstício de verão, essência de fênix diluída, pó de diamante alquímico, raiz de mandrágora secular.",
+  "descricao": "Fluido de consistência dourada e brilho sereno contínuo. Exige caldeirões de prata ou ouro e mexida constante ao longo de seis meses para que as propriedades não decaiam.",
+  "descrição": "Fluido de consistência dourada e brilho sereno contínuo. Exige caldeirões de prata ou ouro e mexida constante ao longo de seis meses para que as propriedades não decaiam.",
+  "sistema": {
+    "tempo_preparo": "Semanas a meses de infusão controlada",
+    "duracao": "Permanente ou até ser cancelado por contramagia específica",
+    "dificuldade_cd": 22,
+    "administracao": "Ingestão ou Unção"
+  },
+  "meta": {
+    "slug": "everlasting-elixirs",
+    "nome_original": "Everlasting Elixirs",
+    "dificuldade_original": "Advanced",
+    "caracteristicas_originais": "Blue in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Everlasting_Elixirs"
+  }
+}

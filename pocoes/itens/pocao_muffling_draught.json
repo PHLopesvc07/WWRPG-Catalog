@@ -1,0 +1,24 @@
+{
+  "id": "pocao_muffling_draught",
+  "nome": "Poção do Silenciamento / Concocto Abafador (Muffling Draught)",
+  "tipo": "Poção / Gás Silenciador",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Ao ser inalada ou ingerida, paralisa momentaneamente as cordas vocais, impedindo o alvo de emitir sons mais altos que um sussurro abafado.",
+  "ingredientes": "Penas de Jobberknoll, fava sonolenta, musgo de carvalho quieto.",
+  "descricao": "Líquido cinza-azulado que absorve o som ambiente ao redor do caldeirão.",
+  "descrição": "Líquido cinza-azulado que absorve o som ambiente ao redor do caldeirão.",
+  "sistema": {
+    "tempo_preparo": "1 hora e 30 minutos",
+    "duracao": "30 minutos",
+    "dificuldade_cd": 14,
+    "administracao": "Ingestão ou Inalação"
+  },
+  "meta": {
+    "slug": "muffling-draught",
+    "nome_original": "Muffling Draught",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Produced blue-coloured fumes",
+    "wiki": "https://harrypotter.fandom.com/wiki/Muffling_Draught"
+  }
+}

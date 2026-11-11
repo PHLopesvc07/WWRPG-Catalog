@@ -1,0 +1,354 @@
+[
+  {
+    "id": "planta_ditamno",
+    "file": "itens/planta_ditamno.json",
+    "nome": "Ditamno (Dittany / Origanum dictamnus)",
+    "categoria": "Popular",
+    "nivel": "1",
+    "manejo_cd": 12
+  },
+  {
+    "id": "planta_urtiga_seca",
+    "file": "itens/planta_urtiga_seca.json",
+    "nome": "Urtiga Seca (Stinging Nettle / Urtica dioica)",
+    "categoria": "Popular",
+    "nivel": "1",
+    "manejo_cd": 10
+  },
+  {
+    "id": "planta_margarida",
+    "file": "itens/planta_margarida.json",
+    "nome": "Margarida (Daisy / Bellis perennis)",
+    "categoria": "Popular",
+    "nivel": "1",
+    "manejo_cd": 10
+  },
+  {
+    "id": "planta_hortela_pimenta",
+    "file": "itens/planta_hortela_pimenta.json",
+    "nome": "Hortelã-Pimenta (Peppermint / Mentha × piperita)",
+    "categoria": "Popular",
+    "nivel": "1",
+    "manejo_cd": 10
+  },
+  {
+    "id": "planta_valeriana",
+    "file": "itens/planta_valeriana.json",
+    "nome": "Valeriana (Valerian / Valeriana officinalis)",
+    "categoria": "Popular",
+    "nivel": "2",
+    "manejo_cd": 12
+  },
+  {
+    "id": "planta_descurainia",
+    "file": "itens/planta_descurainia.json",
+    "nome": "Descurainia (Fluxweed / Descurainia sophia)",
+    "categoria": "Popular",
+    "nivel": "3",
+    "manejo_cd": 14
+  },
+  {
+    "id": "planta_poligono_erva_de_passarinho",
+    "file": "itens/planta_poligono_erva_de_passarinho.json",
+    "nome": "Polígono / Erva-de-Passarinho (Knotgrass / Polygonum aviculare)",
+    "categoria": "Popular",
+    "nivel": "2",
+    "manejo_cd": 12
+  },
+  {
+    "id": "planta_malva_doce",
+    "file": "itens/planta_malva_doce.json",
+    "nome": "Malva Doce (Mallowsweet)",
+    "categoria": "Popular",
+    "nivel": "1",
+    "manejo_cd": 10
+  },
+  {
+    "id": "planta_figueira_caustica_figo_seco",
+    "file": "itens/planta_figueira_caustica_figo_seco.json",
+    "nome": "Figueira Cáustica / Figo Seco (Shrivelfig)",
+    "categoria": "Popular",
+    "nivel": "2",
+    "manejo_cd": 14
+  },
+  {
+    "id": "planta_losna_absinto",
+    "file": "itens/planta_losna_absinto.json",
+    "nome": "Losna / Absinto (Wormwood / Artemisia absinthium)",
+    "categoria": "Popular",
+    "nivel": "2",
+    "manejo_cd": 12
+  },
+  {
+    "id": "planta_asfodelo",
+    "file": "itens/planta_asfodelo.json",
+    "nome": "Asfódelo (Asphodel / Asphodelus albus)",
+    "categoria": "Popular",
+    "nivel": "2",
+    "manejo_cd": 12
+  },
+  {
+    "id": "planta_gengibre",
+    "file": "itens/planta_gengibre.json",
+    "nome": "Gengibre (Ginger Root / Zingiber officinale)",
+    "categoria": "Popular",
+    "nivel": "1",
+    "manejo_cd": 10
+  },
+  {
+    "id": "planta_tormentilha",
+    "file": "itens/planta_tormentilha.json",
+    "nome": "Tormentilha (Tormentil / Potentilla erecta)",
+    "categoria": "Popular",
+    "nivel": "1",
+    "manejo_cd": 10
+  },
+  {
+    "id": "planta_lavanda",
+    "file": "itens/planta_lavanda.json",
+    "nome": "Lavanda (Lavender / Lavandula angustifolia)",
+    "categoria": "Popular",
+    "nivel": "1",
+    "manejo_cd": 10
+  },
+  {
+    "id": "planta_sabugueiro_wiggen",
+    "file": "itens/planta_sabugueiro_wiggen.json",
+    "nome": "Sabugueiro Wiggen (Wiggentree)",
+    "categoria": "Popular",
+    "nivel": "3",
+    "manejo_cd": 14
+  },
+  {
+    "id": "planta_tremeluzente",
+    "file": "itens/planta_tremeluzente.json",
+    "nome": "Tremeluzente (Flitterbloom)",
+    "categoria": "Popular",
+    "nivel": "1",
+    "manejo_cd": 10
+  },
+  {
+    "id": "planta_flor_guarda_chuva",
+    "file": "itens/planta_flor_guarda_chuva.json",
+    "nome": "Flor Guarda-Chuva (Umbrella Flower)",
+    "categoria": "Popular",
+    "nivel": "1",
+    "manejo_cd": 10
+  },
+  {
+    "id": "planta_narciso_berrador",
+    "file": "itens/planta_narciso_berrador.json",
+    "nome": "Narciso Berrador (Honking Daffodil)",
+    "categoria": "Popular",
+    "nivel": "2",
+    "manejo_cd": 12
+  },
+  {
+    "id": "planta_arbusto_borboleta",
+    "file": "itens/planta_arbusto_borboleta.json",
+    "nome": "Arbusto Borboleta (Flutterby Bush)",
+    "categoria": "Popular",
+    "nivel": "2",
+    "manejo_cd": 12
+  },
+  {
+    "id": "planta_espirradeira",
+    "file": "itens/planta_espirradeira.json",
+    "nome": "Espirradeira (Sneezewort / Achillea ptarmica)",
+    "categoria": "Popular",
+    "nivel": "2",
+    "manejo_cd": 12
+  },
+  {
+    "id": "planta_coclearia",
+    "file": "itens/planta_coclearia.json",
+    "nome": "Cocleária (Scurvygrass / Cochlearia officinalis)",
+    "categoria": "Popular",
+    "nivel": "2",
+    "manejo_cd": 10
+  },
+  {
+    "id": "planta_levistico",
+    "file": "itens/planta_levistico.json",
+    "nome": "Levístico (Lovage / Levisticum officinale)",
+    "categoria": "Popular",
+    "nivel": "2",
+    "manejo_cd": 10
+  },
+  {
+    "id": "planta_mandragora",
+    "file": "itens/planta_mandragora.json",
+    "nome": "Mandrágora (Mandrake / Mandragora officinarum)",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "3",
+    "manejo_cd": 16
+  },
+  {
+    "id": "planta_visgo_do_diabo",
+    "file": "itens/planta_visgo_do_diabo.json",
+    "nome": "Visgo do Diabo (Devil's Snare)",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "3",
+    "manejo_cd": 16
+  },
+  {
+    "id": "planta_tentacula_venenosa",
+    "file": "itens/planta_tentacula_venenosa.json",
+    "nome": "Tentácula Venenosa (Venomous Tentacula)",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "5",
+    "manejo_cd": 18
+  },
+  {
+    "id": "planta_salgueiro_lutador",
+    "file": "itens/planta_salgueiro_lutador.json",
+    "nome": "Salgueiro Lutador (Whomping Willow)",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "6",
+    "manejo_cd": 16
+  },
+  {
+    "id": "planta_guelricho",
+    "file": "itens/planta_guelricho.json",
+    "nome": "Guelricho (Gillyweed)",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "4",
+    "manejo_cd": 16
+  },
+  {
+    "id": "planta_repolho_mastigador_chines",
+    "file": "itens/planta_repolho_mastigador_chines.json",
+    "nome": "Repolho Mastigador Chinês (Chinese Chomping Cabbage)",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "3",
+    "manejo_cd": 14
+  },
+  {
+    "id": "planta_bubotubera",
+    "file": "itens/planta_bubotubera.json",
+    "nome": "Bubotúbera (Bubotuber)",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "4",
+    "manejo_cd": 16
+  },
+  {
+    "id": "planta_mimbulus_mimbletonia",
+    "file": "itens/planta_mimbulus_mimbletonia.json",
+    "nome": "Mimbulus Mimbletonia",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "4",
+    "manejo_cd": 14
+  },
+  {
+    "id": "planta_snargaluff",
+    "file": "itens/planta_snargaluff.json",
+    "nome": "Snargaluff",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "6",
+    "manejo_cd": 18
+  },
+  {
+    "id": "planta_bulbo_saltador",
+    "file": "itens/planta_bulbo_saltador.json",
+    "nome": "Bulbo Saltador (Bouncing Bulb)",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "3",
+    "manejo_cd": 14
+  },
+  {
+    "id": "planta_geranio_dentuco",
+    "file": "itens/planta_geranio_dentuco.json",
+    "nome": "Gerânio Dentuço (Fanged Geranium)",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "3",
+    "manejo_cd": 14
+  },
+  {
+    "id": "planta_vagem_sopoforifera",
+    "file": "itens/planta_vagem_sopoforifera.json",
+    "nome": "Vagem Sopoforífera (Sopophorous Bean)",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "6",
+    "manejo_cd": 18
+  },
+  {
+    "id": "planta_aconito_mata_lobos",
+    "file": "itens/planta_aconito_mata_lobos.json",
+    "nome": "Acônito / Mata-Lobos (Aconite / Wolfsbane / Monkshood)",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "5",
+    "manejo_cd": 18
+  },
+  {
+    "id": "planta_beladona",
+    "file": "itens/planta_beladona.json",
+    "nome": "Beladona (Belladonna / Atropa belladonna)",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "4",
+    "manejo_cd": 16
+  },
+  {
+    "id": "planta_alvissareira_alihotsy",
+    "file": "itens/planta_alvissareira_alihotsy.json",
+    "nome": "Alvissareira / Alihotsy",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "3",
+    "manejo_cd": 14
+  },
+  {
+    "id": "planta_vagem_pufosa",
+    "file": "itens/planta_vagem_pufosa.json",
+    "nome": "Vagem Pufosa (Puffapod)",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "3",
+    "manejo_cd": 14
+  },
+  {
+    "id": "planta_estalador_gritante",
+    "file": "itens/planta_estalador_gritante.json",
+    "nome": "Estalador Gritante (Screechsnap)",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "4",
+    "manejo_cd": 16
+  },
+  {
+    "id": "planta_ameixa_dirigivel",
+    "file": "itens/planta_ameixa_dirigivel.json",
+    "nome": "Ameixa Dirigível (Dirigible Plum)",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "3",
+    "manejo_cd": 14
+  },
+  {
+    "id": "planta_raiz_de_cuia",
+    "file": "itens/planta_raiz_de_cuia.json",
+    "nome": "Raiz-de-Cuia (Gurdyroot)",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "2",
+    "manejo_cd": 12
+  },
+  {
+    "id": "planta_cogumelo_saltador",
+    "file": "itens/planta_cogumelo_saltador.json",
+    "nome": "Cogumelo Saltador (Leaping Toadstool)",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "3",
+    "manejo_cd": 14
+  },
+  {
+    "id": "planta_arbusto_de_sementes_de_fogo",
+    "file": "itens/planta_arbusto_de_sementes_de_fogo.json",
+    "nome": "Arbusto de Sementes-de-Fogo (Fireseed Bush)",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "6",
+    "manejo_cd": 18
+  },
+  {
+    "id": "planta_heleboro",
+    "file": "itens/planta_heleboro.json",
+    "nome": "Heléboro (Hellebore / Helleborus niger)",
+    "categoria": "Difícil de Adquirir",
+    "nivel": "4",
+    "manejo_cd": 16
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "id": "pocao_potion_no_113",
+  "nome": "Poção Nº 113 (Potion № 113)",
+  "tipo": "Veneno (Silenciador Letal)",
+  "nivel": 5,
+  "nível": 5,
+  "efeito": "Veneno que ataca as cordas vocais e os pulmões em conjunto, silenciando completamente a vítima antes de induzir insuficiência respiratória grave.",
+  "ingredientes": "Penas de Jobberknoll moídas, xarope concentrado de arnica, fel de serpente aquática.",
+  "descricao": "Líquido marrom denso com etiqueta de alerta de veneno perigoso no acervo de Hogwarts.",
+  "descrição": "Líquido marrom denso com etiqueta de alerta de veneno perigoso no acervo de Hogwarts.",
+  "sistema": {
+    "tempo_preparo": "5 horas",
+    "duracao": "Instantâneo (bloqueio respiratório)",
+    "dificuldade_cd": 20,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "potion-no-113",
+    "nome_original": "Potion № 113",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Experimental mixture (possibly), Brown in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Potion_No._113"
+  }
+}

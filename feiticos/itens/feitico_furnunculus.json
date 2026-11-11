@@ -1,0 +1,11 @@
+{
+  "id": "feitico_furnunculus",
+  "name": "Furnunculus",
+  "cat": "Azaração",
+  "lvl": "2",
+  "tipo": "Ataque",
+  "pronuncia": "Fur-NUN-cu-lus",
+  "pronunciation": "Fur-NUN-cu-lus",
+  "condicao": "(C) Furúnculos",
+  "desc": "Faz furúnculos aparecerem na vítima. | Injúria Específica: (C) Furúnculos"
+}

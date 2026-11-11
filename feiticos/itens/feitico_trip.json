@@ -1,0 +1,11 @@
+{
+  "id": "feitico_trip",
+  "name": "Trip",
+  "cat": "Azaração",
+  "lvl": "1",
+  "tipo": "Ataque",
+  "pronuncia": "TRI-pi",
+  "pronunciation": "TRI-pi",
+  "condicao": "Nenhuma",
+  "desc": "Faz o alvo tropeçar"
+}

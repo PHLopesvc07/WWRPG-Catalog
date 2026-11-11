@@ -1,0 +1,24 @@
+{
+  "id": "pocao_frog_parts_mixture",
+  "nome": "Mistura de Partes de Sapo (Frog Parts Mixture)",
+  "tipo": "Base Alquímica Composta",
+  "nivel": 1,
+  "nível": 1,
+  "efeito": "Base alquímica e reagente intermediário essencial para fabricação de poções anfíbias, respiração aquática e tônicos mentais. Se arremessada no chão, cria uma poça sebosa de muco que faz inimigos escorregarem.",
+  "ingredientes": "Partes maceradas de sapo (cérebros, patas e pele mucosa de anuros mágicos), água alcalina purificada.",
+  "descricao": "Caldo turvo, esverdeado-acinzentado e denso, com pedaços orgânicos em suspensão. Item fundamental nos armários de suprimentos de masmorras de poções.",
+  "descrição": "Caldo turvo, esverdeado-acinzentado e denso, com pedaços orgânicos em suspensão. Item fundamental nos armários de suprimentos de masmorras de poções.",
+  "sistema": {
+    "tempo_preparo": "30 minutos",
+    "duracao": "Material base / 10 minutos de poça escorregadia se arremessada",
+    "dificuldade_cd": 12,
+    "administracao": "Reagente de Caldeirão ou Arremesso no Solo"
+  },
+  "meta": {
+    "slug": "frog-parts-mixture",
+    "nome_original": "Frog Parts Mixture",
+    "dificuldade_original": null,
+    "caracteristicas_originais": null,
+    "wiki": "https://harrypotter.fandom.com/wiki/Frog_Parts_Mixture"
+  }
+}

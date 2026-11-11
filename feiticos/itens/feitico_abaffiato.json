@@ -1,0 +1,11 @@
+{
+  "id": "feitico_abaffiato",
+  "name": "Abaffiato",
+  "cat": "Charme",
+  "lvl": "3",
+  "tipo": "Utilitário",
+  "pronuncia": "A-ba-fi-A-to",
+  "pronunciation": "A-ba-fi-A-to",
+  "condicao": "Nenhuma",
+  "desc": "É capaz de produzir um zumbido no ouvido de pessoas próximas, de modo que elas não consigam escutar conversas ou barulhos feitos pelo(s) usuário(s) do feitiço."
+}

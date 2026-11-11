@@ -1,0 +1,24 @@
+{
+  "id": "pocao_heartbreak_teardrops",
+  "nome": "Lágrimas do Coração Partido (Heartbreak Teardrops)",
+  "tipo": "Filtro do Amor (WonderWitch)",
+  "nivel": 4,
+  "nível": 4,
+  "efeito": "Filtro do amor em conta-gotas ultra concentrado. Algumas gotas fazem o alvo acreditar que a pessoa que lhe deu a poção é sua alma gêmea eterna, desenvolvendo ciúme desesperado, adoração fervorosa e medo obsessivo de perdê-la.",
+  "ingredientes": "Pó de pérola rosa, essência de lírio d'água lacrimoso, néctar de rosa vermelha encantada, lágrimas de fada.",
+  "descricao": "Solução translúcida levemente rosada em frasco em forma de lágrima com conta-gotas. Produto campeão de vendas da linha Garotas Geniais das Gemialidades Weasley.",
+  "descrição": "Solução translúcida levemente rosada em frasco em forma de lágrima com conta-gotas. Produto campeão de vendas da linha Garotas Geniais das Gemialidades Weasley.",
+  "sistema": {
+    "tempo_preparo": "3 horas e 30 minutos",
+    "duracao": "8 horas",
+    "dificuldade_cd": 18,
+    "administracao": "Ingestão (misturado em bebida)"
+  },
+  "meta": {
+    "slug": "heartbreak-teardrops",
+    "nome_original": "Heartbreak Teardrops",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Red in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Heartbreak_Teardrops"
+  }
+}

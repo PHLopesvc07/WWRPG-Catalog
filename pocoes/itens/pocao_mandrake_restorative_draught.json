@@ -1,0 +1,24 @@
+{
+  "id": "pocao_mandrake_restorative_draught",
+  "nome": "Tônico Restaurador de Mandrágora (Mandrake Restorative Draught)",
+  "tipo": "Tônico / Antídoto Supremo",
+  "nivel": 6,
+  "nível": 6,
+  "efeito": "O antídoto restaurador supremo de Hogwarts. Reverte completamente qualquer petrificação mágica (incluindo o olhar do Basilisco), maldições de paralisia permanente ou transfigurações forçadas de seres humanos.",
+  "ingredientes": "Mandrágoras plenamente adultas (cozidas exatamente após atingirem a maturidade biológica), água sagrada purificada, folhas de salgueiro mágico.",
+  "descricao": "Líquido denso e brilhante de cor âmbar dourada. Madame Pomfrey preparou este tônico com as mandrágoras cultivadas pela Professora Sprout para curar os estudantes petrificados pelo Monstro da Câmara Secreta.",
+  "descrição": "Líquido denso e brilhante de cor âmbar dourada. Madame Pomfrey preparou este tônico com as mandrágoras cultivadas pela Professora Sprout para curar os estudantes petrificados pelo Monstro da Câmara Secreta.",
+  "sistema": {
+    "tempo_preparo": "6 horas (após meses de cultivo das mandrágoras até a idade adulta)",
+    "duracao": "Instantâneo (reversão permanente da petrificação)",
+    "dificuldade_cd": 22,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "mandrake-restorative-draught",
+    "nome_original": "Mandrake Restorative Draught",
+    "dificuldade_original": "Advanced",
+    "caracteristicas_originais": "Green in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Mandrake_Restorative_Draught"
+  }
+}

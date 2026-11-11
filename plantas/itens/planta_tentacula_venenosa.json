@@ -1,0 +1,14 @@
+{
+  "id": "planta_tentacula_venenosa",
+  "nome": "Tentácula Venenosa (Venomous Tentacula)",
+  "categoria": "Difícil de Adquirir",
+  "nivel": "5",
+  "manejo_cd": 18,
+  "manejo": "CD 18 (Herbologia). Exige Luvas de Couro de Dragão reforçadas e uma tesoura de prata afiada ou foice de podar para aparar vinhas agressivas.",
+  "efeito": "",
+  "uso_alquimico": "Folhas de Tentácula Venenosa secas e seu suco peçonhento são utilizados em venenos letais e elixires das Trevas.",
+  "classificacao_ministerial": "Artigo Não-Comerciável Classe A. A posse não autorizada ou importação clandestina de sementes é punida com multa de 1.000 Galeões pelo Departamento de Execução das Leis da Magia.",
+  "descricao": "Planta gigante, espinhosa e profundamente agressiva, dotada de longas vinhas móveis verde-escuras repletas de dentes pontiagudos e uma grande bocarra central que cospe dardos peçonhentos e morde com ferocidade canina. Seu veneno é letal e o suco de suas folhas queima a pele humana ao contato.",
+  "peculiaridades": "• Nível de Herbologia: Nível 5 (Avançado II / 5º Ano).\n• Manejo & Colheita: CD 18 (Herbologia). Exige Luvas de Couro de Dragão reforçadas e uma tesoura de prata afiada ou foice de podar para aparar vinhas agressivas.\n• Combate & Efeito Hostil: Em combate, atua como sentinela fixa de alcance 6m. Desfere chicotadas com vinhas espinhosas (dano 2L+1M) e impõe a condição (C) Envenenado por Tentácula (perda de 1L por turno até tomar Antídoto para Venenos Raros). Pode cuspir esporos tóxicos em área de 3m.\n• Fraqueza Tática: O feitiço Severing Charm (Diffindo) pode cortar suas vinhas principais com teste de ataque bem-sucedido.\n• Uso Alquímico: Folhas de Tentácula Venenosa secas e seu suco peçonhento são utilizados em venenos letais e elixires das Trevas.\n• Classificação Ministerial: Artigo Não-Comerciável Classe A. A posse não autorizada ou importação clandestina de sementes é punida com multa de 1.000 Galeões pelo Departamento de Execução das Leis da Magia.",
+  "fotoBase64": ""
+}

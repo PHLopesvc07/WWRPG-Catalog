@@ -1,0 +1,64 @@
+{
+  "id": "tebo",
+  "num": 85,
+  "nome": "Tebo (Tebo)",
+  "classificacao": "XXXX",
+  "licenca": "Magizoologista",
+  "porte": "Grande",
+  "tamanho": "2.0 metros",
+  "peso": "650 kg",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "3.5m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Neutro",
+  "descricao": "O tebo é um javali cinzento, encontrado no Congo e no Zaire. É dotado de invisibilidade, o que dificulta fugir dele ou capturá-lo, tornando-o extremamente perigoso. O tebo é muito valorizado pelos bruxos para fabricar roupas e escudos protetores. Geografia: @Congo e Zaire",
+  "atributos": {
+    "corpo": 4,
+    "destreza": 1,
+    "vitalidade": 4,
+    "instinto": 3,
+    "carisma": -4,
+    "inteligencia": -2,
+    "sabedoria": 2
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Chifrada de Tebo",
+      "desc": "Investida com chifre afiado de porco-do-mato gigante de cor cinza-suja. Rola `1d10 + Corpo` de dano físico, causa **[C: Perfuração]**.",
+      "rolagem": "1d10 + Corpo"
+    },
+    "reacao": {
+      "nome": "Invisibilidade Evasiva Instantânea",
+      "desc": "Fica invisível por segundos para evitar golpe físico. Gasta 1 ação e rola `1d30 + Instinto + 3`. Se vencer, anula o ataque e recua.",
+      "rolagem": "1d30 + Instinto + 3"
+    },
+    "ambiente": {
+      "nome": "Carga Invisível",
+      "desc": "Ataca enquanto invisível, levantando terra e capim. Oponentes a até 4m devem passar em Corpo CD 20 ou são jogados no chão com impacto.",
+      "rolagem": "CD 20 Corpo"
+    },
+    "extra": {
+      "nome": "Fuga Silvestre",
+      "desc": "Extremamente perigoso e difícil de caçar devido à sua habilidade de ficar invisível à vontade. Dá desvantagem permanente em testes de rastreamento.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 3
+    },
+    "media": {
+      "curr": 0,
+      "max": 3
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 3
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/tebo.jpg",
+  "fotoBase64": "./assets/animais/tebo.jpg"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "planta_tremeluzente",
+  "nome": "Tremeluzente (Flitterbloom)",
+  "categoria": "Popular",
+  "nivel": "1",
+  "manejo_cd": 10,
+  "manejo": "CD 10 (Herbologia). Fácil de manter; alimenta-se de luz indireta e regas semanais.",
+  "efeito": "",
+  "uso_alquimico": "",
+  "classificacao_ministerial": "Artigo Comerciável Livre (Popular). Planta de estimação doméstica.",
+  "descricao": "Planta decorativa de estufa muito popular nos lares bruxos. Possui gavinhas arroxeadas compridas que se movem, tremulam e ondulam suavemente como se dançassem ao vento, mesmo em ambientes totalmente fechados. É notória por sua semelhança física com o perigoso Visgo do Diabo, embora seja 100% inofensiva e incapaz de estrangular qualquer criatura.",
+  "peculiaridades": "• Nível de Herbologia: Nível 1 (Aprendiz / 1º Ano).\n• Manejo & Colheita: CD 10 (Herbologia). Fácil de manter; alimenta-se de luz indireta e regas semanais.\n• Peculiaridade Sistemática: Em investigações ou cenas de combate em estufas, exige um Teste de Herbologia CD 12 para distinguir um espécime de Tremeluzente de um broto jovem de Visgo do Diabo.\n• Classificação Ministerial: Artigo Comerciável Livre (Popular). Planta de estimação doméstica.",
+  "fotoBase64": ""
+}

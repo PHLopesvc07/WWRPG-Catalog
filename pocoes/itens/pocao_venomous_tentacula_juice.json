@@ -1,0 +1,24 @@
+{
+  "id": "pocao_venomous_tentacula_juice",
+  "nome": "Suco de Tentácula Venenosa (Venomous Tentacula Juice)",
+  "tipo": "Veneno (Botânico Letal)",
+  "nivel": 5,
+  "nível": 5,
+  "efeito": "Veneno botânico altamente letal e corrosivo extraído das gavinhas da Tentácula Venenosa. Provoca queimação estomacal imediata, paralisia respiratória e choque cardiovascular em poucos minutos se ingerido.",
+  "ingredientes": "Seiva concentrada e pura ordenhada de gavinhas de Tentácula Venenosa madura, estabilizada com vinagre mármore.",
+  "descricao": "Líquido verde-oliva espesso e viscoso que queima a pele ao menor contato. Substância Não-Comerciável Classe C; Fred e George compravam sementes e suco de Mundungus Fletcher para suas pesquisas.",
+  "descrição": "Líquido verde-oliva espesso e viscoso que queima a pele ao menor contato. Substância Não-Comerciável Classe C; Fred e George compravam sementes e suco de Mundungus Fletcher para suas pesquisas.",
+  "sistema": {
+    "tempo_preparo": "Coleta e purificação de risco (2 horas)",
+    "duracao": "Instantâneo (efeito letal progressivo)",
+    "dificuldade_cd": 20,
+    "administracao": "Ingestão ou Revestimento de Lâminas"
+  },
+  "meta": {
+    "slug": "venomous-tentacula-juice",
+    "nome_original": "Venomous Tentacula juice",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Water clear, The insides of the one who drank it felt like they were 'burning', The skin colour of who drank it became purple",
+    "wiki": "https://harrypotter.fandom.com/wiki/Venomous_Tentacula_juice"
+  }
+}

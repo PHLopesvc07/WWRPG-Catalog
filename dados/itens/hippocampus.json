@@ -1,0 +1,64 @@
+{
+  "id": "hippocampus",
+  "num": 41,
+  "nome": "Hippocampus (Hipocampo)",
+  "classificacao": "XXX",
+  "licenca": "Comum",
+  "porte": "Grande",
+  "tamanho": "2.5 metros",
+  "peso": "380 kg",
+  "origem": "Natural",
+  "locomocao": "Aquáticos",
+  "velocidade": "Natação: 6.4m | Terrestre: 1.0m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Neutro",
+  "descricao": "Originário da Grécia, o hipocampo tem a cabeça e os quartos dianteiros de cavalo e o rabo e os quartos traseiros de um peixe gigantes. Embora encontrável comumente no mar Mediterrâneo, um esplêndido espécime ruão azul foi capturado por sereianos ao largo da Escócia em 1949 e por eles domesticados. O hipocampo põe ovos grandes e semi-transparentes, através dos quais se pode ver o filhote em formação. Geografia: @Mar Mediterrâneo e outros mares límpidos",
+  "atributos": {
+    "corpo": 2,
+    "destreza": 2,
+    "vitalidade": 3,
+    "instinto": 3,
+    "carisma": 2,
+    "inteligencia": -2,
+    "sabedoria": 2
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Investida de Cascos Dianteiros",
+      "desc": "Golpeia com as patas dianteiras de cavalo no ambiente aquático. Rola `1d8 + Corpo` de dano físico.",
+      "rolagem": "1d8 + Corpo"
+    },
+    "reacao": {
+      "nome": "Mergulho Evasivo",
+      "desc": "Gasta 1 ação para submergir rapidamente. Rola `1d30 + Destreza + 3` contra feitiços projetados de fora da água, esquivando-se.",
+      "rolagem": "1d30 + Destreza + 3"
+    },
+    "ambiente": {
+      "nome": "Agitação Marinha",
+      "desc": "Bate a cauda gigante de peixe na água, gerando uma onda forte de choque aquático em cone de 5m, empurrando oponentes 3m para trás.",
+      "rolagem": "CD 18 + Instinto"
+    },
+    "extra": {
+      "nome": "Docilidade Oceânica",
+      "desc": "Extremamente dócil após adestrado. Consegue transportar até 2 bruxos em velocidade de natação sem sofrer penalidades de carga.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 3
+    },
+    "media": {
+      "curr": 0,
+      "max": 3
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 3
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/hippocampus.jpg",
+  "fotoBase64": "./assets/animais/hippocampus.jpg"
+}

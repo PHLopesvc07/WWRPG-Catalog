@@ -1,0 +1,64 @@
+{
+  "id": "lobalug",
+  "num": 53,
+  "nome": "Lobalug (Seringa)",
+  "classificacao": "XXX",
+  "licenca": "Comum",
+  "porte": "Médio",
+  "tamanho": "30 cm",
+  "peso": "1.5 kg",
+  "origem": "Natural",
+  "locomocao": "Aquáticos",
+  "velocidade": "Natação: 2.8m | Terrestre: 0.2m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Simples",
+  "descricao": "É encontrada nas profundezas do Mar do Norte. É uma criatura simples com vinte e cinco centímetros de comprimento , formada por um esguicho flexível e uma bolsa de veneno. Quando ameaçada, ela contrai essa bolsa e esguicha veneno no atacante. Os sereianos usam a seringa como arma, e sabe-se que há bruxos que extraem o veneno desse animal para usá-lo em poções, embora tal prática seja rigorosamente controlada. Geografia: @Mar do Norte",
+  "atributos": {
+    "corpo": -3,
+    "destreza": -1,
+    "vitalidade": 0,
+    "instinto": 0,
+    "carisma": -1,
+    "inteligencia": -4,
+    "sabedoria": -1
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Jato de Veneno Ácido",
+      "desc": "Expele veneno de seu saco de veneno através do bocal aquático. Rola `1d6 + Vitalidade` de dano e causa **[C: Intoxicação]**.",
+      "rolagem": "1d6 + Vitalidade"
+    },
+    "reacao": {
+      "nome": "Contração Gelatinosa",
+      "desc": "Gasta 1 ação para contrair seu corpo cilíndrico na água do mar. Rola `1d30 + Vitalidade` para desviar de arpões ou redes simples.",
+      "rolagem": "1d30 + Vitalidade"
+    },
+    "ambiente": {
+      "nome": "Água Turva de Veneno",
+      "desc": "Libera secreções ácidas fracas na água ao seu redor em raio de 2m. Inimigos na área sofrem desvantagem em testes de destreza subaquática.",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Extração de Veneno de Seringa",
+      "desc": "Seu veneno é cobiçado por sereianos para pontas de lanças. Se coletado vivo, fornece ingrediente valioso para venenos industriais.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 1
+    },
+    "media": {
+      "curr": 0,
+      "max": 1
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 1
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/lobalug.jpg",
+  "fotoBase64": "./assets/animais/lobalug.jpg"
+}

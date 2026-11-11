@@ -1,0 +1,64 @@
+{
+  "id": "fire_crab",
+  "num": 32,
+  "nome": "Fire Crab (Caranguejo-De-Fogo)",
+  "classificacao": "XXX",
+  "licenca": "Comum",
+  "porte": "Médio",
+  "tamanho": "70 cm",
+  "peso": "18 kg",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "1.2m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Neutro",
+  "descricao": "Apesar do seu nome, o fire crab (caranguejo-de-fogo) é muito semelhante a uma grande tartaruga com uma carapaça cravejada de pedras preciosas. Em Os trouxas têm grande fraqueza por fadas que aparecem numa variedade de contos escritos para as suas crianças. Esses \"contos de fadas\" falam de seres alados com personalidades distintas e com a capacidade de conversar com humanos (embora na maioria das vezes de forma tão sentimental que dá náuseas). As fadas, conforme são imaginadas pelos trouxas, habitam casinhas minúsculas em corolas de flores, cogumelos ocos e coisas semelhantes. Na maioria das vezes são desenhadas com uma varinha na mão. De todos os animais mágicos pode -se dizer que as fadas têm recebido a melhor cobertura da imprensa trouxa. sua terra de origem, as ilhas Fiji, uma faixa do litoral foi transformada em reserva para protegê-lo não apenas dos trouxas, que poderiam ser tentados por sua carapaça valiosa mas também dos bruxos inescrupulosos que usam as carapaças como caldeirões muito procurados. O caranguejo-de-fogo, no entanto, tem um mecanismo de defesa próprio: expele chamas pelo rabo quando atacado. Ele é exportado como animal de estimação mediante uma licença especial. Geografia: @Fiji",
+  "atributos": {
+    "corpo": 1,
+    "destreza": -1,
+    "vitalidade": 3,
+    "instinto": 2,
+    "carisma": 1,
+    "inteligencia": -2,
+    "sabedoria": 1
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Jato de Chamas Traseiro",
+      "desc": "Dispara fogo pelas costas quando provocado. Rola `1d10 + Vitalidade` de dano de fogo e aplica a condição **[C: Queimadura]**.",
+      "rolagem": "1d10 + Vitalidade"
+    },
+    "reacao": {
+      "nome": "Retração no Casco",
+      "desc": "Retrai-se em sua carapaça recoberta de joias preciosas. Gasta 1 ação e rola `1d30 + Corpo + 3`. Se vencer, reduz todo dano físico sofrido em 5.",
+      "rolagem": "1d30 + Corpo + 3"
+    },
+    "ambiente": {
+      "nome": "Barreira de Calor",
+      "desc": "Cria uma área superaquecida ao seu redor de 2m de raio. Oponentes que entrarem na área sofrem `1d4` de dano de fogo passivo por rodada.",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Carapaça Valiosa",
+      "desc": "Sua carapaça é protegida por leis ministeriais contra caçadores. Dificulta testes de ataque físico de armas comuns em -2 devido à sua dureza de joias.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 1
+    },
+    "media": {
+      "curr": 0,
+      "max": 1
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 1
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/fire-crab.webp",
+  "fotoBase64": "./assets/animais/fire-crab.webp"
+}

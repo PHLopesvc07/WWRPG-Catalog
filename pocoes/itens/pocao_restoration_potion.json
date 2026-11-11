@@ -1,0 +1,24 @@
+{
+  "id": "pocao_restoration_potion",
+  "nome": "Poção de Restauração (Restoration Potion)",
+  "tipo": "Poção (Desencantadora)",
+  "nivel": 3,
+  "nível": 3,
+  "efeito": "Reverte feitiços adversos, azarações e efeitos mágicos residuais lançados sobre objetos inanimados ou criaturas, restabelecendo seu estado original de fábrica ou saúde.",
+  "ingredientes": "Casca de Wiggentree triturada, bagas de visgo, óleo de oliva purificado, pó de pérola cinzenta.",
+  "descricao": "Líquido de cor púrpura suave com reflexos azulados límpidos.",
+  "descrição": "Líquido de cor púrpura suave com reflexos azulados límpidos.",
+  "sistema": {
+    "tempo_preparo": "2 horas",
+    "duracao": "Instantâneo",
+    "dificuldade_cd": 16,
+    "administracao": "Ingestão ou Aspersão sobre o Objeto"
+  },
+  "meta": {
+    "slug": "restoration-potion",
+    "nome_original": "Restoration Potion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Purple-coloured",
+    "wiki": "https://harrypotter.fandom.com/wiki/Restoration_Potion"
+  }
+}

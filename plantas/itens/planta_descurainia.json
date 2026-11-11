@@ -1,0 +1,14 @@
+{
+  "id": "planta_descurainia",
+  "nome": "Descurainia (Fluxweed / Descurainia sophia)",
+  "categoria": "Popular",
+  "nivel": "3",
+  "manejo_cd": 14,
+  "manejo": "CD 14 (Herbologia). A colheita comum é simples (CD 10), mas a colheita sob a Lua Cheia exige sincronia temporal rigorosa. Se colhida fora da fase lunar correta, a planta torna-se inerte para poções complexas.",
+  "efeito": "",
+  "uso_alquimico": "Ingrediente insubstituível da Poção Polissuco e de poções de foco mental (Focus Potion).",
+  "classificacao_ministerial": "Artigo Comerciável Livre, porém espécimes colhidos na Lua Cheia atingem valores altos em feiras de boticários.",
+  "descricao": "Erva esguia da família das mostardas com folhas finamente divididas e pequenas flores amarelas. Embora comum em campos abertos na Grã-Bretanha, possui uma peculiaridade temporal única: para ativar suas propriedades mutagênicas e transfigurativas, deve ser colhida exatamente na noite de Lua Cheia.",
+  "peculiaridades": "• Nível de Herbologia: Nível 3 (Intermediário / 3º Ano).\n• Manejo & Colheita: CD 14 (Herbologia). A colheita comum é simples (CD 10), mas a colheita sob a Lua Cheia exige sincronia temporal rigorosa. Se colhida fora da fase lunar correta, a planta torna-se inerte para poções complexas.\n• Uso Alquímico: Ingrediente insubstituível da Poção Polissuco e de poções de foco mental (Focus Potion).\n• Classificação Ministerial: Artigo Comerciável Livre, porém espécimes colhidos na Lua Cheia atingem valores altos em feiras de boticários.",
+  "fotoBase64": ""
+}

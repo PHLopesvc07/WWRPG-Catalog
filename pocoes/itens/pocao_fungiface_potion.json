@@ -1,0 +1,24 @@
+{
+  "id": "pocao_fungiface_potion",
+  "nome": "Poção Rostocogumelo (Fungiface Potion)",
+  "tipo": "Poção (Pegadinha)",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Faz com que cogumelos de vários tipos, cores e tamanhos brotem instantaneamente pelos poros da face, bochechas e queixo do bebedor, causando coceira e constrangimento hilário.",
+  "ingredientes": "Esporos de cogumelo saltador, levedura encantada, seiva pegajosa de fungo arbóreo.",
+  "descricao": "Líquido marrom-terra com pequenas partículas fúngicas que flutuam na superfície.",
+  "descrição": "Líquido marrom-terra com pequenas partículas fúngicas que flutuam na superfície.",
+  "sistema": {
+    "tempo_preparo": "1 hora",
+    "duracao": "2 horas (ou até ser raspado com poção antialérgica)",
+    "dificuldade_cd": 14,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "fungiface-potion",
+    "nome_original": "Fungiface Potion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Red in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Fungiface_Potion"
+  }
+}

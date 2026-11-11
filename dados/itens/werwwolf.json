@@ -1,0 +1,64 @@
+{
+  "id": "werwwolf",
+  "num": 89,
+  "nome": "Werwwolf (Lobisomem)",
+  "classificacao": "XXXXX",
+  "licenca": "Não permitido",
+  "porte": "Grande",
+  "tamanho": "1.9 metros",
+  "peso": "95 kg",
+  "origem": "Artificial",
+  "locomocao": "Terrestres",
+  "velocidade": "6.4m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Bestial",
+  "descricao": "O lobisomem é encontrado no mundo inteiro, embora se acredite que tenha se originado no norte europeu. Os humanos somente se transformam em lobisomens quando são mordidos. Não se conhece nenhuma cura para esse mal, embora o recente avanço no preparo de poções tenham em certa medida, aliviado os sintomas mais graves. Uma vez por mês, durante a lua cheia, o bruxo ou trouxa afetado, que em outros períodos é normal, se transforma em uma fera assassina. Uma singularidade entres as demais criaturas fantásticas, o lobisomem dá preferência a presas humanas. Veja nota de rodapé sobre o centauro. O unicórnio, tal como a fada, sempre recebeu uma excelente cobertura da mídia - o que em seu caso se justifica. Esta classificação se refere, naturalmente, ao lobisomem após a transformação. Quando não há lua cheia, o animal é inofensivo aos outros humanos. Há um comovente relato da luta de um bruxo contra a licantropia no clássico Focinho peludo, coração humano , de autor anônimo (Editor a Bruxa Aria, 1975) Geografia: @Mundial",
+  "atributos": {
+    "corpo": 4,
+    "destreza": 3,
+    "vitalidade": 4,
+    "instinto": 4,
+    "carisma": -5,
+    "inteligencia": -1,
+    "sabedoria": 0
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Mordida Infectada / Garrada",
+      "desc": "Mordida violenta e arranhão com garras afiadas de lobo gigante. Rola `2d8 + Corpo` de dano físico e causa **[C: Licantropia]**.",
+      "rolagem": "2d8 + Corpo"
+    },
+    "reacao": {
+      "nome": "Reflexo de Fera Raivosa",
+      "desc": "Agilidade indomável sob a lua cheia. Gasta 1 ação e rola `1d30 + Destreza + 3` para esquivar de feitiços de impacto de varinha.",
+      "rolagem": "1d30 + Destreza + 3"
+    },
+    "ambiente": {
+      "nome": "Uivo de Pânico da Lua",
+      "desc": "Ruge furiosamente para o céu sob a lua cheia, assustando oponentes em área de 10m de raio. Inimigos devem passar em Vontade CD 20 ou recuam 3m.",
+      "rolagem": "CD 20 Vontade"
+    },
+    "extra": {
+      "nome": "Fúria Carnívora de Lua Cheia",
+      "desc": "Ganha +3 de bônus em testes de ataque e dano físico se for noite de lua cheia, mas perde toda a capacidade cognitiva de raciocínio simples.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 4
+    },
+    "media": {
+      "curr": 0,
+      "max": 4
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 4
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/werwwolf.jpg",
+  "fotoBase64": "./assets/animais/werwwolf.jpg"
+}

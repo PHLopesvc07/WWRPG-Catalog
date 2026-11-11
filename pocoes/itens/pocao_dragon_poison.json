@@ -1,0 +1,24 @@
+{
+  "id": "pocao_dragon_poison",
+  "nome": "Veneno de Dragão (Dragon Poison)",
+  "tipo": "Veneno",
+  "nivel": 5,
+  "nível": 5,
+  "efeito": "Toxina pirotóxica ardente extraída ou sintetizada de glândulas de dragões. Ao entrar na corrente sanguínea, queima as veias como fogo líquido, gerando dano de fogo contínuo e necrose térmica interna fulminante.",
+  "ingredientes": "Bile concentrada de dragão, sangue de salamandra de fogo, veneno de escorpião do deserto, enxofre alquímico.",
+  "descricao": "Líquido alaranjado fumegante que mantém o frasco quente ao toque e queima madeira se derramado.",
+  "descrição": "Líquido alaranjado fumegante que mantém o frasco quente ao toque e queima madeira se derramado.",
+  "sistema": {
+    "tempo_preparo": "6 horas",
+    "duracao": "Instantâneo (dano contínuo térmico)",
+    "dificuldade_cd": 20,
+    "administracao": "Ingestão ou Revestimento de Lâminas"
+  },
+  "meta": {
+    "slug": "dragon-poison",
+    "nome_original": "Dragon Poison",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Dark green in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Dragon_Poison"
+  }
+}

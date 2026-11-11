@@ -1,0 +1,11 @@
+{
+  "id": "feitico_ennervate",
+  "name": "Ennervate",
+  "cat": "Cura",
+  "lvl": "2",
+  "tipo": "Cura",
+  "pronuncia": "E-ner-VA-te",
+  "pronunciation": "E-ner-VA-te",
+  "condicao": "Nenhuma",
+  "desc": "Um feitiço que faz com que a pessoa que o recebeu \"acorde\". Pode ser usado, por exemplo, numa pessoa que foi estuporada."
+}

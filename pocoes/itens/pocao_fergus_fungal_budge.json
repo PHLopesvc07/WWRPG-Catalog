@@ -1,0 +1,24 @@
+{
+  "id": "pocao_fergus_fungal_budge",
+  "nome": "Fungicida de Fergus (Fergus Fungal Budge)",
+  "tipo": "Pomada (Medicinal / Fungicida)",
+  "nivel": 1,
+  "nível": 1,
+  "efeito": "Fungicida dermatológico potente. Erradica micoses, tinha, proliferação de esporos mágicos na pele e infecções parasitárias fúngicas nos pés e unhas em questão de horas.",
+  "ingredientes": "Raiz de acônito purificada, enxofre em pó, cera de abelha mágica, essência de eucalipto.",
+  "descricao": "Pomada amarelada de odor forte e balsâmico, comercializada amplamente em boticários britânicos.",
+  "descrição": "Pomada amarelada de odor forte e balsâmico, comercializada amplamente em boticários britânicos.",
+  "sistema": {
+    "tempo_preparo": "45 minutos",
+    "duracao": "Cura completa em 12 horas",
+    "dificuldade_cd": 12,
+    "administracao": "Aplicação Tópica"
+  },
+  "meta": {
+    "slug": "fergus-fungal-budge",
+    "nome_original": "Fergus Fungal Budge",
+    "dificuldade_original": null,
+    "caracteristicas_originais": null,
+    "wiki": "https://harrypotter.fandom.com/wiki/Fergus_Fungal_Budge"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "id": "feitico_informous",
+  "name": "Informous",
+  "cat": "Charme",
+  "lvl": "1",
+  "tipo": "Utilitário",
+  "pronuncia": "In-FOR-mus",
+  "pronunciation": "In-FOR-mus",
+  "condicao": "Nenhuma",
+  "desc": "Examina uma criatura mágica à vista e adiciona seus dados vitais, forças, fraquezas e comportamento ao compêndio mágico do conjurador."
+}

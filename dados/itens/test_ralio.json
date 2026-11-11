@@ -1,0 +1,64 @@
+{
+  "id": "test_ralio",
+  "num": 86,
+  "nome": "Test Rálio (Thestral)",
+  "classificacao": "XXXX",
+  "licenca": "Magizoologista",
+  "porte": "Grande",
+  "tamanho": "2.4 metros (cernelha)",
+  "peso": "800 kg",
+  "origem": "Natural",
+  "locomocao": "Aquaéros",
+  "velocidade": "Voo: 11.0m | Terrestre: 2.8m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Consciente",
+  "descricao": "O testrálio é uma raça de cavalo alado com corpo esquelético, rosto de feições reptilianas e asas de couro semelhantes às de um morcego. Eles são invisíveis para qualquer pessoa que não tenha testemunhado a morte de perto. Devido a isso, carregam uma reputação imerecida de mau agouro, mas na verdade são criaturas extremamente inteligentes, fiéis e com um senso de orientação mágica inigualável, capazes de voar milhares de quilômetros para qualquer destino com precisão absoluta. Geografia: @Grã-Bretanha e Irlanda (hospedados na Floresta Proibida)",
+  "atributos": {
+    "corpo": 4,
+    "destreza": 4,
+    "vitalidade": 4,
+    "instinto": 5,
+    "carisma": 3,
+    "inteligencia": 1,
+    "sabedoria": 6
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Patada Esmagadora / Mordida",
+      "desc": "Investida com garras afiadas e asas esqueléticas. Rola `1d10 + Corpo` de dano físico com deslocamento aéreo.",
+      "rolagem": "1d10 + Corpo"
+    },
+    "reacao": {
+      "nome": "Esquiva de Asas de Couro",
+      "desc": "Asas de morcego auxiliam em giros rápidos no ar. Gasta 1 ação e rola `1d30 + Destreza + 3` para anular feitiços balísticos de terra.",
+      "rolagem": "1d30 + Destreza + 3"
+    },
+    "ambiente": {
+      "nome": "Voo Invisível da Morte",
+      "desc": "Visível apenas por quem testemunhou a morte. Bruxos que não viram a morte sofrem desvantagem absoluta para mirar ou atacar o Testrálio.",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Faro de Rastreamento de Destinos",
+      "desc": "Instinto fenomenal de orientação. Consegue voar para qualquer destino do mundo se fornecido o nome da localidade, sem errar o caminho.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 3
+    },
+    "media": {
+      "curr": 0,
+      "max": 3
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 3
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/testralio.jpg",
+  "fotoBase64": "./assets/animais/testralio.jpg"
+}

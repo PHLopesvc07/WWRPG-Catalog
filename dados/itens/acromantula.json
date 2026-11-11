@@ -1,0 +1,64 @@
+{
+  "id": "acromantula",
+  "num": 1,
+  "nome": "Acromantula (Acromântula)",
+  "classificacao": "XXXXX",
+  "licenca": "Não permitido",
+  "porte": "Grande",
+  "tamanho": "4.5 metros (envergadura de pernas)",
+  "peso": "150 kg",
+  "origem": "Artificial",
+  "locomocao": "Terrestres",
+  "velocidade": "4.0m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Bestial",
+  "descricao": "A acromântula é uma aranha monstruosa de oito olhos e dotada de fala humana. É originária de Bórneu, onde habita a mata fechada. Suas características incluem pêlos negros e grossos que lhe cobrem o corpo; as pernas têm uma envergadura que pode abranger ate quatro metros e meio; as pinças produzem um estalido distinto quando ela se excita ou se irrita; e, finalmente, produz uma secreção venenosa e tece teias abobadadas no solo. A acromântula é carnívora e prefere presas de grande porte. A fêmea ;e maior que o macho e pode pôr até cem ovos de cada vez. Macios e brancos, eles têm o tamanho de uma bola inflável de piscina. Os filhotes nascem de seis a oito semanas após a postura. Os ovos de acromântula são classificados como Artigos Não Comerciáveis Classe A pelo Departamento para Regulamentação e Controle das Criaturas Mágicas, o que significa que sua importação ou venda é punida com severidade. Acredita-se que esse animal foi desenvolvido por bruxos, possivelmente com a finalidade de guardar suas casas ou tesouros, como acontece com a maioria dos seres criados por meio de magia. Apesar de sua inteligência quase humana, a acromântula, no entanto, não é treinável e oferece extremo perigo a bruxos e trouxas. Os boatos de que uma colônia desses animais teria se formado na Escócia não foram confirmados. Geografia: @Bornéu, Ásia",
+  "atributos": {
+    "corpo": 5,
+    "destreza": 2,
+    "vitalidade": 5,
+    "instinto": 5,
+    "carisma": -4,
+    "inteligencia": 2,
+    "sabedoria": 3
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Picada Venenosa",
+      "desc": "Mordida devastadora com pinças. Rola `1d10 + Corpo` de dano físico e causa a condição **[C: Envenenado]**, que drena 2 de Vitalidade por rodada.",
+      "rolagem": "1d10 + Corpo"
+    },
+    "reacao": {
+      "nome": "Desvio de Oito Olhos",
+      "desc": "Visão esférica perfeita. Gasta 1 ação de reação para rolar `1d30 + Instinto + 2` para esquivar de ataques corporais ou feitiços pelas costas.",
+      "rolagem": "1d30 + Instinto + 2"
+    },
+    "ambiente": {
+      "nome": "Teia Abobadada",
+      "desc": "Dispara teia espessa em área de 5m de raio. Alvos devem passar em teste de Destreza contra `12 + Instinto` ou ficam Enredados (terreno difícil).",
+      "rolagem": "CD 20 + Instinto"
+    },
+    "extra": {
+      "nome": "Fala Humana / Artimanha",
+      "desc": "Sendo altamente inteligente, consegue imitar vozes humanas para atrair presas ou enganar inimigos. Rola `1d30 + Inteligência` contra Vontade do alvo.",
+      "rolagem": "1d30 + Inteligência"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 5
+    },
+    "media": {
+      "curr": 0,
+      "max": 5
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 5
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/acromantula.jpg",
+  "fotoBase64": "./assets/animais/acromantula.jpg"
+}

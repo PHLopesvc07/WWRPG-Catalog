@@ -1,0 +1,11 @@
+{
+  "id": "feitico_bombarda",
+  "name": "Bombarda",
+  "cat": "Maldição Menor",
+  "lvl": "4",
+  "tipo": "Ataque",
+  "pronuncia": "Bom-BAR-da",
+  "pronunciation": "Bom-BAR-da",
+  "condicao": "(C) Atordoado",
+  "desc": "cria uma energia explosiva que ao tocar, ou ser lançada em um alvo o explode como se fosse uma bomba e desfaz um escudo. | Injúria Específica: (C) Atordoado"
+}

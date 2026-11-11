@@ -1,0 +1,24 @@
+{
+  "id": "pocao_burn_healing_paste",
+  "nome": "Pasta para Queimaduras (Burn-Healing Paste)",
+  "tipo": "Pasta / Pomada (Medicinal)",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Alivia instantaneamente a dor e regenera queimaduras graves provocadas por chamas mundanas, fogo mágico ou respingos de caldeirão ardente, evitando cicatrizes e infecções.",
+  "ingredientes": "Babosa mágica triturada, folhas de confrei, óleo de visgo, cinzas de raiz de asfódelo.",
+  "descricao": "Pasta de coloração alaranjada espessa que esfria ao toque. Item indispensável na enfermaria de Madame Pomfrey para atender estudantes após aulas de Trato das Criaturas Mágicas (como queimaduras de Caranguejos-de-Fogo ou dragões).",
+  "descrição": "Pasta de coloração alaranjada espessa que esfria ao toque. Item indispensável na enfermaria de Madame Pomfrey para atender estudantes após aulas de Trato das Criaturas Mágicas (como queimaduras de Caranguejos-de-Fogo ou dragões).",
+  "sistema": {
+    "tempo_preparo": "1 hora",
+    "duracao": "Alívio imediato / Cura completa em 2d6 horas",
+    "dificuldade_cd": 14,
+    "administracao": "Aplicação Tópica"
+  },
+  "meta": {
+    "slug": "burn-healing-paste",
+    "nome_original": "Burn-healing paste",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Orange in colour, Thick consistency",
+    "wiki": "https://harrypotter.fandom.com/wiki/Burn-Healing_Paste"
+  }
+}

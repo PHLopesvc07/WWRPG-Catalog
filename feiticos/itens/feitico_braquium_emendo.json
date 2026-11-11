@@ -1,0 +1,11 @@
+{
+  "id": "feitico_braquium_emendo",
+  "name": "Braquium Emendo",
+  "cat": "Cura",
+  "lvl": "3",
+  "tipo": "Cura",
+  "pronuncia": "BRA-qui-um E-MEN-do",
+  "pronunciation": "BRA-qui-um E-MEN-do",
+  "condicao": "(C) Osso Remendado",
+  "desc": "Se o nome do feitiço for pronunciado corretamente pode curar um osso quebrado do braço. | Injúria Específica: (C) Osso Remendado"
+}

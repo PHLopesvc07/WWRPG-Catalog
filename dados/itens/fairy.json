@@ -1,0 +1,64 @@
+{
+  "id": "fairy",
+  "num": 31,
+  "nome": "Fairy (Fada)",
+  "classificacao": "XX",
+  "licenca": "Comum",
+  "porte": "Pequeno",
+  "tamanho": "12 cm",
+  "peso": "50 g",
+  "origem": "Natural",
+  "locomocao": "Aéreos",
+  "velocidade": "Voo: 9.5m | Terrestre: 2.5m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Simples",
+  "descricao": "A fada é um animal pequeno e decorativo mas de pouca inteligência. É usada ou conjurada com freqüência pelos bruxos para servir de enfeite na decoração e, em geral, habita as matas e os alagadiços. A fada varia de dois centímetros e meio a doze centímetros de altura, tem corpo, cabeça e ombros minúsculos e humanóides, mas também grandes asas como as e um inseto que podem ser transparentes ou multicoloridas conforme sua espécie. A fada é dotada de fraco poder mágico que ela usa para deter predadores tais como o agoureiro. Tem uma natureza rixenta mas, sendo excessivamente vaidosa, torna-se dócil sempre que é chamada a servir de ornamento. Apesar de sua aparência humana, a fada não fala. Usa um zumbido agudo para se comunicar com suas companheiras. A espécie põe cinqüenta ovos de cada vez no verso das folhas. Deles nascem larvas vivamente coloridas. De seis a dez dias depois elas se transformam em casulos, dos quais saem, um mês mais tarde, adultos alados inteiramente formados. . Geografia: @Mundial",
+  "atributos": {
+    "corpo": -3,
+    "destreza": 3,
+    "vitalidade": 0,
+    "instinto": 1,
+    "carisma": 2,
+    "inteligencia": -2,
+    "sabedoria": 0
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Mordida de Fada / Beliscão",
+      "desc": "Pequenos dentes afiados atacam a pele. Rola `1d4 + Destreza` de dano físico mínimo.",
+      "rolagem": "1d4 + Destreza"
+    },
+    "reacao": {
+      "nome": "Esquiva de Zumbido Rápido",
+      "desc": "Voo ágil com asas brilhantes. Gasta 1 ação para rolar `1d30 + Destreza + 3` para anular ataques físicos direcionados.",
+      "rolagem": "1d30 + Destreza + 3"
+    },
+    "ambiente": {
+      "nome": "Iluminação de Asas",
+      "desc": "Suas asas emitem um brilho mágico suave em área de 3m. Neutraliza escuridão mágica de nível baixo e expõe inimigos ocultos.",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Vaidade Extrema / Distração",
+      "desc": "Usa gestos de orgulho para encantar observadores. Alvos inteligentes devem passar em Vontade CD 16 ou gastam 1 ação admirando a beleza da fada.",
+      "rolagem": "CD 16 Vontade"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 1
+    },
+    "media": {
+      "curr": 0,
+      "max": 1
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 1
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/fairy.jpg",
+  "fotoBase64": "./assets/animais/fairy.jpg"
+}

@@ -1,0 +1,64 @@
+{
+  "id": "pogrebin",
+  "num": 69,
+  "nome": "Pogrebin (Pogrebin)",
+  "classificacao": "XXX",
+  "licenca": "Comum",
+  "porte": "Pequeno",
+  "tamanho": "30 cm",
+  "peso": "2.5 kg",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "1.8m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Simples",
+  "descricao": "O pogrebin é um demônio russo que tem menos de trinta centímetros de altura, um corpo peludo, mas uma enorme cabeça cinzenta e lisa. Quando encolhido, o pogrebin lembra uma pedra redonda e reluzente. Esse demônio é atraído pelos humanos e gosta de segui-los andando à sombra e se abaixando rapidamente quando a sombra se vira para ele. Se um humano permitir que o pogrebin o siga durante muitas horas, será envolvido por um sensação de grande futilidade que finalmente o fará cair em um estado de letargia e desespero. Quando a vítima pára de andar e cai de joelhos para chorar a inutilidade de tudo, o pogrebin saltará sobre ela e tentará devorá-la. Porém é fácil repeli-lo com azarações simples ou Feitiços Estuporantes. Chutá-lo para longe também pode ser eficaz. Geografia: @Rússia",
+  "atributos": {
+    "corpo": 0,
+    "destreza": 1,
+    "vitalidade": 0,
+    "instinto": 2,
+    "carisma": -3,
+    "inteligencia": -2,
+    "sabedoria": 1
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Bote de Garras Curtas",
+      "desc": "Ataca com garras curtas ao saltar das sombras sobre a nuca do alvo. Rola `1d6 + Corpo` de dano físico.",
+      "rolagem": "1d6 + Corpo"
+    },
+    "reacao": {
+      "nome": "Disfarce de Rocha Canto",
+      "desc": "Gasta 1 ação para se agachar e parecer uma pedra cinzenta comum ao ser observado. Rola `1d30 + Instinto + 3` para desviar a atenção.",
+      "rolagem": "1d30 + Instinto + 3"
+    },
+    "ambiente": {
+      "nome": "Sombra do Desespero Mentoso",
+      "desc": "Segue bruxos à distância, induzindo sensação de cansaço extremo e desespero. Alvos sofrem -2 em testes de iniciativa e percepção.",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Bote sobre a Vítima Adormecida",
+      "desc": "Se a vítima cair de joelhos devido ao cansaço, o Pogrebin salta sobre sua cabeça para devorá-la, exigindo teste de Corpo CD 21 do bruxo.",
+      "rolagem": "CD 21 Corpo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 1
+    },
+    "media": {
+      "curr": 0,
+      "max": 1
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 1
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/pogrebin.jpg",
+  "fotoBase64": "./assets/animais/pogrebin.jpg"
+}

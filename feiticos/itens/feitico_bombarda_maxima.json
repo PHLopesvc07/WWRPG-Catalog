@@ -1,0 +1,11 @@
+{
+  "id": "feitico_bombarda_maxima",
+  "name": "Bombarda Maxima",
+  "cat": "Maldição Menor",
+  "lvl": "5",
+  "tipo": "Ataque",
+  "pronuncia": "Bom-BAR-da MAK-si-ma",
+  "pronunciation": "Bom-BAR-da MAK-si-ma",
+  "condicao": "(C) Concussão",
+  "desc": "Feitiço bombarda maximizado. cria uma energia explosiva que ao tocar, ou ser lançada em um alvo o explode como se fosse uma bomba e desfaz um escudo. | Injúria Específica: (C) Concussão"
+}

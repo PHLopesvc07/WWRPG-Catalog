@@ -1,0 +1,64 @@
+{
+  "id": "nundu",
+  "num": 63,
+  "nome": "Nundu (Nundu)",
+  "classificacao": "XXXXX",
+  "licenca": "Não permitido",
+  "porte": "Enorme",
+  "tamanho": "5.0 metros",
+  "peso": "2.5 Toneladas",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "8.0m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Bestial",
+  "descricao": "Esse animal da África Oriental é indiscutivelmente o mais perigoso do mundo. Um enorme leopardo que se desloca em silêncio, apesar de seu tamanho, e cujo o hálito causa uma doença capaz de eliminar um povoado inteiro, o nundu nunca foi subjugado por menos de cem bruxos qualificados juntos. Geografia: @África Oriental",
+  "atributos": {
+    "corpo": 8,
+    "destreza": 5,
+    "vitalidade": 9,
+    "instinto": 6,
+    "carisma": -5,
+    "inteligencia": -1,
+    "sabedoria": 1
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Patada Esmagadora de Leopardo",
+      "desc": "Ataque colossal com patas dotadas de garras retráteis gigantes. Rola `2d12 + Corpo` de dano físico e causa **[C: Trauma Físico Grave]**.",
+      "rolagem": "2d12 + Corpo"
+    },
+    "reacao": {
+      "nome": "Reflexo Felino Indomável",
+      "desc": "Agilidade assustadora para um monstro gigante. Gasta 1 ação e rola `1d30 + Destreza + 5` para desviar de feitiços de impacto ou feixes mágicos.",
+      "rolagem": "1d30 + Destreza + 5"
+    },
+    "ambiente": {
+      "nome": "Sopro Pesteado de Nundu",
+      "desc": "Expele hálito extremamente tóxico em cone de 15m. Causa a morte de vilarejos inteiros. Rola `2d10 + Vitalidade` de dano e aplica **[C: Peste de Nundu]**.",
+      "rolagem": "CD 22 + Vitalidade"
+    },
+    "extra": {
+      "nome": "Furtividade Suprema das Sombras",
+      "desc": "Apesar do porte enorme, move-se em silêncio absoluto. Ganha +6 de bônus em testes de furtividade e iniciativa se atacar de cobertura.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 10
+    },
+    "media": {
+      "curr": 0,
+      "max": 10
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 10
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/nundu.jpg",
+  "fotoBase64": "./assets/animais/nundu.jpg"
+}

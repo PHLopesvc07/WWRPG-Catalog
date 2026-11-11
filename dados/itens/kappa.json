@@ -1,0 +1,64 @@
+{
+  "id": "kappa",
+  "num": 47,
+  "nome": "Kappa (Kappa)",
+  "classificacao": "XXXX",
+  "licenca": "Magizoologista",
+  "porte": "Médio",
+  "tamanho": "1.1 metros",
+  "peso": "18 kg",
+  "origem": "Natural",
+  "locomocao": "Aquáticos",
+  "velocidade": "Natação: 6.4m | Terrestre: 1.0m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Bestial",
+  "descricao": "O kappa é um demônio aquático do Japão que habita lagos e rios rasos. Com fama de parecer um macaco com escamas de peixe em lugar de pêlos, esse animal tem um oco no cocuruto da cabeça no qual ele carrega água O kappa se alimenta de sangue humano, mas é possível convencê-lo a não fazer mal a alguém, atirando-lhe um pepino com o nome da pessoa gravado à faca. Ao enfrentar esse animal, o bruxo deve enganá-lo obrigando-o a se curvar - porque se ele fizer isso, a água guardada no oco de sua cabeça escorrerá, drenando-o de toda a sua força. Geografia: @Japão",
+  "atributos": {
+    "corpo": 2,
+    "destreza": 2,
+    "vitalidade": 2,
+    "instinto": 3,
+    "carisma": -4,
+    "inteligencia": -1,
+    "sabedoria": 1
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Garrada Aquática Sangrenta",
+      "desc": "Garras afiadas de macaco aquático atacam o alvo na água. Rola `1d8 + Corpo` de dano físico, causa **[C: Sangramento]**.",
+      "rolagem": "1d8 + Corpo"
+    },
+    "reacao": {
+      "nome": "Defesa da Tigela da Cabeça",
+      "desc": "Gasta 1 ação para inclinar a cabeça de forma a proteger a água contida em sua tigela craniana. Rola `1d30 + Instinto + 2` para aparar golpes.",
+      "rolagem": "1d30 + Instinto + 2"
+    },
+    "ambiente": {
+      "nome": "Repuxo de Rio",
+      "desc": "Gera uma turbulência na água a até 4m. Nadadores adjacentes devem passar em Corpo CD 21 ou são puxados para o fundo do rio por algas.",
+      "rolagem": "CD 21 Corpo"
+    },
+    "extra": {
+      "nome": "Fraqueza da Tigela",
+      "desc": "Se for persuadido a se curvar e derramar a água de sua cabeça, perde todas as suas forças (-4 em todos os atributos e perde a habilidade de atacar).",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 3
+    },
+    "media": {
+      "curr": 0,
+      "max": 3
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 3
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/Kappa.webp",
+  "fotoBase64": "./assets/animais/Kappa.webp"
+}

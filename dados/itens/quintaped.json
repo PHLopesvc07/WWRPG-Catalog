@@ -1,0 +1,64 @@
+{
+  "id": "quintaped",
+  "num": 74,
+  "nome": "Quintaped (Quintípede), Também Chamado Macboon Peludo",
+  "classificacao": "XXXXX",
+  "licenca": "Comum",
+  "porte": "Médio",
+  "tamanho": "Médio",
+  "peso": "Médio",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "3.0m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Neutro",
+  "descricao": "O quintaped (quintípede) é um animal carnívoro perigosíssimo com um certo gosto por humanos. Seu corpo atarracado e rente ao chão é coberto por pêlos castanho-avermelhados, do mesmo modo que suas pernas, que terminam em patas tortas. Ele é encontrado na ilha de Drear, ao largo do extremo norte da Escócia, razão pela qual a ilha foi considerada imapeável. Conta a lenda que, no passado, a ilha de Drear ela povoada por duas Famílias bruxas, os McClivert e os MacBoon. Um duelo de bêbados entre Dulgad, chefe do clã McClivert, e Quino, chefe do clã MacBoon, terminou com a morte de Dulgad. Em retaliação, assim conta a lenda, um grupo dos McClivert cercou as casas dos MacBoon, certa noite, e transfigurou cada membro da família em um monstruoso animal de cinco patas. Os McClivert perceberam, tarde demais, que os MacBoon, depois de transformados, tinham se tornado infinitamente mais perigoso do que antes (eram famosos por sua grande incompetência em magia). Além disso, os MacBoon resistiram a todos as tentativas de fazê-los voltar à forma humana. Os monstros mataram todos os McClivert até não resta um único ser humano na ilha. Foi então que os monstros MacBoon se deram conta de que na falta de alguém para brandir uma varinha, eles seriam forçados a continuar como estavam para o resto da vida. Se a lenda é ou não verdadeira ninguém jamais saberá. Pois é certo que não sobreviveu nem McClivert nem MacBoon para nos contar o que aconteceu com os seus antepassados. Os quintípedes não são dotados de fala e têm resistido energicamente às tentativas do Departamento para Regulamentação e Controle das Criaturas Mágicas de capturar um espécime e tentar retransformá-lo, por isso temos que supor que se eles forem realmente, conforme sugere seu apelido, os MacBoon peludos, devem estar muito satisfeitos de passar a vida inteira como animais. Geografia: @Mundial",
+  "atributos": {
+    "corpo": 0,
+    "destreza": 0,
+    "vitalidade": 1,
+    "instinto": 0,
+    "carisma": 1,
+    "inteligencia": -2,
+    "sabedoria": 0
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Abocanhamento Brutal com Garras",
+      "desc": "Ataque violento com mandíbulas fortes e cinco patas peludas de garras afiadas. Rola `1d10 + Corpo` de dano físico.",
+      "rolagem": "1d10 + Corpo"
+    },
+    "reacao": {
+      "nome": "Giro de Cinco Pernas",
+      "desc": "Gasta 1 ação para rotacionar seu corpo peludo de cinco patas de forma caótica. Rola `1d30 + Corpo + 2` para rebater ataques de varas ou redes.",
+      "rolagem": "1d30 + Corpo + 2"
+    },
+    "ambiente": {
+      "nome": "Patrulha de Ilha Rochosa",
+      "desc": "Como criatura rústica da ilha de MacBoon, ignora qualquer terreno difícil rochoso, escalando encostas íngremes sem penalidades.",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Fúria Carnívora Indomável",
+      "desc": "Extremamente agressivo e repelente a humanos. Rola com vantagem testes de ataque físico contra bruxos que tentem capturá-lo vivo.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 3
+    },
+    "media": {
+      "curr": 0,
+      "max": 3
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 3
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/quintaped.jpg",
+  "fotoBase64": "./assets/animais/quintaped.jpg"
+}

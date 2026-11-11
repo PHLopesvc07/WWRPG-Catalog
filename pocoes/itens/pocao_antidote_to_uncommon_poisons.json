@@ -1,0 +1,24 @@
+{
+  "id": "pocao_antidote_to_uncommon_poisons",
+  "nome": "Antídoto para Venenos Raros (Antidote to Uncommon Poisons)",
+  "tipo": "Antídoto",
+  "nivel": 4,
+  "nível": 4,
+  "efeito": "Cura e purga venenos mágicos e peçonhas de criaturas raras que resistem a bezoares comuns, com destaque absoluto para o veneno paralisante de Fadas Mordentes (Doxies) e picadas de quimeras menores.",
+  "ingredientes": "Sementes de fogo (Fire seeds), chifre de Frapão (Graphorn horn) em pó, ferrões de Gira-Gira (Billywig stings), carapaças trituradas de Chizpurfle.",
+  "descricao": "Líquido verde-esmeralda brilhante que fumega calorosamente. Seus ingredientes bestiais atuam em sinergia: o chifre de frapão rompe a couraça mágica da toxina, as sementes de fogo queimam o veneno e os ferrões de gira-gira forçam os músculos a saírem do torpor.",
+  "descrição": "Líquido verde-esmeralda brilhante que fumega calorosamente. Seus ingredientes bestiais atuam em sinergia: o chifre de frapão rompe a couraça mágica da toxina, as sementes de fogo queimam o veneno e os ferrões de gira-gira forçam os músculos a saírem do torpor.",
+  "sistema": {
+    "tempo_preparo": "4 horas",
+    "duracao": "Instantâneo",
+    "dificuldade_cd": 18,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "antidote-to-uncommon-poisons",
+    "nome_original": "Antidote to Uncommon Poisons",
+    "dificuldade_original": "Moderate",
+    "caracteristicas_originais": "Green in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Antidote_to_Uncommon_Poisons"
+  }
+}

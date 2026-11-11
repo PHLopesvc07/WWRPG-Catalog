@@ -1,0 +1,64 @@
+{
+  "id": "troll",
+  "num": 87,
+  "nome": "Troll (Trasgo)",
+  "classificacao": "XXXX",
+  "licenca": "Não permitido",
+  "porte": "Grande",
+  "tamanho": "3.5 metros",
+  "peso": "1.5 Toneladas",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "1.2m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Bestial",
+  "descricao": "O trasgo é uma criatura temível que atinge mais de três metros e meio de altura e pesa mais de uma tonelada. Notável por sua força igualmente prodigiosa e sua pouca inteligência, esse animal é muitas vezes violento e imprevisível. O animal é originário da Escandinávia, mas atualmente pode ser encontrados na Grã-Bretanha, Irlanda e outras áreas do norte da Europa. Em geral, ele fala aos grunhidos que parecem constituir uma linguagem primitiva, embora haja notícia de que alguns compreendem e até falem algumas palavras humanas mais simples. Os mais inteligentes da espécie têm sido treinados para guardiões. Existem três tipos de trasgos: das montanhas, das florestas e dos rios. O montanhês é o maior e mais feroz. É careca e tem pele cinza-claro. O florestal tem pele verde-clara e, alguns espécimes, uma cabeleira rala, fina e verde ou castanha. o trasgo fluvial tem pele roxa e é, com freqüência, encontrado sob pontes. Os trasgos comem carne crua e não são exigentes quanto às suas presas, que podem se animais ou humanas. Geografia: @Escandinávia, Grã-Bretanha e outras partes da Europa",
+  "atributos": {
+    "corpo": 5,
+    "destreza": -1,
+    "vitalidade": 5,
+    "instinto": 2,
+    "carisma": -4,
+    "inteligencia": -3,
+    "sabedoria": -1
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Esmagamento de Tacape de Madeira",
+      "desc": "Ataque violento com seu tacape pesado de madeira em combate corpo a corpo. Rola `1d12 + Corpo` de dano físico.",
+      "rolagem": "1d12 + Corpo"
+    },
+    "reacao": {
+      "nome": "Bloqueio Rígido de Pele espessa",
+      "desc": "Pele grossa e rígida amortece pancadas físicas. Gasta 1 ação para rolar `1d30 + Corpo + 1`. Se passar, reduz o dano físico sofrido em 4.",
+      "rolagem": "1d30 + Corpo + 1"
+    },
+    "ambiente": {
+      "nome": "Arremesso de Destroços",
+      "desc": "Joga pedras enormes no cenário. Alvos em área de 4m devem passar em Destreza CD 18 ou sofrem `1d6` de dano e ficam sob escombros.",
+      "rolagem": "CD 18 Destreza"
+    },
+    "extra": {
+      "nome": "Estupidez Lendária",
+      "desc": "Sendo extremamente burro, é imune a ilusões mentais refinadas, mas sofre desvantagem em testes de inteligência e tomada de decisões complexas.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 5
+    },
+    "media": {
+      "curr": 0,
+      "max": 5
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 5
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/Mountain_Troll.webp",
+  "fotoBase64": "./assets/animais/Mountain_Troll.webp"
+}

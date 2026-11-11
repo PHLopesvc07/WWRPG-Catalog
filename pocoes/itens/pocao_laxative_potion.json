@@ -1,0 +1,24 @@
+{
+  "id": "pocao_laxative_potion",
+  "nome": "Poção Laxante (Laxative Potion)",
+  "tipo": "Poção (Pegadinha / Medicinal)",
+  "nivel": 1,
+  "nível": 1,
+  "efeito": "Estimula violentamente o sistema digestivo em menos de 10 minutos após a ingestão, forçando o indivíduo a correr desesperadamente para os banheiros mais próximos.",
+  "ingredientes": "Óleo de rícino enfeitiçado, sementes de sene moídas, suco de ameixa mágica concentrada.",
+  "descricao": "Líquido marrom-âmbar espesso. Utilizada como laxante medicinal para empachamento ou em partidas escolares entre casas rivais.",
+  "descrição": "Líquido marrom-âmbar espesso. Utilizada como laxante medicinal para empachamento ou em partidas escolares entre casas rivais.",
+  "sistema": {
+    "tempo_preparo": "45 minutos",
+    "duracao": "1 hora de urgência intestinal",
+    "dificuldade_cd": 12,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "laxative-potion",
+    "nome_original": "Laxative Potion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": null,
+    "wiki": "https://harrypotter.fandom.com/wiki/Laxative_Potion"
+  }
+}

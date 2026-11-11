@@ -1,0 +1,64 @@
+{
+  "id": "runespoor",
+  "num": 78,
+  "nome": "Runespoor (Farosutil)",
+  "classificacao": "XXXX",
+  "licenca": "Magizoologista",
+  "porte": "Médio",
+  "tamanho": "2.1 metros",
+  "peso": "90 kg",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "3.5m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Neutro",
+  "descricao": "O farosutil é originário de um pequeno país africano, o Burkina Faso. Serpente de três cabeças, ele normalmente atinge entre um metro e oitenta centímetros e dois metros e dez centímetros de comprimento. Laranja berrante com listras negras, o farosutil é facilmente localizável, razão pela qual o Ministério da Magia de Burkina Faso declarou imapeáveis certas áreas de floresta para seu uso exclusivo. Esse animal, embora em si não seja particularmente agressivo, no passado foi um bichinho de estimação de bruxos das trevas sem dúvida por causa de sua aparência vistosa e intimidante. É aos escritos de ofidiglotas, que criaram e conversaram com essas cobras, que devemos a nossa compreensão dos seus curiosos hábitos. Esses escritos revelam que cada uma das cabeças do farosutil tem uma finalidade diferente. A da esquerda (para o bruxo que está de frente para a cobra) é a que planeja. Decide aonde ele deve ir e o que deve fazer a seguir, a cabeça do meio é a que sonha (o farosutil pode permanecer parado durante dias seguidos, perdido em visões e devaneios gloriosos). A cabeça da direita é a que critica e avalia os esforços das cabeças da esquerda e da direita com um silvo contínuo e irritante. As presas da cabeça da direita são extremamente venenosas. Este animal raramente alcança uma idade avançada uma vez que as cabeças tendem a se atacar mutuamente. É comum ser avistado sem a cabeça da direita porque as outras duas se juntaram para arrancá-la. O farosutil põe ovos pela boca, o único animal mágico capaz desse feito. Os ovos têm imenso valor na produção de poções para estimular a agilidade mental. O mercado negro dos ovos e das próprias cobras floresce há muitos séculos. Geografia: @Burkina Faso, África",
+  "atributos": {
+    "corpo": 2,
+    "destreza": 1,
+    "vitalidade": 3,
+    "instinto": 4,
+    "carisma": -4,
+    "inteligencia": -1,
+    "sabedoria": 3
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Picada Tripla Venenosa",
+      "desc": "Ataque coordenado de três cabeças de serpente laranja-escura. Rola `1d10 + Corpo` de dano e aplica **[C: Veneno de Runespoor]**.",
+      "rolagem": "1d10 + Corpo"
+    },
+    "reacao": {
+      "nome": "Aparada de Cabeça Protetora",
+      "desc": "As três cabeças vigiam em 360 graus. Gasta 1 ação para rolar `1d30 + Instinto + 3` para prever e esquivar de ataques corporais flanqueados.",
+      "rolagem": "1d30 + Instinto + 3"
+    },
+    "ambiente": {
+      "nome": "Sussurros de Ofidioglossia",
+      "desc": "As cabeças discutem entre si. Bruxos ofidiglotes na cena podem passar em teste de Sabedoria CD 20 para acalmar a criatura sem combates.",
+      "rolagem": "CD 20 Sabedoria"
+    },
+    "extra": {
+      "nome": "Divisão de Tarefas da Cabeça",
+      "desc": "Cada cabeça desempenha um papel: Esquerda (planeja), Média (decide), Direita (critica). Imune a atordoamento simples devido às mentes múltiplas.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 5
+    },
+    "media": {
+      "curr": 0,
+      "max": 5
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 5
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/runespoor.jpg",
+  "fotoBase64": "./assets/animais/runespoor.jpg"
+}

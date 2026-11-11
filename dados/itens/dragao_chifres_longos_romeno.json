@@ -1,0 +1,64 @@
+{
+  "id": "dragao_chifres_longos_romeno",
+  "num": 19,
+  "nome": "Dragão - Chifres-Longos Romeno (Romanian Longhorn)",
+  "classificacao": "XXXXX",
+  "licenca": "Não permitido",
+  "porte": "Grande",
+  "tamanho": "14.0 metros",
+  "peso": "3.5 Toneladas",
+  "origem": "Natural",
+  "locomocao": "Aquaéros",
+  "velocidade": "Voo: 6.5m | Terrestre: 1.8m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Bestial",
+  "descricao": "O Chifres-Longos Romeno possui escamas verde-escuras e dois longos e faiscantes chifres dourados com os quais perfura sua presa antes de assá-la. Quando moídos, seus chifres são muito valiosos para o preparo de poções. Seu território nativo foi recentemente transformado na reserva de dragões mais importante do mundo. Tem sido alvo de um programa de conservação e reprodução intensivo devido à queda drástica da população decorrente da caça ilegal para o comércio ilegal de chifres. Geografia: @Romênia, Europa",
+  "atributos": {
+    "corpo": 8,
+    "destreza": 1,
+    "vitalidade": 8,
+    "instinto": 4,
+    "carisma": -5,
+    "inteligencia": -2,
+    "sabedoria": 1
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Chifrada Perfurante",
+      "desc": "Investida devastadora com chifres de ouro brilhante. Rola `2d10 + Corpo` de dano perfurante e aplica a condição **[C: Perfuração Interna]**.",
+      "rolagem": "2d10 + Corpo"
+    },
+    "reacao": {
+      "nome": "Defesa Angular",
+      "desc": "Usa os chifres enormes como escudo contra magias. Gasta 1 ação e rola `1d30 + Corpo + 3` para anular feitiços de feixe luminoso diretos.",
+      "rolagem": "1d30 + Corpo + 3"
+    },
+    "ambiente": {
+      "nome": "Chuva de Faíscas",
+      "desc": "Expele uma cortina de fogo de curta distância que derrete pedras e metais, criando poças incandescentes (terreno difícil, causa dano de fogo se pisado).",
+      "rolagem": "CD 20 + Instinto"
+    },
+    "extra": {
+      "nome": "Chifre Conductor",
+      "desc": "Seus chifres atraem poeira mágica e feitiços de choque elétrico, absorvendo-os e tornando-o imune a danos causados por eletricidade.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 9
+    },
+    "media": {
+      "curr": 0,
+      "max": 9
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 9
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/dragao-chifres-longos-romeno.jpg",
+  "fotoBase64": "./assets/animais/dragao-chifres-longos-romeno.jpg"
+}

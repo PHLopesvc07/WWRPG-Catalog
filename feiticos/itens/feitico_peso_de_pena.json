@@ -1,0 +1,11 @@
+{
+  "id": "feitico_peso_de_pena",
+  "name": "Peso de Pena",
+  "cat": "Charme",
+  "lvl": "2",
+  "tipo": "Utilitário",
+  "pronuncia": "PE-so de PE-na",
+  "pronunciation": "PE-so de PE-na",
+  "condicao": "Nenhuma",
+  "desc": "Reduz drasticamente o peso de um objeto, fazendo-o pesar como uma pena. Útil para transportar cargas pesadas."
+}

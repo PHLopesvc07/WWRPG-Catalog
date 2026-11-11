@@ -1,0 +1,24 @@
+{
+  "id": "pocao_everklena",
+  "nome": "Everklena / O Falso Limpador (Everklena)",
+  "tipo": "Solução Mágica Enganosa",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Vendida sob a promessa fraudulenta de limpar qualquer superfície sem esforço, na realidade reage com a matéria orgânica e gera uma proliferação acelerada e incontrolável de mofo negro, lodo e fuligem grudenta.",
+  "ingredientes": "Esporos de bolor mágico dormentes, lodo de caldeirão estragado, água suja de pântano.",
+  "descricao": "Líquido transparente que se disfarça como desengordurante perfumado. Fabricada por vigaristas do Beco do Tranco e vendida a donas de casa desavisadas.",
+  "descrição": "Líquido transparente que se disfarça como desengordurante perfumado. Fabricada por vigaristas do Beco do Tranco e vendida a donas de casa desavisadas.",
+  "sistema": {
+    "tempo_preparo": "1 hora",
+    "duracao": "Contaminação contínua da área até purificação mágica",
+    "dificuldade_cd": 14,
+    "administracao": "Aplicação em Superfície"
+  },
+  "meta": {
+    "slug": "everklena",
+    "nome_original": "Everklena",
+    "dificuldade_original": null,
+    "caracteristicas_originais": null,
+    "wiki": "https://harrypotter.fandom.com/wiki/Everklena"
+  }
+}

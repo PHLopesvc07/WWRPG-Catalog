@@ -1,0 +1,24 @@
+{
+  "id": "pocao_screaming_potion",
+  "nome": "Poção dos Gritos Estridentes (Screaming Potion)",
+  "tipo": "Poção (Pegadinha Sonora)",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Faz com que a garganta do consumidor emita berros, uivos e gritos agudos incontroláveis sempre que tentar abrir a boca, quebrando qualquer tentativa de discrição ou feitiço.",
+  "ingredientes": "Pena de pomorim estridente, pimenta vermelha do deserto, água borbulhante amaldiçoada.",
+  "descricao": "Líquido avermelhado que estala e emite pequenos chiados agudos quando destampado.",
+  "descrição": "Líquido avermelhado que estala e emite pequenos chiados agudos quando destampado.",
+  "sistema": {
+    "tempo_preparo": "1 hora",
+    "duracao": "30 minutos",
+    "dificuldade_cd": 14,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "screaming-potion",
+    "nome_original": "Screaming Potion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": null,
+    "wiki": "https://harrypotter.fandom.com/wiki/Screaming_Potion"
+  }
+}

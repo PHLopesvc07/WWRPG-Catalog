@@ -1,0 +1,64 @@
+{
+  "id": "centaur",
+  "num": 9,
+  "nome": "Centaur (Centauro)",
+  "classificacao": "XXXX",
+  "licenca": "Não permitido",
+  "porte": "Grande",
+  "tamanho": "2.1 metros",
+  "peso": "550 kg",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "4.0m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Consciente",
+  "descricao": "O centauro recebe uma classificação XXXX não porque seja excessivamente agressivo, mas porque deve ser tratado com grande respeito. O mesmo se aplica a sereianos e unicórnios. O centauro tem cabeça, tronco e braços humanos ligados a um corpo de cavalo cujo colorido varia. Inteligente e dotado de fala humana, a rigor, não deveria ser chamado de animal, mas a seu próprio pedido foi assim classificado pelo Ministério da Magia (veja Introdução deste livro). O centauro habita a floresta. Acredita-se que ele teve origem na Grécia, embora haja atualmente comunidades desses animais em várias partes da Europa. As autoridades bruxas em cada país em que há centauros destinaram a eles áreas em que não serão incomodados pelos trouxas; porém, eles não têm grande necessidade de proteção bruxa, pois contam com recursos próprios para se esconder dos humanos. O modo de vida do centauro é envolto em mistério. Geralmente, eles têm tanta desconfiança de bruxos quanto de trouxas e, na realidade, parecem não fazer grande diferença entre os dois. Vivem em rebanhos que reúnem de dez a cinqüenta membros e gozam da reputação de entender de cura mágica, adivinhação, manejo do arco e astronomia. Geografia: @Grã-Bretanha e Europa Central",
+  "atributos": {
+    "corpo": 2,
+    "destreza": 2,
+    "vitalidade": 2,
+    "instinto": 3,
+    "carisma": -1,
+    "inteligencia": 2,
+    "sabedoria": 4
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Disparo com Arco",
+      "desc": "Flecha certeira disparada com precisão. Rola `1d8 + Destreza` de dano físico perfurante e pode causar **[C: Sangramento]**.",
+      "rolagem": "1d8 + Destreza"
+    },
+    "reacao": {
+      "nome": "Patada de Cascos",
+      "desc": "Caso um oponente se aproxime, desfere coice. Gasta 1 ação e rola `1d30 + Corpo + 2` contra o ataque. Se vencer, desvia e inflige `1d6` de dano físico.",
+      "rolagem": "1d30 + Corpo + 2"
+    },
+    "ambiente": {
+      "nome": "Conhecimento da Selva",
+      "desc": "Como habitante nativo da mata densa, ignora qualquer penalidade de terreno difícil em florestas e áreas arborizadas.",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Astrologia e Adivinhação",
+      "desc": "Lê o movimento dos astros para prever o combate. Rola `1d30 + Sabedoria`. Se passar de 22, ganha vantagem em todas as rolagens na primeira rodada.",
+      "rolagem": "1d30 + Sabedoria"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 3
+    },
+    "media": {
+      "curr": 0,
+      "max": 3
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 3
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/centaur.jpg",
+  "fotoBase64": "./assets/animais/centaur.jpg"
+}

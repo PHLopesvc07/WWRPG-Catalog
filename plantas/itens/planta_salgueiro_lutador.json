@@ -1,0 +1,14 @@
+{
+  "id": "planta_salgueiro_lutador",
+  "nome": "Salgueiro Lutador (Whomping Willow)",
+  "categoria": "Difícil de Adquirir",
+  "nivel": "6",
+  "manejo_cd": 16,
+  "manejo": "",
+  "efeito": "",
+  "uso_alquimico": "",
+  "classificacao_ministerial": "Espécime de Alta Periculosidade. Proibido plantio próximo a áreas residenciais ou trilhas públicas.",
+  "descricao": "Uma árvore colossal, antiquíssima e altamente violenta, com tronco grosso e galhos nodosos que atacam selvagemente qualquer criatura, objeto ou veículo voador que penetre em seu raio de alcance. Foi introduzida nas dependências de Hogwarts para guardar a entrada secreta do túnel que leva à Casa dos Gritos em Hogsmeade.",
+  "peculiaridades": "• Nível de Herbologia: Nível 6 (Especialista / N.I.E.M. / Mestre de Herbologia).\n• Combate & Efeito Hostil: Possui alcance de ataque de 12 metros ao redor do tronco. Seus galhos desferem golpes pesados devastadores (Dano: 3L + 2M + 1P por pancada direta). Atingir uma criatura impõe a condição (C) Arremessado para Longe e (C) Concussão Grave.\n• Ponto Cego / Imobilização: Possui um pequeno nódulo saliente na base do tronco. Se um galho fino, objeto ou o feitiço Immobulus atingir o nó da raiz (exige teste de Precisão CD 16), a árvore paralisa instantaneamente todos os seus galhos por 10 minutos.\n• Classificação Ministerial: Espécime de Alta Periculosidade. Proibido plantio próximo a áreas residenciais ou trilhas públicas.",
+  "fotoBase64": ""
+}

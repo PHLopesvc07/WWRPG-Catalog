@@ -1,0 +1,11 @@
+{
+  "id": "feitico_pack",
+  "name": "Pack",
+  "cat": "Charme",
+  "lvl": "2",
+  "tipo": "Utilitário",
+  "pronuncia": "PEK",
+  "pronunciation": "PEK",
+  "condicao": "Nenhuma",
+  "desc": "Arruma e organiza malas e bagagens automaticamente, fazendo com que os itens se dobrem e se acomodem por conta própria."
+}

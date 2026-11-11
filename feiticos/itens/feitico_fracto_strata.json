@@ -1,0 +1,11 @@
+{
+  "id": "feitico_fracto_strata",
+  "name": "Fracto Strata",
+  "cat": "Charme",
+  "lvl": "2",
+  "tipo": "Ataque",
+  "pronuncia": "FRAC-to STRA-ta",
+  "pronunciation": "FRAC-to STRA-ta",
+  "condicao": "Nenhuma",
+  "desc": "Emite uma onda de choque que fragmenta camadas finas de alvenaria, gesso, pisos cerâmicos e tábuas de madeira, abrindo brechas estruturais."
+}

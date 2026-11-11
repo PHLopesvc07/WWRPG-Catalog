@@ -1,0 +1,11 @@
+{
+  "id": "feitico_relaxo",
+  "name": "Relaxo",
+  "cat": "Charme",
+  "lvl": "1",
+  "tipo": "Utilitário",
+  "pronuncia": "Re-LAK-so",
+  "pronunciation": "Re-LAK-so",
+  "condicao": "Nenhuma",
+  "desc": "Faz com que algo que esteja preso ou segurando outra coisa solte-se imediatamente. Útil para libertar objetos presos ou abrir garras e armadilhas."
+}

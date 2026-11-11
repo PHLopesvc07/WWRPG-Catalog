@@ -1,0 +1,14 @@
+{
+  "id": "planta_espirradeira",
+  "nome": "Espirradeira (Sneezewort / Achillea ptarmica)",
+  "categoria": "Popular",
+  "nivel": "2",
+  "manejo_cd": 12,
+  "manejo": "CD 12 (Herbologia). Exige máscaras de pano ou feitiço Cabeça-de-Bolha durante o manuseio para evitar inalação acidental.",
+  "efeito": "",
+  "uso_alquimico": "Ingrediente da Poção da Confusão (Confusing Draught) e Poção da Desorientação.",
+  "classificacao_ministerial": "Artigo Comerciável Livre (Popular).",
+  "descricao": "Planta herbácea comum com cachos de flores brancas. Suas folhas secas liberam um pó microscópico irritante que inflama as vias aéreas superiores e o cérebro humano, provocando confusão mental e espirros incontroláveis.",
+  "peculiaridades": "• Nível de Herbologia: Nível 2 (Iniciante / 2º Ano).\n• Manejo & Colheita: CD 12 (Herbologia). Exige máscaras de pano ou feitiço Cabeça-de-Bolha durante o manuseio para evitar inalação acidental.\n• Efeito Hostil: A inalação direta impõe a condição (C) Crise de Espirros por 1d4 turnos.\n• Uso Alquímico: Ingrediente da Poção da Confusão (Confusing Draught) e Poção da Desorientação.\n• Classificação Ministerial: Artigo Comerciável Livre (Popular).",
+  "fotoBase64": ""
+}

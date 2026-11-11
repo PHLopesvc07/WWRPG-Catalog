@@ -1,0 +1,64 @@
+{
+  "id": "matagoti",
+  "num": 56,
+  "nome": "Matagoti (Matagot)",
+  "classificacao": "XXX",
+  "licenca": "Magizoologista",
+  "porte": "Médio",
+  "tamanho": "80 cm",
+  "peso": "8 kg",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "2.5m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Neutro",
+  "descricao": "O matagoti é um espírito sob a forma de um grande gato preto de olhos azuis brilhantes e corpo esguio. Na França, eles são comumente utilizados pelo Ministério da Magia para segurança interna, guarda de arquivos e correspondências. Embora pareçam gatos normais à distância, eles são ferozes e agressivos se provocados. Quando atacados, eles se multiplicam rapidamente, tornando-se uma matilha de felinos sombrios e perigosos. Eles retornam à sua forma fraca ou desaparecem se expostos à luz solar direta. Geografia: @França (especialmente no Ministério da Magia Francês)",
+  "atributos": {
+    "corpo": 1,
+    "destreza": 4,
+    "vitalidade": 1,
+    "instinto": 4,
+    "carisma": -3,
+    "inteligencia": -1,
+    "sabedoria": 2
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Garrada Sombria de Gato",
+      "desc": "Ataque rápido com garras afiadas impregnadas de magia negra. Rola `1d8 + Corpo` de dano físico.",
+      "rolagem": "1d8 + Corpo"
+    },
+    "reacao": {
+      "nome": "Esquiva de Olhos Amarelos",
+      "desc": "Gasta 1 ação para se liquefazer em sombras ao ser alvejado. Rola `1d30 + Destreza + 3`. Se vencer, anula o feitiço ou golpe físico.",
+      "rolagem": "1d30 + Destreza + 3"
+    },
+    "ambiente": {
+      "nome": "Multiplicação por Agressão",
+      "desc": "Se for atacado por feitiços destrutivos simples, divide-se em 2 a 4 novos Matagots ativos na cena, multiplicando a ameaça.",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Furtividade do Gato das Trevas",
+      "desc": "Move-se de forma perfeitamente silenciosa e invisível em ambientes escuros. Ganha +5 de bônus em iniciativa se atacar das sombras.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 1
+    },
+    "media": {
+      "curr": 0,
+      "max": 1
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 1
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/matagoti.jpg",
+  "fotoBase64": "./assets/animais/matagoti.jpg"
+}

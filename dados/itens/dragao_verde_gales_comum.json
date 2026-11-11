@@ -1,0 +1,64 @@
+{
+  "id": "dragao_verde_gales_comum",
+  "num": 27,
+  "nome": "Dragão - Verde-Galês Comum (Common Welsh Green)",
+  "classificacao": "XXXXX",
+  "licenca": "Não permitido",
+  "porte": "Grande",
+  "tamanho": "10.0 metros",
+  "peso": "2.2 Toneladas",
+  "origem": "Natural",
+  "locomocao": "Aquaéros",
+  "velocidade": "Voo: 9.5m | Terrestre: 2.5m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Bestial",
+  "descricao": "O Verde-Galês se confunde com as pastagens luxuriantes de sua terra natal, embora faça ninho nas montanhas mais altas onde foi demarcada uma reserva para sua preservação. Esta raça está entre as que causam menos problemas ao Ministério, preferindo caçar carneiros e empenhar-se para evitar contato com humanos, a não ser quando provocado. Tem um urro surpreendentemente melodioso que é facilmente reconhecível. Suas labaredas saem em jorros finos e longos, e seus ovos são cor de terra sarapintados de verde. Geografia: @País de Gales, Grã-Bretanha",
+  "atributos": {
+    "corpo": 6,
+    "destreza": 3,
+    "vitalidade": 7,
+    "instinto": 4,
+    "carisma": -4,
+    "inteligencia": -2,
+    "sabedoria": 1
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Mordida Suave",
+      "desc": "Mordida defensiva para afastar ameaças de suas colinas nativas. Rola `2d8 + Corpo` de dano físico.",
+      "rolagem": "2d8 + Corpo"
+    },
+    "reacao": {
+      "nome": "Esquiva de Voo Rasante",
+      "desc": "Manobra habilidosamente por entre montanhas e neblinas. Gasta 1 ação e rola `1d30 + Destreza + 3` para desviar de qualquer magia balística.",
+      "rolagem": "1d30 + Destreza + 3"
+    },
+    "ambiente": {
+      "nome": "Sopro de Jatos Finos",
+      "desc": "Expele chamas finas em cone de 8m. Prefere focar na vegetação montanhosa para criar barreiras de fumaça densa de capim queimado.",
+      "rolagem": "CD 18 + Instinto"
+    },
+    "extra": {
+      "nome": "Canto de Acasalamento",
+      "desc": "Seu canto melodioso de dragão acalma feras menores. Feras e pets na área devem passar em Sabedoria CD 20 ou não atacam na próxima rodada.",
+      "rolagem": "CD 20 Sabedoria"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 8
+    },
+    "media": {
+      "curr": 0,
+      "max": 8
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 8
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/dragao-verde-gales-comum.jpg",
+  "fotoBase64": "./assets/animais/dragao-verde-gales-comum.jpg"
+}

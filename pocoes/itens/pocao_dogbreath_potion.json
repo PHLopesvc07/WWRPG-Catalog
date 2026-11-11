@@ -1,0 +1,24 @@
+{
+  "id": "pocao_dogbreath_potion",
+  "nome": "Poção do Hálito de Fogo / Respiração Ardente (Dogbreath Potion)",
+  "tipo": "Poção",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Faz com que o bebedor exale golfadas curtas de fogo vivo e fumaça espessa pelas ventas e pela boca ao falar ou gritar, causando dano térmico leve em alvos próximos.",
+  "ingredientes": "Pimenta-fantasma mágica, presas de dragão pulverizadas, cinzas de salamandra.",
+  "descricao": "Líquido vermelho-alaranjado picante que borbulha como lava no caldeirão. Muito procurada por estudantes travessos ou duelistas em combate corporal cerrado.",
+  "descrição": "Líquido vermelho-alaranjado picante que borbulha como lava no caldeirão. Muito procurada por estudantes travessos ou duelistas em combate corporal cerrado.",
+  "sistema": {
+    "tempo_preparo": "1 hora",
+    "duracao": "10 minutos",
+    "dificuldade_cd": 14,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "dogbreath-potion",
+    "nome_original": "Dogbreath Potion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Purple-coloured",
+    "wiki": "https://harrypotter.fandom.com/wiki/Dogbreath_Potion"
+  }
+}

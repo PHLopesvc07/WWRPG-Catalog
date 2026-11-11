@@ -1,0 +1,11 @@
+{
+  "id": "feitico_ducklifors",
+  "name": "Ducklifors",
+  "cat": "Transfiguração",
+  "lvl": "2",
+  "tipo": "Ataque",
+  "pronuncia": "Da-cli-FORS",
+  "pronunciation": "Da-cli-FORS",
+  "condicao": "(C) Transfigurado em Pato",
+  "desc": "Dispara um feixe de luz amarelado que transfigura criaturas pequenas ou adversários em patos inofensivos que apenas sabem grasnar e nadar desajeitadamente. | Injúria Específica: (C) Transfigurado em Pato"
+}

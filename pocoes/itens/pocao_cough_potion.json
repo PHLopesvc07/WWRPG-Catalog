@@ -1,0 +1,24 @@
+{
+  "id": "pocao_cough_potion",
+  "nome": "Poção para Tosse (Cough Potion)",
+  "tipo": "Poção (Medicinal)",
+  "nivel": 1,
+  "nível": 1,
+  "efeito": "Cessa imediatamente crises de tosse severa, expectora mucos pulmonares e alivia irritações brônquicas e inflamações de garganta decorrentes de gripes ou fumaça de feitiços.",
+  "ingredientes": "Mel silvestre enfeitiçado, raiz de marshmallow mágica, eucalipto lunar, infusão de tomilho.",
+  "descricao": "Xarope denso de tonalidade âmbar avermelhada e aroma doce canforado. Um dos remédios mais tradicionais da medicina bruxa doméstica.",
+  "descrição": "Xarope denso de tonalidade âmbar avermelhada e aroma doce canforado. Um dos remédios mais tradicionais da medicina bruxa doméstica.",
+  "sistema": {
+    "tempo_preparo": "45 minutos",
+    "duracao": "8 horas de alívio contínuo",
+    "dificuldade_cd": 12,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "cough-potion",
+    "nome_original": "Cough Potion",
+    "dificuldade_original": "Advanced",
+    "caracteristicas_originais": null,
+    "wiki": "https://harrypotter.fandom.com/wiki/Cough_potion"
+  }
+}

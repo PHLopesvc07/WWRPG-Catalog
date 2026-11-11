@@ -1,0 +1,11 @@
+{
+  "id": "feitico_piscifors",
+  "name": "Piscifors",
+  "cat": "Transfiguração",
+  "lvl": "2",
+  "tipo": "Ataque",
+  "pronuncia": "Pis-ci-FORS",
+  "pronunciation": "Pis-ci-FORS",
+  "condicao": "(C) Transfigurado em Peixe",
+  "desc": "Transfigura pequenas criaturas ou objetos inanimados em peixes frescos que se debatem no chão. | Injúria Específica: (C) Transfigurado em Peixe"
+}

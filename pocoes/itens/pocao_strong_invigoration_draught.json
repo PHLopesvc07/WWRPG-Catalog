@@ -1,0 +1,24 @@
+{
+  "id": "pocao_strong_invigoration_draught",
+  "nome": "Forte Poção do Vigor (Strong Invigoration Draught)",
+  "tipo": "Poção (Vigor Extremo)",
+  "nivel": 5,
+  "nível": 5,
+  "efeito": "Estimulante vital de altíssimo calibre. Eleva a estamina, a velocidade de reação e o foco do bruxo a níveis formidáveis, anulando por completo a exaustão acumulada e concedendo agilidade superior em combate prolongado.",
+  "ingredientes": "Asas de Alisoto selecionadas, olhos secos de enguia mágica, espinhos de peixe-leão de águas profundas, essência pura de valeriana, sangue de salamandra.",
+  "descricao": "Líquido azul-safira incandescente de aroma pungente e revigorante. Ensinada aos alunos mais dedicados das turmas de N.O.M.s de Hogwarts.",
+  "descrição": "Líquido azul-safira incandescente de aroma pungente e revigorante. Ensinada aos alunos mais dedicados das turmas de N.O.M.s de Hogwarts.",
+  "sistema": {
+    "tempo_preparo": "4 horas",
+    "duracao": "12 horas",
+    "dificuldade_cd": 20,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "strong-invigoration-draught",
+    "nome_original": "Strong Invigoration Draught",
+    "dificuldade_original": "Advanced",
+    "caracteristicas_originais": "Fiery orange in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Strong_Invigoration_Draught"
+  }
+}

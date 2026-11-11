@@ -1,0 +1,11 @@
+{
+  "id": "feitico_estupore",
+  "name": "Estupore",
+  "cat": "Maldição Menor",
+  "lvl": "4",
+  "tipo": "Ataque",
+  "pronuncia": "Es-tu-PO-re",
+  "pronunciation": "Es-tu-PO-re",
+  "condicao": "(C) Atordoado",
+  "desc": "Este feitiço, assim como Estupefaça, mantém o alvo inconsciente, embora o Estupefaça deixe a vítima desacordada apenas se usado por três ou mais varinhas, e seu efeito principal seja lançar a vítima para longe.\nNotas: O feitiço é inútil contra gigantes. Seu contra-feitiço é Ennervate. | Injúria Específica: (C) Atordoado"
+}

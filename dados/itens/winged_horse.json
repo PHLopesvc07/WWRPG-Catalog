@@ -1,0 +1,64 @@
+{
+  "id": "winged_horse",
+  "num": 90,
+  "nome": "Winged Horse (Cavalo Alado)",
+  "classificacao": "XX-XXXX",
+  "licenca": "Comum",
+  "porte": "Grande",
+  "tamanho": "2.4 metros (cernelha)",
+  "peso": "800 kg",
+  "origem": "Natural",
+  "locomocao": "Aquaéros",
+  "velocidade": "Voo: 9.5m | Terrestre: 2.5m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Neutro",
+  "descricao": "Os cavalos alados existem no mundo inteiro. Há diferentes raças, entre elas a Abraxama (um palomino enorme e forte), a Etoniana (castanha, popular na Grã-Bretanha e na Irlanda), a Graniana (cinzento e muito veloz) a Testrália (negra, dotada do poder da invisibilidade e considerada portadora de azar por muitos bruxos). Tal como no caso do hipogrifo, exige-se que o dono de um cavalo alado lance sobre ele, periodicamente, um Feitiço Desilusório (veja Introdução). YETI (IÉTI), também conhecido como Bigfoot (Pé-Grande) e Abominable Geografia: @Mundial (com raças específicas como Abraxan, Granian, etc.)",
+  "atributos": {
+    "corpo": 5,
+    "destreza": 3,
+    "vitalidade": 5,
+    "instinto": 3,
+    "carisma": 3,
+    "inteligencia": -1,
+    "sabedoria": 3
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Casco Aéreo / Patada",
+      "desc": "Desfere coice duplo de patas dianteiras ou traseiras com deslocamento de voo. Rola `1d8 + Corpo` de dano físico.",
+      "rolagem": "1d8 + Corpo"
+    },
+    "reacao": {
+      "nome": "Salto de Asas",
+      "desc": "Gasta 1 ação para alçar voo rapidamente ao ser atacado no solo. Rola `1d30 + Destreza + 2` para anular ataques corporais de armas curtas.",
+      "rolagem": "1d30 + Destreza + 2"
+    },
+    "ambiente": {
+      "nome": "Rajada de Asas",
+      "desc": "Bate as asas fortemente para erguer poeira e capim seco em cone de 5m, reduzindo a precisão de ataques à distância de inimigos em -2.",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Resistência de Voo de Longa Distância",
+      "desc": "Capaz de voar por horas sem descansar. Abraxans requerem apenas uísque de malte puro para recuperar toda a Vitalidade exaurida.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 5
+    },
+    "media": {
+      "curr": 0,
+      "max": 5
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 5
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/cavalo-alado.webp",
+  "fotoBase64": "./assets/animais/cavalo-alado.webp"
+}

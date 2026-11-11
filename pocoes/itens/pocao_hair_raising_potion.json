@@ -1,0 +1,24 @@
+{
+  "id": "pocao_hair_raising_potion",
+  "nome": "Poção para Arrepiar Cabelos (Hair-Raising Potion)",
+  "tipo": "Poção",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Faz com que todos os pelos e fios de cabelo do consumidor se arrepiem rigidamente para cima como cerdas de vassoura, causando um aspecto cômico ou assustador.",
+  "ingredientes": "Olhos de rato secos, rabo de salamandra, garras de morcego moídas, água pura.",
+  "descricao": "Líquido esverdeado e espumoso que solta pequenos estalinhos de eletricidade estática. Ensinada no 2º ano de Hogwarts por Severus Snape.",
+  "descrição": "Líquido esverdeado e espumoso que solta pequenos estalinhos de eletricidade estática. Ensinada no 2º ano de Hogwarts por Severus Snape.",
+  "sistema": {
+    "tempo_preparo": "1 hora",
+    "duracao": "3 horas",
+    "dificuldade_cd": 14,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "hair-raising-potion",
+    "nome_original": "Hair-Raising Potion",
+    "dificuldade_original": "Beginner to Ordinary Wizarding Level",
+    "caracteristicas_originais": "Green in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Hair-Raising_Potion"
+  }
+}

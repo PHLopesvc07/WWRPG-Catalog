@@ -1,0 +1,64 @@
+{
+  "id": "dragao_meteoro_chines",
+  "num": 23,
+  "nome": "Dragão - Meteoro-Chinês (Chinese Fireball)",
+  "classificacao": "XXXXX",
+  "licenca": "Não permitido",
+  "porte": "Grande",
+  "tamanho": "15.0 metros",
+  "peso": "3.2 Toneladas",
+  "origem": "Natural",
+  "locomocao": "Aquaéros",
+  "velocidade": "Voo: 8.0m | Terrestre: 2.2m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Bestial",
+  "descricao": "O único dragão oriental, também conhecido como Dragão-Leão, tem uma aparência particularmente vistosa. Vermelho, com escamas lisas, apresenta uma franja de cristas douradas em volta do focinho arredondado e olhos muito saltados. O Meteoro-Chinês recebeu este nome por causa das labaredas em forma de cogumelo que saem de suas narinas quando irritado. Pesa entre duas e quatro toneladas, sendo a fêmea maior que o macho. Os olhos são carmim-vivo com pintas douradas. É agressivo, porém mais tolerante com a própria espécie do que a maioria dos dragões, consentindo por vezes em dividir seu território com até outros dois dragões. Alimenta-se da maioria dos mamíferos, embora prefira porcos e humanos. Geografia: @China, Extremo Oriente",
+  "atributos": {
+    "corpo": 8,
+    "destreza": 2,
+    "vitalidade": 8,
+    "instinto": 5,
+    "carisma": -5,
+    "inteligencia": -2,
+    "sabedoria": 1
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Abocanhamento de Meteoro",
+      "desc": "Morde enquanto libera centelhas de fogo pelas narinas. Rola `2d10 + Corpo` de dano e aplica **[C: Queimadura Térmica]**.",
+      "rolagem": "2d10 + Corpo"
+    },
+    "reacao": {
+      "nome": "Lançamento de Centelha",
+      "desc": "Expele bola de fogo média contra projétil ou feitiço físico. Gasta 1 ação e rola `1d30 + Instinto` para vaporizar e anular o ataque à distância.",
+      "rolagem": "1d30 + Instinto"
+    },
+    "ambiente": {
+      "nome": "Explosão de Bolas de Fogo",
+      "desc": "Lança globos de fogo fustigantes que cobrem o cenário de fumaça cinzenta espessa em área de 10m de raio, garantindo camuflagem parcial.",
+      "rolagem": "CD 20 + Instinto"
+    },
+    "extra": {
+      "nome": "Fúria de Fogo Vermelho",
+      "desc": "Se sofrer uma Injúria Média ou superior, entra em estado de fúria por 3 rodadas, adicionando +3 em todas as rolagens de dano físico.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 8
+    },
+    "media": {
+      "curr": 0,
+      "max": 8
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 8
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/dragao-meteoro-chines.jpg",
+  "fotoBase64": "./assets/animais/dragao-meteoro-chines.jpg"
+}

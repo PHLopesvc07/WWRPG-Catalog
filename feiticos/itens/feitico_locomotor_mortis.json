@@ -1,0 +1,11 @@
+{
+  "id": "feitico_locomotor_mortis",
+  "name": "Locomotor Mortis",
+  "cat": "Transfiguração",
+  "lvl": "1",
+  "tipo": "Utilitário",
+  "pronuncia": "Lo-co-MO-tor MOR-tis",
+  "pronunciation": "Lo-co-MO-tor MOR-tis",
+  "condicao": "(C) Pernas Coladas",
+  "desc": "É azaração simples, seu efeito é de colar as pernas do oponente uma na outra por alguns minutos. | Injúria Específica: (C) Pernas Coladas"
+}

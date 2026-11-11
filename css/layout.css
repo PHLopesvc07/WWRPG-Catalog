@@ -1,28 +1,186 @@
-header {
-    width: 100%;
-    max-width: 900px;
+.parchment-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    background-color: var(--bg-parchment);
+    background-image: radial-gradient(rgba(139, 90, 43, 0.08) 20%, transparent 80%);
+    border: 3px double var(--border-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), inset 0 0 50px rgba(139, 90, 43, 0.18);
+    padding: 25px 30px;
+    border-radius: 4px;
+}
+
+.ministry-header {
     text-align: center;
-    margin-bottom: 20px;
-    border-bottom: 2px solid var(--magic-gold);
-    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border-color);
+    margin-bottom: 22px;
+    padding-bottom: 15px;
 }
-header h1 {
-    color: var(--magic-gold);
+
+.ministry-header h1 {
+    font-size: 2.2rem;
+    color: var(--accent-purple);
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+}
+
+.ministry-header h2 {
+    font-size: 1.05rem;
+    color: var(--ink-secondary);
+    font-family: var(--font-body);
+    font-style: italic;
+    margin-bottom: 14px;
+}
+
+/* Barra de Conexão Firebase */
+.firebase-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    background: rgba(74, 53, 37, 0.08);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 8px 14px;
+    margin-bottom: 16px;
+}
+
+.firebase-status-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ink-primary);
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-online {
+    background-color: #27ae60;
+    box-shadow: 0 0 6px #27ae60;
+}
+
+.status-warning {
+    background-color: #d35400;
+    box-shadow: 0 0 6px #e67e22;
+}
+
+.status-offline {
+    background-color: #8b1e1e;
+}
+
+.firebase-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Navegação dos 4 Espaços de Catálogo */
+.catalog-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-group-label {
+    font-size: 0.85rem;
+    font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 1.5rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-secondary);
 }
-main {
-    width: 100%;
-    max-width: 900px;
+
+.nav-buttons-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
 }
-.form-grid {
+
+/* Layout de Registro */
+.form-grid-layout {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-}
-.archive-grid {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 200px 1fr;
     gap: 20px;
+    align-items: start;
+}
+
+.form-row {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.flex-1 { flex: 1; min-width: 140px; }
+.flex-2 { flex: 2; min-width: 220px; }
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+    gap: 10px;
+}
+
+.abilities-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+}
+
+/* Layout do Arquivo (Sidebar + Visualizador Individual) */
+.archive-layout {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 20px;
+    min-height: 680px;
+    align-items: start;
+}
+
+.archive-sidebar {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+}
+
+.filter-count-label {
+    color: var(--ink-secondary);
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.filter-two-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.sidebar-buttons-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+@media (max-width: 960px) {
+    .form-grid-layout,
+    .archive-layout {
+        grid-template-columns: 1fr;
+    }
 }

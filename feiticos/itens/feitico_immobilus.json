@@ -1,0 +1,11 @@
+{
+  "id": "feitico_immobilus",
+  "name": "Immobilus",
+  "cat": "Charme",
+  "lvl": "3",
+  "tipo": "Utilitário",
+  "pronuncia": "I-MO-bi-lus",
+  "pronunciation": "I-MO-bi-lus",
+  "condicao": "(C) Paralisado",
+  "desc": "Usado para paralisar criaturas/pessoas. Semelhante ao Petrificus Totalus. | Injúria Específica: (C) Paralisado"
+}

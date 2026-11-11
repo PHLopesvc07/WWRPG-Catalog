@@ -1,0 +1,11 @@
+{
+  "id": "feitico_animus_novandi",
+  "name": "Animus Novandi",
+  "cat": "Transfiguração",
+  "lvl": "5",
+  "tipo": "Utilitário",
+  "pronuncia": "A-ni-mus No-VAN-di",
+  "pronunciation": "A-ni-mus No-VAN-di",
+  "condicao": "Nenhuma",
+  "desc": "Faz com que objetos não-mágicos façam suas devidas ações sozinhos."
+}

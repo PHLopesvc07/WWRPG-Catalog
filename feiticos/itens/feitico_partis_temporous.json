@@ -1,0 +1,11 @@
+{
+  "id": "feitico_partis_temporous",
+  "name": "Partis Temporous",
+  "cat": "Charme",
+  "lvl": "5",
+  "tipo": "Utilitário",
+  "pronuncia": "PAR-tis Tem-PO-rus",
+  "pronunciation": "PAR-tis Tem-PO-rus",
+  "condicao": "Nenhuma",
+  "desc": "Divide temporariamente campos de proteção exemplo: anel de fogo."
+}

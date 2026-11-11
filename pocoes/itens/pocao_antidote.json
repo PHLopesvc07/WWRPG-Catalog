@@ -1,0 +1,24 @@
+{
+  "id": "pocao_antidote",
+  "nome": "Antídoto Geral / Composto Purificador (Antidote)",
+  "tipo": "Antídoto",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Fórmula balanceada de largo espectro desenvolvida para neutralizar venenos estomacais brandos, peçonhas de insetos comuns e reações alérgicas induzidas por poções domésticas mal preparadas.",
+  "ingredientes": "Bezoar moído, bagas de visgo, essência de lavanda, chifre de unicórnio em pó diluído.",
+  "descricao": "Solução límpida de tonalidade prateada tênue, com sabor suave e mineral. Item de emergência obrigatório nos estoques de enfermaria e kits de primeiros socorros de campo de aurores.",
+  "descrição": "Solução límpida de tonalidade prateada tênue, com sabor suave e mineral. Item de emergência obrigatório nos estoques de enfermaria e kits de primeiros socorros de campo de aurores.",
+  "sistema": {
+    "tempo_preparo": "1 hora",
+    "duracao": "Instantâneo",
+    "dificuldade_cd": 14,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "antidote",
+    "nome_original": "Antidote",
+    "dificuldade_original": "Varies",
+    "caracteristicas_originais": "Varies",
+    "wiki": "https://harrypotter.fandom.com/wiki/Antidote"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "pocao_wolfsbane_potion",
+  "nome": "Poção do Acônito / Mata-Cão (Wolfsbane Potion)",
+  "tipo": "Poção (Alquimia Avançada de Licantropia)",
+  "nivel": 6,
+  "nível": 6,
+  "efeito": "Não cura a licantropia (algo impossível na magia moderna), mas permite que o lobisomem mantenha sua consciência, inteligência e razão humanas intactas durante a transformação na noite de lua cheia, evitando que ataque inocentes.",
+  "ingredientes": "Acônito (Aconite / Wolfsbane) purificado sob temperatura rigorosa, raízes de mandrágora, favas de fumaça azul, prata mágica coloidal, xarope estabilizador.",
+  "descricao": "Líquido de fumaça azulada tênue com gosto extremamente repugnante. Inventada na segunda metade do século XX por Damocles Belby; seu preparo é de extrema complexidade e custo elevadíssimo, exigindo um mestre em poções com caldeirão de cobre selado. Severus Snape preparava esta poção todo mês para o Professor Remus Lupin em Hogwarts.",
+  "descrição": "Líquido de fumaça azulada tênue com gosto extremamente repugnante. Inventada na segunda metade do século XX por Damocles Belby; seu preparo é de extrema complexidade e custo elevadíssimo, exigindo um mestre em poções com caldeirão de cobre selado. Severus Snape preparava esta poção todo mês para o Professor Remus Lupin em Hogwarts.",
+  "sistema": {
+    "tempo_preparo": "7 dias de preparo prévio à lua cheia",
+    "duracao": "Dura toda a noite de transformação sob lua cheia",
+    "dificuldade_cd": 22,
+    "administracao": "Ingestão diária na semana anterior à lua cheia"
+  },
+  "meta": {
+    "slug": "wolfsbane-potion",
+    "nome_original": "Wolfsbane Potion",
+    "dificuldade_original": "Advanced",
+    "caracteristicas_originais": "Blue smoke, Unpleasant taste, Rendered useless with sugar",
+    "wiki": "https://harrypotter.fandom.com/wiki/Wolfsbane_Potion"
+  }
+}

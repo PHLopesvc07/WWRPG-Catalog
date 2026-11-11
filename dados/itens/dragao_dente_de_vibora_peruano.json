@@ -1,0 +1,64 @@
+{
+  "id": "dragao_dente_de_vibora_peruano",
+  "num": 20,
+  "nome": "Dragão - Dente-de-Víbora Peruano (Peruvian Vipertooth)",
+  "classificacao": "XXXXX",
+  "licenca": "Não permitido",
+  "porte": "Médio",
+  "tamanho": "4.5 metros",
+  "peso": "800 kg",
+  "origem": "Natural",
+  "locomocao": "Aquaéros",
+  "velocidade": "Voo: 11.0m | Terrestre: 2.8m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Bestial",
+  "descricao": "O Dente-de-Víbora é o menor dos dragões conhecidos e o mais rápido em voo. Com apenas quatro metros e meio de comprimento, possui escamas lisas acobreadas e marcas negras na crista. Seus chifres são curtos e suas presas são particularmente venenosas. Alimenta-se de cabras e vacas, mas tem um gosto especial por humanos. A Confederação Internacional de Bruxos foi forçada a intervir no Peru no fim do século XIX para reduzir sua população que crescia de forma assustadoramente rápida. Geografia: @Peru, América do Sul",
+  "atributos": {
+    "corpo": 5,
+    "destreza": 4,
+    "vitalidade": 6,
+    "instinto": 5,
+    "carisma": -5,
+    "inteligencia": -2,
+    "sabedoria": 1
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Dentada Peçonhenta Rápida",
+      "desc": "Picada com presas afiadas. Rola `1d12 + Corpo` de dano e causa a condição **[C: Envenenamento Agudo]** (drena 2 de Vitalidade por rodada).",
+      "rolagem": "1d12 + Corpo"
+    },
+    "reacao": {
+      "nome": "Aceleração Aérea",
+      "desc": "O menor e mais rápido dragão esquiva com maestria. Gasta 1 ação e rola `1d30 + Destreza + 4` para desviar de qualquer projétil ou feitiço direcionado.",
+      "rolagem": "1d30 + Destreza + 4"
+    },
+    "ambiente": {
+      "nome": "Sobrevoo Rasante",
+      "desc": "Executa voo rasante rente ao solo, levantando redemoinho de poeira e detritos em área de 6m. Alvos ficam Desorientados por 1 rodada.",
+      "rolagem": "CD 18 + Instinto"
+    },
+    "extra": {
+      "nome": "Predador de Humanos",
+      "desc": "Ganha +3 de bônus em testes de ataque e instinto se o alvo for um bruxo ou humano, movido por sua predileção alimentar lendária.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 6
+    },
+    "media": {
+      "curr": 0,
+      "max": 6
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 6
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/dragao-dente-de-vibora-peruano.jpg",
+  "fotoBase64": "./assets/animais/dragao-dente-de-vibora-peruano.jpg"
+}

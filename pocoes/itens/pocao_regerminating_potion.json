@@ -1,0 +1,24 @@
+{
+  "id": "pocao_regerminating_potion",
+  "nome": "Poção Regerminadora (Regerminating Potion)",
+  "tipo": "Solução Botânica",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Ressuscita e restaura a vitalidade de plantas murchas, secas ou mortas recentemente por pragas mágicas, fazendo brotar novas folhas verdes viçosas em minutos.",
+  "ingredientes": "Cinzas de folhas verdes sadias, água lunar de poço, seiva de carvalho ancestral, pó de concha marinha.",
+  "descricao": "Líquido verde-esmeralda vivo que borbulha suavemente.",
+  "descrição": "Líquido verde-esmeralda vivo que borbulha suavemente.",
+  "sistema": {
+    "tempo_preparo": "1 hora",
+    "duracao": "Instantâneo (revitalização vegetal)",
+    "dificuldade_cd": 14,
+    "administracao": "Rega de Plantas"
+  },
+  "meta": {
+    "slug": "regerminating-potion",
+    "nome_original": "Regerminating Potion",
+    "dificuldade_original": "Advanced",
+    "caracteristicas_originais": "Green or golden in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Regerminating_Potion"
+  }
+}

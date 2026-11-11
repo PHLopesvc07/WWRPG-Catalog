@@ -1,0 +1,24 @@
+{
+  "id": "pocao_rat_tonic",
+  "nome": "Tônico para Ratos (Rat Tonic)",
+  "tipo": "Tônico (Trato de Animais)",
+  "nivel": 1,
+  "nível": 1,
+  "efeito": "Restaura pelos caídos, vitalidade física e apetite de roedores domésticos mágicos ou comuns, curando debilidades e prolongando sua saúde.",
+  "ingredientes": "Óleo de fígado de peixe, sementes de girassol trituradas, folhas de urtiga doce, água morna.",
+  "descricao": "Líquido esverdeado em frasco conta-gotas. Comprado por Ron Weasley no Beco Diagonal para tratar de Perebas em *O Prisioneiro de Azkaban*.",
+  "descrição": "Líquido esverdeado em frasco conta-gotas. Comprado por Ron Weasley no Beco Diagonal para tratar de Perebas em *O Prisioneiro de Azkaban*.",
+  "sistema": {
+    "tempo_preparo": "30 minutos",
+    "duracao": "Cura contínua de animais de pequeno porte",
+    "dificuldade_cd": 12,
+    "administracao": "Ingestão (para roedores)"
+  },
+  "meta": {
+    "slug": "rat-tonic",
+    "nome_original": "Rat Tonic",
+    "dificuldade_original": "Advanced",
+    "caracteristicas_originais": "Green or red in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Rat_tonic"
+  }
+}

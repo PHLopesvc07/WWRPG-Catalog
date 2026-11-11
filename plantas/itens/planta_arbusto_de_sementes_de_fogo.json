@@ -1,0 +1,14 @@
+{
+  "id": "planta_arbusto_de_sementes_de_fogo",
+  "nome": "Arbusto de Sementes-de-Fogo (Fireseed Bush)",
+  "categoria": "Difícil de Adquirir",
+  "nivel": "6",
+  "manejo_cd": 18,
+  "manejo": "CD 18 (Herbologia). EXIGE OBRIGATORIAMENTE o uso imediato do Feitiço Congelante (Glacius / Freezing Charm) para resfriar as sementes antes que queimem as luvas e a pele do colhedor (contato direto sem congelamento causa 2L de dano por queimadura imediata e impõe (C) Em Chamas).",
+  "efeito": "",
+  "uso_alquimico": "Ingrediente de poções térmicas supremas e necessário para manter a temperatura de ninhos de criadouros de dragões.",
+  "classificacao_ministerial": "Artigo Não-Comerciável Classe A. Sujeito à multa ministerial de 1.000 Galeões por posse ilegal.",
+  "descricao": "Arbusto mágico raro e espetacular nativo de áreas vulcânicas ou de alta temperatura mágica. Produz sementes vermelhas incandescentes que ardem perpetuamente em chamas mágicas sem se consumirem. As sementes emitem calor intenso e são vitais para incubação de ovos de dragão.",
+  "peculiaridades": "• Nível de Herbologia: Nível 6 (Especialista / N.I.E.M. / 6º Ano).\n• Manejo & Colheita: CD 18 (Herbologia). EXIGE OBRIGATORIAMENTE o uso imediato do Feitiço Congelante (Glacius / Freezing Charm) para resfriar as sementes antes que queimem as luvas e a pele do colhedor (contato direto sem congelamento causa 2L de dano por queimadura imediata e impõe (C) Em Chamas).\n• Uso Alquímico: Ingrediente de poções térmicas supremas e necessário para manter a temperatura de ninhos de criadouros de dragões.\n• Classificação Ministerial: Artigo Não-Comerciável Classe A. Sujeito à multa ministerial de 1.000 Galeões por posse ilegal.",
+  "fotoBase64": ""
+}

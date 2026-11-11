@@ -1,0 +1,24 @@
+{
+  "id": "pocao_gregory_s_unctuous_unction",
+  "nome": "Unto Untuoso de Gregory (Gregory's Unctuous Unction)",
+  "tipo": "Pomada (Influência Mental)",
+  "nivel": 4,
+  "nível": 4,
+  "efeito": "Faz com que a pessoa que inalar ou ingerir o unto acredite fervorosamente que quem lhe aplicou a substância é seu melhor amigo de infância e confidente inseparável, revelando segredos sem hesitação.",
+  "ingredientes": "Óleo de camaleão mágico, folhas de verbena adocicada, cera de favo dourado, pétalas de margarida encantadas.",
+  "descricao": "Pomada sedosa translúcida escorregadia. Criada pelo bajulador cortesão Gregory, o Untuoso, que a usou para infiltrar a corte do Rei Richard e obter riquezas.",
+  "descrição": "Pomada sedosa translúcida escorregadia. Criada pelo bajulador cortesão Gregory, o Untuoso, que a usou para infiltrar a corte do Rei Richard e obter riquezas.",
+  "sistema": {
+    "tempo_preparo": "4 horas",
+    "duracao": "6 horas",
+    "dificuldade_cd": 18,
+    "administracao": "Ingestão ou Aplicação Tópica"
+  },
+  "meta": {
+    "slug": "gregory-s-unctuous-unction",
+    "nome_original": "Gregory's Unctuous Unction",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Green in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Gregory's_Unctuous_Unction"
+  }
+}

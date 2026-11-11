@@ -1,0 +1,11 @@
+{
+  "id": "feitico_nox",
+  "name": "Nox",
+  "cat": "Contrafeitiço",
+  "lvl": "1",
+  "tipo": "Utilitário",
+  "pronuncia": "NOKS",
+  "pronunciation": "NOKS",
+  "condicao": "Nenhuma",
+  "desc": "É o contrafeitiço dos feitiços Lumos, ele apaga a luz gerada na ponta da varinha"
+}

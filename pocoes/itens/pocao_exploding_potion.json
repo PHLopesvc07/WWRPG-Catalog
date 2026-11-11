@@ -1,0 +1,24 @@
+{
+  "id": "pocao_exploding_potion",
+  "nome": "Poção Explosiva (Exploding Potion)",
+  "tipo": "Poção Volátil",
+  "nivel": 3,
+  "nível": 3,
+  "efeito": "Produz uma combustão mágica súbita e uma explosão de calor e estilhaços ao entrar em contato com chamas ou ao se quebrar com força bruta contra o solo ou estruturas.",
+  "ingredientes": "Pólvora de fada, bile de dragão, gelo seco mágico, cinzas de raiz ardente.",
+  "descricao": "Líquido azulado fosforescente que solta pequenos estalinhos nas bordas do frasco. Muito usada em emboscadas e desobstrução de passagens subterrâneas.",
+  "descrição": "Líquido azulado fosforescente que solta pequenos estalinhos nas bordas do frasco. Muito usada em emboscadas e desobstrução de passagens subterrâneas.",
+  "sistema": {
+    "tempo_preparo": "2 horas",
+    "duracao": "Instantâneo (detonação)",
+    "dificuldade_cd": 16,
+    "administracao": "Arremesso"
+  },
+  "meta": {
+    "slug": "exploding-potion",
+    "nome_original": "Exploding Potion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Acid-green or blue in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Exploding_Potion"
+  }
+}

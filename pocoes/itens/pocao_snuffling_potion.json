@@ -1,0 +1,24 @@
+{
+  "id": "pocao_snuffling_potion",
+  "nome": "Poção do Faro Aguçado (Snuffling Potion)",
+  "tipo": "Poção (Sensorial)",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Amplifica o sentido do olfato do consumidor a níveis sobre-humanos, permitindo rastrear odores sutis, identificar venenos no ar e farejar criaturas escondidas a centenas de metros.",
+  "ingredientes": "Focinho de texugo mágico, folhas de arruda seca, essência de menta silvestre, óleo de trufa da floresta.",
+  "descricao": "Líquido amarelo límpido que desprende uma fumaça clara e transparente ao ser finalizado no caldeirão.",
+  "descrição": "Líquido amarelo límpido que desprende uma fumaça clara e transparente ao ser finalizado no caldeirão.",
+  "sistema": {
+    "tempo_preparo": "1 hora e 15 minutos",
+    "duracao": "2 horas",
+    "dificuldade_cd": 14,
+    "administracao": "Ingestão ou Inalação"
+  },
+  "meta": {
+    "slug": "snuffling-potion",
+    "nome_original": "Snuffling Potion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Clear smoke upon completion",
+    "wiki": "https://harrypotter.fandom.com/wiki/Snuffling_Potion"
+  }
+}

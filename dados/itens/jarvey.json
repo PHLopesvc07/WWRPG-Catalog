@@ -1,0 +1,64 @@
+{
+  "id": "jarvey",
+  "num": 45,
+  "nome": "Jarvey (Furanzão)",
+  "classificacao": "XXX",
+  "licenca": "Comum",
+  "porte": "Médio",
+  "tamanho": "60 cm",
+  "peso": "4.5 kg",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "2.0m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Consciente",
+  "descricao": "O furanzão é encontrado na Grã-Bretanha, Irlanda e América do Norte. Assemelha-se a um furão de grande porte na maioria das espécies, exceto pelo fato de que é capaz de falar. Uma conversa propriamente dita, porém, ultrapassa a capacidade do furanzão, que tende a se limitar a frases curtas (e, em geral, grosseiras) ditas num fluxo contínuo. Ele vive principalmente sob a terra onde persegue gnomos, mas também se alimenta de toupeiras, ratos e outros roedores. Geografia: @Grã-Bretanha, Irlanda e América do Norte",
+  "atributos": {
+    "corpo": 0,
+    "destreza": 2,
+    "vitalidade": 1,
+    "instinto": 2,
+    "carisma": -3,
+    "inteligencia": 0,
+    "sabedoria": 1
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Mordida Rápida Dilacerante",
+      "desc": "Mordida com dentes afiados de furão falante gigante. Rola `1d6 + Destreza` de dano físico.",
+      "rolagem": "1d6 + Destreza"
+    },
+    "reacao": {
+      "nome": "Esquiva de Rastejar",
+      "desc": "Escorrega por entre as pernas do atacante. Gasta 1 ação e rola `1d30 + Destreza + 2` para anular ataques corporais de armas ou bastões.",
+      "rolagem": "1d30 + Destreza + 2"
+    },
+    "ambiente": {
+      "nome": "Tocas de Caça",
+      "desc": "Cria pequenas galerias subterrâneas temporárias no jardim, usando-as para obter cobertura parcial (+2 na Defesa) contra feitiços.",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Insultos Ofensivos Coletivos",
+      "desc": "Capaz de proferir frases curtas e extremamente rudes. Alvos inteligentes devem passar em Vontade CD 20 ou ficam Irritados (-2 em testes de Sabedoria).",
+      "rolagem": "CD 20 Vontade"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 1
+    },
+    "media": {
+      "curr": 0,
+      "max": 1
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 1
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/jarvey.jpg",
+  "fotoBase64": "./assets/animais/jarvey.jpg"
+}

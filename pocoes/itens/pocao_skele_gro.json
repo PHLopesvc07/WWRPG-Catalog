@@ -1,0 +1,24 @@
+{
+  "id": "pocao_skele_gro",
+  "nome": "Esquelece / Regenerador Ósseo (Skele-Gro)",
+  "tipo": "Poção (Regeneração Óssea Severa)",
+  "nivel": 5,
+  "nível": 5,
+  "efeito": "Regenera e faz crescer ossos inteiros que tenham sido perdidos, desossados ou destruídos por acidentes ou feitiços desastrosos. O processo é doloroso, febril e consome uma noite inteira enquanto o esqueleto se reconstrói osso a osso.",
+  "ingredientes": "Pó de osso de dragão purificado, dente de réptil marinho, escaravelhos negros chineses esmagados, água salina encantada.",
+  "descricao": "Líquido fumegante de cor amarela opaca e sabor horrível que desce queimando a garganta. Madame Pomfrey usou um frasco grande desta poção para regenerar os trinta e três ossos do braço de Harry Potter após Gilderoy Lockhart acidentalmente desossá-lo com um feitiço desastrado.",
+  "descrição": "Líquido fumegante de cor amarela opaca e sabor horrível que desce queimando a garganta. Madame Pomfrey usou um frasco grande desta poção para regenerar os trinta e três ossos do braço de Harry Potter após Gilderoy Lockhart acidentalmente desossá-lo com um feitiço desastrado.",
+  "sistema": {
+    "tempo_preparo": "8 horas",
+    "duracao": "8 a 12 horas para reconstituição óssea completa",
+    "dificuldade_cd": 20,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "skele-gro",
+    "nome_original": "Skele-Gro",
+    "dificuldade_original": "Moderate",
+    "caracteristicas_originais": "Smoked when poured, Vile taste, Burned on the way down, Yellow in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Skele-Gro"
+  }
+}

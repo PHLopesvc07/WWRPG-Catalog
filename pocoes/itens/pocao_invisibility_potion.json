@@ -1,0 +1,24 @@
+{
+  "id": "pocao_invisibility_potion",
+  "nome": "Poção de Invisibilidade (Invisibility Potion)",
+  "tipo": "Poção",
+  "nivel": 4,
+  "nível": 4,
+  "efeito": "Concede invisibilidade mágica completa ao bebedor e às suas vestes e equipamentos próximos, tornando-o completamente imperceptível à visão comum por um curto período.",
+  "ingredientes": "Pó de pérola pura, veneno de acromântula, tintura de Seminviso (Demiguise), cerejas mágicas, asas de aranha, cúpula de cogumelo-saltador.",
+  "descricao": "Líquido prateado cintilante que borbulha constantemente no frasco. Uma alternativa líquida aos raros mantos da invisibilidade, muito usada por espiões e aurores.",
+  "descrição": "Líquido prateado cintilante que borbulha constantemente no frasco. Uma alternativa líquida aos raros mantos da invisibilidade, muito usada por espiões e aurores.",
+  "sistema": {
+    "tempo_preparo": "4 horas",
+    "duracao": "30 minutos",
+    "dificuldade_cd": 18,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "invisibility-potion",
+    "nome_original": "Invisibility Potion",
+    "dificuldade_original": "Moderate",
+    "caracteristicas_originais": "Silver or light pink in colour, Very bubbly",
+    "wiki": "https://harrypotter.fandom.com/wiki/Invisibility_Potion"
+  }
+}

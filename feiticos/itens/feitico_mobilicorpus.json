@@ -1,0 +1,11 @@
+{
+  "id": "feitico_mobilicorpus",
+  "name": "Mobilicorpus",
+  "cat": "Charme",
+  "lvl": "2",
+  "tipo": "Utilitário",
+  "pronuncia": "Mo-bi-li-COR-pus",
+  "pronunciation": "Mo-bi-li-COR-pus",
+  "condicao": "Nenhuma",
+  "desc": "Ergue um corpo humano inerte, inconsciente ou petrificado e o faz flutuar na vertical ou horizontal, manobrando-o pelo ar como se estivesse suspenso por fios invisíveis."
+}

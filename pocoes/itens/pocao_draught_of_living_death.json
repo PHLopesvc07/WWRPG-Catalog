@@ -1,0 +1,24 @@
+{
+  "id": "pocao_draught_of_living_death",
+  "nome": "Poção do Morto-Vivo (Draught of Living Death)",
+  "tipo": "Poção",
+  "nivel": 6,
+  "nível": 6,
+  "efeito": "Mergulha o bebedor em um sono cataléptico tão profundo e assustadoramente pesado que a vítima aparenta estar completamente morta (sem respiração perceptível ou batimentos cardíacos detectáveis por meios comuns). O efeito pode durar séculos sem envelhecimento.",
+  "ingredientes": "Infusão de absinto (wormwood), raiz de asfódelo em pó, vagem de fava sonolenta esmagada (com lâmina de prata), raiz de valeriana, suco de amora mágica.",
+  "descricao": "Líquido que começa escuro e se torna lilás-claro e finalmente límpido como água pura. Ensinada por Slughorn no 6º ano de Hogwarts. O Príncipe Mestiço (Severus Snape) anotou no livro a instrução crucial de esmagar a fava sonolenta em vez de cortá-la.",
+  "descrição": "Líquido que começa escuro e se torna lilás-claro e finalmente límpido como água pura. Ensinada por Slughorn no 6º ano de Hogwarts. O Príncipe Mestiço (Severus Snape) anotou no livro a instrução crucial de esmagar a fava sonolenta em vez de cortá-la.",
+  "sistema": {
+    "tempo_preparo": "6 horas (exige caldeirão de estanho ou prata)",
+    "duracao": "Indefinida (até que a Poção Wiggenweld seja administrada)",
+    "dificuldade_cd": 22,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "draught-of-living-death",
+    "nome_original": "Draught of Living Death",
+    "dificuldade_original": "Advanced",
+    "caracteristicas_originais": "Turned pale lilac colour then clear",
+    "wiki": "https://harrypotter.fandom.com/wiki/Draught_of_Living_Death"
+  }
+}

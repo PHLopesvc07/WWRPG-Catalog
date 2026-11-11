@@ -1,0 +1,11 @@
+{
+  "id": "feitico_silencio",
+  "name": "Silencio",
+  "cat": "Charme",
+  "lvl": "3",
+  "tipo": "Utilitário",
+  "pronuncia": "Si-LEN-ci-o",
+  "pronunciation": "Si-LEN-ci-o",
+  "condicao": "(C) Silenciado",
+  "desc": "Faz com que o alvo fique em silêncio. | Injúria Específica: (C) Silenciado"
+}

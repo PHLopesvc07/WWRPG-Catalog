@@ -1,0 +1,64 @@
+{
+  "id": "mackled_malaclaw",
+  "num": 54,
+  "nome": "Mackled Malaclaw (Malagarra)",
+  "classificacao": "XXX",
+  "licenca": "Comum",
+  "porte": "Médio",
+  "tamanho": "Médio",
+  "peso": "Médio",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "3.0m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Neutro",
+  "descricao": "A mackled malaclaw (malagarra) é uma criatura terrestre É quase impossível calcular o número de vítimas da lethifold (mortalha -viva) porque ela não deixa pistas de sua passagem. Mais fácil será calcular o número de bruxos que visando a objetivos inescrupulosos fingiram Ter sido mortos por esses mantos letais. O exemplo mais recente dessa duplicidade ocorreu em 1973 quando o bruxo Jano Thickey desapareceu, deixando apenas um bilhete escrito, às pressas, na mesa -de-cabeceira: \"Ah, não, uma mortalha -viva me pegou, estou sufo cando.\" Convencidos pela cama vazia e imaculada que aquele animal realmente tivesse matado Jano, sua mulher e seus filhos iniciaram um período de luto rigoroso que foi bruscamente interrompido quando descobriram que Jano estava vivendo a oitenta quilômetro s de distância com a proprietária do Dragão Verde. encontrável principalmente nas costas rochosas da Europa. Apesar de sua leve semelhança com a lagosta, ela não deve em hipótese alguma ser ingerida porque sua carne é imprópria para o consumo humano e provocará febre alta e uma feia urticária esverdeada. A malagarra pode atingir o comprimento de trinta centímetros, seu corpo é cinza-claro com pintas verde-escuras. Alimenta-se de pequenos crustáceos e tenta atacar presas de maior tamanho. Sua mordida tem o singular efeito colateral de tornar a vítima extremamente azarada por um período de até uma semana após a mordida. Se alguém, for mordido por uma malagarra, deve cancelar todas as apostas, investimento de risco e especulações porque certamente terá prejuízos. Geografia: @Mundial",
+  "atributos": {
+    "corpo": 0,
+    "destreza": 0,
+    "vitalidade": 1,
+    "instinto": 0,
+    "carisma": 1,
+    "inteligencia": -2,
+    "sabedoria": 0
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Mordida de Pinça de Malagarra",
+      "desc": "Mordida dolorosa com garras que lembram as de uma lagosta. Rola `1d8 + Corpo` de dano físico e aplica **[C: Mordida Infecciosa]**.",
+      "rolagem": "1d8 + Corpo"
+    },
+    "reacao": {
+      "nome": "Casca Calcária",
+      "desc": "Carapaça dura que amortece pancadas. Gasta 1 ação e rola `1d30 + Vitalidade` contra ataque físico. Se vencer, reduz o dano sofrido à metade.",
+      "rolagem": "1d30 + Vitalidade"
+    },
+    "ambiente": {
+      "nome": "Rastro Costeiro de Lodo",
+      "desc": "Expele uma gosma costeira que torna as pedras da praia escorregadias (CD 20 Destreza para não escorregar nas rochas adjacentes).",
+      "rolagem": "CD 20 Destreza"
+    },
+    "extra": {
+      "nome": "Aura de Azar Absoluto",
+      "desc": "Quem é picado por um Malagarra sofre de azar extremo por 1 dia inteiro: falha crítica em qualquer dado de RPG ocorre com rolagens de 1 a 3.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 3
+    },
+    "media": {
+      "curr": 0,
+      "max": 3
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 3
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/Macled_malaclaw.webp",
+  "fotoBase64": "./assets/animais/Macled_malaclaw.webp"
+}

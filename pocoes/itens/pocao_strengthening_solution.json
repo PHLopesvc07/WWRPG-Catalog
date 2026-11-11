@@ -1,0 +1,24 @@
+{
+  "id": "pocao_strengthening_solution",
+  "nome": "Solução Fortalecedora (Strengthening Solution)",
+  "tipo": "Solução (Fortalecedora Avançada)",
+  "nivel": 4,
+  "nível": 4,
+  "efeito": "Concede força física descomunal e sobre-humana ao bebedor, multiplicando sua capacidade de carga e resistência física contra impactos e atordoamentos de combate.",
+  "ingredientes": "Sangue de salamandra pura, garras de grifo em pó, bílis de dragão, infusão de acônito.",
+  "descricao": "Líquido de coloração azul-turquesa brilhante que emana calor constante. Ensinada por Severus Snape no 5º ano de Hogwarts como preparação para os exames dos N.O.M.s.",
+  "descrição": "Líquido de coloração azul-turquesa brilhante que emana calor constante. Ensinada por Severus Snape no 5º ano de Hogwarts como preparação para os exames dos N.O.M.s.",
+  "sistema": {
+    "tempo_preparo": "3 horas e 30 minutos",
+    "duracao": "1 hora",
+    "dificuldade_cd": 18,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "strengthening-solution",
+    "nome_original": "Strengthening Solution",
+    "dificuldade_original": "Beginner to advanced",
+    "caracteristicas_originais": "Turquoise in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Strengthening_Solution"
+  }
+}

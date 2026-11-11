@@ -1,0 +1,11 @@
+{
+  "id": "feitico_nebulus",
+  "name": "Nebulus",
+  "cat": "Charme",
+  "lvl": "3",
+  "tipo": "Proteção",
+  "pronuncia": "NE-bu-lus",
+  "pronunciation": "NE-bu-lus",
+  "condicao": "(C) Visão Obscurecida",
+  "desc": "Evoca uma névoa densa, fresca e rodopiante que se espalha em um raio de até 20 metros, obscurecendo completamente a visibilidade e impedindo perseguições e mira de feitiços de longo alcance. | Injúria Específica: (C) Visão Obscurecida"
+}

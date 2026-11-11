@@ -1,0 +1,14 @@
+{
+  "id": "planta_bulbo_saltador",
+  "nome": "Bulbo Saltador (Bouncing Bulb)",
+  "categoria": "Difícil de Adquirir",
+  "nivel": "3",
+  "manejo_cd": 14,
+  "manejo": "CD 14 (Herbologia). Para podar ou envasar, deve-se conter seus saltos. Se escapar, ataca com cabeçadas (Dano: 1L, impondo (C) Desestabilizado / Derrubado).",
+  "efeito": "",
+  "uso_alquimico": "O extrato de bulbo saltador confere propriedades elásticas e dinâmicas a poções de agilidade e poções pimentosas.",
+  "classificacao_ministerial": "Artigo Controlado Classe B.",
+  "descricao": "Planta bulbosa roxa com caule longo e folhas largas que pula e salta agressivamente pelo chão como uma bola de borracha desgovernada sempre que não está enterrada em solo firme. Quando se sente ameaçada ou tenta fugir de seu vaso, ataca pulando diretamente no rosto de bruxos desavisados.",
+  "peculiaridades": "• Nível de Herbologia: Nível 3 (Intermediário / 3º Ano).\n• Manejo & Colheita: CD 14 (Herbologia). Para podar ou envasar, deve-se conter seus saltos. Se escapar, ataca com cabeçadas (Dano: 1L, impondo (C) Desestabilizado / Derrubado).\n• Fraquezas Táticas: O feitiço de fogo Incendio murcha momentaneamente o bulbo; o feitiço Flipendo pode empurrá-lo de volta para o vaso de terra.\n• Uso Alquímico: O extrato de bulbo saltador confere propriedades elásticas e dinâmicas a poções de agilidade e poções pimentosas.\n• Classificação Ministerial: Artigo Controlado Classe B.",
+  "fotoBase64": ""
+}

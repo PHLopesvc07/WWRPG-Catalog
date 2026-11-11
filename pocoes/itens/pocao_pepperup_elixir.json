@@ -1,0 +1,24 @@
+{
+  "id": "pocao_pepperup_elixir",
+  "nome": "Elixir Estimulante (Pepperup Elixir)",
+  "tipo": "Elixir (Concentrado)",
+  "nivel": 3,
+  "nível": 3,
+  "efeito": "Formulação farmacêutica ultra-concentrada com 46% de teor alcoólico. Uma dosagem estrita de 7 a 21 gotas cura gripes severas e hipotermia instantaneamente, sem o inconveniente de soltar vapor pelos ouvidos como a poção tradicional.",
+  "ingredientes": "Álcool retificado a 46%, tintura concentrada de pimenta mágica, pó de chifre de bicórnio, raiz de mandrágora.",
+  "descricao": "Líquido vermelho-fogo aromático emitido sob regulamentação da Associação de Poções. Seu rótulo adverte expressamente contra o uso de mais de 21 gotas.",
+  "descrição": "Líquido vermelho-fogo aromático emitido sob regulamentação da Associação de Poções. Seu rótulo adverte expressamente contra o uso de mais de 21 gotas.",
+  "sistema": {
+    "tempo_preparo": "3 horas",
+    "duracao": "Instantâneo (efeito térmico dura 4 horas)",
+    "dificuldade_cd": 16,
+    "administracao": "Ingestão (conta-gotas, 7 a 21 gotas)"
+  },
+  "meta": {
+    "slug": "pepperup-elixir",
+    "nome_original": "Pepperup Elixir",
+    "dificuldade_original": null,
+    "caracteristicas_originais": null,
+    "wiki": "https://harrypotter.fandom.com/wiki/Pepperup_Elixir"
+  }
+}

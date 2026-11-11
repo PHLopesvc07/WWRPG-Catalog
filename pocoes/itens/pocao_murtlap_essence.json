@@ -1,0 +1,24 @@
+{
+  "id": "pocao_murtlap_essence",
+  "nome": "Essência de Murtlap (Murtlap Essence)",
+  "tipo": "Essência (Medicinal)",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Alivia a dor de imediato e cicatriza cortes, queimaduras ácidas e feridas mágicas superficiais, como as cicatrizes impostas pela pena de sangue de Dolores Umbridge nas mãos de Harry Potter.",
+  "ingredientes": "Tentáculos marinados de Murtlap em salmoura mágica purificada.",
+  "descricao": "Solução amarelada transparente calmante. Hermione Granger mantinha sempre um frasco desta essência em sua bolsa encantada.",
+  "descrição": "Solução amarelada transparente calmante. Hermione Granger mantinha sempre um frasco desta essência em sua bolsa encantada.",
+  "sistema": {
+    "tempo_preparo": "1 hora",
+    "duracao": "Instantâneo (alívio imediato e cicatrização acelerada)",
+    "dificuldade_cd": 14,
+    "administracao": "Imersão ou Aplicação Tópica"
+  },
+  "meta": {
+    "slug": "murtlap-essence",
+    "nome_original": "Murtlap Essence",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Blue in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Murtlap_Essence"
+  }
+}

@@ -1,258 +1,650 @@
-import { fileToBase64 } from '../utils/helpers.js';
-import { DatabaseService } from '../services/database.js';
+/**
+ * CONTROLADOR DO CATÁLOGO DE ANIMAIS / CRIATURAS MÁGICAS (D.R.C.C.M.)
+ * Carregamento Individual Sob Demanda (Tier 1: Índice Leve | Tier 2: Documento Individual)
+ */
+
+import {
+    COLLECTIONS,
+    fetchCatalogIndex,
+    fetchItemById,
+    fetchItemsByIds,
+    saveRecord,
+    saveBulkRecords,
+    deleteRecord,
+    downloadJsonFile
+} from "../services/database.js";
+import { fileToBase64, exportJson, escapeHtml } from "../utils/helpers.js";
 
 export class CreatureController {
     constructor() {
-        this.archive = [];
-        this.currentImageBase64 = '';
-        this.init();
+        this.indexData = [];
+        this.filteredIndex = [];
+        this.selectedIds = new Set();
+        this.activeCreatureId = null;
+        this.editingId = null;
+        this.currentFotoBase64 = "";
+
+        this.form = document.getElementById("form-creature");
+        this.listContainer = document.getElementById("creature-list");
+        this.viewerContainer = document.getElementById("creature-viewer-content");
+
+        this.initEvents();
     }
 
-    init() {
-        this.bindEvents();
-        document.addEventListener('tab-opened', (e) => {
-            if (e.detail.tabId === 'tab-archive') this.loadArchive();
-        });
-    }
+    initEvents() {
+        // 1. Visibilidade dinâmica ou destaque de atributos por Tipo de Criatura
+        const tipoSelect = document.getElementById("reg-tipo");
+        if (tipoSelect) {
+            tipoSelect.addEventListener("change", e => this.handleTypeChange(e.target.value));
+        }
 
-    bindEvents() {
-        const photoInput = document.getElementById('creature-photo');
-        if (photoInput) {
-            photoInput.addEventListener('change', async (e) => {
+        // 2. Upload de Foto com compressão automática
+        const fotoInput = document.getElementById("reg-foto");
+        if (fotoInput) {
+            fotoInput.addEventListener("change", async e => {
                 const file = e.target.files[0];
-                this.currentImageBase64 = await fileToBase64(file);
-                document.getElementById('photo-preview').src = this.currentImageBase64;
+                if (file) {
+                    this.currentFotoBase64 = await fileToBase64(file);
+                    const preview = document.getElementById("preview-foto");
+                    if (preview) {
+                        preview.src = this.currentFotoBase64;
+                        preview.classList.remove("hidden");
+                    }
+                    const label = document.getElementById("label-foto");
+                    if (label) label.textContent = "Fotografia Anexada ✓";
+                }
             });
         }
 
-        const typeSelect = document.getElementById('c-type');
-        if (typeSelect) {
-            typeSelect.addEventListener('change', (e) => this.handleDynamicAttributes(e.target.value));
-        }
-
-        const btnAddInjury = document.getElementById('btn-add-injury');
+        // 3. Adicionar ferimento customizado no formulário
+        const btnAddInjury = document.getElementById("btn-add-reg-injury");
         if (btnAddInjury) {
-            btnAddInjury.addEventListener('click', () => this.addCustomInjuryField());
+            btnAddInjury.addEventListener("click", () => this.addCustomInjuryRow());
         }
 
-        const form = document.getElementById('creature-form');
-        if (form) form.addEventListener('submit', (e) => this.saveCreature(e, form));
-
-        document.getElementById('sort-order')?.addEventListener('change', () => this.applyFiltersAndRender());
-        document.getElementById('search-creature')?.addEventListener('input', () => this.applyFiltersAndRender());
-        document.querySelectorAll('.filter-panel input[type="checkbox"]:not([data-filter-spell])')
-            .forEach(cb => cb.addEventListener('change', () => this.applyFiltersAndRender()));
-    }
-
-    handleDynamicAttributes(type) {
-        const wrappers = {
-            instinto: document.getElementById('wrap-instinto'),
-            carisma: document.getElementById('wrap-carisma'),
-            inteligencia: document.getElementById('wrap-inteligencia'),
-            sabedoria: document.getElementById('wrap-sabedoria')
-        };
-
-        Object.values(wrappers).forEach(el => el.style.display = 'none');
-        ['attr-instinto', 'attr-carisma', 'attr-inteligencia', 'attr-sabedoria'].forEach(id => document.getElementById(id).value = 0);
-
-        if (['Bestial', 'Neutro', 'Consciente'].includes(type)) wrappers.instinto.style.display = 'flex';
-        if (['Neutro', 'Consciente'].includes(type)) wrappers.carisma.style.display = 'flex';
-        if (type === 'Consciente') {
-            wrappers.inteligencia.style.display = 'flex';
-            wrappers.sabedoria.style.display = 'flex';
+        // 4. Submissão do formulário de Registro / Edição
+        if (this.form) {
+            this.form.addEventListener("submit", async e => {
+                e.preventDefault();
+                await this.saveCreature();
+            });
         }
+
+        // 5. Importação em Massa de Criaturas (JSON)
+        const btnBulk = document.getElementById("btn-bulk-import-creatures");
+        if (btnBulk) {
+            btnBulk.addEventListener("click", () => this.handleBulkImport());
+        }
+
+        // 6. Filtros e Pesquisa no Arquivo
+        const filterIds = [
+            "search-creature",
+            "sort-creature",
+            "filter-class",
+            "filter-licenca",
+            "filter-locomocao",
+            "filter-porte",
+            "filter-interacao",
+            "filter-tipo"
+        ];
+        filterIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener("input", () => this.applyFilters());
+                el.addEventListener("change", () => this.applyFilters());
+            }
+        });
+
+        const btnReset = document.getElementById("btn-reset-filters");
+        if (btnReset) {
+            btnReset.addEventListener("click", () => this.resetFilters());
+        }
+
+        // 7. Exportação de múltiplos animais selecionados
+        const btnExportSelected = document.getElementById("btn-export-selected-creatures");
+        if (btnExportSelected) {
+            btnExportSelected.addEventListener("click", () => this.exportSelectedCreatures());
+        }
+
+        // 8. Carrega o índice inicial
+        this.loadCatalog();
     }
 
-    addCustomInjuryField() {
-        const container = document.getElementById('custom-injuries-container');
-        const div = document.createElement('div');
-        div.className = 'custom-injury-row';
-        div.style = 'display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 5px;';
-        div.innerHTML = `
-            <input type="text" class="ink-input injury-name" placeholder="Condição" style="width: 140px;">
-            <input type="number" class="ink-input short-input injury-curr" value="0" min="0"> / 
-            <input type="number" class="ink-input short-input injury-max" value="0" min="0">
-            <button type="button" class="btn-danger btn-delete-injury" style="padding: 4px 8px;">X</button>
+    handleTypeChange(selectedType) {
+        document.querySelectorAll(".dynamic-reg-attr").forEach(el => {
+            const allowedTypes = el.dataset.types.split(",");
+            if (allowedTypes.includes(selectedType)) {
+                el.classList.remove("hidden");
+            } else {
+                el.classList.remove("hidden"); // Mantém visível no compêndio ministerial completo
+            }
+        });
+    }
+
+    addCustomInjuryRow(data = { name: "", curr: 0, max: 1 }) {
+        const container = document.getElementById("reg-custom-injuries-container");
+        if (!container) return;
+        const row = document.createElement("div");
+        row.className = "injury-row custom-injury mt-10";
+        row.innerHTML = `
+            <input type="text" class="ink-input injury-name-input" placeholder="Condição (ex: Asa Quebrada)" value="${escapeHtml(data.name)}" style="flex: 1;">
+            <input type="number" class="ink-input short-input curr" value="${Number(data.curr || 0)}" min="0"> /
+            <input type="number" class="ink-input short-input max" value="${Number(data.max || 1)}" min="1">
+            <button type="button" class="btn-danger" onclick="this.parentElement.remove()">X</button>
         `;
-        div.querySelector('.btn-delete-injury').addEventListener('click', () => div.remove());
-        container.appendChild(div);
+        container.appendChild(row);
     }
 
-    saveCreature(e, form) {
-        e.preventDefault();
-        const customInjuries = Array.from(document.querySelectorAll('#custom-injuries-container .custom-injury-row')).map(row => ({
-            name: row.querySelector('.injury-name').value,
-            curr: row.querySelector('.injury-curr').value,
-            max: row.querySelector('.injury-max').value
-        }));
+    async saveCreature() {
+        const customInjuries = [];
+        document.querySelectorAll("#reg-custom-injuries-container .custom-injury").forEach(row => {
+            const name = row.querySelector(".injury-name-input")?.value?.trim();
+            if (name) {
+                customInjuries.push({
+                    name,
+                    curr: parseInt(row.querySelector(".curr")?.value) || 0,
+                    max: parseInt(row.querySelector(".max")?.value) || 1
+                });
+            }
+        });
 
         const creatureData = {
-            id: Date.now().toString(),
-            nome: document.getElementById('c-name').value,
-            tamanho: document.getElementById('c-size').value,
-            peso: document.getElementById('c-weight').value,
-            classificacao: document.getElementById('c-class').value,
-            licenca: document.getElementById('c-license').value,
-            origem: document.getElementById('c-origin').value,
-            locomocao: document.getElementById('c-locomotion').value,
-            interacao: document.getElementById('c-interaction').value,
-            tipo: document.getElementById('c-type').value,
-            descricao: document.getElementById('c-desc').value,
-            fotoBase64: this.currentImageBase64,
+            ...(this.editingId ? { id: this.editingId } : {}),
+            nome: document.getElementById("reg-nome").value.trim(),
+            classificacao: document.getElementById("reg-classificacao").value,
+            licenca: document.getElementById("reg-licenca").value,
+            porte: document.getElementById("reg-porte")?.value || "Médio",
+            tamanho: document.getElementById("reg-tamanho").value.trim(),
+            peso: document.getElementById("reg-peso").value.trim(),
+            origem: document.getElementById("reg-origem").value,
+            locomocao: document.getElementById("reg-locomocao").value,
+            velocidade: document.getElementById("reg-velocidade")?.value?.trim() || "3.0m por ação",
+            interacao: document.getElementById("reg-interacao").value,
+            tipo: document.getElementById("reg-tipo").value,
+            descricao: document.getElementById("reg-descricao").value.trim(),
+            fotoBase64: this.currentFotoBase64,
+            fotoUrl: this.currentFotoBase64,
             atributos: {
-                corpo: parseInt(document.getElementById('attr-corpo').value) || 0,
-                destreza: parseInt(document.getElementById('attr-destreza').value) || 0,
-                vitalidade: parseInt(document.getElementById('attr-vitalidade').value) || 0,
-                instinto: parseInt(document.getElementById('attr-instinto').value) || 0,
-                carisma: parseInt(document.getElementById('attr-carisma').value) || 0,
-                inteligencia: parseInt(document.getElementById('attr-inteligencia').value) || 0,
-                sabedoria: parseInt(document.getElementById('attr-sabedoria').value) || 0
+                corpo: parseInt(document.getElementById("attr-corpo").value) || 0,
+                destreza: parseInt(document.getElementById("attr-destreza").value) || 0,
+                vitalidade: parseInt(document.getElementById("attr-vitalidade").value) || 0,
+                instinto: parseInt(document.getElementById("attr-instinto").value) || 0,
+                carisma: parseInt(document.getElementById("attr-carisma").value) || 0,
+                inteligencia: parseInt(document.getElementById("attr-inteligencia").value) || 0,
+                sabedoria: parseInt(document.getElementById("attr-sabedoria").value) || 0
+            },
+            habilidades: {
+                dano: {
+                    nome: document.getElementById("hab-dano-nome")?.value?.trim() || "",
+                    rolagem: document.getElementById("hab-dano-rolagem")?.value?.trim() || "",
+                    desc: document.getElementById("hab-dano-desc")?.value?.trim() || ""
+                },
+                reacao: {
+                    nome: document.getElementById("hab-reacao-nome")?.value?.trim() || "",
+                    rolagem: document.getElementById("hab-reacao-rolagem")?.value?.trim() || "",
+                    desc: document.getElementById("hab-reacao-desc")?.value?.trim() || ""
+                },
+                ambiente: {
+                    nome: document.getElementById("hab-ambiente-nome")?.value?.trim() || "",
+                    rolagem: document.getElementById("hab-ambiente-rolagem")?.value?.trim() || "",
+                    desc: document.getElementById("hab-ambiente-desc")?.value?.trim() || ""
+                },
+                extra: {
+                    nome: document.getElementById("hab-extra-nome")?.value?.trim() || "",
+                    rolagem: document.getElementById("hab-extra-rolagem")?.value?.trim() || "",
+                    desc: document.getElementById("hab-extra-desc")?.value?.trim() || ""
+                }
             },
             injuries: {
-                leve:   { curr: document.getElementById('c-inj-leve-curr')?.value   || 0, max: document.getElementById('c-inj-leve-max')?.value   || 0 },
-                media:  { curr: document.getElementById('c-inj-media-curr')?.value  || 0, max: document.getElementById('c-inj-media-max')?.value  || 0 },
-                pesada: { curr: document.getElementById('c-inj-pesada-curr')?.value || 0, max: document.getElementById('c-inj-pesada-max')?.value || 0 },
+                leve: {
+                    curr: parseInt(document.getElementById("reg-inj-leve-curr").value) || 0,
+                    max: parseInt(document.getElementById("reg-inj-leve-max").value) || 3
+                },
+                media: {
+                    curr: parseInt(document.getElementById("reg-inj-media-curr").value) || 0,
+                    max: parseInt(document.getElementById("reg-inj-media-max").value) || 2
+                },
+                pesada: {
+                    curr: parseInt(document.getElementById("reg-inj-pesada-curr").value) || 0,
+                    max: parseInt(document.getElementById("reg-inj-pesada-max").value) || 1
+                },
                 custom: customInjuries
             }
         };
 
-        DatabaseService.saveRecord(creatureData, creatureData.nome);
-        alert(`O registo de ${creatureData.nome} foi concluído!\nMova o ficheiro baixado para a pasta "dados" e adicione no indice.json.`);
+        const result = await saveRecord(COLLECTIONS.CREATURES, creatureData, "criatura");
 
-        form.reset();
-        document.getElementById('photo-preview').src = '';
-        this.currentImageBase64 = '';
-        document.getElementById('custom-injuries-container').innerHTML = '';
-        document.getElementById('c-type').dispatchEvent(new Event('change'));
-    }
-
-    async loadArchive() {
-        const listEl = document.getElementById('archive-list');
-        listEl.innerHTML = '<li style="color: var(--magic-gold); text-align: center; padding: 15px;">A consultar os arquivos restritos...</li>';
-        try {
-            this.archive = await DatabaseService.fetchCollection('./dados', 'indice.json');
-            this.applyFiltersAndRender();
-        } catch (error) {
-            listEl.innerHTML = `<li style="color: #ff6b6b; padding: 15px;">Erro de Acesso: Verifique se está a utilizar um Live Server e se a pasta 'dados' existe.</li>`;
+        this.form.reset();
+        this.editingId = null;
+        this.currentFotoBase64 = "";
+        const preview = document.getElementById("preview-foto");
+        if (preview) {
+            preview.src = "";
+            preview.classList.add("hidden");
         }
+        const label = document.getElementById("label-foto");
+        if (label) label.textContent = "Anexar Retrato ou Ilustração";
+        const injContainer = document.getElementById("reg-custom-injuries-container");
+        if (injContainer) injContainer.innerHTML = "";
+
+        await this.loadCatalog(true);
+        alert(
+            result.savedToCloud
+                ? `Criatura "${creatureData.nome}" catalogada e sincronizada no Firebase Firestore!`
+                : `Criatura "${creatureData.nome}" salva no catálogo local!`
+        );
     }
 
-    applyFiltersAndRender() {
-        const listEl = document.getElementById('archive-list');
-        if (!listEl) return;
-        listEl.innerHTML = '';
+    async handleBulkImport() {
+        const textInput = document.getElementById("bulk-creature-input")?.value?.trim();
+        const fileInput = document.getElementById("bulk-creature-file")?.files?.[0];
 
-        const search = (document.getElementById('search-creature')?.value || '').toLowerCase().trim();
+        let rawJson = textInput;
+        if (fileInput) {
+            rawJson = await fileInput.text();
+        }
 
-        const activeFilters = { tipo: [], classificacao: [], locomocao: [], origem: [], interacao: [] };
-        document.querySelectorAll('.filter-panel input[type="checkbox"]:checked:not([data-filter-spell])').forEach(cb => {
-            activeFilters[cb.getAttribute('data-filter')].push(cb.value);
-        });
-
-        let filtered = this.archive.filter(creature => {
-            if (search) {
-                const nome = (creature.nome || '').toLowerCase();
-                const desc = (creature.descricao || '').toLowerCase();
-                if (!nome.includes(search) && !desc.includes(search)) return false;
-            }
-            for (const category in activeFilters) {
-                if (activeFilters[category].length > 0) {
-                    if (!activeFilters[category].includes(String(creature[category]))) return false;
-                }
-            }
-            return true;
-        });
-
-        const sortOrder = document.getElementById('sort-order')?.value || 'AZ';
-        filtered.sort((a, b) => sortOrder === 'AZ' ? a.nome.localeCompare(b.nome) : b.nome.localeCompare(a.nome));
-
-        if (filtered.length === 0) {
-            listEl.innerHTML = '<li style="color: gray; padding: 10px; text-align:center;">Nenhum espécime encontrado.</li>';
+        if (!rawJson) {
+            alert("Cole um JSON válido ou selecione um arquivo .json para importar criaturas em massa.");
             return;
         }
 
-        filtered.forEach((creature) => {
-            const li = document.createElement('li');
-            li.className = 'creature-item';
-            li.style.cursor = 'pointer';
-            li.onclick = () => this.renderDetails(creature);
+        try {
+            const parsed = JSON.parse(rawJson);
+            const list = Array.isArray(parsed) ? parsed : [parsed];
+            const res = await saveBulkRecords(COLLECTIONS.CREATURES, list, "criatura");
+            document.getElementById("bulk-creature-input").value = "";
+            document.getElementById("bulk-creature-file").value = "";
+            await this.loadCatalog(true);
+            alert(`${res.count} criatura(s) importada(s) com sucesso!`);
+        } catch (err) {
+            alert("Erro ao processar JSON de criaturas: " + err.message);
+        }
+    }
 
-            const span = document.createElement('span');
-            span.className = 'creature-item-title';
-            span.textContent = `${creature.nome} (${creature.classificacao})`;
+    /**
+     * Carrega apenas o índice leve das criaturas (Tier 1) para listagem rápida.
+     */
+    async loadCatalog(forceRefresh = false) {
+        if (!this.listContainer) return;
+        this.listContainer.innerHTML = `<li class="empty-msg">Consultando índice do D.R.C.C.M...</li>`;
 
-            const exportBtn = document.createElement('button');
-            exportBtn.className = 'btn-teal';
-            exportBtn.style.fontSize = '0.8rem';
-            exportBtn.textContent = 'Extrair Cópia';
-            exportBtn.onclick = (e) => { e.stopPropagation(); DatabaseService.saveRecord(creature, creature.nome); };
+        this.indexData = await fetchCatalogIndex(COLLECTIONS.CREATURES, forceRefresh);
+        this.updateBadgeCount();
+        this.applyFilters();
+    }
 
-            li.appendChild(span);
-            li.appendChild(exportBtn);
-            listEl.appendChild(li);
+    updateBadgeCount() {
+        const badge = document.getElementById("count-badge-creatures");
+        if (badge) badge.textContent = this.indexData.length;
+    }
+
+    resetFilters() {
+        const ids = [
+            "search-creature",
+            "filter-class",
+            "filter-licenca",
+            "filter-locomocao",
+            "filter-porte",
+            "filter-interacao",
+            "filter-tipo"
+        ];
+        ids.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.value = "";
+        });
+        const sortEl = document.getElementById("sort-creature");
+        if (sortEl) sortEl.value = "alfabetica";
+        this.applyFilters();
+    }
+
+    applyFilters() {
+        const search = (document.getElementById("search-creature")?.value || "").toLowerCase().trim();
+        const sortMode = document.getElementById("sort-creature")?.value || "alfabetica";
+        const fClass = document.getElementById("filter-class")?.value || "";
+        const fLicenca = document.getElementById("filter-licenca")?.value || "";
+        const fLocomocao = document.getElementById("filter-locomocao")?.value || "";
+        const fPorte = document.getElementById("filter-porte")?.value || "";
+        const fInteracao = document.getElementById("filter-interacao")?.value || "";
+        const fTipo = document.getElementById("filter-tipo")?.value || "";
+
+        this.filteredIndex = this.indexData.filter(c => {
+            const matchName = !search || (c.nome || "").toLowerCase().includes(search);
+            const matchClass = !fClass || c.classificacao === fClass;
+            const matchLicenca = !fLicenca || c.licenca === fLicenca;
+            const matchLocomocao = !fLocomocao || c.locomocao === fLocomocao;
+            const matchPorte = !fPorte || c.porte === fPorte;
+            const matchInteracao = !fInteracao || c.interacao === fInteracao;
+            const matchTipo = !fTipo || c.tipo === fTipo;
+
+            return matchName && matchClass && matchLicenca && matchLocomocao && matchPorte && matchInteracao && matchTipo;
+        });
+
+        this.filteredIndex.sort((a, b) => {
+            if (sortMode === "alfabetica") return (a.nome || "").localeCompare(b.nome || "", "pt-BR");
+            if (sortMode === "perigo-asc") return (a.classificacao || "").length - (b.classificacao || "").length;
+            if (sortMode === "perigo-desc") return (b.classificacao || "").length - (a.classificacao || "").length;
+            return 0;
+        });
+
+        this.renderSidebarList();
+    }
+
+    renderSidebarList() {
+        if (!this.listContainer) return;
+        this.listContainer.innerHTML = "";
+
+        const countEl = document.getElementById("creature-filter-count");
+        if (countEl) {
+            countEl.textContent = `Exibindo ${this.filteredIndex.length} de ${this.indexData.length} espécies`;
+        }
+
+        if (this.filteredIndex.length === 0) {
+            this.listContainer.innerHTML = `<li class="empty-msg">Nenhuma criatura encontrada com os filtros atuais.</li>`;
+            return;
+        }
+
+        const fragment = document.createDocumentFragment();
+        this.filteredIndex.forEach(c => {
+            const li = document.createElement("li");
+            li.className = `record-list-item ${this.activeCreatureId === c.id ? "active-record" : ""}`;
+            li.dataset.id = c.id;
+
+            const isChecked = this.selectedIds.has(c.id);
+            li.innerHTML = `
+                <div class="list-item-row">
+                    <input type="checkbox" class="record-check" data-id="${escapeHtml(c.id)}" ${isChecked ? "checked" : ""} title="Selecionar para exportação">
+                    <div class="list-item-main">
+                        <strong>${escapeHtml(c.nome)}</strong>
+                        <small>${escapeHtml(c.tipo)} • ${escapeHtml(c.locomocao)} • ${escapeHtml(c.porte || "Médio")}</small>
+                    </div>
+                    <span class="badge-danger-small">${escapeHtml(c.classificacao)}</span>
+                </div>
+            `;
+
+            const checkbox = li.querySelector(".record-check");
+            checkbox.addEventListener("click", e => {
+                e.stopPropagation();
+                if (e.target.checked) {
+                    this.selectedIds.add(c.id);
+                } else {
+                    this.selectedIds.delete(c.id);
+                }
+                this.updateExportButtonLabel();
+            });
+
+            li.addEventListener("click", () => this.selectAndLoadCreature(c.id));
+            fragment.appendChild(li);
+        });
+
+        this.listContainer.appendChild(fragment);
+        this.updateExportButtonLabel();
+    }
+
+    updateExportButtonLabel() {
+        const btn = document.getElementById("btn-export-selected-creatures");
+        if (btn) {
+            btn.textContent = this.selectedIds.size > 0
+                ? `📦 Exportar Selecionados (${this.selectedIds.size})`
+                : `📦 Exportar Lista Filtrada (${this.filteredIndex.length})`;
+        }
+    }
+
+    /**
+     * Carregamento Individual Sob Demanda (Tier 2):
+     * Busca a ficha completa da criatura APENAS quando o usuário a seleciona.
+     */
+    async selectAndLoadCreature(id) {
+        this.activeCreatureId = id;
+        this.listContainer?.querySelectorAll(".record-list-item").forEach(li => {
+            li.classList.toggle("active-record", li.dataset.id === id);
+        });
+
+        if (!this.viewerContainer) return;
+        this.viewerContainer.classList.remove("empty-viewer");
+        this.viewerContainer.innerHTML = `
+            <div class="loading-parchment">
+                <span class="loading-quill">🪶</span>
+                <p>Consultando registro ministerial individual no arquivo...</p>
+            </div>
+        `;
+
+        const c = await fetchItemById(COLLECTIONS.CREATURES, id);
+        if (!c) {
+            this.viewerContainer.innerHTML = `<p class="empty-msg">Não foi possível carregar o registro individual desta criatura.</p>`;
+            return;
+        }
+
+        this.renderCreatureSheet(c);
+    }
+
+    formatSigned(val) {
+        const n = Number(val || 0);
+        return n > 0 ? `+${n}` : `${n}`;
+    }
+
+    renderCreatureSheet(c) {
+        const photoSrc = c.fotoBase64 || c.fotoUrl || "";
+        const imgHtml = photoSrc
+            ? `<div class="creature-portrait-frame">
+                 <img src="${escapeHtml(photoSrc)}" class="creature-sheet-photo" alt="${escapeHtml(c.nome)}" loading="lazy" onerror="this.parentElement.style.display='none'">
+               </div>`
+            : "";
+
+        const attrs = c.atributos || {};
+        const attrLabels = [
+            { key: "corpo", icon: "💪", label: "Corpo" },
+            { key: "destreza", icon: "🎯", label: "Destreza" },
+            { key: "vitalidade", icon: "❤️", label: "Vitalidade" },
+            { key: "instinto", icon: "🦊", label: "Instinto" },
+            { key: "carisma", icon: "👑", label: "Carisma" },
+            { key: "inteligencia", icon: "🧠", label: "Inteligência" },
+            { key: "sabedoria", icon: "👁️", label: "Sabedoria" }
+        ];
+
+        const attrsHtml = attrLabels.map(a => `
+            <div class="stat-pill">
+                <span class="stat-pill-label">${a.icon} ${a.label}</span>
+                <strong class="stat-pill-value">${this.formatSigned(attrs[a.key])}</strong>
+            </div>
+        `).join("");
+
+        // Habilidades Especiais (Dano, Reação, Ambiente, Extra)
+        const hab = c.habilidades || {};
+        const habCategories = [
+            { key: "dano", badge: "⚔️ DANO", colorClass: "hab-dano" },
+            { key: "reacao", badge: "🛡️ REAÇÃO", colorClass: "hab-reacao" },
+            { key: "ambiente", badge: "🌪️ AMBIENTE", colorClass: "hab-ambiente" },
+            { key: "extra", badge: "✨ EXTRA", colorClass: "hab-extra" }
+        ];
+
+        const hasAbilities = habCategories.some(hc => hab[hc.key]?.nome || hab[hc.key]?.desc);
+        const abilitiesHtml = hasAbilities
+            ? `
+            <div class="sheet-section mt-15">
+                <h4 class="section-subtitle">⚔️ Habilidades de Combate & Instinto</h4>
+                <div class="abilities-grid">
+                    ${habCategories.map(hc => {
+                        const item = hab[hc.key];
+                        if (!item || (!item.nome && !item.desc)) return "";
+                        return `
+                            <div class="ability-card ${hc.colorClass}">
+                                <div class="ability-card-header">
+                                    <span class="ability-type-tag">${hc.badge}</span>
+                                    <strong class="ability-name">${escapeHtml(item.nome || "Habilidade")}</strong>
+                                    ${item.rolagem ? `<code class="ability-roll">${escapeHtml(item.rolagem)}</code>` : ""}
+                                </div>
+                                <p class="ability-desc">${escapeHtml(item.desc || "")}</p>
+                            </div>
+                        `;
+                    }).join("")}
+                </div>
+            </div>`
+            : "";
+
+        let customInjHtml = "";
+        if (c.injuries?.custom && c.injuries.custom.length > 0) {
+            customInjHtml = `<div class="mt-10"><strong>Condições Específicas:</strong><ul style="margin-left: 20px;">` +
+                c.injuries.custom.map(i => `<li>${escapeHtml(i.name)}: [${i.curr} / ${i.max}]</li>`).join("") +
+                `</ul></div>`;
+        }
+
+        this.viewerContainer.innerHTML = `
+            <div class="creature-sheet-card animated-fade">
+                <div class="sheet-top-banner">
+                    <div>
+                        <span class="department-tag">D.R.C.C.M. • REGISTRO OFICIAL DE ESPÉCIE MÁGICA</span>
+                        <h3 class="sheet-main-title">${escapeHtml(c.nome)}</h3>
+                    </div>
+                    <div class="danger-stamp" title="Classificação do Ministério da Magia">
+                        <span>M.M.</span>
+                        <strong>${escapeHtml(c.classificacao)}</strong>
+                    </div>
+                </div>
+
+                <div class="sheet-hero-grid">
+                    ${imgHtml}
+                    <div class="sheet-metadata-box">
+                        <div class="meta-item"><strong>Licença Exigida:</strong> <span class="license-tag">${escapeHtml(c.licenca)}</span></div>
+                        <div class="meta-item"><strong>Tipo de Criatura:</strong> ${escapeHtml(c.tipo)} (${escapeHtml(c.interacao)})</div>
+                        <div class="meta-item"><strong>Origem:</strong> ${escapeHtml(c.origem || "Natural")}</div>
+                        <div class="meta-item"><strong>Porte / Categoria:</strong> ${escapeHtml(c.porte || "Médio")}</div>
+                        <div class="meta-item"><strong>Dimensões Adulto:</strong> ${escapeHtml(c.tamanho || "N/A")} • ${escapeHtml(c.peso || "N/A")}</div>
+                        <div class="meta-item"><strong>Locomoção:</strong> ${escapeHtml(c.locomocao)}</div>
+                        <div class="meta-item"><strong>Velocidade de Ação:</strong> <code>${escapeHtml(c.velocidade || "3.0m por ação")}</code></div>
+                    </div>
+                </div>
+
+                <div class="sheet-section mt-15">
+                    <h4 class="section-subtitle">📊 Atributos Físicos e Animais (Escala -5 a +10)</h4>
+                    <div class="stats-pills-grid">
+                        ${attrsHtml}
+                    </div>
+                </div>
+
+                ${abilitiesHtml}
+
+                <div class="sheet-section mt-15">
+                    <h4 class="section-subtitle">🩺 Prontuário Médico-Veterinário (Limites de Injúria)</h4>
+                    <div class="injury-badges-row">
+                        <span class="inj-badge inj-light">🟢 Leve: [ ${c.injuries?.leve?.curr || 0} / ${c.injuries?.leve?.max || 3} ]</span>
+                        <span class="inj-badge inj-medium">🟡 Média: [ ${c.injuries?.media?.curr || 0} / ${c.injuries?.media?.max || 2} ]</span>
+                        <span class="inj-badge inj-heavy">🔴 Pesada: [ ${c.injuries?.pesada?.curr || 0} / ${c.injuries?.pesada?.max || 1} ]</span>
+                    </div>
+                    ${customInjHtml}
+                </div>
+
+                <div class="sheet-section mt-15">
+                    <h4 class="section-subtitle">📜 Descrição Física, Habitat & Temperamento</h4>
+                    <p class="sheet-prose">${escapeHtml(c.descricao || "").replace(/\n/g, "<br>")}</p>
+                </div>
+
+                <div class="sheet-actions-bar mt-20">
+                    <button type="button" class="btn-submit" id="btn-export-single-creature">
+                        📥 Exportar para Ficha de Jogador (.json)
+                    </button>
+                    <button type="button" class="btn-secondary" id="btn-edit-creature">
+                        ✏️ Editar Registro
+                    </button>
+                    <button type="button" class="btn-danger" id="btn-delete-creature">
+                        🗑️ Excluir
+                    </button>
+                </div>
+            </div>
+        `;
+
+        this.viewerContainer.querySelector("#btn-export-single-creature")?.addEventListener("click", () => {
+            exportJson(c, `criatura_${c.nome}`);
+        });
+
+        this.viewerContainer.querySelector("#btn-edit-creature")?.addEventListener("click", () => {
+            this.populateFormForEdit(c);
+        });
+
+        this.viewerContainer.querySelector("#btn-delete-creature")?.addEventListener("click", async () => {
+            if (confirm(`Deseja realmente remover "${c.nome}" do arquivo?`)) {
+                await deleteRecord(COLLECTIONS.CREATURES, c.id);
+                this.activeCreatureId = null;
+                this.viewerContainer.innerHTML = `<p class="empty-msg">Registro removido. Selecione outra criatura na lista ao lado.</p>`;
+                await this.loadCatalog(true);
+            }
         });
     }
 
-    renderDetails(c) {
-        const viewer = document.getElementById('creature-viewer');
-        let attrHtml = `
-            <span class="attr-badge">Corpo: ${c.atributos?.corpo || 0}</span>
-            <span class="attr-badge">Destreza: ${c.atributos?.destreza || 0}</span>
-            <span class="attr-badge">Vitalidade: ${c.atributos?.vitalidade || 0}</span>
-        `;
-        if (['Bestial', 'Neutro', 'Consciente'].includes(c.tipo)) attrHtml += `<span class="attr-badge">Instinto: ${c.atributos?.instinto || 0}</span>`;
-        if (['Neutro', 'Consciente'].includes(c.tipo)) attrHtml += `<span class="attr-badge">Carisma: ${c.atributos?.carisma || 0}</span>`;
-        if (c.tipo === 'Consciente') {
-            attrHtml += `<span class="attr-badge">Inteligência: ${c.atributos?.inteligencia || 0}</span>`;
-            attrHtml += `<span class="attr-badge">Sabedoria: ${c.atributos?.sabedoria || 0}</span>`;
+    populateFormForEdit(c) {
+        this.editingId = c.id;
+        document.getElementById("reg-nome").value = c.nome || "";
+        document.getElementById("reg-classificacao").value = c.classificacao || "XXX";
+        document.getElementById("reg-licenca").value = c.licenca || "Comum";
+        if (document.getElementById("reg-porte")) {
+            document.getElementById("reg-porte").value = c.porte || "Médio";
+        }
+        document.getElementById("reg-tamanho").value = c.tamanho || "";
+        document.getElementById("reg-peso").value = c.peso || "";
+        document.getElementById("reg-origem").value = c.origem || "Natural";
+        document.getElementById("reg-locomocao").value = c.locomocao || "Terrestres";
+        if (document.getElementById("reg-velocidade")) {
+            document.getElementById("reg-velocidade").value = c.velocidade || "3.0m por ação";
+        }
+        document.getElementById("reg-interacao").value = c.interacao || "Pacífico";
+        document.getElementById("reg-tipo").value = c.tipo || "Neutro";
+        document.getElementById("reg-descricao").value = c.descricao || "";
+
+        const attrs = c.atributos || {};
+        document.getElementById("attr-corpo").value = attrs.corpo ?? 0;
+        document.getElementById("attr-destreza").value = attrs.destreza ?? 0;
+        document.getElementById("attr-vitalidade").value = attrs.vitalidade ?? 0;
+        document.getElementById("attr-instinto").value = attrs.instinto ?? 0;
+        document.getElementById("attr-carisma").value = attrs.carisma ?? 0;
+        document.getElementById("attr-inteligencia").value = attrs.inteligencia ?? 0;
+        document.getElementById("attr-sabedoria").value = attrs.sabedoria ?? 0;
+
+        const hab = c.habilidades || {};
+        ["dano", "reacao", "ambiente", "extra"].forEach(k => {
+            const h = hab[k] || {};
+            const nEl = document.getElementById(`hab-${k}-nome`);
+            const rEl = document.getElementById(`hab-${k}-rolagem`);
+            const dEl = document.getElementById(`hab-${k}-desc`);
+            if (nEl) nEl.value = h.nome || "";
+            if (rEl) rEl.value = h.rolagem || "";
+            if (dEl) dEl.value = h.desc || "";
+        });
+
+        document.getElementById("reg-inj-leve-curr").value = c.injuries?.leve?.curr ?? 0;
+        document.getElementById("reg-inj-leve-max").value = c.injuries?.leve?.max ?? 3;
+        document.getElementById("reg-inj-media-curr").value = c.injuries?.media?.curr ?? 0;
+        document.getElementById("reg-inj-media-max").value = c.injuries?.media?.max ?? 2;
+        document.getElementById("reg-inj-pesada-curr").value = c.injuries?.pesada?.curr ?? 0;
+        document.getElementById("reg-inj-pesada-max").value = c.injuries?.pesada?.max ?? 1;
+
+        const injContainer = document.getElementById("reg-custom-injuries-container");
+        if (injContainer) {
+            injContainer.innerHTML = "";
+            (c.injuries?.custom || []).forEach(inj => this.addCustomInjuryRow(inj));
         }
 
-        let injuriesHtml = '';
-        if (c.injuries) {
-            let customHtml = '';
-            if (c.injuries.custom?.length > 0) {
-                customHtml = '<h4 style="margin: 10px 0 5px 0; font-size: 0.9rem; color: var(--magic-gold);">Condições Especiais:</h4>';
-                c.injuries.custom.forEach(inj => {
-                    if (inj.name) customHtml += `<p style="margin: 3px 0;"><strong>${inj.name}:</strong> ${inj.curr} / ${inj.max}</p>`;
-                });
-            }
-            injuriesHtml = `
-                <div class="bureaucracy-box" style="padding: 10px; margin-bottom: 15px;">
-                    <h3 style="margin-top: 0; font-size: 1rem;">Prontuário Médico</h3>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <span class="attr-badge" style="background: rgba(183,28,28,0.1); border-color: #b71c1c;">Leve: ${c.injuries.leve?.curr || 0}/${c.injuries.leve?.max || 0}</span>
-                        <span class="attr-badge" style="background: rgba(183,28,28,0.1); border-color: #b71c1c;">Média: ${c.injuries.media?.curr || 0}/${c.injuries.media?.max || 0}</span>
-                        <span class="attr-badge" style="background: rgba(183,28,28,0.1); border-color: #b71c1c;">Pesada: ${c.injuries.pesada?.curr || 0}/${c.injuries.pesada?.max || 0}</span>
-                    </div>
-                    ${customHtml}
-                </div>`;
+        this.currentFotoBase64 = c.fotoBase64 || c.fotoUrl || "";
+        const preview = document.getElementById("preview-foto");
+        if (preview && this.currentFotoBase64) {
+            preview.src = this.currentFotoBase64;
+            preview.classList.remove("hidden");
         }
 
-        const photoSrc = c.fotoBase64 || 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+        // Navega para a aba de registro de criaturas
+        document.querySelector('[data-target="tab-registro-criaturas"]')?.click();
+    }
 
-        viewer.innerHTML = `
-            <div class="details-header">
-                <img src="${photoSrc}" alt="Foto de ${c.nome}">
-                <div>
-                    <h2 style="margin: 0 0 10px 0; color: var(--magic-gold);">${c.nome}</h2>
-                    <p style="margin: 2px 0;"><strong>Classificação:</strong> ${c.classificacao}</p>
-                    <p style="margin: 2px 0;"><strong>Tipo:</strong> ${c.tipo}</p>
-                    <p style="margin: 2px 0;"><strong>Licença:</strong> ${c.licenca}</p>
-                </div>
-            </div>
-            <div style="margin-bottom: 15px;">
-                <p style="margin: 5px 0;"><strong>Dimensões:</strong> ${c.tamanho}m | ${c.peso}kg</p>
-                <p style="margin: 5px 0;"><strong>Perfil:</strong> ${c.origem} | ${c.locomocao} | ${c.interacao}</p>
-            </div>
-            <div class="bureaucracy-box" style="padding: 10px; margin-bottom: 15px;">
-                <h3 style="margin-top: 0; font-size: 1rem;">Atributos Mágicos / Físicos</h3>
-                ${attrHtml}
-            </div>
-            ${injuriesHtml}
-            <div>
-                <h3 style="margin-top: 0; font-size: 1rem; color: var(--magic-gold);">Descrição e Notas</h3>
-                <p style="line-height: 1.5; white-space: pre-wrap; font-size: 0.95rem;">${c.descricao}</p>
-            </div>
-        `;
+    async exportSelectedCreatures() {
+        const targetIds = this.selectedIds.size > 0
+            ? Array.from(this.selectedIds)
+            : this.filteredIndex.map(i => i.id);
+
+        if (targetIds.length === 0) {
+            alert("Nenhuma criatura disponível para exportar.");
+            return;
+        }
+
+        const fullItems = await fetchItemsByIds(COLLECTIONS.CREATURES, targetIds);
+        downloadJsonFile(fullItems, `compendio_criaturas_${fullItems.length}`);
     }
 }

@@ -1,0 +1,24 @@
+{
+  "id": "pocao_grand_wiggenweld_potion",
+  "nome": "Grande Poção Wiggenweld (Grand Wiggenweld Potion)",
+  "tipo": "Poção (Cura Avançada)",
+  "nivel": 4,
+  "nível": 4,
+  "efeito": "Versão superior da Poção Wiggenweld. Regenera grandes quantidades de vitalidade, estanca hemorragias, recupera ossos trincados e desperta alvos sob qualquer tipo de sono mágico ou coma induzido.",
+  "ingredientes": "Suco de Horklump concentrado, casca de Wiggentree secular, muco de Verme-Cego purificado, pó de chifre de unicórnio.",
+  "descricao": "Líquido verde-esmeralda cintilante que ilumina suavemente o recipiente onde é guardado.",
+  "descrição": "Líquido verde-esmeralda cintilante que ilumina suavemente o recipiente onde é guardado.",
+  "sistema": {
+    "tempo_preparo": "3 horas e 30 minutos",
+    "duracao": "Instantâneo",
+    "dificuldade_cd": 18,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "grand-wiggenweld-potion",
+    "nome_original": "Grand Wiggenweld Potion",
+    "dificuldade_original": "Beginner",
+    "caracteristicas_originais": "Green in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Grand_Wiggenweld_Potion"
+  }
+}

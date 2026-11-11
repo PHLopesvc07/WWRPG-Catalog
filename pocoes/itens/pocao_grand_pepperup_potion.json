@@ -1,0 +1,24 @@
+{
+  "id": "pocao_grand_pepperup_potion",
+  "nome": "Grande Poção Estimulante (Grand Pepperup Potion)",
+  "tipo": "Poção (Medicinal Avançada)",
+  "nivel": 4,
+  "nível": 4,
+  "efeito": "Versão de alta potência da Poção Estimulante. Cura resfriados graves, febres mágicas, restaura estamina exaurida e aquece o corpo instantaneamente, liberando jatos volumosos de vapor pelos ouvidos por várias horas.",
+  "ingredientes": "Pó de polvo gigante, chifre de bicórnio triturado, raiz de mandrágora cozida, folhas de pimenteira mágica.",
+  "descricao": "Líquido escarlate denso que ferve continuamente mesmo fora do fogo. Muito mais potente e rápida que a receita clássica de Glover Hipworth.",
+  "descrição": "Líquido escarlate denso que ferve continuamente mesmo fora do fogo. Muito mais potente e rápida que a receita clássica de Glover Hipworth.",
+  "sistema": {
+    "tempo_preparo": "3 horas",
+    "duracao": "Cura instantânea / Efeito térmico dura 6 horas",
+    "dificuldade_cd": 18,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "grand-pepperup-potion",
+    "nome_original": "Grand Pepperup Potion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Red in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Grand_Pepperup_Potion"
+  }
+}

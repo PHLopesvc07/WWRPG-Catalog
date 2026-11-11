@@ -1,0 +1,11 @@
+{
+  "id": "feitico_alohomora",
+  "name": "Alohomora",
+  "cat": "Charme",
+  "lvl": "1",
+  "tipo": "Utilitário",
+  "pronuncia": "A-lo-ho-MO-ra",
+  "pronunciation": "A-lo-ho-MO-ra",
+  "condicao": "Nenhuma",
+  "desc": "Usado para destrancar portas trancadas por chaves comuns, e não trancadas por magia."
+}

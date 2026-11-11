@@ -1,0 +1,14 @@
+{
+  "id": "planta_geranio_dentuco",
+  "nome": "Gerânio Dentuço (Fanged Geranium)",
+  "categoria": "Difícil de Adquirir",
+  "nivel": "3",
+  "manejo_cd": 14,
+  "manejo": "CD 14 (Herbologia). Exige Luvas de Couro de Dragão; sem luvas, a mordida causa 1L e impõe a condição (C) Mordido.",
+  "efeito": "",
+  "uso_alquimico": "Seus dentes e presas secas são moídos para compor poções de ataque, poções de coragem e soluções cáusticas.",
+  "classificacao_ministerial": "Artigo Controlado Classe B (Difícil de Adquirir).",
+  "descricao": "Variedade de gerânio de folhas aveludadas e flores coloridas no centro das quais se esconde uma mandíbula afiada com dentes pequenos pontiagudos semelhantes a caninos de víbora. Morde qualquer um que tentar cheirá-lo ou tocá-lo sem as devidas precauções.",
+  "peculiaridades": "• Nível de Herbologia: Nível 3 (Intermediário / 3º Ano).\n• Manejo & Colheita: CD 14 (Herbologia). Exige Luvas de Couro de Dragão; sem luvas, a mordida causa 1L e impõe a condição (C) Mordido.\n• Uso Alquímico: Seus dentes e presas secas são moídos para compor poções de ataque, poções de coragem e soluções cáusticas.\n• Classificação Ministerial: Artigo Controlado Classe B (Difícil de Adquirir).",
+  "fotoBase64": ""
+}

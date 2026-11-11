@@ -1,0 +1,11 @@
+{
+  "id": "feitico_ventus",
+  "name": "Ventus",
+  "cat": "Charme",
+  "lvl": "1",
+  "tipo": "Ataque",
+  "pronuncia": "VEN-tus",
+  "pronunciation": "VEN-tus",
+  "condicao": "(C) Desequilibrado",
+  "desc": "Dispara uma espiral de vento forte da ponta da varinha, capaz de afastar pequenos alvos, apagar tochas e desequilibrar oponentes. | Injúria Específica: (C) Desequilibrado"
+}

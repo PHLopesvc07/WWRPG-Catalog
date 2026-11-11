@@ -1,0 +1,11 @@
+{
+  "id": "feitico_incendio",
+  "name": "Incendio",
+  "cat": "Charme",
+  "lvl": "1",
+  "tipo": "Ataque",
+  "pronuncia": "In-CEN-di-o",
+  "pronunciation": "In-CEN-di-o",
+  "condicao": "(C) Em Chamas",
+  "desc": "Feitiço elementar de fogo que projeta uma língua de chamas vivas a partir da varinha, capaz de atear fogo a tecidos, vegetações secas ou queimar adversários. | Injúria Específica: (C) Em Chamas"
+}

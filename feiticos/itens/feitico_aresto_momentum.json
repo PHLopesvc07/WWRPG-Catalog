@@ -1,0 +1,11 @@
+{
+  "id": "feitico_aresto_momentum",
+  "name": "Aresto Momentum",
+  "cat": "Charme",
+  "lvl": "5",
+  "tipo": "Proteção",
+  "pronuncia": "A-RES-to Mo-MEN-tum",
+  "pronunciation": "A-RES-to Mo-MEN-tum",
+  "condicao": "(C) Desacelerado",
+  "desc": "é um feitiço conhecido como \"feitiço de desaceleração\" ou \"charme de frenagem\", usado para diminuir a velocidade de objetos ou pessoas em queda. Ele serve para interromper o ímpeto, tornando movimentos lentos. | Injúria Específica: (C) Desacelerado"
+}

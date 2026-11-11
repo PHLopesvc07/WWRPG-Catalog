@@ -1,0 +1,24 @@
+{
+  "id": "pocao_vitamix_potion",
+  "nome": "Poção Vitamix / Explosão de Energia (Vitamix Potion)",
+  "tipo": "Poção (Energética)",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Concede um surto instantâneo de energia física e foco revigorado, dissipando dores corporais leves e cansaço de estudos ou trabalho prolongado.",
+  "ingredientes": "Infusão de absinto, raiz de asfódelo em pó, folhas de acônito tratadas, suco de maçã silvestre.",
+  "descricao": "Líquido azul elétrico brilhante com sabor picante e cítrico.",
+  "descrição": "Líquido azul elétrico brilhante com sabor picante e cítrico.",
+  "sistema": {
+    "tempo_preparo": "1 hora",
+    "duracao": "2 horas",
+    "dificuldade_cd": 14,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "vitamix-potion",
+    "nome_original": "Vitamix Potion",
+    "dificuldade_original": "Beginner",
+    "caracteristicas_originais": "Blue in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Vitamix_Potion"
+  }
+}

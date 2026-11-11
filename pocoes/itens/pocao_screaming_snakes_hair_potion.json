@@ -1,0 +1,24 @@
+{
+  "id": "pocao_screaming_snakes_hair_potion",
+  "nome": "Poção dos Cabelos de Serpente Gritadora (Screaming Snakes Hair Potion)",
+  "tipo": "Poção (Pegadinha Grotesca)",
+  "nivel": 3,
+  "nível": 3,
+  "efeito": "Transforma as mechas de cabelo do bebedor em pequenas cobras sibilantes que gritam estridentemente ao ver qualquer pessoa por perto, simulando a cabeça de uma górgona cômica.",
+  "ingredientes": "Pele dessecada de cobra-verde, pó de osso de coruja estridente, seiva de espinheiro.",
+  "descricao": "Líquido verde-escuro escamoso mantido em frascos de travessuras mágicas.",
+  "descrição": "Líquido verde-escuro escamoso mantido em frascos de travessuras mágicas.",
+  "sistema": {
+    "tempo_preparo": "2 horas",
+    "duracao": "1 hora",
+    "dificuldade_cd": 16,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "screaming-snakes-hair-potion",
+    "nome_original": "Screaming Snakes Hair Potion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": null,
+    "wiki": "https://harrypotter.fandom.com/wiki/Screaming_Snakes_Hair_Potion"
+  }
+}

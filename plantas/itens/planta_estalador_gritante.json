@@ -1,0 +1,14 @@
+{
+  "id": "planta_estalador_gritante",
+  "nome": "Estalador Gritante (Screechsnap)",
+  "categoria": "Difícil de Adquirir",
+  "nivel": "4",
+  "manejo_cd": 16,
+  "manejo": "CD 16 (Herbologia). Requer fertilização constante com Esterco de Dragão para permanecer dócil. Se ficar faminta, seus estalos e berros ensurdecedores impõem desvantagem em feitiços verbais aos bruxos ao redor.",
+  "efeito": "",
+  "uso_alquimico": "",
+  "classificacao_ministerial": "Artigo Controlado Classe B.",
+  "descricao": "Planta mágica de galhos móveis retorcidos e pequenas flores pontiagudas que se retorcem e soltam estalos barulhentos semelhantes a fogos de artifício e gritos estridentes sempre que alguém se aproxima ou tenta podá-la sem o adubo correto.",
+  "peculiaridades": "• Nível de Herbologia: Nível 4 (Avançado I / 4º Ano).\n• Manejo & Colheita: CD 16 (Herbologia). Requer fertilização constante com Esterco de Dragão para permanecer dócil. Se ficar faminta, seus estalos e berros ensurdecedores impõem desvantagem em feitiços verbais aos bruxos ao redor.\n• Classificação Ministerial: Artigo Controlado Classe B.",
+  "fotoBase64": ""
+}

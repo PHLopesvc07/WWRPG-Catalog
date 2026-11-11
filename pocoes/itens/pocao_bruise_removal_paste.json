@@ -1,0 +1,24 @@
+{
+  "id": "pocao_bruise_removal_paste",
+  "nome": "Pasta Removedora de Hematomas (Bruise Removal Paste)",
+  "tipo": "Pasta / Pomada",
+  "nivel": 1,
+  "nível": 1,
+  "efeito": "Trata, alivia a dor e absorve completamente hematomas, contusões, marcas de pancadas físicas ou 'olhos roxos' causados por socos ou truques mágicos em menos de uma hora.",
+  "ingredientes": "Extrato de casca de salgueiro, calêndula mágica macerada, manteiga de cacau enfeitiçada.",
+  "descricao": "Pasta amarelada espessa e untuosa. Uma versão famosa e modificada foi criada pelos gêmeos Weasley para curar as marcas do seu telescópio esmurrador (*Punching Telescope*).",
+  "descrição": "Pasta amarelada espessa e untuosa. Uma versão famosa e modificada foi criada pelos gêmeos Weasley para curar as marcas do seu telescópio esmurrador (*Punching Telescope*).",
+  "sistema": {
+    "tempo_preparo": "30 minutos",
+    "duracao": "1 hora para cura completa",
+    "dificuldade_cd": 12,
+    "administracao": "Aplicação Tópica"
+  },
+  "meta": {
+    "slug": "bruise-removal-paste",
+    "nome_original": "Bruise removal paste",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Thick, yellow paste",
+    "wiki": "https://harrypotter.fandom.com/wiki/Bruise_removal_paste"
+  }
+}

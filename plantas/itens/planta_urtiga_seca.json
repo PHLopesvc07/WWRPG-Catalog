@@ -1,0 +1,14 @@
+{
+  "id": "planta_urtiga_seca",
+  "nome": "Urtiga Seca (Stinging Nettle / Urtica dioica)",
+  "categoria": "Popular",
+  "nivel": "1",
+  "manejo_cd": 10,
+  "manejo": "CD 10 (Herbologia). Exige obrigatoriamente Luvas de Couro de Dragão; o contato com folhas frescas sem luvas causa queimação e impõe (C) Erupção Cutânea Dolorosa (-1 em testes de destreza por 1 hora).",
+  "efeito": "",
+  "uso_alquimico": "Ingrediente fundamental da Poção para Curar Furúnculos, Poção do Despertar (Wideye Potion) e Solução Herbívora.",
+  "classificacao_ministerial": "Artigo Comerciável Livre (Popular). Encontrada espontaneamente em bosques e jardins.",
+  "descricao": "Planta herbácea extremamente comum, coberta por pequenos pelos ocos e urticantes que injetam ácido fórmico e histamina ao toque de pele nua. Embora na natureza muggle seja uma erva daninha irritante, no mundo bruxo as urtigas devidamente secas e tratadas perdem sua toxina e adquirem propriedades adstringentes e purificadoras de sangue.",
+  "peculiaridades": "• Nível de Herbologia: Nível 1 (Aprendiz / 1º Ano).\n• Manejo & Colheita: CD 10 (Herbologia). Exige obrigatoriamente Luvas de Couro de Dragão; o contato com folhas frescas sem luvas causa queimação e impõe (C) Erupção Cutânea Dolorosa (-1 em testes de destreza por 1 hora).\n• Uso Alquímico: Ingrediente fundamental da Poção para Curar Furúnculos, Poção do Despertar (Wideye Potion) e Solução Herbívora.\n• Classificação Ministerial: Artigo Comerciável Livre (Popular). Encontrada espontaneamente em bosques e jardins.",
+  "fotoBase64": ""
+}

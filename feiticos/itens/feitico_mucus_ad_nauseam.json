@@ -1,0 +1,11 @@
+{
+  "id": "feitico_mucus_ad_nauseam",
+  "name": "Mucus ad Nauseam",
+  "cat": "Maldição Menor",
+  "lvl": "2",
+  "tipo": "Ataque",
+  "pronuncia": "MU-cus ad NAU-se-am",
+  "pronunciation": "MU-cus ad NAU-se-am",
+  "condicao": "(C) Coriza Incessante",
+  "desc": "A infame Maldição das Melecas. Inflige na vítima um resfriado mágico fulminante que provoca coriza verde incessante e espirros incontroláveis, drenando sua estamina e quebrando sua concentração mágica. | Injúria Específica: (C) Coriza Incessante"
+}

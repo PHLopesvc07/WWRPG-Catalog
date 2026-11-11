@@ -1,0 +1,11 @@
+{
+  "id": "feitico_molliare",
+  "name": "Molliare",
+  "cat": "Charme",
+  "lvl": "2",
+  "tipo": "Proteção",
+  "pronuncia": "Mo-li-A-re",
+  "pronunciation": "Mo-li-A-re",
+  "condicao": "Nenhuma",
+  "desc": "O Feitiço de Amortecimento. Cria um bolsão elástico invisível e acolchoado sob superfícies ou abaixo de pessoas em queda livre, absorvendo 100% do impacto mecânico de impactos e quedas."
+}

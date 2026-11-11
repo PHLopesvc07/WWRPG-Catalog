@@ -1,0 +1,24 @@
+{
+  "id": "pocao_invigoration_draught",
+  "nome": "Poção do Vigor / Concocto Revigorante (Invigoration Draught)",
+  "tipo": "Poção",
+  "nivel": 3,
+  "nível": 3,
+  "efeito": "Revitaliza o corpo, recupera estamina exaurida, desperta a mente de cansaço extremo e concede energia para continuar em vigília ou combater por várias horas.",
+  "ingredientes": "Asas de Alisoto secas, olhos de enguia mágica, espinhos de peixe-leão, infusão de valeriana.",
+  "descricao": "Líquido azul-turquesa brilhante e espumoso. Ensinada no 5º ano de Hogwarts como preparação para os exames dos N.O.M.s.",
+  "descrição": "Líquido azul-turquesa brilhante e espumoso. Ensinada no 5º ano de Hogwarts como preparação para os exames dos N.O.M.s.",
+  "sistema": {
+    "tempo_preparo": "2 horas",
+    "duracao": "6 horas",
+    "dificuldade_cd": 16,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "invigoration-draught",
+    "nome_original": "Invigoration Draught",
+    "dificuldade_original": "Ordinary Wizarding Level",
+    "caracteristicas_originais": "Orange or blue in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Invigoration_Draught"
+  }
+}

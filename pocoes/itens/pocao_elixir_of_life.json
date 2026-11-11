@@ -1,0 +1,24 @@
+{
+  "id": "pocao_elixir_of_life",
+  "nome": "Elixir da Vida (Elixir of Life)",
+  "tipo": "Elixir (Alquimia Suprema)",
+  "nivel": 7,
+  "nível": 7,
+  "efeito": "Concede a imortalidade biológica e a longevidade eterna enquanto o usuário continuar a bebê-lo regularmente. Rejuvenesce células, impede a morte por velhice e sustenta a força vital, embora não torne o corpo invulnerável a destruição física violenta.",
+  "ingredientes": "A Pedra Filosofal (Philosopher's Stone), água alquímica primordial purificada.",
+  "descricao": "Líquido escarlate brilhante e luminoso que emite uma suave pulsação calorosa. O célebre alquimista Nicolas Flamel e sua esposa Perenelle viveram mais de 660 anos graças ao consumo regular deste elixir até sua destruição em 1992.",
+  "descrição": "Líquido escarlate brilhante e luminoso que emite uma suave pulsação calorosa. O célebre alquimista Nicolas Flamel e sua esposa Perenelle viveram mais de 660 anos graças ao consumo regular deste elixir até sua destruição em 1992.",
+  "sistema": {
+    "tempo_preparo": "Operação Alquímica Contínua (Requer a Pedra Filosofal)",
+    "duracao": "Sustenta a imortalidade enquanto ingerido periodicamente",
+    "dificuldade_cd": 25,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "elixir-of-life",
+    "nome_original": "Elixir of Life",
+    "dificuldade_original": null,
+    "caracteristicas_originais": null,
+    "wiki": "https://harrypotter.fandom.com/wiki/Elixir_of_Life"
+  }
+}

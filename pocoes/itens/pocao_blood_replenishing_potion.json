@@ -1,0 +1,24 @@
+{
+  "id": "pocao_blood_replenishing_potion",
+  "nome": "Poção Restauradora de Sangue (Blood-Replenishing Potion)",
+  "tipo": "Poção (Medicinal)",
+  "nivel": 4,
+  "nível": 4,
+  "efeito": "Estimula a medula mágica e repõe de forma imediata o volume sanguíneo perdido em decorrência de ferimentos profundos, feitiços cortantes (como Sectumsempra) ou hemorragias graves, salvando vidas em estado de choque hipovolêmico.",
+  "ingredientes": "Água padrão para poções, chifre de unicórnio em pó, mandrágora cozida em fogo brando, essência de urtiga vermelha.",
+  "descricao": "Líquido espesso e vermelho-rubi escuro, muito semelhante ao próprio sangue. É um dos preparados mais essenciais do Hospital St. Mungus e dos kits médicos dos aurores em serviço de campo.",
+  "descrição": "Líquido espesso e vermelho-rubi escuro, muito semelhante ao próprio sangue. É um dos preparados mais essenciais do Hospital St. Mungus e dos kits médicos dos aurores em serviço de campo.",
+  "sistema": {
+    "tempo_preparo": "4 horas",
+    "duracao": "Instantâneo (estabiliza o paciente e estanca hemorragias)",
+    "dificuldade_cd": 18,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "blood-replenishing-potion",
+    "nome_original": "Blood-Replenishing Potion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Dark red in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Blood-Replenishing_Potion"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "id": "feitico_pericullum",
+  "name": "Pericullum",
+  "cat": "Charme",
+  "lvl": "1",
+  "tipo": "Utilitário",
+  "pronuncia": "Pe-RI-cu-lum",
+  "pronunciation": "Pe-RI-cu-lum",
+  "condicao": "Nenhuma",
+  "desc": "Lança centelhas ou fogos de artifício vermelhos para o céu, servindo como sinal de socorro ou marcador de posição."
+}

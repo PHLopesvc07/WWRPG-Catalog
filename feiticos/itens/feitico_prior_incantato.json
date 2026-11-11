@@ -1,0 +1,11 @@
+{
+  "id": "feitico_prior_incantato",
+  "name": "Prior Incantato",
+  "cat": "Charme",
+  "lvl": "4",
+  "tipo": "Utilitário",
+  "pronuncia": "PRI-or In-can-TA-to",
+  "pronunciation": "PRI-or In-can-TA-to",
+  "condicao": "Nenhuma",
+  "desc": "O Feitiço de Verificação Forense. Força a varinha visada a projetar uma fumaça espectral que reconstitui em ordem inversa os últimos feitiços conjurados por ela."
+}

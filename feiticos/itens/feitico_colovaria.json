@@ -1,0 +1,11 @@
+{
+  "id": "feitico_colovaria",
+  "name": "Colovaria",
+  "cat": "Charme",
+  "lvl": "1",
+  "tipo": "Utilitário",
+  "pronuncia": "Co-lo-VA-ri-a",
+  "pronunciation": "Co-lo-VA-ri-a",
+  "condicao": "Nenhuma",
+  "desc": "O Feitiço de Mudança de Cor. Altera instantaneamente a coloração e saturação de superfícies, tecidos, tintas ou pelos de pequenos animais conforme o desejo do conjurador."
+}

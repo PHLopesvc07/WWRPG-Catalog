@@ -1,0 +1,11 @@
+{
+  "id": "feitico_expelliarmus",
+  "name": "Expelliarmus",
+  "cat": "Charme",
+  "lvl": "2",
+  "tipo": "Utilitário",
+  "pronuncia": "Eks-pe-li-AR-mus",
+  "pronunciation": "Eks-pe-li-AR-mus",
+  "condicao": "(C) Desarmado",
+  "desc": "Feitiço de Desarmamento que produz um raio vermelho, também é usado para jogar o adversário longe(caso o usuário do feitiço mire na pessoa em vez de mirar na arma, seja varinha ou outra coisa), às vezes fazendo-o desmaiar. (este feitiço faz com que o alvo role um teste de lábia, em caso de um desastre faz com que a varinha perca uma das regras [1d5]) | Injúria Específica: (C) Desarmado"
+}

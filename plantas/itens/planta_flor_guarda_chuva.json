@@ -1,0 +1,14 @@
+{
+  "id": "planta_flor_guarda_chuva",
+  "nome": "Flor Guarda-Chuva (Umbrella Flower)",
+  "categoria": "Popular",
+  "nivel": "1",
+  "manejo_cd": 10,
+  "manejo": "CD 10 (Herbologia). Cultivo ornamental em canteiros externos.",
+  "efeito": "Pode ser colhida e usada fisicamente como guarda-chuva encantado que repele água mundana e o feitiço Aguamenti.",
+  "uso_alquimico": "",
+  "classificacao_ministerial": "Artigo Comerciável Livre (Popular).",
+  "descricao": "Planta mágica de jardim com flores gigantescas e flexíveis cujas pétalas se expandem sobre uma haste arqueada, assumindo o formato e a impermeabilidade perfeita de um guarda-chuva aberto. Quando chove, ela se abre automaticamente e pinga um néctar adocicado pelo cabo que atrai pássaros mágicos.",
+  "peculiaridades": "• Nível de Herbologia: Nível 1 (Aprendiz / 1º Ano).\n• Manejo & Colheita: CD 10 (Herbologia). Cultivo ornamental em canteiros externos.\n• Mecânica e Efeito: Pode ser colhida e usada fisicamente como guarda-chuva encantado que repele água mundana e o feitiço Aguamenti.\n• Classificação Ministerial: Artigo Comerciável Livre (Popular).",
+  "fotoBase64": ""
+}

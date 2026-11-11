@@ -1,0 +1,64 @@
+{
+  "id": "kelpie",
+  "num": 48,
+  "nome": "Kelpie (Cavalo-Do-Lago)",
+  "classificacao": "XXXX",
+  "licenca": "Magizoologista",
+  "porte": "Grande",
+  "tamanho": "1.8 metros (cernelha)",
+  "peso": "450 kg",
+  "origem": "Natural",
+  "locomocao": "Aquáticos",
+  "velocidade": "Natação: 6.4m | Terrestre: 1.0m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Bestial",
+  "descricao": "Esse demônio aquático da Grã-Bretanha e da Irlanda pode assumir vária formas, embora na maioria das vezes apareça como um cavalo com crineira de folhas de tabua. Depois de atrair os incautos para montá-lo, ele mergulha direto ao fundo do rio ou lago e devora o cavaleiro deixando suas tripas boiando à superfície. A maneira correta de dominar um cavalo-do-lago é passar as rédeas por cima de sua cabeça com um Feitiço de Colocação que o torne obediente e manso. O maior cavalo-do-lago do mundo encontra-se no lago Ness, Escócia. Assume, de preferência, a forma de uma serpente marinha. Os observadores enviados pela Confederação Internacional de Bruxos perceberam que não estavam lidando com uma serpente verdadeira quando a viram transforma-se em uma lontra à aproximação de uma equipe de investigadores trouxas e, em seguida, voltar à forma anterior quando eles partiram. Geografia: @Grã-Bretanha e Irlanda",
+  "atributos": {
+    "corpo": 4,
+    "destreza": 2,
+    "vitalidade": 4,
+    "instinto": 3,
+    "carisma": -4,
+    "inteligencia": -1,
+    "sabedoria": 2
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Arraste Subaquático de Cascos",
+      "desc": "Abocanha a vítima e a arrasta para o fundo do lago. Rola `1d10 + Corpo` de dano por esmagamento aquático e afogamento.",
+      "rolagem": "1d10 + Corpo"
+    },
+    "reacao": {
+      "nome": "Metamorfose Evasiva",
+      "desc": "Transforma-se em uma lontra ou alga marinha ao receber ataque. Gasta 1 ação e rola `1d30 + Instinto + 3` para anular completamente o ataque.",
+      "rolagem": "1d30 + Instinto + 3"
+    },
+    "ambiente": {
+      "nome": "Névoa de Algas Lacustres",
+      "desc": "Enche a água ao redor (raio de 6m) com crinas de algas espessas. Terreno torna-se extremamente difícil para qualquer criatura que não seja o Kelpie.",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Cabresto de Redirecionamento",
+      "desc": "Se um bruxo conseguir colocar um cabresto com Feitiço de Colocação na cabeça do Kelpie, ele se torna dócil e aceita ser montado.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 3
+    },
+    "media": {
+      "curr": 0,
+      "max": 3
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 3
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/kelpie.jpg",
+  "fotoBase64": "./assets/animais/kelpie.jpg"
+}

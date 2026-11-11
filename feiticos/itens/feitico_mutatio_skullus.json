@@ -1,0 +1,11 @@
+{
+  "id": "feitico_mutatio_skullus",
+  "name": "Mutatio Skullus",
+  "cat": "Azaração",
+  "lvl": "2",
+  "tipo": "Ataque",
+  "pronuncia": "Mu-TA-ci-o SKU-lus",
+  "pronunciation": "Mu-TA-ci-o SKU-lus",
+  "condicao": "(C) Crânio Deformado",
+  "desc": "Deforma assimetricamente a estrutura do crânio da vítima, fazendo surgir protuberâncias desconcertantes e desorientando sua visão. | Injúria Específica: (C) Crânio Deformado"
+}

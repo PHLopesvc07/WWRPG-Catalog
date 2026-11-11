@@ -1,0 +1,24 @@
+{
+  "id": "pocao_antidote_to_common_poisons",
+  "nome": "Antídoto para Venenos Comuns (Antidote to Common Poisons)",
+  "tipo": "Antídoto",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Neutraliza com eficácia comprovada toxinas naturais orgânicas (visgo, cicuta, beladona), picadas de cobras não-mágicas e substâncias tóxicas de 1º e 2º anos de estudo em Hogwarts.",
+  "ingredientes": "1 Bezoar triturado, 2 medidas de Ingrediente Padrão, 1 pitada de chifre de unicórnio em pó, 2 bagas de visgo.",
+  "descricao": "Líquido de coloração verde-água / azul-petróleo (teal). Sua receita clássica de Libatius Borage é o primeiro grande antídoto ensinado nas masmorras de Hogwarts, demonstrando as propriedades catalisadoras do bezoar.",
+  "descrição": "Líquido de coloração verde-água / azul-petróleo (teal). Sua receita clássica de Libatius Borage é o primeiro grande antídoto ensinado nas masmorras de Hogwarts, demonstrando as propriedades catalisadoras do bezoar.",
+  "sistema": {
+    "tempo_preparo": "1 hora e 15 minutos",
+    "duracao": "Instantâneo",
+    "dificuldade_cd": 14,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "antidote-to-common-poisons",
+    "nome_original": "Antidote to Common Poisons",
+    "dificuldade_original": "Beginner to Moderate",
+    "caracteristicas_originais": "Teal-coloured",
+    "wiki": "https://harrypotter.fandom.com/wiki/Antidote_to_Common_Poisons"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "pocao_contortion_potion",
+  "nome": "Poção da Contorção (Contortion Potion)",
+  "tipo": "Poção",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Concede flexibilidade óssea e muscular sobre-humana temporária, permitindo ao bruxo se contorcer, passar por espaços exíguos, escapar de cordas e amarras sem sofrer luxações.",
+  "ingredientes": "Cartilagem de enguia mágica, óleo de serpente, folhas de salgueiro-flexível, seiva elástica.",
+  "descricao": "Líquido escorregadio e semitransparente de tom âmbar claro. Muito usada por artistas de circo bruxo e acrobatas.",
+  "descrição": "Líquido escorregadio e semitransparente de tom âmbar claro. Muito usada por artistas de circo bruxo e acrobatas.",
+  "sistema": {
+    "tempo_preparo": "1 hora e 15 minutos",
+    "duracao": "1 hora",
+    "dificuldade_cd": 14,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "contortion-potion",
+    "nome_original": "Contortion Potion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": null,
+    "wiki": "https://harrypotter.fandom.com/wiki/Contortion_Potion"
+  }
+}

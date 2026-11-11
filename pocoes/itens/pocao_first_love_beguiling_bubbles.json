@@ -1,0 +1,24 @@
+{
+  "id": "pocao_first_love_beguiling_bubbles",
+  "nome": "Bolhas Cativantes do Primeiro Amor (First Love Beguiling Bubbles)",
+  "tipo": "Filtro do Amor (WonderWitch)",
+  "nivel": 3,
+  "nível": 3,
+  "efeito": "Provoca um sentimento nostálgico e avassalador de amor à primeira vista e afeição pueril pelo doador da bebida, deixando a vítima dócil, sonhadora e vulnerável a pedidos afetivos.",
+  "ingredientes": "Pó de pérola, pétalas de lírio do vale, água gaseificada encantada, gotas sutis de Amortentia.",
+  "descricao": "Líquido efervescente cor de rosa que libera pequenas bolhas que flutuam ao redor da boca da garrafa. Parte da coleção Garotas Geniais das Gemialidades Weasley.",
+  "descrição": "Líquido efervescente cor de rosa que libera pequenas bolhas que flutuam ao redor da boca da garrafa. Parte da coleção Garotas Geniais das Gemialidades Weasley.",
+  "sistema": {
+    "tempo_preparo": "3 horas",
+    "duracao": "5 horas",
+    "dificuldade_cd": 16,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "first-love-beguiling-bubbles",
+    "nome_original": "First Love Beguiling Bubbles",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Red in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/First_Love_Beguiling_Bubbles"
+  }
+}

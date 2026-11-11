@@ -1,0 +1,64 @@
+{
+  "id": "ashwinder",
+  "num": 2,
+  "nome": "Ashwinder (Cinzal)",
+  "classificacao": "XXX",
+  "licenca": "Comum",
+  "porte": "Pequeno",
+  "tamanho": "1.0 metro",
+  "peso": "1.2 kg",
+  "origem": "Artificial",
+  "locomocao": "Terrestres",
+  "velocidade": "1.5m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Simples",
+  "descricao": "O ashwinder (cinzal) se forma quando se permite que um fogo mágico arda livremente durante muito tempo. Uma cobra fina, cinza-claro, de olhos Animais dotados de fala humana raramente aprendem a falar sozinh os; exceção a esta regra é o furanzão. A Proibição de Criação Experimental somente entrou em vigor neste século, muito depois da primeira notícia oficial, 1974, da descoberta de uma acromântula Qualquer fogo a que se tenha adicionado uma substância mágic a como o pó de Flu. rutilante, surgirá das brasas desse fogo e rastejará para as sombras da habitação em que se encontra deixando um rastro de cinzas atrás de si. O cinzal vive apenas uma hora, tempo usado para procurar um lugar escuro e protegido e ali depositar seu ovos, depois do que ele vira pó. Os ovos são vermelho-vivo e liberam um intenso calor. Podem incendiar uma habitação em minutos se não forem encontrados e congelados com um feitiço apropriado. O bruxo que perceber que há um ou mais cinzais soltos em casa deve procurar rastreá-los imediatamente e localizar a ninhada de ovos. Uma vez congelados, os ovos são muito valiosos para o preparo de Poções de Amor e podem ser comidos inteiros como remédio para a malária. Os cinzais são encontrados no mundo inteiro. AUGUREY (AGOUREIRO), também conhecido como Irish Phoenix (fênix Geografia: @Mundial (onde há fogos mágicos acesos)",
+  "atributos": {
+    "corpo": -1,
+    "destreza": 0,
+    "vitalidade": -1,
+    "instinto": 1,
+    "carisma": -3,
+    "inteligencia": -3,
+    "sabedoria": 1
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Queimadura Térmica",
+      "desc": "Rasteja incandescente sobre o alvo, desferindo calor extremo. Rola `1d6 + Vitalidade` de dano de fogo e pode causar **[C: Queimadura Térmica]**.",
+      "rolagem": "1d6 + Vitalidade"
+    },
+    "reacao": {
+      "nome": "Nuvem de Cinzas",
+      "desc": "Ao ser atacado por golpe físico, expele cinzas quentes. Gasta 1 ação para rolar `1d30 + Vitalidade`. Se vencer, cega temporariamente o atacante por 1 rodada.",
+      "rolagem": "1d30 + Vitalidade"
+    },
+    "ambiente": {
+      "nome": "Incêndio Silencioso",
+      "desc": "Propaga chamas mágicas por móveis e estruturas de madeira a até 3m de distância por turno, consumindo o ambiente ao redor.",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Ninho de Ovos Flamejantes",
+      "desc": "Ao morrer, deixa ovos vermelhos incandescentes. Se não forem recolhidos e congelados em 5 minutos, explodem causando `2d8` de dano de fogo em área.",
+      "rolagem": "Explosão automática"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 2
+    },
+    "media": {
+      "curr": 0,
+      "max": 2
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 1
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/ashwinder.jpg",
+  "fotoBase64": "./assets/animais/ashwinder.jpg"
+}

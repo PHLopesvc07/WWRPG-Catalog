@@ -1,0 +1,11 @@
+{
+  "id": "feitico_deffodio",
+  "name": "Deffodio",
+  "cat": "Charme",
+  "lvl": "4",
+  "tipo": "Utilitário",
+  "pronuncia": "De-FO-di-o",
+  "pronunciation": "De-FO-di-o",
+  "condicao": "Nenhuma",
+  "desc": "Este feitiço faz com que entalhes profundos apareçam no objeto alvejado. Usado para escavar terra, pedra e outros materiais com facilidade. (Pode ser utilizado para destruir objetos)"
+}

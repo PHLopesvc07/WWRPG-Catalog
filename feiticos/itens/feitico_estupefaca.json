@@ -1,0 +1,11 @@
+{
+  "id": "feitico_estupefaca",
+  "name": "Estupefaça",
+  "cat": "Maldição Menor",
+  "lvl": "3",
+  "tipo": "Ataque",
+  "pronuncia": "Es-tu-pe-FA-ça",
+  "pronunciation": "Es-tu-pe-FA-ça",
+  "condicao": "(C) Desmaiado",
+  "desc": "Joga a vítima para longe. Faz a pessoa desmaiar. Um rojão de luz azul (personagens em geral), laranja parecendo fogo (personagens malignos) | Injúria Específica: (C) Desmaiado"
+}

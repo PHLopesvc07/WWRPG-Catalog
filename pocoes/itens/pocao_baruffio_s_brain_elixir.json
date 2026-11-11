@@ -1,0 +1,24 @@
+{
+  "id": "pocao_baruffio_s_brain_elixir",
+  "nome": "Elixir Cerebral de Baruffio (Baruffio's Brain Elixir)",
+  "tipo": "Elixir",
+  "nivel": 5,
+  "nível": 5,
+  "efeito": "Promete aumentar drasticamente o poder cerebral e o intelecto do consumidor. No entanto, sua fórmula clandestina é altamente volátil: concede bônus temporário em testes mentais, mas pode causar sequelas graves como confusão mental permanente, afasia ou derretimento da concentração se mal preparada.",
+  "ingredientes": "Cogumelos-saltadores, cérebros de sapo, ovos de Runespoor (serpente de três cabeças), pó de garra de dragão, óleo alquímico.",
+  "descricao": "Líquido verde-escuro fumegante. Produto ilegal e banido em Hogwarts; vendido no mercado negro estudantil durante época de exames (N.O.M.s). Criado pelo excêntrico Baruffio, que certa vez pronunciou 's' em vez de 'f' e viu um búfalo cair em seu peito.",
+  "descrição": "Líquido verde-escuro fumegante. Produto ilegal e banido em Hogwarts; vendido no mercado negro estudantil durante época de exames (N.O.M.s). Criado pelo excêntrico Baruffio, que certa vez pronunciou 's' em vez de 'f' e viu um búfalo cair em seu peito.",
+  "sistema": {
+    "tempo_preparo": "12 horas",
+    "duracao": "1 hora",
+    "dificuldade_cd": 20,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "baruffio-s-brain-elixir",
+    "nome_original": "Baruffio's Brain Elixir",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Green in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Baruffio's_Brain_Elixir"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "planta_heleboro",
+  "nome": "Heléboro (Hellebore / Helleborus niger)",
+  "categoria": "Difícil de Adquirir",
+  "nivel": "4",
+  "manejo_cd": 16,
+  "manejo": "CD 16 (Herbologia). Exige luvas protetoras. A pesagem no caldeirão deve ser exata; xarope de heléboro em excesso na Poção da Paz mergulha o bebedor em um sono profundo perpétuo e coma irreversível.",
+  "efeito": "",
+  "uso_alquimico": "Ingrediente crucial da Poção da Paz (Draught of Peace) e Poções da Tranquilidade.",
+  "classificacao_ministerial": "Artigo de Veneno Controlado Classe B.",
+  "descricao": "Planta herbácea venenosa de belas flores esbranquiçadas ou esverdeadas que florescem durante o inverno rigoroso. Seus tecidos contêm heléborina e toxinas que atacam o coração e a mente, devendo ser manipulada com precisão milimétrica em balanças alquímicas para não transformar uma cura em veneno fatal.",
+  "peculiaridades": "• Nível de Herbologia: Nível 4 (Avançado I / 4º Ano).\n• Manejo & Colheita: CD 16 (Herbologia). Exige luvas protetoras. A pesagem no caldeirão deve ser exata; xarope de heléboro em excesso na Poção da Paz mergulha o bebedor em um sono profundo perpétuo e coma irreversível.\n• Uso Alquímico: Ingrediente crucial da Poção da Paz (Draught of Peace) e Poções da Tranquilidade.\n• Classificação Ministerial: Artigo de Veneno Controlado Classe B.",
+  "fotoBase64": ""
+}

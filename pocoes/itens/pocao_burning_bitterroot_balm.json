@@ -1,0 +1,24 @@
+{
+  "id": "pocao_burning_bitterroot_balm",
+  "nome": "Bálsamo Calmante de Raiz-Amarga (Burning Bitterroot Balm)",
+  "tipo": "Bálsamo (Medicinal)",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Bálsamo calmante e reconfortante para contusões térmicas, picadas urticantes e ferimentos expostos, acelerando o fechamento de tecidos sensibilizados.",
+  "ingredientes": "Raiz-amarga (Bitterroot) cozida, cera vegetal, essência de calêndula, orvalho purificado.",
+  "descricao": "Pomada macia amarelada que produz uma sensação inicial de formigamento quente seguida por dormência anestésica relaxante.",
+  "descrição": "Pomada macia amarelada que produz uma sensação inicial de formigamento quente seguida por dormência anestésica relaxante.",
+  "sistema": {
+    "tempo_preparo": "1 hora e 30 minutos",
+    "duracao": "4 horas de alívio e regeneração",
+    "dificuldade_cd": 14,
+    "administracao": "Aplicação Tópica"
+  },
+  "meta": {
+    "slug": "burning-bitterroot-balm",
+    "nome_original": "Burning Bitterroot Balm",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Blue-coloured",
+    "wiki": "https://harrypotter.fandom.com/wiki/Burning_Bitterroot_Balm"
+  }
+}

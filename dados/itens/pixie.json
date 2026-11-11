@@ -1,0 +1,64 @@
+{
+  "id": "pixie",
+  "num": 67,
+  "nome": "Pixie (Diabrete)",
+  "classificacao": "XXX",
+  "licenca": "Comum",
+  "porte": "Pequeno",
+  "tamanho": "20 cm",
+  "peso": "1.0 kg",
+  "origem": "Natural",
+  "locomocao": "Aéreos",
+  "velocidade": "Voo: 9.5m | Terrestre: 2.5m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Neutro",
+  "descricao": "O pixie (diabrete) é encontrado principalmente na Cornualha, uma região inglesa. De cor azul-elétrico, medindo até vinte centímetros de altura e muito travesso, ele gosta de pregar peças e fazer brincadeiras de mau gosto de todo o tipo. Embora não seja dotado de asas, é capaz de voar e sabe-se que pode agarrar humanos incautos pelas orelhas e levá-los para o topo de árvores e edifícios de grande altura. O diabrete fala uma algaravia aguda que só é compreendida pelos seus iguais. Este animal gera seus filhotes. A fênix recebe classificação XXXX não porque seja agressiva, mas porque pouquíssimos bruxos conseguiram domesticá -la. Geografia: @Cornualha, Grã-Bretanha",
+  "atributos": {
+    "corpo": -1,
+    "destreza": 3,
+    "vitalidade": 0,
+    "instinto": 2,
+    "carisma": -3,
+    "inteligencia": -1,
+    "sabedoria": 0
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Puxão de Orelha / Garrada",
+      "desc": "Belisca e puxa orelhas com força desproporcional ao tamanho azulado. Rola `1d4 + Destreza` de dano físico.",
+      "rolagem": "1d4 + Destreza"
+    },
+    "reacao": {
+      "nome": "Esquiva de Revoada Evasiva",
+      "desc": "Voo rápido e errático sem asas. Gasta 1 ação e rola `1d30 + Destreza + 3` para esquivar de feitiços de impacto ou redes de captura.",
+      "rolagem": "1d30 + Destreza + 3"
+    },
+    "ambiente": {
+      "nome": "Bagunça Caótica de Objetos",
+      "desc": "Agita e joga poções, chaves e varinhas para o alto. Oponentes na sala devem passar em Destreza CD 20 ou perdem a varinha que seguram.",
+      "rolagem": "CD 20 Destreza"
+    },
+    "extra": {
+      "nome": "Erguer Bruxos pelo Ar",
+      "desc": "Se houver mais de 2 Diabretes da Cornualha adjacentes, conseguem erguer um bruxo fisicamente pelo ar pelas orelhas e pendurá-lo no teto.",
+      "rolagem": "CD 20 Corpo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 1
+    },
+    "media": {
+      "curr": 0,
+      "max": 1
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 1
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/pixie.jpg",
+  "fotoBase64": "./assets/animais/pixie.jpg"
+}

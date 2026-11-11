@@ -1,0 +1,14 @@
+{
+  "id": "planta_guelricho",
+  "nome": "Guelricho (Gillyweed)",
+  "categoria": "Difícil de Adquirir",
+  "nivel": "4",
+  "manejo_cd": 16,
+  "manejo": "CD 16 (Herbologia/Mergulho Mágico). Difícil de encontrar na natureza britânica; deve ser colhido no leito marinho e armazenado em água salgada fresca para não ressecar.",
+  "efeito": "Consumir uma porção de Guelricho concede a condição positiva (C) Adaptação Anfíbia por 60 minutos (respiração ilimitada debaixo d'água, velocidade de nado dobrada e visão submarina límpida). Fora da água, causa sensação temporária de asfixia caso o efeito ainda esteja ativo.",
+  "uso_alquimico": "",
+  "classificacao_ministerial": "Artigo Comerciável Raro (Difícil de Adquirir). Valor de mercado de 10 a 15 Galeões por dose.",
+  "descricao": "Planta aquática viscosa, verde-acinzentada e com aparência de caudas de rato entrelaçadas, nativa das profundezas do Mar Mediterrâneo. Quando mastigada e engolida crua por uma bruxa ou bruxo, provoca uma transformação corporal imediata: brotam guelras funcionais no pescoço e membranas natatórias entre os dedos das mãos e pés, permitindo respiração e natação submarina veloz por aproximadamente uma hora em água doce (ou um pouco mais em água salgada).",
+  "peculiaridades": "• Nível de Herbologia: Nível 4 (Avançado I / 4º Ano).\n• Manejo & Colheita: CD 16 (Herbologia/Mergulho Mágico). Difícil de encontrar na natureza britânica; deve ser colhido no leito marinho e armazenado em água salgada fresca para não ressecar.\n• Mecânica e Efeito: Consumir uma porção de Guelricho concede a condição positiva (C) Adaptação Anfíbia por 60 minutos (respiração ilimitada debaixo d'água, velocidade de nado dobrada e visão submarina límpida). Fora da água, causa sensação temporária de asfixia caso o efeito ainda esteja ativo.\n• Classificação Ministerial: Artigo Comerciável Raro (Difícil de Adquirir). Valor de mercado de 10 a 15 Galeões por dose.",
+  "fotoBase64": ""
+}

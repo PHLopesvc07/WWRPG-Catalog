@@ -1,0 +1,11 @@
+{
+  "id": "feitico_locomotor_wibbly",
+  "name": "Locomotor Wibbly",
+  "cat": "Azaração",
+  "lvl": "1",
+  "tipo": "Ataque",
+  "pronuncia": "Lo-co-MO-tor UIB-li",
+  "pronunciation": "Lo-co-MO-tor UIB-li",
+  "condicao": "(C) Pernas de Gelatina",
+  "desc": "A clássica Azaração das Pernas de Gelatina. Torna os ossos e músculos das pernas da vítima moles e flexíveis como gelatina, fazendo-a desabar no chão e impedindo que fique de pé. | Injúria Específica: (C) Pernas de Gelatina"
+}

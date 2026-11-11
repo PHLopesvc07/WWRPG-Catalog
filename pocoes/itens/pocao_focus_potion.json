@@ -1,0 +1,24 @@
+{
+  "id": "pocao_focus_potion",
+  "nome": "Poção do Foco (Focus Potion)",
+  "tipo": "Poção",
+  "nivel": 3,
+  "nível": 3,
+  "efeito": "Acelera o tempo de recuperação mental e o refluxo mágico do bruxo, permitindo que ele lance feitiços consecutivos sem fadiga e reduzindo o tempo de recarga de encantamentos complexos.",
+  "ingredientes": "Crisopídeos macerados, haste de fluxo de linho, língua de sapo-saltador.",
+  "descricao": "Líquido dourado esverdeado denso que emana um zumbido sutil de concentração.",
+  "descrição": "Líquido dourado esverdeado denso que emana um zumbido sutil de concentração.",
+  "sistema": {
+    "tempo_preparo": "2 horas",
+    "duracao": "10 minutos (1 cena de combate)",
+    "dificuldade_cd": 16,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "focus-potion",
+    "nome_original": "Focus Potion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Blue in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Focus_Potion"
+  }
+}

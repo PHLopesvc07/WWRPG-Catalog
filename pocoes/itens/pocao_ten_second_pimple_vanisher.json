@@ -1,0 +1,24 @@
+{
+  "id": "pocao_ten_second_pimple_vanisher",
+  "nome": "Desaparecedor de Espinhas em Dez Segundos (Ten-Second Pimple Vanisher)",
+  "tipo": "Pomada (WonderWitch / Dermatológica)",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Cura e desintegra de forma definitiva qualquer tipo de acne, cravo, pústula, espinha inflamada ou furúnculo em exatos dez segundos de aplicação tópica, deixando a pele lisinha e sem cicatrizes.",
+  "ingredientes": "Extrato de calêndula feérica, óleo de amêndoas encantadas, pó de pérola purificado, bicarbonato estelar.",
+  "descricao": "Pasta cremosa espessa de cor rosa-brilhante acondicionada em pequenos potes decorados. Produto campeão da linha Garotas Geniais das Gemialidades Weasley, muito elogiada por Fred Weasley para sua irmã Ginny.",
+  "descrição": "Pasta cremosa espessa de cor rosa-brilhante acondicionada em pequenos potes decorados. Produto campeão da linha Garotas Geniais das Gemialidades Weasley, muito elogiada por Fred Weasley para sua irmã Ginny.",
+  "sistema": {
+    "tempo_preparo": "1 hora e 30 minutos",
+    "duracao": "Instantâneo (10 segundos para cura completa)",
+    "dificuldade_cd": 14,
+    "administracao": "Aplicação Tópica no Rosto ou Corpo"
+  },
+  "meta": {
+    "slug": "ten-second-pimple-vanisher",
+    "nome_original": "Ten-Second Pimple Vanisher",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Pink in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Ten-Second_Pimple_Vanisher"
+  }
+}

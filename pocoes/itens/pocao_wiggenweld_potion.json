@@ -1,0 +1,24 @@
+{
+  "id": "pocao_wiggenweld_potion",
+  "nome": "Poção Wiggenweld (Wiggenweld Potion)",
+  "tipo": "Poção (Cura & Vitalidade)",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "A poção curativa mais célebre do mundo bruxo. Regenera ferimentos físicos, recupera estamina e pontos de vida, e tem a propriedade mística singular de reverter e despertar pessoas sob o efeito do Morto-Vivo (Draught of Living Death).",
+  "ingredientes": "Suco de Horklump, 2 gotas de muco de verme-cego (Flobberworm mucus), casca de Wiggentree triturada, espinhos de peixe-leão, raminhos de menta fresca.",
+  "descricao": "Líquido verde-brilhante reluzente. É a espinha dorsal dos suprimentos médicos de qualquer bruxo aventureiro e de hospitais mágicos.",
+  "descrição": "Líquido verde-brilhante reluzente. É a espinha dorsal dos suprimentos médicos de qualquer bruxo aventureiro e de hospitais mágicos.",
+  "sistema": {
+    "tempo_preparo": "1 hora e 30 minutos",
+    "duracao": "Instantâneo",
+    "dificuldade_cd": 14,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "wiggenweld-potion",
+    "nome_original": "Wiggenweld Potion",
+    "dificuldade_original": "Beginner",
+    "caracteristicas_originais": "Green, red, purple, pink or blue in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Wiggenweld_Potion"
+  }
+}

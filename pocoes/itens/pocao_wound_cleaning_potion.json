@@ -1,0 +1,24 @@
+{
+  "id": "pocao_wound_cleaning_potion",
+  "nome": "Poção para Limpeza de Ferimentos (Wound-Cleaning Potion)",
+  "tipo": "Poção / Solução Antisséptica",
+  "nivel": 1,
+  "nível": 1,
+  "efeito": "Antisséptico mágico fulminante. Desinfeta cortes profundos e feridas expostas, limpando infecções e fumaça de feitiços com estalos e chiados característicos, cauterizando os tecidos com segurança.",
+  "ingredientes": "Essência de ditamno (Dittany), seiva de visgo purificada, álcool de poções, sal gélido.",
+  "descricao": "Líquido transparente que fumega levemente ao ser derramado sobre a carne ferida. Utilizada com frequência por Madame Pomfrey e curandeiros do St. Mungus.",
+  "descrição": "Líquido transparente que fumega levemente ao ser derramado sobre a carne ferida. Utilizada com frequência por Madame Pomfrey e curandeiros do St. Mungus.",
+  "sistema": {
+    "tempo_preparo": "45 minutos",
+    "duracao": "Instantâneo (cauterização e assepsia)",
+    "dificuldade_cd": 12,
+    "administracao": "Lavagem Tópica sobre o Ferimento"
+  },
+  "meta": {
+    "slug": "wound-cleaning-potion",
+    "nome_original": "Wound-Cleaning Potion",
+    "dificuldade_original": "Advanced",
+    "caracteristicas_originais": "Purple liquid, Smoked on contact, Stung on contact",
+    "wiki": "https://harrypotter.fandom.com/wiki/Wound-Cleaning_Potion"
+  }
+}

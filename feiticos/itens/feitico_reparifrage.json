@@ -1,0 +1,11 @@
+{
+  "id": "feitico_reparifrage",
+  "name": "Reparifrage",
+  "cat": "Contrafeitiço",
+  "lvl": "1",
+  "tipo": "Contrafeitiço",
+  "pronuncia": "Re-pa-ri-FAR-ge",
+  "pronunciation": "Re-pa-ri-FAR-ge",
+  "condicao": "Nenhuma",
+  "desc": "Desfaz uma transfiguração. Destranfiguração (o feitiço deve ser conjurado em níveis equivalentes para reverter transfigurações mais complexas)"
+}

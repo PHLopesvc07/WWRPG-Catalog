@@ -1,0 +1,24 @@
+{
+  "id": "pocao_confidence_boosting_brew",
+  "nome": "Tônico da Autoconfiança (Confidence Boosting Brew)",
+  "tipo": "Poção",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Elimina a timidez, o medo de palco e a hesitação, conferindo audácia, postura firme e eloquência persuasiva em interações sociais e discursos públicos.",
+  "ingredientes": "Penas de pavão trituradas, folhas de gengibre ardente, raiz de ginseng mágico, gotas de hidromel.",
+  "descricao": "Líquido dourado vibrante que efervesce com entusiasmo. Muito procurada por bruxos antes de entrevistas de emprego ministeriais ou primeiros encontros amorosos.",
+  "descrição": "Líquido dourado vibrante que efervesce com entusiasmo. Muito procurada por bruxos antes de entrevistas de emprego ministeriais ou primeiros encontros amorosos.",
+  "sistema": {
+    "tempo_preparo": "1 hora e 30 minutos",
+    "duracao": "2 horas",
+    "dificuldade_cd": 14,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "confidence-boosting-brew",
+    "nome_original": "Confidence boosting brew",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Grey-green",
+    "wiki": "https://harrypotter.fandom.com/wiki/Confidence_boosting_brew"
+  }
+}

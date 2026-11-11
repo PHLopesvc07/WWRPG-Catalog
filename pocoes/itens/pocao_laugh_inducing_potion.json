@@ -1,0 +1,24 @@
+{
+  "id": "pocao_laugh_inducing_potion",
+  "nome": "Poção do Riso Incontrolável (Laugh-inducing Potion)",
+  "tipo": "Poção",
+  "nivel": 4,
+  "nível": 4,
+  "efeito": "Provoca gargalhadas histéricas e convulsões involuntárias de riso ruidoso. É tão barulhenta e estridente que quebra maldições de medo e pode desorientar Banshees que atacam com lamentos fúnebres.",
+  "ingredientes": "Folhas de Alisoto, asas de Gira-Gira moídas, espinhos de Ouriço (Knarl), pelos de Pomorim (Puffskein), rábano silvestre ralado e risadas genuínas durante a mexida.",
+  "descricao": "Líquido amarelo radiante criado no século XVI pelo lendário mestre pocionista Zygmunt Budge. No caldeirão, ferve liberando vapores que assumem formas de faces sorridentes.",
+  "descrição": "Líquido amarelo radiante criado no século XVI pelo lendário mestre pocionista Zygmunt Budge. No caldeirão, ferve liberando vapores que assumem formas de faces sorridentes.",
+  "sistema": {
+    "tempo_preparo": "3 horas",
+    "duracao": "10 minutos",
+    "dificuldade_cd": 18,
+    "administracao": "Ingestão ou Arremesso"
+  },
+  "meta": {
+    "slug": "laugh-inducing-potion",
+    "nome_original": "Laugh-inducing Potion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Red-coloured when finished",
+    "wiki": "https://harrypotter.fandom.com/wiki/Laugh-inducing_Potion"
+  }
+}

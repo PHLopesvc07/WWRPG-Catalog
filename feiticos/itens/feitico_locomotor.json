@@ -1,0 +1,11 @@
+{
+  "id": "feitico_locomotor",
+  "name": "Locomotor",
+  "cat": "Charme",
+  "lvl": "2",
+  "tipo": "Utilitário",
+  "pronuncia": "Lo-co-MO-tor",
+  "pronunciation": "Lo-co-MO-tor",
+  "condicao": "Nenhuma",
+  "desc": "Feitiço de deslocamento geral. Ao apontar para um objeto e pronunciar o feitiço acompanhado do nome do alvo (ex: 'Locomotor Mala'), o objeto levita rente ao chão e segue obedientemente os passos do bruxo."
+}

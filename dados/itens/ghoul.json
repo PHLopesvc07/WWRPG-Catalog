@@ -1,0 +1,64 @@
+{
+  "id": "ghoul",
+  "num": 35,
+  "nome": "Ghoul (Vampiro)",
+  "classificacao": "XX",
+  "licenca": "Comum",
+  "porte": "Médio",
+  "tamanho": "1.7 metros",
+  "peso": "65 kg",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "1.2m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Simples",
+  "descricao": "O ghoul (vampiro), embora feio, não é uma criatura particularmente perigosa. Parece um ogro escorregadio e dentuço e, em geral, habita os sótãos ou os celeiros de propriedades de bruxos onde come aranhas e mariposas. Ele geme e de vez em quando atira objetos pela habitação, mas é em essência um simplório que, na pior das hipóteses, rosna assustadoramente para todos com quem depara. Existe uma Força-Tarefa para vampiros no Departamento para Regulamentação e Controle das Criaturas Mágicas que se encarrega de removê-los das habitações que passaram às mãos trouxas, mas nas famílias bruxas o vampiro muitas vezes é assunto de conversas ou até bicho de estimação. Geografia: @Sótãos e estábulos de bruxos em todo o mundo",
+  "atributos": {
+    "corpo": 1,
+    "destreza": -1,
+    "vitalidade": 2,
+    "instinto": 1,
+    "carisma": 0,
+    "inteligencia": -2,
+    "sabedoria": -1
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Mordida Dentada e Garras",
+      "desc": "Ataque físico desajeitado com dentes salientes e garras sujas. Rola `1d6 + Corpo` de dano físico.",
+      "rolagem": "1d6 + Corpo"
+    },
+    "reacao": {
+      "nome": "Gesto Ameaçador",
+      "desc": "Rosna e exibe os dentes. Gasta 1 ação e rola `1d30 + Carisma` contra teste de ataque físico do oponente. Se vencer, assusta o atacante (-2 no ataque).",
+      "rolagem": "1d30 + Carisma"
+    },
+    "ambiente": {
+      "nome": "Barulho no Sótão",
+      "desc": "Joga objetos velhos, pratos e telhas para assustar. Cria terreno difícil temporário em salas fechadas devido aos destroços jogados.",
+      "rolagem": "1 ação"
+    },
+    "extra": {
+      "nome": "Resiliência Carniceira",
+      "desc": "Alimenta-se de pragas e lixo doméstico. Ganha imunidade a venenos comuns e doenças bacterianas mágicas ordinárias.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 3
+    },
+    "media": {
+      "curr": 0,
+      "max": 3
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 3
+    },
+    "custom": []
+  },
+  "fotoUrl": "",
+  "fotoBase64": ""
+}

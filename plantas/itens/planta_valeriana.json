@@ -1,0 +1,14 @@
+{
+  "id": "planta_valeriana",
+  "nome": "Valeriana (Valerian / Valeriana officinalis)",
+  "categoria": "Popular",
+  "nivel": "2",
+  "manejo_cd": 12,
+  "manejo": "CD 12 (Herbologia). A colheita das raízes e ramos deve ocorrer no outono, exigindo secagem rigorosa para evitar apodrecimento por umidade.",
+  "efeito": "A infusão de suas raízes atua como calmante profundo, neutralizando estados de fúria mágica ou estresse traumático.",
+  "uso_alquimico": "Ramos e raízes de valeriana são indispensáveis na Poção do Sono, Poção do Morto-Vivo (Draught of Living Death) e Poção da Paz.",
+  "classificacao_ministerial": "Artigo Comerciável Livre (Popular).",
+  "descricao": "Planta herbácea perene de flores brancas e rosadas com raízes tuberosa de odor terroso forte e característico. É um dos sedativos e calmantes naturais mais potentes do mundo mágico, exercendo forte atração sobre gatos e sapos de estimação.",
+  "peculiaridades": "• Nível de Herbologia: Nível 2 (Iniciante / 2º Ano).\n• Manejo & Colheita: CD 12 (Herbologia). A colheita das raízes e ramos deve ocorrer no outono, exigindo secagem rigorosa para evitar apodrecimento por umidade.\n• Mecânica e Efeito: A infusão de suas raízes atua como calmante profundo, neutralizando estados de fúria mágica ou estresse traumático.\n• Uso Alquímico: Ramos e raízes de valeriana são indispensáveis na Poção do Sono, Poção do Morto-Vivo (Draught of Living Death) e Poção da Paz.\n• Classificação Ministerial: Artigo Comerciável Livre (Popular).",
+  "fotoBase64": ""
+}

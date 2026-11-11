@@ -1,0 +1,24 @@
+{
+  "id": "pocao_pompion_potion",
+  "nome": "Poção de Abóbora (Pompion Potion)",
+  "tipo": "Poção (Transfiguração Temporária)",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Transforma a cabeça do bebedor em uma abóbora real e alaranjada por um curto período de tempo, permitindo-lhe assustar outras pessoas e resistir a pancadas contundentes na cabeça.",
+  "ingredientes": "Sementes de abóbora de Halloween encantadas, pele de sapo saltador, bile de morcego.",
+  "descricao": "Líquido laranja espesso com sementes que giram dentro da garrafa. Muito popular em celebrações do Dia das Bruxas em Hogwarts.",
+  "descrição": "Líquido laranja espesso com sementes que giram dentro da garrafa. Muito popular em celebrações do Dia das Bruxas em Hogwarts.",
+  "sistema": {
+    "tempo_preparo": "1 hora",
+    "duracao": "15 minutos",
+    "dificuldade_cd": 14,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "pompion-potion",
+    "nome_original": "Pompion Potion",
+    "dificuldade_original": "Beginner",
+    "caracteristicas_originais": "Orange-coloured",
+    "wiki": "https://harrypotter.fandom.com/wiki/Pompion_Potion"
+  }
+}

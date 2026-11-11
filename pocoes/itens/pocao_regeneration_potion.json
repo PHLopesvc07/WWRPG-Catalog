@@ -1,0 +1,24 @@
+{
+  "id": "pocao_regeneration_potion",
+  "nome": "Poção de Regeneração Corporal das Trevas (Regeneration Potion)",
+  "tipo": "Poção das Trevas / Alquimia Corporal",
+  "nivel": 7,
+  "nível": 7,
+  "efeito": "Ritual alquímico supremo das Trevas. Reconstitui um corpo físico plenamente funcional, poderoso e vivo para um bruxo desprovido de forma corpórea cujo espírito esteja ancorado por Horcruxes.",
+  "ingredientes": "Osso do pai retirado sem consentimento, Carne do servo entregue voluntariamente, Sangue do inimigo tirado à força.",
+  "descricao": "O caldeirão ferve com faíscas incandescentes, assumindo tom azul venenoso com o osso, vermelho ardente com a carne e branco ofuscante em fumaça densa com o sangue. Usada por Peter Pettigrew para restituir o corpo de Lord Voldemort no cemitério de Little Hangleton.",
+  "descrição": "O caldeirão ferve com faíscas incandescentes, assumindo tom azul venenoso com o osso, vermelho ardente com a carne e branco ofuscante em fumaça densa com o sangue. Usada por Peter Pettigrew para restituir o corpo de Lord Voldemort no cemitério de Little Hangleton.",
+  "sistema": {
+    "tempo_preparo": "Ritual Complexo no Caldeirão Gigante (1 hora de rito final)",
+    "duracao": "Permanente (criação de um novo corpo vivo)",
+    "dificuldade_cd": 25,
+    "administracao": "Imersão do ser rudimentar no caldeirão"
+  },
+  "meta": {
+    "slug": "regeneration-potion",
+    "nome_original": "Regeneration potion",
+    "dificuldade_original": "Advanced",
+    "caracteristicas_originais": "Fiery sparks when begun, Poisonous blue when the bone was added, Burning red when the flesh was added, Blinding white becoming steam when the blood was added",
+    "wiki": "https://harrypotter.fandom.com/wiki/Regeneration_potion"
+  }
+}

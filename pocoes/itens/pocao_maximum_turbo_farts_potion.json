@@ -1,0 +1,24 @@
+{
+  "id": "pocao_maximum_turbo_farts_potion",
+  "nome": "Poção do Turbofumpe Máximo (Maximum Turbo Farts Potion)",
+  "tipo": "Poção (Pegadinha Grotesca)",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Induz flatulências estrondosas, explosivas e ininterruptas de odor sulfuroso asfixiante, gerando pequenas ondas de propulsão constrangedoras no bebedor e dispersando todos ao redor.",
+  "ingredientes": "Feijões pretos mágicos fermentados, enxofre em pó, água com gás amaldiçoada.",
+  "descricao": "Líquido marrom-esverdeado gasoso mantido em frasco reforçado contra pressão interna.",
+  "descrição": "Líquido marrom-esverdeado gasoso mantido em frasco reforçado contra pressão interna.",
+  "sistema": {
+    "tempo_preparo": "45 minutos",
+    "duracao": "1 hora",
+    "dificuldade_cd": 14,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "maximum-turbo-farts-potion",
+    "nome_original": "Maximum Turbo Farts Potion",
+    "dificuldade_original": null,
+    "caracteristicas_originais": null,
+    "wiki": "https://harrypotter.fandom.com/wiki/Maximum_Turbo_Farts_Potion"
+  }
+}

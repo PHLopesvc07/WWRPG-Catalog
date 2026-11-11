@@ -1,0 +1,11 @@
+{
+  "id": "feitico_vermiculus",
+  "name": "Vermiculus",
+  "cat": "Transfiguração",
+  "lvl": "1",
+  "tipo": "Ataque",
+  "pronuncia": "Ver-MI-cu-lus",
+  "pronunciation": "Ver-MI-cu-lus",
+  "condicao": "(C) Transfigurado em Minhoca",
+  "desc": "Transfigura pequenos objetos ou pequenas criaturas em um punhado de minhocas viscosas inofensivas. | Injúria Específica: (C) Transfigurado em Minhoca"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "planta_mimbulus_mimbletonia",
+  "nome": "Mimbulus Mimbletonia",
+  "categoria": "Difícil de Adquirir",
+  "nivel": "4",
+  "manejo_cd": 14,
+  "manejo": "",
+  "efeito": "",
+  "uso_alquimico": "",
+  "classificacao_ministerial": "Espécime Raro Exótico (Difícil de Adquirir).",
+  "descricao": "Cacto cinzento-azulado extremamente raro e pulsante nativo da Assíria. Não possui espinhos normais, mas é coberto por verrugas carnudas que funcionam como mecanismo de defesa ativa: quando cutucado, golpeado ou assustado, o cacto ejeta jatos violentos de Escumaprata (Stinksap), um líquido verde-escuro, viscoso e não-tóxico, mas com um odor pútrido fétido comparável a fezes apodrecidas.",
+  "peculiaridades": "• Nível de Herbologia: Nível 4 (Avançado I / 4º Ano).\n• Manejo & Cultivo: CD 14 (Herbologia). Requer solo desértico e água rara. Deve ser manuseado com extrema delicadeza para não ativar suas bolsas de defesa.\n• Efeito Hostil em Combate: Se golpeado ou usado como armadilha, esguicha Escumaprata em um cone de 3 metros. Qualquer um atingido sofre a condição (C) Fedorento / Escumaprata (desvantagem em testes de furtividade e testes sociais por 24 horas; o cheiro só sai com o feitiço Scourgify vigoroso).\n• Classificação Ministerial: Espécime Raro Exótico (Difícil de Adquirir).",
+  "fotoBase64": ""
+}

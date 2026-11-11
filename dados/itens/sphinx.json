@@ -1,0 +1,64 @@
+{
+  "id": "sphinx",
+  "num": 83,
+  "nome": "Sphinx (Esfinge)",
+  "classificacao": "XXXX",
+  "licenca": "Magizoologista",
+  "porte": "Grande",
+  "tamanho": "2.2 metros",
+  "peso": "300 kg",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "4.0m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Consciente",
+  "descricao": "A esfinge egípcia tem cabeça humana e corpo de leão. Há mais de mil anos ela é usada pelos bruxos e bruxas para guardar tesouros e seus esconderijos secretos. Inteligentíssimo, esse animal te prazer em inventar charadas e quebra-cabeças. Em geral, a esfinge só se torna perigosa quando aquilo que está guardando é ameaçado. Geografia: @Egito",
+  "atributos": {
+    "corpo": 5,
+    "destreza": 2,
+    "vitalidade": 5,
+    "instinto": 4,
+    "carisma": -1,
+    "inteligencia": 4,
+    "sabedoria": 5
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Patada Dilacerante de Leão",
+      "desc": "Mordida ou golpe com garras leoninas gigantescas de grande potência. Rola `2d10 + Corpo` de dano físico e causa **[C: Sangramento]**.",
+      "rolagem": "2d10 + Corpo"
+    },
+    "reacao": {
+      "nome": "Defesa Estratégica",
+      "desc": "Sua mente genial prevê os movimentos do oponente. Gasta 1 ação e rola `1d30 + Inteligência + 3` para anular ataques corporais ou feitiços diretos.",
+      "rolagem": "1d30 + Inteligência + 3"
+    },
+    "ambiente": {
+      "nome": "Enigma da Passagem",
+      "desc": "Barreira mágica protetora de esfinge em área de 4m. Inimigos não conseguem cruzar a passagem sem responder corretamente ao seu enigma tático.",
+      "rolagem": "1 ação"
+    },
+    "extra": {
+      "nome": "Charadas de Esfinge",
+      "desc": "Sendo altamente inteligente, adora enigmas. Se o bruxo tentar dialogar e decifrar charadas, rola Inteligência CD 22, acalmando o monstro em sucesso.",
+      "rolagem": "CD 22 Inteligência"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 5
+    },
+    "media": {
+      "curr": 0,
+      "max": 5
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 5
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/sphinx.jpg",
+  "fotoBase64": "./assets/animais/sphinx.jpg"
+}

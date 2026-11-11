@@ -1,0 +1,24 @@
+{
+  "id": "pocao_mouth_itching_antidote",
+  "nome": "Antídoto para Coceira na Boca (Mouth Itching Antidote)",
+  "tipo": "Antídoto",
+  "nivel": 1,
+  "nível": 1,
+  "efeito": "Cura e neutraliza coceiras lancinantes, formigamentos e inchaços na cavidade bucal causados por feitiços de travessura ou ingestão acidental de cogumelos urticantes.",
+  "ingredientes": "Mel de abelha mágica, folhas de hortelã fresca, casca de limão enfeitiçado.",
+  "descricao": "Líquido verde-pálido refrescante com aroma agradável e revigorante.",
+  "descrição": "Líquido verde-pálido refrescante com aroma agradável e revigorante.",
+  "sistema": {
+    "tempo_preparo": "30 minutos",
+    "duracao": "Instantâneo",
+    "dificuldade_cd": 12,
+    "administracao": "Bochecho ou Ingestão"
+  },
+  "meta": {
+    "slug": "mouth-itching-antidote",
+    "nome_original": "Mouth Itching Antidote",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Pale green in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Mouth_Itching_Antidote"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "id": "feitico_transmogrify",
+  "name": "Transmogrify",
+  "cat": "Maldição",
+  "lvl": "5",
+  "tipo": "Ataque",
+  "pronuncia": "Trans-mo-gri-FAI",
+  "pronunciation": "Trans-mo-gri-FAI",
+  "condicao": "Nenhuma",
+  "desc": "mata pequenos animais. Tortura Transmogrifiana."
+}

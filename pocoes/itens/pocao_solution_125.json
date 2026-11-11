@@ -1,0 +1,24 @@
+{
+  "id": "pocao_solution_125",
+  "nome": "Solução 125 (Solution 125)",
+  "tipo": "Solução Alquímica (Neutralizadora de Ácidos)",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Agente alcalinizante e neutralizador de ácidos alquímicos. Anula o efeito cáustico de misturas corrosivas (como bile de tatu ou secreção de bandinho) sobre bancadas e tecidos.",
+  "ingredientes": "Pó de pedra calcária, bicarbonato mágico purificado, água de fonte mineral.",
+  "descricao": "Líquido marrom-claro leitoso com rótulo de segurança farmacêutica nas masmorras de Hogwarts.",
+  "descrição": "Líquido marrom-claro leitoso com rótulo de segurança farmacêutica nas masmorras de Hogwarts.",
+  "sistema": {
+    "tempo_preparo": "1 hora",
+    "duracao": "Instantâneo",
+    "dificuldade_cd": 14,
+    "administracao": "Aspersão ou Imersão"
+  },
+  "meta": {
+    "slug": "solution-125",
+    "nome_original": "Solution 125",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Muddy-brown colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Solution_125"
+  }
+}

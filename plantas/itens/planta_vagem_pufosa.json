@@ -1,0 +1,14 @@
+{
+  "id": "planta_vagem_pufosa",
+  "nome": "Vagem Pufosa (Puffapod)",
+  "categoria": "Difícil de Adquirir",
+  "nivel": "3",
+  "manejo_cd": 14,
+  "manejo": "CD 14 (Herbologia). Deve ser colhida com cestos acolchoados com feitiço de amortecimento (Molliare). Se cair no chão da estufa, detona uma explosão floral imediata.",
+  "efeito": "",
+  "uso_alquimico": "",
+  "classificacao_ministerial": "Artigo Controlado Classe B.",
+  "descricao": "Planta mágica singular que produz vagens rosadas gordonchas cheias de feijões mágicos brilhantes. A vagem possui uma sensibilidade cinética extrema: no exato milissegundo em que cai ou toca qualquer superfície dura, ela explode espontaneamente em uma floração instantânea e maciça de flores coloridas e vinhas velozes.",
+  "peculiaridades": "• Nível de Herbologia: Nível 3 (Intermediário / 3º Ano).\n• Manejo & Colheita: CD 14 (Herbologia). Deve ser colhida com cestos acolchoados com feitiço de amortecimento (Molliare). Se cair no chão da estufa, detona uma explosão floral imediata.\n• Uso em Combate: Pode ser arremessada no chão (Ação Bônus) para criar uma barreira física vegetal instantânea de 2 metros de diâmetro que bloqueia passagem e mira mágica por 1 rodada.\n• Classificação Ministerial: Artigo Controlado Classe B.",
+  "fotoBase64": ""
+}

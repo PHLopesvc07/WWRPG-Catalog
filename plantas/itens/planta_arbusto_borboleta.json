@@ -1,0 +1,14 @@
+{
+  "id": "planta_arbusto_borboleta",
+  "nome": "Arbusto Borboleta (Flutterby Bush)",
+  "categoria": "Popular",
+  "nivel": "2",
+  "manejo_cd": 12,
+  "manejo": "CD 12 (Herbologia). A poda deve ser feita com tesouras encantadas após o florescimento para evitar que o arbusto se debata.",
+  "efeito": "Inalar o pólen de suas flores reduz em 1 ponto a fadiga mental e concede vantagem em testes de resistência contra medo.",
+  "uso_alquimico": "",
+  "classificacao_ministerial": "Artigo Comerciável Livre (Popular).",
+  "descricao": "Arbusto mágico com folhagem trêmula e flores delicadas que se abrem apenas uma vez a cada século, liberando uma névoa de perfume inebriante que altera o aroma conforme os desejos e memórias felizes de quem o inala. Os galhos tremem suavemente como asas de borboleta prontas para voar.",
+  "peculiaridades": "• Nível de Herbologia: Nível 2 (Iniciante / 2º Ano).\n• Manejo & Colheita: CD 12 (Herbologia). A poda deve ser feita com tesouras encantadas após o florescimento para evitar que o arbusto se debata.\n• Mecânica e Efeito: Inalar o pólen de suas flores reduz em 1 ponto a fadiga mental e concede vantagem em testes de resistência contra medo.\n• Classificação Ministerial: Artigo Comerciável Livre (Popular).",
+  "fotoBase64": ""
+}

@@ -1,0 +1,64 @@
+{
+  "id": "dragao_rabo_corneo_hungaro",
+  "num": 26,
+  "nome": "Dragão - Rabo-Córneo Húngaro (Hungarian Horntail)",
+  "classificacao": "XXXXX",
+  "licenca": "Não permitido",
+  "porte": "Enorme",
+  "tamanho": "15.0 metros",
+  "peso": "4.0 Toneladas",
+  "origem": "Natural",
+  "locomocao": "Aquaéros",
+  "velocidade": "Voo: 9.5m | Terrestre: 2.5m por ação",
+  "interacao": "Agressivo",
+  "tipo": "Bestial",
+  "descricao": "Com fama de ser a mais perigosa de todas as raças de dragão, o Rabo-Córneo Húngaro tem escamas pretas e uma aparência distintamente reptiliana de lagarto gigante. Seus olhos são amarelos brilhantes, os chifres cor de bronze tal como os espinhos afiados que cobrem o seu longo e perigoso rabo. O alcance de suas labaredas é um dos maiores que se tem notícia (podendo chegar a quinze metros de distância). Seus ovos são cor de cimento com uma casca blindada; os filhotes quebram as cascas com as caudas, cujos cornos já nascem bem desenvolvidos. Alimenta-se de cabras, carneiros e, sempre que possível, de humanos. Geografia: @Hungria",
+  "atributos": {
+    "corpo": 9,
+    "destreza": 3,
+    "vitalidade": 9,
+    "instinto": 5,
+    "carisma": -5,
+    "inteligencia": -2,
+    "sabedoria": 2
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Esmagamento por Cauda Córnea",
+      "desc": "Ataque brutal com a cauda recoberta de espinhos bronzeados. Rola `2d12 + Corpo` de dano físico, causa a condição **[C: Trauma Craniano]**.",
+      "rolagem": "2d12 + Corpo"
+    },
+    "reacao": {
+      "nome": "Rugido Ensurdecedor",
+      "desc": "Ruge com força sísmica ao ser alvejado. Gasta 1 ação para rolar `1d30 + Vitalidade`. Se vencer a CD, atordoa o atacante por 1 rodada (gasta 1 ação).",
+      "rolagem": "1d30 + Vitalidade"
+    },
+    "ambiente": {
+      "nome": "Sopro de Fogo Máximo",
+      "desc": "Expele uma torrente de chamas amarelas e alaranjadas a até 15m. Reduz obstáculos a pó e causa `2d12` de dano de fogo em linha reta.",
+      "rolagem": "CD 21 + Instinto"
+    },
+    "extra": {
+      "nome": "Fúria Territorial Extrema",
+      "desc": "Considerado o mais perigoso dos dragões. Adiciona +2 na Destreza e Instinto se estiver envolvido em combates aéreos diretos.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 10
+    },
+    "media": {
+      "curr": 0,
+      "max": 10
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 10
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/dragao-rabo-corneo.jpg",
+  "fotoBase64": "./assets/animais/dragao-rabo-corneo.jpg"
+}

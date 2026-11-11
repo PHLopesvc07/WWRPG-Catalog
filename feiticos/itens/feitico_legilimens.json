@@ -1,0 +1,11 @@
+{
+  "id": "feitico_legilimens",
+  "name": "Legilimens",
+  "cat": "Maldição",
+  "lvl": "5",
+  "tipo": "Ataque",
+  "pronuncia": "Le-GI-li-mens",
+  "pronunciation": "Le-GI-li-mens",
+  "condicao": "(C) Mente Invadida",
+  "desc": "Permite ao bruxo penetrar na mente da vítima, podendo ver memórias e emoções. | Injúria Específica: (C) Mente Invadida"
+}

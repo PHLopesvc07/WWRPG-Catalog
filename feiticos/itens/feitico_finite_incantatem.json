@@ -1,0 +1,11 @@
+{
+  "id": "feitico_finite_incantatem",
+  "name": "Finite Incantatem",
+  "cat": "Contrafeitiço",
+  "lvl": "2",
+  "tipo": "Proteção",
+  "pronuncia": "Fi-NI-te In-can-TA-tem",
+  "pronunciation": "Fi-NI-te In-can-TA-tem",
+  "condicao": "Nenhuma",
+  "desc": "Usado para acabar com o efeito de um feitiço usado numa pessoa ou numa coisa."
+}

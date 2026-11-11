@@ -1,0 +1,64 @@
+{
+  "id": "streeler",
+  "num": 84,
+  "nome": "Streeler (Lesmalenta)",
+  "classificacao": "XXX",
+  "licenca": "Comum",
+  "porte": "Pequeno",
+  "tamanho": "30 cm",
+  "peso": "3.5 kg",
+  "origem": "Natural",
+  "locomocao": "Terrestres",
+  "velocidade": "1.0m por ação",
+  "interacao": "Pacífico",
+  "tipo": "Simples",
+  "descricao": "Esse animal é uma enorme lesma que muda de cor de hora em hora, e quando caminha deixa um rastro tão venenoso que murcha e queima toda a vegetação por onde passa. A lesmalenta é originária de vários países africanos, embora tenha sido reproduzida pelos bruxos, com sucesso, na Europa, na Ásia e nas Américas. É criada como bicho de estimação por aqueles Quem estiver interessado no papel que os pomorim dourado representou no desenvolvimento do jogo de quadribol deve consultar o Quadribol através dos séculos , de autoria de Kennilworthy Whisp (Ed. Livros Bruxa Aria, 1952). que apreciam suas mudanças caleidoscópicas de cor e porque seu veneno é uma das poucas substâncias capazes de matar toletes. Geografia: @África",
+  "atributos": {
+    "corpo": -3,
+    "destreza": -2,
+    "vitalidade": 0,
+    "instinto": 0,
+    "carisma": 1,
+    "inteligencia": -4,
+    "sabedoria": -1
+  },
+  "habilidades": {
+    "dano": {
+      "nome": "Rastro de Secreção Ácida",
+      "desc": "Morde ou secreta muco venenoso no agressor. Rola `1d6 + Vitalidade` de dano ácido, causa a condição **[C: Queimadura Ácida]**.",
+      "rolagem": "1d6 + Vitalidade"
+    },
+    "reacao": {
+      "nome": "Retração na Concha Espinhosa",
+      "desc": "Gasta 1 ação para retrair seu corpo de lesma gigante em sua concha espinhosa. Rola `1d30 + Vitalidade + 3` para anular danos físicos.",
+      "rolagem": "1d30 + Vitalidade + 3"
+    },
+    "ambiente": {
+      "nome": "Rastro Venenoso Incinerador",
+      "desc": "Seu rastro de muco queima e destrói toda a vegetação e madeira do solo em raio de 2m, gerando terreno perigoso e escorregadio.",
+      "rolagem": "Passivo"
+    },
+    "extra": {
+      "nome": "Mudar de Cor Temática",
+      "desc": "Muda de cor a cada poucas horas. Suas secreções ácidas neutralizam pragas botânicas e podem ser coletadas para fins defensivos.",
+      "rolagem": "Passivo"
+    }
+  },
+  "injuries": {
+    "leve": {
+      "curr": 0,
+      "max": 1
+    },
+    "media": {
+      "curr": 0,
+      "max": 1
+    },
+    "pesada": {
+      "curr": 0,
+      "max": 1
+    },
+    "custom": []
+  },
+  "fotoUrl": "./assets/animais/streeler.jpg",
+  "fotoBase64": "./assets/animais/streeler.jpg"
+}

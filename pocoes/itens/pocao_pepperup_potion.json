@@ -1,0 +1,24 @@
+{
+  "id": "pocao_pepperup_potion",
+  "nome": "Poção Estimulante / Apimentada (Pepperup Potion)",
+  "tipo": "Poção (Medicinal)",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Cura instantaneamente resfriados comuns, tosses, congestão nasal e calafrios, aquecendo o corpo do bebedor por várias horas. Possui o efeito colateral característico de fazer jatos de fumaça e vapor saírem pelas orelhas do paciente por horas a fio.",
+  "ingredientes": "Chifre de bicórnio moído, raiz de mandrágora, erva-de-santa-maria mágica (jewelweed), pimenta malagueta encantada.",
+  "descricao": "Líquido vermelho-vivo e fumegante inventado pelo célebre pocionista Glover Hipworth no século XVIII e distribuída em massa por Madame Pomfrey no inverno em Hogwarts.",
+  "descrição": "Líquido vermelho-vivo e fumegante inventado pelo célebre pocionista Glover Hipworth no século XVIII e distribuída em massa por Madame Pomfrey no inverno em Hogwarts.",
+  "sistema": {
+    "tempo_preparo": "1 hora e 30 minutos",
+    "duracao": "Cura instantânea / Vapor nas orelhas por 3 horas",
+    "dificuldade_cd": 14,
+    "administracao": "Ingestão"
+  },
+  "meta": {
+    "slug": "pepperup-potion",
+    "nome_original": "Pepperup Potion",
+    "dificuldade_original": "Moderate",
+    "caracteristicas_originais": "Red in colour",
+    "wiki": "https://harrypotter.fandom.com/wiki/Pepperup_Potion"
+  }
+}

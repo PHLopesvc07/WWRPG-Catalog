@@ -1,0 +1,24 @@
+{
+  "id": "pocao_bundimun_pomade",
+  "nome": "Pomada de Bandinho (Bundimun Pomade)",
+  "tipo": "Pomada (Cosmética)",
+  "nivel": 2,
+  "nível": 2,
+  "efeito": "Pomada capilar altamente modeladora e estilizadora. Fixa os cabelos em qualquer penteado por 24 horas, conferindo brilho e resistência contra umidade e ventanias de voo de vassoura.",
+  "ingredientes": "Secreção de Bandinho altamente diluída e purificada, cera de abelha mágica, óleo de lavanda.",
+  "descricao": "Creme espesso verde-claro aromático. A proporção de secreção de bandinho deve ser milimetricamente controlada para evitar que a acidez corroa os fios de cabelo em vez de estilizá-los.",
+  "descrição": "Creme espesso verde-claro aromático. A proporção de secreção de bandinho deve ser milimetricamente controlada para evitar que a acidez corroa os fios de cabelo em vez de estilizá-los.",
+  "sistema": {
+    "tempo_preparo": "1 hora",
+    "duracao": "24 horas",
+    "dificuldade_cd": 14,
+    "administracao": "Aplicação Tópica no Cabelo"
+  },
+  "meta": {
+    "slug": "bundimun-pomade",
+    "nome_original": "Bundimum Pomade",
+    "dificuldade_original": null,
+    "caracteristicas_originais": null,
+    "wiki": "https://harrypotter.fandom.com/wiki/Bundimun_Pomade"
+  }
+}

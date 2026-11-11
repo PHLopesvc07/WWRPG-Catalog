@@ -1,0 +1,11 @@
+{
+  "id": "feitico_lacarnum_inflamari",
+  "name": "Lacarnum Inflamari",
+  "cat": "Charme",
+  "lvl": "1",
+  "tipo": "Utilitário",
+  "pronuncia": "La-CAR-num In-fla-MA-ri",
+  "pronunciation": "La-CAR-num In-fla-MA-ri",
+  "condicao": "(C) Em Chamas",
+  "desc": "Produz chamas azuladas e quentes que podem ser recolhidas num frasco. | Injúria Específica: (C) Em Chamas"
+}

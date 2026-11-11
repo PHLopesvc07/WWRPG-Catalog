@@ -1,0 +1,11 @@
+{
+  "id": "feitico_vipera_evanesca",
+  "name": "Vipera Evanesca",
+  "cat": "Contrafeitiço",
+  "lvl": "2",
+  "tipo": "Proteção",
+  "pronuncia": "VI-pe-ra E-va-NES-ca",
+  "pronunciation": "VI-pe-ra E-va-NES-ca",
+  "condicao": "Nenhuma",
+  "desc": "Faz uma serpente criada por um feitiço desaparecer(é uma variação do feitiço Evanesco, direcionado para serpentes)."
+}

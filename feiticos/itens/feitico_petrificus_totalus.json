@@ -1,0 +1,11 @@
+{
+  "id": "feitico_petrificus_totalus",
+  "name": "Petrificus Totalus",
+  "cat": "Maldição Menor",
+  "lvl": "3",
+  "tipo": "Ataque",
+  "pronuncia": "Pe-TRI-fi-cus To-TA-lus",
+  "pronunciation": "Pe-TRI-fi-cus To-TA-lus",
+  "condicao": "(C) Petrificado",
+  "desc": "Paralisa o alvo. É comum as pessoas dizerem que o feitiço petrifica o alvo, o que é um erro, pois petrificar é transformar em pedra, como ocorre com a lava expelida dos vulcões ou fissuras marítimas, após ser resfriada. | Injúria Específica: (C) Petrificado"
+}

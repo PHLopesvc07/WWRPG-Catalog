@@ -1,0 +1,24 @@
+{
+  "id": "pocao_noxious_poison",
+  "nome": "Veneno Nocivo / Ácido Pútrido (Noxious Poison)",
+  "tipo": "Veneno / Gás Corrosivo",
+  "nivel": 4,
+  "nível": 4,
+  "efeito": "Veneno altamente cáustico e corrosivo. Em contato com a pele ou vias respiratórias, dissolve mucosas e tecidos orgânicos, gerando asfixia grave e dano contínuo.",
+  "ingredientes": "Bile concentrada de serpente cinzenta, ácido de lesma carnívora, enxofre em pó.",
+  "descricao": "Líquido verde-escuro fumegante que corrói vidros comuns se não for guardado em frascos de cristal encantado.",
+  "descrição": "Líquido verde-escuro fumegante que corrói vidros comuns se não for guardado em frascos de cristal encantado.",
+  "sistema": {
+    "tempo_preparo": "3 horas e 30 minutos",
+    "duracao": "Instantâneo (dano contínuo)",
+    "dificuldade_cd": 18,
+    "administracao": "Ingestão ou Arremesso"
+  },
+  "meta": {
+    "slug": "noxious-poison",
+    "nome_original": "Noxious Poison",
+    "dificuldade_original": null,
+    "caracteristicas_originais": "Green-coloured smoke",
+    "wiki": "https://harrypotter.fandom.com/wiki/Noxious_Poison"
+  }
+}
