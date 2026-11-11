@@ -1,31 +1,30 @@
 # Arquivo Geral do Ministerio da Magia — W&W RPG Catalog
 
-Aplicacao web de catalogacao, consulta rapida e exportacao de recursos para o sistema **Wands & Wizards RPG (W&W)**, estruturada em quatro arquivos departamentais independentes:
+Aplicacao web de catalogacao, consulta rapida e exportacao de recursos para o sistema **Wands & Wizards RPG (W&W)**, conectada diretamente ao **Cloud Firestore** e estruturada em quatro arquivos departamentais independentes:
 
-1. **D.R.C.C.M. — Animais e Criaturas Magicas** (92 especies catalogadas com retratos, atributos, habilidades de combate e prontuario de injurias)
-2. **C.E.F. — Grande Compendio de Feiticos** (210 encantamentos catalogados com pronuncia, nivel 1 a 7, categoria magica, pericia de conjuracao e condicao aplicada)
-3. **Compendio de Herbologia e Botanica Magica** (44 plantas magicas classificadas por raridade, nivel de herbologia, CD de manejo e usos alquimicos)
-4. **Catalogo Alquimico de Pocoes** (166 compostos, elixires, antidotos e venenos com CD de preparo, tempo de fermentacao, via de administracao e ingredientes)
+1. **D.R.C.C.M. — Animais e Criaturas Magicas** (92 especies armazenadas no Firestore com retratos embutidos em Base64, atributos, habilidades de combate e prontuario de injurias)
+2. **C.E.F. — Grande Compendio de Feiticos** (210 encantamentos armazenados no Firestore com pronuncia, nivel 1 a 7, categoria magica, pericia de conjuracao e condicao aplicada)
+3. **Compendio de Herbologia e Botanica Magica** (44 plantas magicas armazenadas no Firestore classificadas por raridade, nivel de herbologia, CD de manejo e usos alquimicos)
+4. **Catalogo Alquimico de Pocoes** (166 compostos, elixires, antidotos e venenos armazenados no Firestore com CD de preparo, tempo de fermentacao, via de administracao e ingredientes)
 
 ---
 
 ## Guia de Consulta da API
 
-Para integrar este catalogo a fichas de personagem (como o **WWRPG-Ficha**), bots ou ferramentas externas, consulte o documento dedicado:
+Para integrar este catalogo a fichas de personagem (como o **WWRPG-Ficha**), bots ou ferramentas externas consultando diretamente o Cloud Firestore, acesse o documento dedicado:
 
-- **[Guia de Consulta da API (`API_GUIDE.md`)](./API_GUIDE.md)**: Documentacao completa dos endpoints HTTP estaticos (`indice.json` e `itens/{id}.json`), funcoes do modulo ES6 (`js/services/database.js`), exemplos em JavaScript/`curl` e esquemas JSON de todas as quatro colecoes.
+- **[Guia de Consulta da API (`API_GUIDE.md`)](./API_GUIDE.md)**: Documentacao completa dos endpoints REST do Cloud Firestore (`_indexes/{colecao}` e `{colecao}/{id}`), funcoes do modulo ES6 (`js/services/database.js`), exemplos em JavaScript/`curl` e esquemas JSON de todas as quatro colecoes.
 
 ---
 
-## Arquitetura de Desempenho e Carregamento Individual
+## Arquitetura Cloud Firestore e Carregamento Individual
 
-O sistema opera com carregamento em duas camadas (Two-Tier Lazy Loading) e otimizacoes de renderizacao para garantir navegacao imediata:
+Nenhum arquivo JSON de catalogo ou imagem de criatura fica armazenado localmente no codigo-fonte; todos os dados sao puxados sob demanda do **Cloud Firestore** (`wwcatalog-10546`):
 
-- **Carregamento Sob Demanda por Aba (`ensureLoaded`):** Na abertura da aplicacao, apenas o indice da aba ativa e processado. Os catalogos de Feiticos, Plantas e Pocoes sao carregados sob demanda no instante em que o usuario acessa a respectiva aba.
-- **Camada 1 (Indices Leves):** Cada modulo carrega inicialmente apenas seu arquivo `indice.json`, permitindo filtragem e ordenacao instantaneas em memoria.
-- **Camada 2 (Documentos Individuais com Cache em Memoria):** Ao selecionar um registro na barra lateral, a aplicacao requisita apenas o arquivo `./<categoria>/itens/<id>.json` correspondente e armazena-o em cache (`Map`) para exibicao imediata em consultas subsequentes.
-- **Delegacao de Eventos e Debounce:** As listas laterais utilizam um unico listener delegado por container (`ul.record-list`) com `contain: content` no CSS e debounce de `80ms` nos campos de busca textual, evitando recriacao de listeners e reflows desnecessarios.
-- **Ativos Graficos Otimizados:** As texturas de pergaminho e retratos de criaturas foram comprimidas e utilizam carregamento nativo assincrono (`loading="lazy" decoding="async"`).
+- **Carregamento Sob Demanda por Aba (`ensureLoaded`):** Na abertura da aplicacao, apenas o indice da aba ativa e requisitado ao Firestore. Os catalogos de Feiticos, Plantas e Pocoes sao consultados no momento em que o usuario abre a respectiva aba.
+- **Camada 1 (Indices Leves em `_indexes/{colecao}`):** Cada modulo consulta inicialmente apenas o documento de indice leve da sua colecao no Firestore, permitindo filtragem e ordenacao instantaneas em memoria sem trafegar descricoes longas ou imagens Base64.
+- **Camada 2 (Documentos Individuais em `{colecao}/{id}` com Cache em Memoria):** Ao clicar em um item na lista lateral, a aplicacao requisita apenas aquele documento individual no Firestore (incluindo a imagem `fotoBase64` da criatura) e o mantem em cache (`Map`) para exibicao instantanea em consultas repetidas.
+- **Delegacao de Eventos e Debounce:** As listas laterais utilizam um unico listener delegado por container (`ul.record-list`) com `contain: content` no CSS e debounce de `80ms` nos campos de busca textual.
 
 ---
 
@@ -45,7 +44,7 @@ A interface combina a identidade tipografica do **WWRPG-Ficha** com o guia tecni
 WWcatalog/
 ├── index.html                  # Interface principal com os 4 espacos de catalogo e formularios
 ├── README.md                   # Documentacao geral do projeto
-├── API_GUIDE.md                # Guia de consulta da API e esquemas JSON
+├── API_GUIDE.md                # Guia de consulta da API Cloud Firestore e esquemas JSON
 ├── css/
 │   ├── variables.css           # Tokens de cores, fontes e superficies dos 3 temas
 │   ├── base.css                # Reset, tipografia e estilos de formulario
@@ -54,7 +53,8 @@ WWcatalog/
 ├── js/
 │   ├── main.js                 # Inicializacao, controle de temas e carregamento sob demanda por aba
 │   ├── services/
-│   │   └── database.js         # Camada de dados (indices leves, itens individuais, cache e exportacao)
+│   │   ├── firebaseConfig.js   # Configuracao do projeto Cloud Firestore (wwcatalog-10546)
+│   │   └── database.js         # Cliente REST Cloud Firestore (indices, itens individuais e escrita)
 │   ├── controllers/
 │   │   ├── TabController.js      # Navegacao entre abas e emissao do evento tab-opened
 │   │   ├── CreatureController.js # Controlador de Animais Magicos (D.R.C.C.M.)
@@ -63,32 +63,15 @@ WWcatalog/
 │   │   └── PotionController.js   # Controlador de Pocoes (Alquimia)
 │   └── utils/
 │       └── helpers.js          # Utilitarios de sanitizacao HTML, Base64 e exportacao JSON
-├── assets/
-│   ├── img/                    # Texturas de pergaminho e emblemas otimizados
-│   └── animais/                # 91 ilustracoes de criaturas magicas otimizadas
-├── dados/
-│   ├── indice.json             # Indice leve de criaturas (92 registros)
-│   ├── catalogo_criaturas.json # Pacote completo de criaturas
-│   └── itens/                  # 92 arquivos JSON individuais de criaturas
-├── feiticos/
-│   ├── indice.json             # Indice leve de feiticos (210 registros)
-│   ├── catalogo_feiticos.json  # Pacote completo de feiticos
-│   └── itens/                  # 210 arquivos JSON individuais de feiticos
-├── plantas/
-│   ├── indice.json             # Indice leve de plantas (44 registros)
-│   ├── catalogo_plantas.json   # Pacote completo de plantas
-│   └── itens/                  # 44 arquivos JSON individuais de plantas
-└── pocoes/
-    ├── indice.json             # Indice leve de pocoes (166 registros)
-    ├── catalogo_pocoes.json    # Pacote completo de pocoes
-    └── itens/                  # 166 arquivos JSON individuais de pocoes
+└── assets/
+    └── img/                    # Texturas de pergaminho e emblemas de interface do Ministerio
 ```
 
 ---
 
 ## Como Executar Localmente
 
-Por utilizar ES6 Modules (`<script type="module">`) e requisicoes `fetch` para os arquivos JSON, sirva a pasta raiz por meio de um servidor HTTP estatico:
+Por utilizar ES6 Modules (`<script type="module">`), sirva a pasta raiz por meio de um servidor HTTP estatico:
 
 ```bash
 # Opcao 1: Node.js (npx)
