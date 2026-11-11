@@ -1,7 +1,7 @@
 /**
  * CONTROLADOR PRINCIPAL DA VERSÃO MOBILE / ANDROID
  * Conecta os 4 catálogos do Firestore, gerencia a Bottom Navigation Bar,
- * os filtros colapsáveis e a Bottom Sheet modal para exibição fluida no celular.
+ * os filtros colapsáveis, a Bottom Sheet modal e a verificação automática de updates no GitHub.
  */
 
 import {
@@ -11,6 +11,7 @@ import {
     saveRecord
 } from "../js/services/database.js";
 import { escapeHtml } from "../js/utils/helpers.js";
+import { checkForAppUpdates, CURRENT_APP_VERSION } from "../js/services/updater.js";
 
 class MobileCatalogApp {
     constructor() {
@@ -36,6 +37,7 @@ class MobileCatalogApp {
         this.setupBottomNav();
         this.setupModal();
         this.setupFilters();
+        this.checkUpdates();
         await this.loadAllCatalogs();
     }
 
@@ -61,6 +63,36 @@ class MobileCatalogApp {
         }
     }
 
+    async checkUpdates() {
+        let appVer = CURRENT_APP_VERSION;
+        if (window.AndroidNative && typeof window.AndroidNative.getAppVersion === "function") {
+            try {
+                appVer = window.AndroidNative.getAppVersion();
+            } catch (_) {}
+        }
+
+        const updateBanner = document.getElementById("mobile-update-banner");
+        const updateText = document.getElementById("mobile-update-text");
+        const updateLink = document.getElementById("mobile-update-link");
+
+        const info = await checkForAppUpdates(appVer);
+        if (info.hasUpdate && updateBanner) {
+            if (updateText) {
+                updateText.textContent = `Nova versão ${info.latestVersion} disponível!`;
+            }
+            if (updateLink) {
+                updateLink.href = info.downloadUrl || "#";
+                updateLink.addEventListener("click", e => {
+                    if (window.AndroidNative && typeof window.AndroidNative.openExternalUrl === "function") {
+                        e.preventDefault();
+                        window.AndroidNative.openExternalUrl(info.downloadUrl);
+                    }
+                });
+            }
+            updateBanner.style.display = "flex";
+        }
+    }
+
     setupBottomNav() {
         const navButtons = document.querySelectorAll(".mobile-nav-item[data-target]");
         navButtons.forEach(btn => {
@@ -73,12 +105,10 @@ class MobileCatalogApp {
     }
 
     switchTab(targetPaneId) {
-        // Atualiza botões
         document.querySelectorAll(".mobile-nav-item").forEach(btn => {
             btn.classList.toggle("active", btn.dataset.target === targetPaneId);
         });
 
-        // Alterna panes
         document.querySelectorAll(".mobile-tab-pane").forEach(pane => {
             pane.classList.toggle("active", pane.id === targetPaneId);
         });
@@ -117,7 +147,6 @@ class MobileCatalogApp {
     }
 
     setupFilters() {
-        // Toggle filtros avançados
         document.querySelectorAll(".btn-toggle-filters").forEach(btn => {
             btn.addEventListener("click", () => {
                 const targetId = btn.dataset.target;
@@ -129,7 +158,6 @@ class MobileCatalogApp {
             });
         });
 
-        // Eventos de Busca e Filtro de Criaturas
         const searchCreature = document.getElementById("m-search-creature");
         if (searchCreature) {
             searchCreature.addEventListener("input", () => this.debounceFilter("creatures"));
@@ -138,7 +166,6 @@ class MobileCatalogApp {
             document.getElementById(id)?.addEventListener("change", () => this.applyCreatureFilters());
         });
 
-        // Eventos de Feitiços
         const searchSpell = document.getElementById("m-search-spell");
         if (searchSpell) {
             searchSpell.addEventListener("input", () => this.debounceFilter("spells"));
@@ -147,7 +174,6 @@ class MobileCatalogApp {
             document.getElementById(id)?.addEventListener("change", () => this.applySpellFilters());
         });
 
-        // Eventos de Plantas
         const searchPlant = document.getElementById("m-search-plant");
         if (searchPlant) {
             searchPlant.addEventListener("input", () => this.debounceFilter("plants"));
@@ -156,7 +182,6 @@ class MobileCatalogApp {
             document.getElementById(id)?.addEventListener("change", () => this.applyPlantFilters());
         });
 
-        // Eventos de Poções
         const searchPotion = document.getElementById("m-search-potion");
         if (searchPotion) {
             searchPotion.addEventListener("input", () => this.debounceFilter("potions"));
@@ -165,7 +190,6 @@ class MobileCatalogApp {
             document.getElementById(id)?.addEventListener("change", () => this.applyPotionFilters());
         });
 
-        // Delegação de cliques nas listas mobile
         document.getElementById("m-list-creatures")?.addEventListener("click", e => {
             const item = e.target.closest(".record-list-item");
             if (item?.dataset.id) this.openDetailSheet("creatures", item.dataset.id);
@@ -226,7 +250,6 @@ class MobileCatalogApp {
         if (el) el.textContent = count;
     }
 
-    /* FILTROS E RENDERIZAÇÃO DE LISTAS */
     applyCreatureFilters() {
         const q = (document.getElementById("m-search-creature")?.value || "").toLowerCase().trim();
         const fClass = document.getElementById("m-filter-class")?.value || "";
@@ -394,7 +417,6 @@ class MobileCatalogApp {
         `).join("");
     }
 
-    /* VISUALIZADOR MODAL DE DETALHES */
     async openDetailSheet(category, id) {
         const modal = document.getElementById("mobile-sheet-modal");
         const body = document.getElementById("mobile-modal-body");

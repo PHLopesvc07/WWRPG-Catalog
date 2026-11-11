@@ -455,3 +455,74 @@ body.terminal-mode .mobile-nav-item .nav-badge {
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
 }
+
+/* ==========================================================================
+   BANNER DE ATUALIZAÇÕES AUTOMÁTICAS (GITHUB RELEASES)
+   ========================================================================== */
+.mobile-update-banner {
+    background: #d4af37;
+    color: #1a1714;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-bottom: 2px solid var(--ink);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    animation: slideDown 0.3s ease;
+}
+
+body.dark-mode .mobile-update-banner {
+    background: #f1c40f;
+    color: #0b0c10;
+}
+
+body.terminal-mode .mobile-update-banner {
+    background: #00f0ff;
+    color: #0b1011;
+    border-bottom: 1px solid #00f0ff;
+}
+
+.mobile-update-banner .update-icon {
+    font-size: 1.25rem;
+}
+
+.mobile-update-banner .update-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    line-height: 1.2;
+}
+
+.mobile-update-banner .update-info strong {
+    font-size: 0.88rem;
+    font-family: var(--font-sans);
+}
+
+.mobile-update-banner .update-info small {
+    font-size: 0.72rem;
+    opacity: 0.85;
+}
+
+.mobile-btn-update {
+    background: var(--ink);
+    color: var(--parchment);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.dark-mode .mobile-btn-update {
+    background: #14140f;
+    color: #f1c40f;
+}
+
+body.terminal-mode .mobile-btn-update {
+    background: #0b1011;
+    color: #00f0ff;
+}
