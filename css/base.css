@@ -1,6 +1,6 @@
 /* ==========================================================================
    BASE.CSS — MINISTÉRIO DA MAGIA (WWRPG CATALOG)
-   Reset, Tipografia, Acessibilidade e Fundo
+   Reset, Tipografia, Acessibilidade e Fundo Otimizado
    ========================================================================== */
 
 *, *::before, *::after {
@@ -19,8 +19,8 @@ body {
     background-color: var(--parchment);
     background-image: var(--bg-pergaminho);
     background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-position: center top;
+    background-repeat: repeat-y;
 
     color: var(--ink);
     font-family: var(--font-typewriter);
@@ -31,7 +31,6 @@ body {
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 body.terminal-mode {
@@ -64,7 +63,6 @@ code {
 
 .tab-content.active {
     display: block;
-    animation: fadeInForm 0.25s ease-out;
 }
 
 .mt-10 { margin-top: 10px; }

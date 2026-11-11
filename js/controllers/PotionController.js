@@ -1,6 +1,7 @@
 /**
  * CONTROLADOR DO CATÁLOGO ALQUÍMICO DE POÇÕES
  * Carregamento Individual Sob Demanda (Tier 1: Índice Leve | Tier 2: Documento Individual)
+ * Otimizado com delegação de eventos, debounce de busca e carregamento sob demanda da aba.
  */
 
 import {
@@ -22,6 +23,8 @@ export class PotionController {
         this.selectedIds = new Set();
         this.activePotionId = null;
         this.editingId = null;
+        this.loaded = false;
+        this._searchTimer = null;
 
         this.form = document.getElementById("form-potion");
         this.listContainer = document.getElementById("potion-list");
@@ -43,8 +46,15 @@ export class PotionController {
             btnBulk.addEventListener("click", () => this.handleBulkImport());
         }
 
+        const searchEl = document.getElementById("search-potion");
+        if (searchEl) {
+            searchEl.addEventListener("input", () => {
+                clearTimeout(this._searchTimer);
+                this._searchTimer = setTimeout(() => this.applyFilters(), 80);
+            });
+        }
+
         const filterIds = [
-            "search-potion",
             "sort-potion",
             "filter-potion-lvl",
             "filter-potion-tipo",
@@ -53,7 +63,6 @@ export class PotionController {
         filterIds.forEach(id => {
             const el = document.getElementById(id);
             if (el) {
-                el.addEventListener("input", () => this.applyFilters());
                 el.addEventListener("change", () => this.applyFilters());
             }
         });
@@ -68,7 +77,34 @@ export class PotionController {
             btnExportList.addEventListener("click", () => this.exportSelectedPotions());
         }
 
-        this.loadCatalog();
+        if (this.listContainer) {
+            this.listContainer.addEventListener("click", e => {
+                const checkbox = e.target.closest(".record-check");
+                if (checkbox) {
+                    e.stopPropagation();
+                    const id = checkbox.dataset.id;
+                    if (checkbox.checked) {
+                        this.selectedIds.add(id);
+                    } else {
+                        this.selectedIds.delete(id);
+                    }
+                    this.updateExportButtonLabel();
+                    return;
+                }
+
+                const li = e.target.closest(".record-list-item");
+                if (li && li.dataset.id) {
+                    this.selectAndLoadPotion(li.dataset.id);
+                }
+            });
+        }
+    }
+
+    async ensureLoaded() {
+        if (!this.loaded) {
+            this.loaded = true;
+            await this.loadCatalog();
+        }
     }
 
     async savePotion() {
@@ -111,7 +147,7 @@ export class PotionController {
         this.editingId = null;
         await this.loadCatalog(true);
 
-        alert(`Poção "${potionData.nome}" catalogada com sucesso no Catálogo Alquímico!`);
+        alert(`Poção "${potionData.nome}" catalogada com sucesso no Catálogo Alquímico.`);
         document.querySelector('[data-target="tab-arquivo-pocoes"]')?.click();
         await this.selectAndLoadPotion(result.id);
     }
@@ -137,7 +173,7 @@ export class PotionController {
             document.getElementById("bulk-potion-input").value = "";
             document.getElementById("bulk-potion-file").value = "";
             await this.loadCatalog(true);
-            alert(`${res.count} composto(s) alquímico(s) importado(s) com sucesso!`);
+            alert(`${res.count} composto(s) alquímico(s) importado(s) com sucesso.`);
         } catch (err) {
             alert("Erro ao processar JSON de poções: " + err.message);
         }
@@ -148,6 +184,7 @@ export class PotionController {
         this.listContainer.innerHTML = `<li class="empty-msg">Consultando índice alquímico...</li>`;
 
         this.indexData = await fetchCatalogIndex(COLLECTIONS.POTIONS, forceRefresh);
+        this.loaded = true;
         this.updateBadgeCount();
         this.applyFilters();
 
@@ -202,7 +239,6 @@ export class PotionController {
 
     renderSidebarList() {
         if (!this.listContainer) return;
-        this.listContainer.innerHTML = "";
 
         const countEl = document.getElementById("potion-filter-count");
         if (countEl) {
@@ -211,43 +247,30 @@ export class PotionController {
 
         if (this.filteredIndex.length === 0) {
             this.listContainer.innerHTML = `<li class="empty-msg">Nenhuma poção encontrada com os filtros atuais.</li>`;
+            this.updateExportButtonLabel();
             return;
         }
 
-        const fragment = document.createDocumentFragment();
-        this.filteredIndex.forEach(p => {
-            const li = document.createElement("li");
-            li.className = `record-list-item ${this.activePotionId === p.id ? "active-record" : ""}`;
-            li.dataset.id = p.id;
+        const htmlItems = new Array(this.filteredIndex.length);
+        for (let i = 0; i < this.filteredIndex.length; i++) {
+            const p = this.filteredIndex[i];
+            const isActive = this.activePotionId === p.id ? " active-record" : "";
+            const isChecked = this.selectedIds.has(p.id) ? " checked" : "";
+            const idSafe = escapeHtml(p.id);
 
-            const isChecked = this.selectedIds.has(p.id);
-            li.innerHTML = `
+            htmlItems[i] = `<li class="record-list-item${isActive}" data-id="${idSafe}">
                 <div class="list-item-row">
-                    <input type="checkbox" class="record-check" data-id="${escapeHtml(p.id)}" ${isChecked ? "checked" : ""} title="Selecionar para exportação">
+                    <input type="checkbox" class="record-check" data-id="${idSafe}"${isChecked} title="Selecionar para exportação">
                     <div class="list-item-main">
                         <strong>${escapeHtml(p.nome)}</strong>
                         <small>${escapeHtml(p.tipo)} • CD ${escapeHtml(p.dificuldade_cd || 14)} • ${escapeHtml(p.administracao || "Ingestão")}</small>
                     </div>
                     <span class="badge-level-small">Nv. ${escapeHtml(p.nivel)}</span>
                 </div>
-            `;
+            </li>`;
+        }
 
-            const checkbox = li.querySelector(".record-check");
-            checkbox.addEventListener("click", e => {
-                e.stopPropagation();
-                if (e.target.checked) {
-                    this.selectedIds.add(p.id);
-                } else {
-                    this.selectedIds.delete(p.id);
-                }
-                this.updateExportButtonLabel();
-            });
-
-            li.addEventListener("click", () => this.selectAndLoadPotion(p.id));
-            fragment.appendChild(li);
-        });
-
-        this.listContainer.appendChild(fragment);
+        this.listContainer.innerHTML = htmlItems.join("");
         this.updateExportButtonLabel();
     }
 
@@ -255,8 +278,8 @@ export class PotionController {
         const btn = document.getElementById("btn-export-potion-list");
         if (btn) {
             btn.textContent = this.selectedIds.size > 0
-                ? `📦 Exportar Selecionadas (${this.selectedIds.size})`
-                : `📦 Exportar Lista Filtrada (${this.filteredIndex.length})`;
+                ? `Exportar Selecionadas (${this.selectedIds.size})`
+                : `Exportar Lista Filtrada (${this.filteredIndex.length})`;
         }
     }
 
@@ -265,16 +288,17 @@ export class PotionController {
      * Busca a receita completa da poção apenas quando clicada na lista.
      */
     async selectAndLoadPotion(id) {
+        const prevActive = this.listContainer?.querySelector(".record-list-item.active-record");
+        if (prevActive) prevActive.classList.remove("active-record");
+
         this.activePotionId = id;
-        this.listContainer?.querySelectorAll(".record-list-item").forEach(li => {
-            li.classList.toggle("active-record", li.dataset.id === id);
-        });
+        const nextActive = this.listContainer?.querySelector(`.record-list-item[data-id="${CSS.escape(id)}"]`);
+        if (nextActive) nextActive.classList.add("active-record");
 
         if (!this.viewerContainer) return;
         this.viewerContainer.classList.remove("empty-viewer");
         this.viewerContainer.innerHTML = `
             <div class="loading-parchment">
-                <span class="loading-quill">⚗️</span>
                 <p>Consultando fórmula alquímica individual no boticário...</p>
             </div>
         `;
@@ -302,7 +326,7 @@ export class PotionController {
             <div class="creature-sheet-card animated-fade">
                 <div class="sheet-top-banner">
                     <div>
-                        <span class="department-tag">CATÁLOGO ALQUÍMICO • COMPOSTOS, ELIXIRES & ANTÍDOTOS</span>
+                        <span class="department-tag">CATÁLOGO ALQUÍMICO • COMPOSTOS, ELIXIRES E ANTÍDOTOS</span>
                         <h3 class="sheet-main-title">${escapeHtml(p.nome)}</h3>
                     </div>
                     <div class="level-stamp">
@@ -314,38 +338,38 @@ export class PotionController {
                 <div class="sheet-metadata-box mt-15">
                     <div class="meta-item"><strong>Classificação Alquímica:</strong> <span class="cat-badge">${escapeHtml(p.tipo || "Poção")}</span></div>
                     <div class="meta-item"><strong>Dificuldade de Preparo (W&W):</strong> <code>CD ${escapeHtml(cd)} (Poções / Inteligência)</code></div>
-                    <div class="meta-item"><strong>Tempo de Preparo:</strong> ⏳ ${escapeHtml(prep)}</div>
-                    <div class="meta-item"><strong>Duração do Efeito:</strong> ⏱️ ${escapeHtml(dur)}</div>
-                    <div class="meta-item"><strong>Via de Administração:</strong> 🧪 ${escapeHtml(admin)}</div>
+                    <div class="meta-item"><strong>Tempo de Preparo:</strong> ${escapeHtml(prep)}</div>
+                    <div class="meta-item"><strong>Duração do Efeito:</strong> ${escapeHtml(dur)}</div>
+                    <div class="meta-item"><strong>Via de Administração:</strong> ${escapeHtml(admin)}</div>
                 </div>
 
                 <div class="sheet-section mt-15">
-                    <h4 class="section-subtitle">✨ Efeito Mecânico & Propriedades</h4>
+                    <h4 class="section-subtitle">Efeito Mecânico e Propriedades</h4>
                     <p class="sheet-prose">${escapeHtml(p.efeito || "").replace(/\n/g, "<br>")}</p>
                 </div>
 
                 <div class="sheet-section mt-15">
-                    <h4 class="section-subtitle">🌿 Ingredientes Exigidos no Caldeirão</h4>
+                    <h4 class="section-subtitle">Ingredientes Exigidos no Caldeirão</h4>
                     <div class="peculiaridades-box">
                         ${escapeHtml(p.ingredientes || "Ingredientes sob sigilo de boticário.").replace(/\n/g, "<br>")}
                     </div>
                 </div>
 
                 <div class="sheet-section mt-15">
-                    <h4 class="section-subtitle">📜 Características Físicas, Vapores & Lore</h4>
+                    <h4 class="section-subtitle">Características Físicas, Vapores e Lore</h4>
                     <p class="sheet-prose">${escapeHtml(desc).replace(/\n/g, "<br>")}</p>
-                    ${meta.wiki ? `<p class="mt-10"><small>🔗 Referência Canônica: <a href="${escapeHtml(meta.wiki)}" target="_blank" rel="noopener noreferrer">${escapeHtml(meta.nome_original || p.nome)}</a></small></p>` : ""}
+                    ${meta.wiki ? `<p class="mt-10"><small>Referência Canônica: <a href="${escapeHtml(meta.wiki)}" target="_blank" rel="noopener noreferrer">${escapeHtml(meta.nome_original || p.nome)}</a></small></p>` : ""}
                 </div>
 
                 <div class="sheet-actions-bar mt-20">
                     <button type="button" class="btn-submit" id="btn-export-single-potion">
-                        📥 Exportar Poção (.json)
+                        Exportar Poção (.json)
                     </button>
                     <button type="button" class="btn-secondary" id="btn-edit-potion">
-                        ✏️ Editar Fórmula
+                        Editar Fórmula
                     </button>
                     <button type="button" class="btn-danger" id="btn-delete-potion">
-                        🗑️ Excluir
+                        Excluir
                     </button>
                 </div>
             </div>

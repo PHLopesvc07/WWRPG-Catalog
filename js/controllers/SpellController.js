@@ -1,6 +1,7 @@
 /**
  * CONTROLADOR DO GRANDE COMPÊNDIO DE FEITIÇARIA (C.E.F.)
  * Carregamento Individual Sob Demanda (Tier 1: Índice Leve | Tier 2: Documento Individual)
+ * Otimizado com delegação de eventos, debounce de busca e carregamento sob demanda da aba.
  */
 
 import {
@@ -34,6 +35,8 @@ export class SpellController {
         this.selectedIds = new Set();
         this.activeSpellId = null;
         this.editingId = null;
+        this.loaded = false;
+        this._searchTimer = null;
 
         this.form = document.getElementById("form-spell");
         this.listContainer = document.getElementById("spell-list");
@@ -55,8 +58,15 @@ export class SpellController {
             btnBulk.addEventListener("click", () => this.handleBulkImport());
         }
 
+        const searchEl = document.getElementById("search-spell");
+        if (searchEl) {
+            searchEl.addEventListener("input", () => {
+                clearTimeout(this._searchTimer);
+                this._searchTimer = setTimeout(() => this.applyFilters(), 80);
+            });
+        }
+
         const filterIds = [
-            "search-spell",
             "sort-spell",
             "filter-spell-lvl",
             "filter-spell-cat",
@@ -66,7 +76,6 @@ export class SpellController {
         filterIds.forEach(id => {
             const el = document.getElementById(id);
             if (el) {
-                el.addEventListener("input", () => this.applyFilters());
                 el.addEventListener("change", () => this.applyFilters());
             }
         });
@@ -81,7 +90,34 @@ export class SpellController {
             btnExportList.addEventListener("click", () => this.exportSelectedSpells());
         }
 
-        this.loadCatalog();
+        if (this.listContainer) {
+            this.listContainer.addEventListener("click", e => {
+                const checkbox = e.target.closest(".spell-export-check");
+                if (checkbox) {
+                    e.stopPropagation();
+                    const id = checkbox.dataset.id;
+                    if (checkbox.checked) {
+                        this.selectedIds.add(id);
+                    } else {
+                        this.selectedIds.delete(id);
+                    }
+                    this.updateExportButtonLabel();
+                    return;
+                }
+
+                const li = e.target.closest(".record-list-item");
+                if (li && li.dataset.id) {
+                    this.selectAndLoadSpell(li.dataset.id);
+                }
+            });
+        }
+    }
+
+    async ensureLoaded() {
+        if (!this.loaded) {
+            this.loaded = true;
+            await this.loadCatalog();
+        }
     }
 
     async saveSingleSpell() {
@@ -103,7 +139,7 @@ export class SpellController {
         this.editingId = null;
         await this.loadCatalog(true);
 
-        alert(`Feitiço "${spellData.name}" catalogado com sucesso no Grimório Ministerial!`);
+        alert(`Feitiço "${spellData.name}" catalogado com sucesso no Grimório Ministerial.`);
         document.querySelector('[data-target="tab-arquivo-feiticos"]')?.click();
         await this.selectAndLoadSpell(result.id);
     }
@@ -129,7 +165,7 @@ export class SpellController {
             document.getElementById("bulk-spell-input").value = "";
             document.getElementById("bulk-spell-file").value = "";
             await this.loadCatalog(true);
-            alert(`${res.count} feitiço(s) importado(s) com sucesso!`);
+            alert(`${res.count} feitiço(s) importado(s) com sucesso.`);
         } catch (err) {
             alert("Erro ao processar JSON de feitiços: " + err.message);
         }
@@ -140,6 +176,7 @@ export class SpellController {
         this.listContainer.innerHTML = `<li class="empty-msg">Consultando índice do C.E.F...</li>`;
 
         this.indexData = await fetchCatalogIndex(COLLECTIONS.SPELLS, forceRefresh);
+        this.loaded = true;
         this.updateBadgeCount();
         this.applyFilters();
 
@@ -217,7 +254,6 @@ export class SpellController {
 
     renderSidebarList() {
         if (!this.listContainer) return;
-        this.listContainer.innerHTML = "";
 
         const countEl = document.getElementById("spell-filter-count");
         if (countEl) {
@@ -226,45 +262,31 @@ export class SpellController {
 
         if (this.filteredIndex.length === 0) {
             this.listContainer.innerHTML = `<li class="empty-msg">Nenhum feitiço encontrado com os filtros atuais.</li>`;
+            this.updateExportButtonLabel();
             return;
         }
 
-        const fragment = document.createDocumentFragment();
-        this.filteredIndex.forEach(s => {
-            const li = document.createElement("li");
-            li.className = `record-list-item ${this.activeSpellId === s.id ? "active-record" : ""}`;
-            li.dataset.id = s.id;
-
-            const isChecked = this.selectedIds.has(s.id);
+        const htmlItems = new Array(this.filteredIndex.length);
+        for (let i = 0; i < this.filteredIndex.length; i++) {
+            const s = this.filteredIndex[i];
+            const isActive = this.activeSpellId === s.id ? " active-record" : "";
+            const isChecked = this.selectedIds.has(s.id) ? " checked" : "";
             const hasCondition = s.condicao && s.condicao !== "Nenhuma";
+            const idSafe = escapeHtml(s.id);
 
-            li.innerHTML = `
+            htmlItems[i] = `<li class="record-list-item${isActive}" data-id="${idSafe}">
                 <div class="list-item-row">
-                    <input type="checkbox" class="spell-export-check" data-id="${escapeHtml(s.id)}" ${isChecked ? "checked" : ""} title="Incluir no pacote de exportação">
+                    <input type="checkbox" class="spell-export-check" data-id="${idSafe}"${isChecked} title="Incluir no pacote de exportação">
                     <div class="list-item-main">
                         <strong>${escapeHtml(s.name)}</strong>
                         <small>${escapeHtml(s.cat)} • ${escapeHtml(s.tipo)}${hasCondition ? ` • <span class="cond-inline">${escapeHtml(s.condicao)}</span>` : ""}</small>
                     </div>
                     <span class="badge-level-small">Nv. ${escapeHtml(s.lvl)}</span>
                 </div>
-            `;
+            </li>`;
+        }
 
-            const checkbox = li.querySelector(".spell-export-check");
-            checkbox.addEventListener("click", e => {
-                e.stopPropagation();
-                if (e.target.checked) {
-                    this.selectedIds.add(s.id);
-                } else {
-                    this.selectedIds.delete(s.id);
-                }
-                this.updateExportButtonLabel();
-            });
-
-            li.addEventListener("click", () => this.selectAndLoadSpell(s.id));
-            fragment.appendChild(li);
-        });
-
-        this.listContainer.appendChild(fragment);
+        this.listContainer.innerHTML = htmlItems.join("");
         this.updateExportButtonLabel();
     }
 
@@ -272,8 +294,8 @@ export class SpellController {
         const btn = document.getElementById("btn-export-spell-list");
         if (btn) {
             btn.textContent = this.selectedIds.size > 0
-                ? `📦 Exportar Selecionados (${this.selectedIds.size})`
-                : `📦 Exportar Lista Filtrada (${this.filteredIndex.length})`;
+                ? `Exportar Selecionados (${this.selectedIds.size})`
+                : `Exportar Lista Filtrada (${this.filteredIndex.length})`;
         }
     }
 
@@ -282,16 +304,17 @@ export class SpellController {
      * Busca o feitiço completo apenas quando clicado na lista.
      */
     async selectAndLoadSpell(id) {
+        const prevActive = this.listContainer?.querySelector(".record-list-item.active-record");
+        if (prevActive) prevActive.classList.remove("active-record");
+
         this.activeSpellId = id;
-        this.listContainer?.querySelectorAll(".record-list-item").forEach(li => {
-            li.classList.toggle("active-record", li.dataset.id === id);
-        });
+        const nextActive = this.listContainer?.querySelector(`.record-list-item[data-id="${CSS.escape(id)}"]`);
+        if (nextActive) nextActive.classList.add("active-record");
 
         if (!this.viewerContainer) return;
         this.viewerContainer.classList.remove("empty-viewer");
         this.viewerContainer.innerHTML = `
             <div class="loading-parchment">
-                <span class="loading-quill">🪄</span>
                 <p>Consultando pergaminho individual do feitiço...</p>
             </div>
         `;
@@ -318,7 +341,7 @@ export class SpellController {
                     <div>
                         <span class="department-tag">C.E.F. • COMISSÃO EXPERIMENTAL DE FEITIÇOS</span>
                         <h3 class="sheet-main-title">${escapeHtml(s.name)}</h3>
-                        <p class="pronunciation-subtitle">🗣️ Pronúncia: <em>"${escapeHtml(pronuncia)}"</em></p>
+                        <p class="pronunciation-subtitle">Pronúncia: <em>"${escapeHtml(pronuncia)}"</em></p>
                     </div>
                     <div class="level-stamp">
                         <span>NÍVEL</span>
@@ -337,19 +360,19 @@ export class SpellController {
                 </div>
 
                 <div class="sheet-section mt-15">
-                    <h4 class="section-subtitle">📜 Efeito Mecânico, Regras & Descrição</h4>
+                    <h4 class="section-subtitle">Efeito Mecânico, Regras e Descrição</h4>
                     <p class="sheet-prose">${escapeHtml(s.desc || "").replace(/\n/g, "<br>")}</p>
                 </div>
 
                 <div class="sheet-actions-bar mt-20">
                     <button type="button" class="btn-submit" id="btn-export-single-spell">
-                        📥 Exportar para Grimório da Ficha (.json)
+                        Exportar para Grimório da Ficha (.json)
                     </button>
                     <button type="button" class="btn-secondary" id="btn-edit-spell">
-                        ✏️ Editar Feitiço
+                        Editar Feitiço
                     </button>
                     <button type="button" class="btn-danger" id="btn-delete-spell">
-                        🗑️ Excluir
+                        Excluir
                     </button>
                 </div>
             </div>

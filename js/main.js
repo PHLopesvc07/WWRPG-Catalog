@@ -1,6 +1,7 @@
 /**
  * PONTO DE ENTRADA PRINCIPAL — ARQUIVO GERAL DO MINISTÉRIO DA MAGIA (W&W RPG)
- * Inicializa os 4 Catálogos (Animais, Feitiços, Plantas e Poções) e o Controle de Tema.
+ * Inicializa os 4 Catálogos (Animais, Feitiços, Plantas e Poções) com carregamento
+ * sob demanda por aba para garantir navegação fluida e sem travamentos.
  */
 
 import { TabController } from "./controllers/TabController.js";
@@ -14,12 +15,28 @@ document.addEventListener("DOMContentLoaded", async () => {
     setupThemeControls();
 
     new TabController();
-    new CreatureController();
-    new SpellController();
-    new PlantController();
-    new PotionController();
+    const creatureCtrl = new CreatureController();
+    const spellCtrl = new SpellController();
+    const plantCtrl = new PlantController();
+    const potionCtrl = new PotionController();
+
+    const tabControllerMap = {
+        "tab-arquivo-criaturas": creatureCtrl,
+        "tab-arquivo-feiticos": spellCtrl,
+        "tab-arquivo-plantas": plantCtrl,
+        "tab-arquivo-pocoes": potionCtrl
+    };
+
+    document.addEventListener("tab-opened", e => {
+        const targetId = e.detail?.targetId;
+        const ctrl = tabControllerMap[targetId];
+        if (ctrl) {
+            ctrl.ensureLoaded();
+        }
+    });
 
     await initDatabaseConnection();
+    await creatureCtrl.ensureLoaded();
 });
 
 function setupThemeControls() {
@@ -30,11 +47,11 @@ function setupThemeControls() {
         const isDark = document.body.classList.contains("dark-mode");
         const isTerminal = document.body.classList.contains("terminal-mode");
         if (btnTheme) {
-            btnTheme.textContent = isDark ? "☀" : "🌙";
+            btnTheme.textContent = isDark ? "Modo Claro" : "Modo Escuro";
             btnTheme.title = isDark ? "Ativar Modo Claro (Pergaminho)" : "Ativar Modo Escuro (Ministério)";
         }
         if (btnTerminal) {
-            btnTerminal.textContent = isTerminal ? "📜" : "⚡";
+            btnTerminal.textContent = isTerminal ? "Modo Pergaminho" : "Modo Terminal";
             btnTerminal.title = isTerminal ? "Voltar ao Modo Pergaminho" : "Ativar Modo Terminal Tático";
         }
     };

@@ -1,6 +1,7 @@
 /**
  * CONTROLADOR DO COMPÊNDIO DE HERBOLOGIA E BOTÂNICA MÁGICA
  * Carregamento Individual Sob Demanda (Tier 1: Índice Leve | Tier 2: Documento Individual)
+ * Otimizado com delegação de eventos, debounce de busca e carregamento sob demanda da aba.
  */
 
 import {
@@ -23,6 +24,8 @@ export class PlantController {
         this.activePlantId = null;
         this.editingId = null;
         this.currentFotoBase64 = "";
+        this.loaded = false;
+        this._searchTimer = null;
 
         this.form = document.getElementById("form-plant");
         this.listContainer = document.getElementById("plant-list");
@@ -44,7 +47,7 @@ export class PlantController {
                         preview.classList.remove("hidden");
                     }
                     const label = document.getElementById("label-plant-foto");
-                    if (label) label.textContent = "Ilustração Botânica Anexada ✓";
+                    if (label) label.textContent = "Ilustração Botânica Anexada";
                 }
             });
         }
@@ -61,8 +64,15 @@ export class PlantController {
             btnBulk.addEventListener("click", () => this.handleBulkImport());
         }
 
+        const searchEl = document.getElementById("search-plant");
+        if (searchEl) {
+            searchEl.addEventListener("input", () => {
+                clearTimeout(this._searchTimer);
+                this._searchTimer = setTimeout(() => this.applyFilters(), 80);
+            });
+        }
+
         const filterIds = [
-            "search-plant",
             "sort-plant",
             "filter-plant-cat",
             "filter-plant-lvl"
@@ -70,7 +80,6 @@ export class PlantController {
         filterIds.forEach(id => {
             const el = document.getElementById(id);
             if (el) {
-                el.addEventListener("input", () => this.applyFilters());
                 el.addEventListener("change", () => this.applyFilters());
             }
         });
@@ -85,7 +94,34 @@ export class PlantController {
             btnExportList.addEventListener("click", () => this.exportSelectedPlants());
         }
 
-        this.loadCatalog();
+        if (this.listContainer) {
+            this.listContainer.addEventListener("click", e => {
+                const checkbox = e.target.closest(".record-check");
+                if (checkbox) {
+                    e.stopPropagation();
+                    const id = checkbox.dataset.id;
+                    if (checkbox.checked) {
+                        this.selectedIds.add(id);
+                    } else {
+                        this.selectedIds.delete(id);
+                    }
+                    this.updateExportButtonLabel();
+                    return;
+                }
+
+                const li = e.target.closest(".record-list-item");
+                if (li && li.dataset.id) {
+                    this.selectAndLoadPlant(li.dataset.id);
+                }
+            });
+        }
+    }
+
+    async ensureLoaded() {
+        if (!this.loaded) {
+            this.loaded = true;
+            await this.loadCatalog();
+        }
     }
 
     async savePlant() {
@@ -103,7 +139,7 @@ export class PlantController {
         if (!peculiaridades) {
             const lines = [
                 `• Nível de Herbologia: Nível ${nivel}.`,
-                `• Manejo & Colheita: CD ${manejo_cd} (Herbologia). ${manejo}`,
+                `• Manejo e Colheita: CD ${manejo_cd} (Herbologia). ${manejo}`,
                 efeito ? `• Mecânica e Efeito: ${efeito}` : "",
                 uso_alquimico ? `• Uso Alquímico: ${uso_alquimico}` : "",
                 classificacao_ministerial ? `• Classificação Ministerial: ${classificacao_ministerial}` : ""
@@ -139,7 +175,7 @@ export class PlantController {
         if (label) label.textContent = "Anexar Ilustração Botânica";
 
         await this.loadCatalog(true);
-        alert(`Planta "${plantData.nome}" catalogada com sucesso no Herbário Ministerial!`);
+        alert(`Planta "${plantData.nome}" catalogada com sucesso no Herbário Ministerial.`);
         document.querySelector('[data-target="tab-arquivo-plantas"]')?.click();
         await this.selectAndLoadPlant(result.id);
     }
@@ -165,7 +201,7 @@ export class PlantController {
             document.getElementById("bulk-plant-input").value = "";
             document.getElementById("bulk-plant-file").value = "";
             await this.loadCatalog(true);
-            alert(`${res.count} espécime(s) botânico(s) importado(s) com sucesso!`);
+            alert(`${res.count} espécime(s) botânico(s) importado(s) com sucesso.`);
         } catch (err) {
             alert("Erro ao processar JSON de plantas: " + err.message);
         }
@@ -176,6 +212,7 @@ export class PlantController {
         this.listContainer.innerHTML = `<li class="empty-msg">Consultando índice herbológico...</li>`;
 
         this.indexData = await fetchCatalogIndex(COLLECTIONS.PLANTS, forceRefresh);
+        this.loaded = true;
         this.updateBadgeCount();
         this.applyFilters();
 
@@ -225,7 +262,6 @@ export class PlantController {
 
     renderSidebarList() {
         if (!this.listContainer) return;
-        this.listContainer.innerHTML = "";
 
         const countEl = document.getElementById("plant-filter-count");
         if (countEl) {
@@ -234,45 +270,31 @@ export class PlantController {
 
         if (this.filteredIndex.length === 0) {
             this.listContainer.innerHTML = `<li class="empty-msg">Nenhuma planta mágica encontrada com os filtros atuais.</li>`;
+            this.updateExportButtonLabel();
             return;
         }
 
-        const fragment = document.createDocumentFragment();
-        this.filteredIndex.forEach(p => {
-            const li = document.createElement("li");
-            li.className = `record-list-item ${this.activePlantId === p.id ? "active-record" : ""}`;
-            li.dataset.id = p.id;
-
-            const isChecked = this.selectedIds.has(p.id);
+        const htmlItems = new Array(this.filteredIndex.length);
+        for (let i = 0; i < this.filteredIndex.length; i++) {
+            const p = this.filteredIndex[i];
+            const isActive = this.activePlantId === p.id ? " active-record" : "";
+            const isChecked = this.selectedIds.has(p.id) ? " checked" : "";
             const isRare = (p.categoria || "").toLowerCase().includes("dif");
+            const idSafe = escapeHtml(p.id);
 
-            li.innerHTML = `
+            htmlItems[i] = `<li class="record-list-item${isActive}" data-id="${idSafe}">
                 <div class="list-item-row">
-                    <input type="checkbox" class="record-check" data-id="${escapeHtml(p.id)}" ${isChecked ? "checked" : ""} title="Selecionar para exportação">
+                    <input type="checkbox" class="record-check" data-id="${idSafe}"${isChecked} title="Selecionar para exportação">
                     <div class="list-item-main">
                         <strong>${escapeHtml(p.nome)}</strong>
                         <small>Nv. ${escapeHtml(p.nivel)} • CD ${escapeHtml(p.manejo_cd || 12)} • ${escapeHtml(p.categoria)}</small>
                     </div>
                     <span class="${isRare ? "badge-rare-small" : "badge-popular-small"}">${isRare ? "Rara" : "Popular"}</span>
                 </div>
-            `;
+            </li>`;
+        }
 
-            const checkbox = li.querySelector(".record-check");
-            checkbox.addEventListener("click", e => {
-                e.stopPropagation();
-                if (e.target.checked) {
-                    this.selectedIds.add(p.id);
-                } else {
-                    this.selectedIds.delete(p.id);
-                }
-                this.updateExportButtonLabel();
-            });
-
-            li.addEventListener("click", () => this.selectAndLoadPlant(p.id));
-            fragment.appendChild(li);
-        });
-
-        this.listContainer.appendChild(fragment);
+        this.listContainer.innerHTML = htmlItems.join("");
         this.updateExportButtonLabel();
     }
 
@@ -280,8 +302,8 @@ export class PlantController {
         const btn = document.getElementById("btn-export-plant-list");
         if (btn) {
             btn.textContent = this.selectedIds.size > 0
-                ? `📦 Exportar Selecionadas (${this.selectedIds.size})`
-                : `📦 Exportar Lista Filtrada (${this.filteredIndex.length})`;
+                ? `Exportar Selecionadas (${this.selectedIds.size})`
+                : `Exportar Lista Filtrada (${this.filteredIndex.length})`;
         }
     }
 
@@ -290,16 +312,17 @@ export class PlantController {
      * Busca os dados completos da planta apenas quando selecionada na lista.
      */
     async selectAndLoadPlant(id) {
+        const prevActive = this.listContainer?.querySelector(".record-list-item.active-record");
+        if (prevActive) prevActive.classList.remove("active-record");
+
         this.activePlantId = id;
-        this.listContainer?.querySelectorAll(".record-list-item").forEach(li => {
-            li.classList.toggle("active-record", li.dataset.id === id);
-        });
+        const nextActive = this.listContainer?.querySelector(`.record-list-item[data-id="${CSS.escape(id)}"]`);
+        if (nextActive) nextActive.classList.add("active-record");
 
         if (!this.viewerContainer) return;
         this.viewerContainer.classList.remove("empty-viewer");
         this.viewerContainer.innerHTML = `
             <div class="loading-parchment">
-                <span class="loading-quill">🌿</span>
                 <p>Consultando ficha botânica individual nas estufas...</p>
             </div>
         `;
@@ -317,7 +340,7 @@ export class PlantController {
         const isRare = (p.categoria || "").toLowerCase().includes("dif");
         const imgHtml = p.fotoBase64
             ? `<div class="creature-portrait-frame">
-                 <img src="${escapeHtml(p.fotoBase64)}" class="creature-sheet-photo" alt="${escapeHtml(p.nome)}" loading="lazy">
+                 <img src="${escapeHtml(p.fotoBase64)}" class="creature-sheet-photo" alt="${escapeHtml(p.nome)}" loading="lazy" decoding="async">
                </div>`
             : "";
 
@@ -325,7 +348,7 @@ export class PlantController {
             <div class="creature-sheet-card animated-fade">
                 <div class="sheet-top-banner">
                     <div>
-                        <span class="department-tag">COMPÊNDIO DE HERBOLOGIA & BOTÂNICA MÁGICA</span>
+                        <span class="department-tag">COMPÊNDIO DE HERBOLOGIA E BOTÂNICA MÁGICA</span>
                         <h3 class="sheet-main-title">${escapeHtml(p.nome)}</h3>
                     </div>
                     <div class="level-stamp">
@@ -338,7 +361,7 @@ export class PlantController {
                     ${imgHtml}
                     <div class="sheet-metadata-box">
                         <div class="meta-item">
-                            <strong>Disponibilidade & Mercado:</strong>
+                            <strong>Disponibilidade e Mercado:</strong>
                             <span class="${isRare ? "cond-badge-active" : "cat-badge"}">${escapeHtml(p.categoria || "Popular")}</span>
                         </div>
                         <div class="meta-item"><strong>Nível de Herbologia:</strong> Nível ${escapeHtml(p.nivel || "1")}</div>
@@ -348,12 +371,12 @@ export class PlantController {
                 </div>
 
                 <div class="sheet-section mt-15">
-                    <h4 class="section-subtitle">🌱 Descrição Morfológica, Habitat & Propriedades</h4>
+                    <h4 class="section-subtitle">Descrição Morfológica, Habitat e Propriedades</h4>
                     <p class="sheet-prose">${escapeHtml(p.descricao || "").replace(/\n/g, "<br>")}</p>
                 </div>
 
                 <div class="sheet-section mt-15">
-                    <h4 class="section-subtitle">🧤 Peculiaridades de Cultivo, Colheita & Uso Alquímico</h4>
+                    <h4 class="section-subtitle">Peculiaridades de Cultivo, Colheita e Uso Alquímico</h4>
                     <div class="peculiaridades-box">
                         ${escapeHtml(p.peculiaridades || "").replace(/\n/g, "<br>")}
                     </div>
@@ -361,13 +384,13 @@ export class PlantController {
 
                 <div class="sheet-actions-bar mt-20">
                     <button type="button" class="btn-submit" id="btn-export-single-plant">
-                        📥 Exportar Espécime (.json)
+                        Exportar Espécime (.json)
                     </button>
                     <button type="button" class="btn-secondary" id="btn-edit-plant">
-                        ✏️ Editar Planta
+                        Editar Planta
                     </button>
                     <button type="button" class="btn-danger" id="btn-delete-plant">
-                        🗑️ Excluir
+                        Excluir
                     </button>
                 </div>
             </div>

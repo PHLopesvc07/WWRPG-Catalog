@@ -1,6 +1,6 @@
 /**
- * CONTROLADOR DO CATÁLOGO DE ANIMAIS / CRIATURAS MÁGICAS (D.R.C.C.M.)
- * Carregamento Individual Sob Demanda (Tier 1: Índice Leve | Tier 2: Documento Individual)
+ * CONTROLADOR DO CATALOGO DE ANIMAIS / CRIATURAS MAGICAS (D.R.C.C.M.)
+ * Carregamento Individual Sob Demanda e Delegacao de Eventos de Alta Performance
  */
 
 import {
@@ -23,6 +23,8 @@ export class CreatureController {
         this.activeCreatureId = null;
         this.editingId = null;
         this.currentFotoBase64 = "";
+        this.loaded = false;
+        this.searchTimer = null;
 
         this.form = document.getElementById("form-creature");
         this.listContainer = document.getElementById("creature-list");
@@ -32,13 +34,6 @@ export class CreatureController {
     }
 
     initEvents() {
-        // 1. Visibilidade dinâmica ou destaque de atributos por Tipo de Criatura
-        const tipoSelect = document.getElementById("reg-tipo");
-        if (tipoSelect) {
-            tipoSelect.addEventListener("change", e => this.handleTypeChange(e.target.value));
-        }
-
-        // 2. Upload de Foto com compressão automática
         const fotoInput = document.getElementById("reg-foto");
         if (fotoInput) {
             fotoInput.addEventListener("change", async e => {
@@ -51,18 +46,16 @@ export class CreatureController {
                         preview.classList.remove("hidden");
                     }
                     const label = document.getElementById("label-foto");
-                    if (label) label.textContent = "Fotografia Anexada ✓";
+                    if (label) label.textContent = "Fotografia Anexada";
                 }
             });
         }
 
-        // 3. Adicionar ferimento customizado no formulário
         const btnAddInjury = document.getElementById("btn-add-reg-injury");
         if (btnAddInjury) {
             btnAddInjury.addEventListener("click", () => this.addCustomInjuryRow());
         }
 
-        // 4. Submissão do formulário de Registro / Edição
         if (this.form) {
             this.form.addEventListener("submit", async e => {
                 e.preventDefault();
@@ -70,15 +63,20 @@ export class CreatureController {
             });
         }
 
-        // 5. Importação em Massa de Criaturas (JSON)
         const btnBulk = document.getElementById("btn-bulk-import-creatures");
         if (btnBulk) {
             btnBulk.addEventListener("click", () => this.handleBulkImport());
         }
 
-        // 6. Filtros e Pesquisa no Arquivo
-        const filterIds = [
-            "search-creature",
+        const searchEl = document.getElementById("search-creature");
+        if (searchEl) {
+            searchEl.addEventListener("input", () => {
+                clearTimeout(this.searchTimer);
+                this.searchTimer = setTimeout(() => this.applyFilters(), 80);
+            });
+        }
+
+        const selectIds = [
             "sort-creature",
             "filter-class",
             "filter-licenca",
@@ -87,12 +85,9 @@ export class CreatureController {
             "filter-interacao",
             "filter-tipo"
         ];
-        filterIds.forEach(id => {
+        selectIds.forEach(id => {
             const el = document.getElementById(id);
-            if (el) {
-                el.addEventListener("input", () => this.applyFilters());
-                el.addEventListener("change", () => this.applyFilters());
-            }
+            if (el) el.addEventListener("change", () => this.applyFilters());
         });
 
         const btnReset = document.getElementById("btn-reset-filters");
@@ -100,25 +95,39 @@ export class CreatureController {
             btnReset.addEventListener("click", () => this.resetFilters());
         }
 
-        // 7. Exportação de múltiplos animais selecionados
         const btnExportSelected = document.getElementById("btn-export-selected-creatures");
         if (btnExportSelected) {
             btnExportSelected.addEventListener("click", () => this.exportSelectedCreatures());
         }
 
-        // 8. Carrega o índice inicial
-        this.loadCatalog();
+        // Delegacao unica de eventos na lista lateral (evita centenas de listeners)
+        if (this.listContainer) {
+            this.listContainer.addEventListener("click", e => {
+                const checkbox = e.target.closest(".record-check");
+                if (checkbox) {
+                    e.stopPropagation();
+                    const id = checkbox.dataset.id;
+                    if (checkbox.checked) {
+                        this.selectedIds.add(id);
+                    } else {
+                        this.selectedIds.delete(id);
+                    }
+                    this.updateExportButtonLabel();
+                    return;
+                }
+
+                const li = e.target.closest(".record-list-item");
+                if (li && li.dataset.id) {
+                    this.selectAndLoadCreature(li.dataset.id);
+                }
+            });
+        }
     }
 
-    handleTypeChange(selectedType) {
-        document.querySelectorAll(".dynamic-reg-attr").forEach(el => {
-            const allowedTypes = el.dataset.types.split(",");
-            if (allowedTypes.includes(selectedType)) {
-                el.classList.remove("hidden");
-            } else {
-                el.classList.remove("hidden"); // Mantém visível no compêndio ministerial completo
-            }
-        });
+    async ensureLoaded() {
+        if (!this.loaded) {
+            await this.loadCatalog();
+        }
     }
 
     addCustomInjuryRow(data = { name: "", curr: 0, max: 1 }) {
@@ -127,7 +136,7 @@ export class CreatureController {
         const row = document.createElement("div");
         row.className = "injury-row custom-injury mt-10";
         row.innerHTML = `
-            <input type="text" class="ink-input injury-name-input" placeholder="Condição (ex: Asa Quebrada)" value="${escapeHtml(data.name)}" style="flex: 1;">
+            <input type="text" class="ink-input injury-name-input" placeholder="Condicao (ex: Asa Quebrada)" value="${escapeHtml(data.name)}" style="flex: 1;">
             <input type="number" class="ink-input short-input curr" value="${Number(data.curr || 0)}" min="0"> /
             <input type="number" class="ink-input short-input max" value="${Number(data.max || 1)}" min="1">
             <button type="button" class="btn-danger" onclick="this.parentElement.remove()">X</button>
@@ -142,8 +151,8 @@ export class CreatureController {
             if (name) {
                 customInjuries.push({
                     name,
-                    curr: parseInt(row.querySelector(".curr")?.value) || 0,
-                    max: parseInt(row.querySelector(".max")?.value) || 1
+                    curr: parseInt(row.querySelector(".curr")?.value, 10) || 0,
+                    max: parseInt(row.querySelector(".max")?.value, 10) || 1
                 });
             }
         });
@@ -165,13 +174,13 @@ export class CreatureController {
             fotoBase64: this.currentFotoBase64,
             fotoUrl: this.currentFotoBase64,
             atributos: {
-                corpo: parseInt(document.getElementById("attr-corpo").value) || 0,
-                destreza: parseInt(document.getElementById("attr-destreza").value) || 0,
-                vitalidade: parseInt(document.getElementById("attr-vitalidade").value) || 0,
-                instinto: parseInt(document.getElementById("attr-instinto").value) || 0,
-                carisma: parseInt(document.getElementById("attr-carisma").value) || 0,
-                inteligencia: parseInt(document.getElementById("attr-inteligencia").value) || 0,
-                sabedoria: parseInt(document.getElementById("attr-sabedoria").value) || 0
+                corpo: parseInt(document.getElementById("attr-corpo").value, 10) || 0,
+                destreza: parseInt(document.getElementById("attr-destreza").value, 10) || 0,
+                vitalidade: parseInt(document.getElementById("attr-vitalidade").value, 10) || 0,
+                instinto: parseInt(document.getElementById("attr-instinto").value, 10) || 0,
+                carisma: parseInt(document.getElementById("attr-carisma").value, 10) || 0,
+                inteligencia: parseInt(document.getElementById("attr-inteligencia").value, 10) || 0,
+                sabedoria: parseInt(document.getElementById("attr-sabedoria").value, 10) || 0
             },
             habilidades: {
                 dano: {
@@ -197,16 +206,16 @@ export class CreatureController {
             },
             injuries: {
                 leve: {
-                    curr: parseInt(document.getElementById("reg-inj-leve-curr").value) || 0,
-                    max: parseInt(document.getElementById("reg-inj-leve-max").value) || 3
+                    curr: parseInt(document.getElementById("reg-inj-leve-curr").value, 10) || 0,
+                    max: parseInt(document.getElementById("reg-inj-leve-max").value, 10) || 3
                 },
                 media: {
-                    curr: parseInt(document.getElementById("reg-inj-media-curr").value) || 0,
-                    max: parseInt(document.getElementById("reg-inj-media-max").value) || 2
+                    curr: parseInt(document.getElementById("reg-inj-media-curr").value, 10) || 0,
+                    max: parseInt(document.getElementById("reg-inj-media-max").value, 10) || 2
                 },
                 pesada: {
-                    curr: parseInt(document.getElementById("reg-inj-pesada-curr").value) || 0,
-                    max: parseInt(document.getElementById("reg-inj-pesada-max").value) || 1
+                    curr: parseInt(document.getElementById("reg-inj-pesada-curr").value, 10) || 0,
+                    max: parseInt(document.getElementById("reg-inj-pesada-max").value, 10) || 1
                 },
                 custom: customInjuries
             }
@@ -223,12 +232,12 @@ export class CreatureController {
             preview.classList.add("hidden");
         }
         const label = document.getElementById("label-foto");
-        if (label) label.textContent = "Anexar Retrato ou Ilustração";
+        if (label) label.textContent = "Anexar Retrato ou Ilustracao";
         const injContainer = document.getElementById("reg-custom-injuries-container");
         if (injContainer) injContainer.innerHTML = "";
 
         await this.loadCatalog(true);
-        alert(`Criatura "${creatureData.nome}" catalogada com sucesso no Arquivo Ministerial!`);
+        alert(`Criatura "${creatureData.nome}" catalogada com sucesso no Arquivo Ministerial.`);
         document.querySelector('[data-target="tab-arquivo-criaturas"]')?.click();
         await this.selectAndLoadCreature(result.id);
     }
@@ -243,7 +252,7 @@ export class CreatureController {
         }
 
         if (!rawJson) {
-            alert("Cole um JSON válido ou selecione um arquivo .json para importar criaturas em massa.");
+            alert("Cole um JSON valido ou selecione um arquivo .json para importar criaturas em massa.");
             return;
         }
 
@@ -254,20 +263,16 @@ export class CreatureController {
             document.getElementById("bulk-creature-input").value = "";
             document.getElementById("bulk-creature-file").value = "";
             await this.loadCatalog(true);
-            alert(`${res.count} criatura(s) importada(s) com sucesso!`);
+            alert(`${res.count} criatura(s) importada(s) com sucesso.`);
         } catch (err) {
             alert("Erro ao processar JSON de criaturas: " + err.message);
         }
     }
 
-    /**
-     * Carrega apenas o índice leve das criaturas (Tier 1) para listagem rápida.
-     */
     async loadCatalog(forceRefresh = false) {
         if (!this.listContainer) return;
-        this.listContainer.innerHTML = `<li class="empty-msg">Consultando índice do D.R.C.C.M...</li>`;
-
         this.indexData = await fetchCatalogIndex(COLLECTIONS.CREATURES, forceRefresh);
+        this.loaded = true;
         this.updateBadgeCount();
         this.applyFilters();
 
@@ -334,52 +339,35 @@ export class CreatureController {
 
     renderSidebarList() {
         if (!this.listContainer) return;
-        this.listContainer.innerHTML = "";
 
         const countEl = document.getElementById("creature-filter-count");
         if (countEl) {
-            countEl.textContent = `Exibindo ${this.filteredIndex.length} de ${this.indexData.length} espécies`;
+            countEl.textContent = `Exibindo ${this.filteredIndex.length} de ${this.indexData.length} especies`;
         }
 
         if (this.filteredIndex.length === 0) {
             this.listContainer.innerHTML = `<li class="empty-msg">Nenhuma criatura encontrada com os filtros atuais.</li>`;
+            this.updateExportButtonLabel();
             return;
         }
 
-        const fragment = document.createDocumentFragment();
-        this.filteredIndex.forEach(c => {
-            const li = document.createElement("li");
-            li.className = `record-list-item ${this.activeCreatureId === c.id ? "active-record" : ""}`;
-            li.dataset.id = c.id;
-
+        this.listContainer.innerHTML = this.filteredIndex.map(c => {
             const isChecked = this.selectedIds.has(c.id);
-            li.innerHTML = `
-                <div class="list-item-row">
-                    <input type="checkbox" class="record-check" data-id="${escapeHtml(c.id)}" ${isChecked ? "checked" : ""} title="Selecionar para exportação">
-                    <div class="list-item-main">
-                        <strong>${escapeHtml(c.nome)}</strong>
-                        <small>${escapeHtml(c.tipo)} • ${escapeHtml(c.locomocao)} • ${escapeHtml(c.porte || "Médio")}</small>
+            const isActive = this.activeCreatureId === c.id;
+            return `
+                <li class="record-list-item ${isActive ? "active-record" : ""}" data-id="${escapeHtml(c.id)}">
+                    <div class="list-item-row">
+                        <input type="checkbox" class="record-check" data-id="${escapeHtml(c.id)}" ${isChecked ? "checked" : ""} title="Selecionar para exportacao">
+                        <div class="list-item-main">
+                            <strong>${escapeHtml(c.nome)}</strong>
+                            <small>${escapeHtml(c.tipo)} | ${escapeHtml(c.locomocao)} | ${escapeHtml(c.porte || "Medio")}</small>
+                        </div>
+                        <span class="badge-danger-small">${escapeHtml(c.classificacao)}</span>
                     </div>
-                    <span class="badge-danger-small">${escapeHtml(c.classificacao)}</span>
-                </div>
+                </li>
             `;
+        }).join("");
 
-            const checkbox = li.querySelector(".record-check");
-            checkbox.addEventListener("click", e => {
-                e.stopPropagation();
-                if (e.target.checked) {
-                    this.selectedIds.add(c.id);
-                } else {
-                    this.selectedIds.delete(c.id);
-                }
-                this.updateExportButtonLabel();
-            });
-
-            li.addEventListener("click", () => this.selectAndLoadCreature(c.id));
-            fragment.appendChild(li);
-        });
-
-        this.listContainer.appendChild(fragment);
         this.updateExportButtonLabel();
     }
 
@@ -387,15 +375,11 @@ export class CreatureController {
         const btn = document.getElementById("btn-export-selected-creatures");
         if (btn) {
             btn.textContent = this.selectedIds.size > 0
-                ? `📦 Exportar Selecionados (${this.selectedIds.size})`
-                : `📦 Exportar Lista Filtrada (${this.filteredIndex.length})`;
+                ? `Exportar Selecionados (${this.selectedIds.size})`
+                : `Exportar Lista Filtrada (${this.filteredIndex.length})`;
         }
     }
 
-    /**
-     * Carregamento Individual Sob Demanda (Tier 2):
-     * Busca a ficha completa da criatura APENAS quando o usuário a seleciona.
-     */
     async selectAndLoadCreature(id) {
         this.activeCreatureId = id;
         this.listContainer?.querySelectorAll(".record-list-item").forEach(li => {
@@ -404,16 +388,10 @@ export class CreatureController {
 
         if (!this.viewerContainer) return;
         this.viewerContainer.classList.remove("empty-viewer");
-        this.viewerContainer.innerHTML = `
-            <div class="loading-parchment">
-                <span class="loading-quill">🪶</span>
-                <p>Consultando registro ministerial individual no arquivo...</p>
-            </div>
-        `;
 
         const c = await fetchItemById(COLLECTIONS.CREATURES, id);
         if (!c) {
-            this.viewerContainer.innerHTML = `<p class="empty-msg">Não foi possível carregar o registro individual desta criatura.</p>`;
+            this.viewerContainer.innerHTML = `<p class="empty-msg">Nao foi possivel carregar o registro individual desta criatura.</p>`;
             return;
         }
 
@@ -429,42 +407,41 @@ export class CreatureController {
         const photoSrc = c.fotoBase64 || c.fotoUrl || "";
         const imgHtml = photoSrc
             ? `<div class="creature-portrait-frame">
-                 <img src="${escapeHtml(photoSrc)}" class="creature-sheet-photo" alt="${escapeHtml(c.nome)}" loading="lazy" onerror="this.parentElement.style.display='none'">
+                 <img src="${escapeHtml(photoSrc)}" class="creature-sheet-photo" alt="${escapeHtml(c.nome)}" decoding="async" loading="lazy" onerror="this.parentElement.style.display='none'">
                </div>`
             : "";
 
         const attrs = c.atributos || {};
         const attrLabels = [
-            { key: "corpo", icon: "💪", label: "Corpo" },
-            { key: "destreza", icon: "🎯", label: "Destreza" },
-            { key: "vitalidade", icon: "❤️", label: "Vitalidade" },
-            { key: "instinto", icon: "🦊", label: "Instinto" },
-            { key: "carisma", icon: "👑", label: "Carisma" },
-            { key: "inteligencia", icon: "🧠", label: "Inteligência" },
-            { key: "sabedoria", icon: "👁️", label: "Sabedoria" }
+            { key: "corpo", label: "Corpo" },
+            { key: "destreza", label: "Destreza" },
+            { key: "vitalidade", label: "Vitalidade" },
+            { key: "instinto", label: "Instinto" },
+            { key: "carisma", label: "Carisma" },
+            { key: "inteligencia", label: "Inteligencia" },
+            { key: "sabedoria", label: "Sabedoria" }
         ];
 
         const attrsHtml = attrLabels.map(a => `
             <div class="stat-pill">
-                <span class="stat-pill-label">${a.icon} ${a.label}</span>
+                <span class="stat-pill-label">${a.label}</span>
                 <strong class="stat-pill-value">${this.formatSigned(attrs[a.key])}</strong>
             </div>
         `).join("");
 
-        // Habilidades Especiais (Dano, Reação, Ambiente, Extra)
         const hab = c.habilidades || {};
         const habCategories = [
-            { key: "dano", badge: "⚔️ DANO", colorClass: "hab-dano" },
-            { key: "reacao", badge: "🛡️ REAÇÃO", colorClass: "hab-reacao" },
-            { key: "ambiente", badge: "🌪️ AMBIENTE", colorClass: "hab-ambiente" },
-            { key: "extra", badge: "✨ EXTRA", colorClass: "hab-extra" }
+            { key: "dano", badge: "DANO", colorClass: "hab-dano" },
+            { key: "reacao", badge: "REACAO", colorClass: "hab-reacao" },
+            { key: "ambiente", badge: "AMBIENTE", colorClass: "hab-ambiente" },
+            { key: "extra", badge: "EXTRA", colorClass: "hab-extra" }
         ];
 
         const hasAbilities = habCategories.some(hc => hab[hc.key]?.nome || hab[hc.key]?.desc);
         const abilitiesHtml = hasAbilities
             ? `
             <div class="sheet-section mt-15">
-                <h4 class="section-subtitle">⚔️ Habilidades de Combate & Instinto</h4>
+                <h4 class="section-subtitle">Habilidades de Combate e Instinto</h4>
                 <div class="abilities-grid">
                     ${habCategories.map(hc => {
                         const item = hab[hc.key];
@@ -486,19 +463,19 @@ export class CreatureController {
 
         let customInjHtml = "";
         if (c.injuries?.custom && c.injuries.custom.length > 0) {
-            customInjHtml = `<div class="mt-10"><strong>Condições Específicas:</strong><ul style="margin-left: 20px;">` +
+            customInjHtml = `<div class="mt-10"><strong>Condicoes Especificas:</strong><ul style="margin-left: 20px;">` +
                 c.injuries.custom.map(i => `<li>${escapeHtml(i.name)}: [${i.curr} / ${i.max}]</li>`).join("") +
                 `</ul></div>`;
         }
 
         this.viewerContainer.innerHTML = `
-            <div class="creature-sheet-card animated-fade">
+            <div class="creature-sheet-card">
                 <div class="sheet-top-banner">
                     <div>
-                        <span class="department-tag">D.R.C.C.M. • REGISTRO OFICIAL DE ESPÉCIE MÁGICA</span>
+                        <span class="department-tag">D.R.C.C.M. | REGISTRO OFICIAL DE ESPECIE MAGICA</span>
                         <h3 class="sheet-main-title">${escapeHtml(c.nome)}</h3>
                     </div>
-                    <div class="danger-stamp" title="Classificação do Ministério da Magia">
+                    <div class="danger-stamp" title="Classificacao do Ministerio da Magia">
                         <span>M.M.</span>
                         <strong>${escapeHtml(c.classificacao)}</strong>
                     </div>
@@ -507,18 +484,18 @@ export class CreatureController {
                 <div class="sheet-hero-grid">
                     ${imgHtml}
                     <div class="sheet-metadata-box">
-                        <div class="meta-item"><strong>Licença Exigida:</strong> <span class="license-tag">${escapeHtml(c.licenca)}</span></div>
+                        <div class="meta-item"><strong>Licenca Exigida:</strong> <span class="license-tag">${escapeHtml(c.licenca)}</span></div>
                         <div class="meta-item"><strong>Tipo de Criatura:</strong> ${escapeHtml(c.tipo)} (${escapeHtml(c.interacao)})</div>
                         <div class="meta-item"><strong>Origem:</strong> ${escapeHtml(c.origem || "Natural")}</div>
-                        <div class="meta-item"><strong>Porte / Categoria:</strong> ${escapeHtml(c.porte || "Médio")}</div>
-                        <div class="meta-item"><strong>Dimensões Adulto:</strong> ${escapeHtml(c.tamanho || "N/A")} • ${escapeHtml(c.peso || "N/A")}</div>
-                        <div class="meta-item"><strong>Locomoção:</strong> ${escapeHtml(c.locomocao)}</div>
-                        <div class="meta-item"><strong>Velocidade de Ação:</strong> <code>${escapeHtml(c.velocidade || "3.0m por ação")}</code></div>
+                        <div class="meta-item"><strong>Porte / Categoria:</strong> ${escapeHtml(c.porte || "Medio")}</div>
+                        <div class="meta-item"><strong>Dimensoes Adulto:</strong> ${escapeHtml(c.tamanho || "N/A")} | ${escapeHtml(c.peso || "N/A")}</div>
+                        <div class="meta-item"><strong>Locomocao:</strong> ${escapeHtml(c.locomocao)}</div>
+                        <div class="meta-item"><strong>Velocidade de Acao:</strong> <code>${escapeHtml(c.velocidade || "3.0m por acao")}</code></div>
                     </div>
                 </div>
 
                 <div class="sheet-section mt-15">
-                    <h4 class="section-subtitle">📊 Atributos Físicos e Animais (Escala -5 a +10)</h4>
+                    <h4 class="section-subtitle">Atributos Fisicos e Animais (Escala -5 a +10)</h4>
                     <div class="stats-pills-grid">
                         ${attrsHtml}
                     </div>
@@ -527,29 +504,29 @@ export class CreatureController {
                 ${abilitiesHtml}
 
                 <div class="sheet-section mt-15">
-                    <h4 class="section-subtitle">🩺 Prontuário Médico-Veterinário (Limites de Injúria)</h4>
+                    <h4 class="section-subtitle">Prontuario Medico-Veterinario (Limites de Injuria)</h4>
                     <div class="injury-badges-row">
-                        <span class="inj-badge inj-light">🟢 Leve: [ ${c.injuries?.leve?.curr || 0} / ${c.injuries?.leve?.max || 3} ]</span>
-                        <span class="inj-badge inj-medium">🟡 Média: [ ${c.injuries?.media?.curr || 0} / ${c.injuries?.media?.max || 2} ]</span>
-                        <span class="inj-badge inj-heavy">🔴 Pesada: [ ${c.injuries?.pesada?.curr || 0} / ${c.injuries?.pesada?.max || 1} ]</span>
+                        <span class="inj-badge inj-light">Leve: [ ${c.injuries?.leve?.curr || 0} / ${c.injuries?.leve?.max || 3} ]</span>
+                        <span class="inj-badge inj-medium">Media: [ ${c.injuries?.media?.curr || 0} / ${c.injuries?.media?.max || 2} ]</span>
+                        <span class="inj-badge inj-heavy">Pesada: [ ${c.injuries?.pesada?.curr || 0} / ${c.injuries?.pesada?.max || 1} ]</span>
                     </div>
                     ${customInjHtml}
                 </div>
 
                 <div class="sheet-section mt-15">
-                    <h4 class="section-subtitle">📜 Descrição Física, Habitat & Temperamento</h4>
+                    <h4 class="section-subtitle">Descricao Fisica, Habitat e Temperamento</h4>
                     <p class="sheet-prose">${escapeHtml(c.descricao || "").replace(/\n/g, "<br>")}</p>
                 </div>
 
                 <div class="sheet-actions-bar mt-20">
                     <button type="button" class="btn-submit" id="btn-export-single-creature">
-                        📥 Exportar para Ficha de Jogador (.json)
+                        Exportar para Ficha de Jogador (.json)
                     </button>
                     <button type="button" class="btn-secondary" id="btn-edit-creature">
-                        ✏️ Editar Registro
+                        Editar Registro
                     </button>
                     <button type="button" class="btn-danger" id="btn-delete-creature">
-                        🗑️ Excluir
+                        Excluir
                     </button>
                 </div>
             </div>
@@ -632,7 +609,6 @@ export class CreatureController {
             preview.classList.remove("hidden");
         }
 
-        // Navega para a aba de registro de criaturas
         document.querySelector('[data-target="tab-registro-criaturas"]')?.click();
     }
 
@@ -642,7 +618,7 @@ export class CreatureController {
             : this.filteredIndex.map(i => i.id);
 
         if (targetIds.length === 0) {
-            alert("Nenhuma criatura disponível para exportar.");
+            alert("Nenhuma criatura disponivel para exportar.");
             return;
         }
 

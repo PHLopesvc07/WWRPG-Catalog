@@ -35,10 +35,10 @@
         <header class="ministry-header">
             <div class="theme-controls">
                 <button type="button" id="btn-theme-toggle" class="btn-gold btn-theme-toggle" aria-label="Alternar Modo de Leitura" title="Alternar Modo Claro / Escuro (WWRPG-Ficha)">
-                    🌙
+                    Modo Escuro
                 </button>
                 <button type="button" id="btn-terminal-toggle" class="btn-teal btn-theme-toggle" aria-label="Alternar Modo Terminal" title="Alternar Modo Terminal Tático (design.md)">
-                    ⚡
+                    Modo Terminal
                 </button>
             </div>
 
@@ -82,17 +82,17 @@
                 
                 <aside class="archive-sidebar bureaucracy-box">
                     <div class="sidebar-header-row">
-                        <h3 class="section-title" style="margin-bottom: 4px;">🐾 Filtros (D.R.C.C.M.)</h3>
+                        <h3 class="section-title" style="margin-bottom: 4px;">Filtros (D.R.C.C.M.)</h3>
                         <small id="creature-filter-count" class="filter-count-label">Carregando...</small>
                     </div>
                     
-                    <input type="text" id="search-creature" class="ink-input mb-10" placeholder="🔍 Buscar espécie mágica...">
+                    <input type="text" id="search-creature" class="ink-input mb-10" placeholder="Buscar espécie mágica...">
                     
                     <label class="filter-label">Ordenar por:
                         <select id="sort-creature" class="ink-select mb-10">
                             <option value="alfabetica">Ordem Alfabética (A-Z)</option>
-                            <option value="perigo-asc">Periculosidade (X → XXXXX)</option>
-                            <option value="perigo-desc">Periculosidade (XXXXX → X)</option>
+                            <option value="perigo-asc">Periculosidade (X a XXXXX)</option>
+                            <option value="perigo-desc">Periculosidade (XXXXX a X)</option>
                         </select>
                     </label>
 
@@ -162,15 +162,15 @@
                     </div>
 
                     <div class="sidebar-buttons-stack">
-                        <button type="button" id="btn-reset-filters" class="btn-secondary">🧹 Limpar Filtros</button>
+                        <button type="button" id="btn-reset-filters" class="btn-secondary">Limpar Filtros</button>
                         <button type="button" id="btn-export-selected-creatures" class="btn-submit" style="font-size: 0.9rem; padding: 8px;">
-                            📦 Exportar Lista (.json)
+                            Exportar Lista (.json)
                         </button>
                     </div>
 
                     <hr class="ministry-divider">
                     
-                    <h4 class="list-title">Espécies Catalogadas (Clique p/ Carregar)</h4>
+                    <h4 class="list-title">Espécies Catalogadas (Clique para Carregar)</h4>
                     <ul id="creature-list" class="record-list">
                         <li class="empty-msg">Carregando índice...</li>
                     </ul>
@@ -178,7 +178,7 @@
 
                 <section class="archive-viewer bureaucracy-box">
                     <div id="creature-viewer-content" class="viewer-content empty-viewer">
-                        <p>🐾 Selecione uma criatura mágica na lista ao lado para carregar sua ficha individual completa, atributos, habilidades de combate e prontuário veterinário.</p>
+                        <p>Selecione uma criatura mágica na lista ao lado para carregar sua ficha individual completa, atributos, habilidades de combate e prontuário veterinário.</p>
                     </div>
                 </section>
 
@@ -190,7 +190,7 @@
              ===================================================================== -->
         <main id="tab-registro-criaturas" class="tab-content hidden">
             <div class="mb-10" style="display:flex; justify-content:space-between; align-items:center;">
-                <button type="button" class="btn-secondary" data-target="tab-arquivo-criaturas">← Voltar ao Arquivo de Animais</button>
+                <button type="button" class="btn-secondary" data-target="tab-arquivo-criaturas">Voltar ao Arquivo de Animais</button>
             </div>
             <form id="form-creature" class="bureaucracy-box">
                 <h3 class="section-title">1. Ficha de Registro Ministerial (D.R.C.C.M.)</h3>
@@ -281,19 +281,19 @@
 
                 <h3 class="section-title mt-20">2. Atributos Físicos e Animais (-5 a +10)</h3>
                 <div class="stats-grid">
-                    <label class="attr-box">💪 Corpo: <input type="number" id="attr-corpo" class="ink-input" value="0" min="-5" max="15"></label>
-                    <label class="attr-box">🎯 Destreza: <input type="number" id="attr-destreza" class="ink-input" value="0" min="-5" max="15"></label>
-                    <label class="attr-box">❤️ Vitalidade: <input type="number" id="attr-vitalidade" class="ink-input" value="0" min="-5" max="15"></label>
-                    <label class="attr-box dynamic-reg-attr" data-types="Bestial,Neutro,Consciente">🦊 Instinto: <input type="number" id="attr-instinto" class="ink-input" value="0" min="-5" max="15"></label>
-                    <label class="attr-box dynamic-reg-attr" data-types="Neutro,Consciente">👑 Carisma: <input type="number" id="attr-carisma" class="ink-input" value="0" min="-5" max="15"></label>
-                    <label class="attr-box dynamic-reg-attr" data-types="Consciente">🧠 Inteligência: <input type="number" id="attr-inteligencia" class="ink-input" value="0" min="-5" max="15"></label>
-                    <label class="attr-box dynamic-reg-attr" data-types="Consciente">👁️ Sabedoria: <input type="number" id="attr-sabedoria" class="ink-input" value="0" min="-5" max="15"></label>
+                    <label class="attr-box">Corpo: <input type="number" id="attr-corpo" class="ink-input" value="0" min="-5" max="15"></label>
+                    <label class="attr-box">Destreza: <input type="number" id="attr-destreza" class="ink-input" value="0" min="-5" max="15"></label>
+                    <label class="attr-box">Vitalidade: <input type="number" id="attr-vitalidade" class="ink-input" value="0" min="-5" max="15"></label>
+                    <label class="attr-box dynamic-reg-attr" data-types="Bestial,Neutro,Consciente">Instinto: <input type="number" id="attr-instinto" class="ink-input" value="0" min="-5" max="15"></label>
+                    <label class="attr-box dynamic-reg-attr" data-types="Neutro,Consciente">Carisma: <input type="number" id="attr-carisma" class="ink-input" value="0" min="-5" max="15"></label>
+                    <label class="attr-box dynamic-reg-attr" data-types="Consciente">Inteligência: <input type="number" id="attr-inteligencia" class="ink-input" value="0" min="-5" max="15"></label>
+                    <label class="attr-box dynamic-reg-attr" data-types="Consciente">Sabedoria: <input type="number" id="attr-sabedoria" class="ink-input" value="0" min="-5" max="15"></label>
                 </div>
 
-                <h3 class="section-title mt-20">3. Habilidades Especiais (Combate & Instinto)</h3>
+                <h3 class="section-title mt-20">3. Habilidades Especiais (Combate e Instinto)</h3>
                 <div class="abilities-form-grid">
                     <div class="bureaucracy-box inner-box">
-                        <strong>⚔️ Habilidade de Dano</strong>
+                        <strong>Habilidade de Dano</strong>
                         <div class="form-row mt-10">
                             <input type="text" id="hab-dano-nome" class="ink-input flex-2" placeholder="Nome (ex: Picada Venenosa)">
                             <input type="text" id="hab-dano-rolagem" class="ink-input flex-1" placeholder="Fórmula (ex: 1d10 + Corpo)">
@@ -302,7 +302,7 @@
                     </div>
 
                     <div class="bureaucracy-box inner-box">
-                        <strong>🛡️ Habilidade de Reação</strong>
+                        <strong>Habilidade de Reação</strong>
                         <div class="form-row mt-10">
                             <input type="text" id="hab-reacao-nome" class="ink-input flex-2" placeholder="Nome (ex: Desvio de Oito Olhos)">
                             <input type="text" id="hab-reacao-rolagem" class="ink-input flex-1" placeholder="Fórmula (ex: 1d30 + Instinto)">
@@ -311,7 +311,7 @@
                     </div>
 
                     <div class="bureaucracy-box inner-box">
-                        <strong>🌪️ Habilidade de Ambiente</strong>
+                        <strong>Habilidade de Ambiente</strong>
                         <div class="form-row mt-10">
                             <input type="text" id="hab-ambiente-nome" class="ink-input flex-2" placeholder="Nome (ex: Teia Abobadada)">
                             <input type="text" id="hab-ambiente-rolagem" class="ink-input flex-1" placeholder="Fórmula (ex: CD 20 + Instinto)">
@@ -320,7 +320,7 @@
                     </div>
 
                     <div class="bureaucracy-box inner-box">
-                        <strong>✨ Habilidade Extra / Passiva</strong>
+                        <strong>Habilidade Extra / Passiva</strong>
                         <div class="form-row mt-10">
                             <input type="text" id="hab-extra-nome" class="ink-input flex-2" placeholder="Nome (ex: Fala Humana)">
                             <input type="text" id="hab-extra-rolagem" class="ink-input flex-1" placeholder="Fórmula (ex: Passivo)">
@@ -333,17 +333,17 @@
                 <div class="bureaucracy-box inner-box">
                     <div class="form-row">
                         <div class="injury-row flex-1">
-                            <label>🟢 Leve (Atual/Máx):</label>
+                            <label>Leve (Atual/Máx):</label>
                             <input type="number" id="reg-inj-leve-curr" class="ink-input short-input" value="0" min="0"> / 
                             <input type="number" id="reg-inj-leve-max" class="ink-input short-input" value="3" min="1">
                         </div>
                         <div class="injury-row flex-1">
-                            <label>🟡 Média (Atual/Máx):</label>
+                            <label>Média (Atual/Máx):</label>
                             <input type="number" id="reg-inj-media-curr" class="ink-input short-input" value="0" min="0"> / 
                             <input type="number" id="reg-inj-media-max" class="ink-input short-input" value="2" min="1">
                         </div>
                         <div class="injury-row flex-1">
-                            <label>🔴 Pesada (Atual/Máx):</label>
+                            <label>Pesada (Atual/Máx):</label>
                             <input type="number" id="reg-inj-pesada-curr" class="ink-input short-input" value="0" min="0"> / 
                             <input type="number" id="reg-inj-pesada-max" class="ink-input short-input" value="1" min="1">
                         </div>
@@ -355,7 +355,7 @@
                 <h3 class="section-title mt-20">5. Descrição Física, Habitat e Temperamento</h3>
                 <textarea id="reg-descricao" class="ink-textarea" rows="5" placeholder="Descreva os hábitos, habitat, alimentação e particularidades mágicas da espécie..."></textarea>
 
-                <button type="submit" class="btn-submit mt-20">📜 Catalogar Criatura no Arquivo Ministerial</button>
+                <button type="submit" class="btn-submit mt-20">Catalogar Criatura no Arquivo Ministerial</button>
             </form>
 
             <div class="bureaucracy-box mt-20">
@@ -366,7 +366,7 @@
                     <label style="flex: 1;">Ou carregue um arquivo JSON:
                         <input type="file" id="bulk-creature-file" accept=".json" class="ink-input">
                     </label>
-                    <button type="button" id="btn-bulk-import-creatures" class="btn-submit" style="width: auto; padding: 12px 30px;">📥 Processar Lote de Criaturas</button>
+                    <button type="button" id="btn-bulk-import-creatures" class="btn-submit" style="width: auto; padding: 12px 30px;">Processar Lote de Criaturas</button>
                 </div>
             </div>
         </main>
@@ -379,17 +379,17 @@
                 
                 <aside class="archive-sidebar bureaucracy-box">
                     <div class="sidebar-header-row">
-                        <h3 class="section-title" style="margin-bottom: 4px;">🪄 Filtros (C.E.F.)</h3>
+                        <h3 class="section-title" style="margin-bottom: 4px;">Filtros (C.E.F.)</h3>
                         <small id="spell-filter-count" class="filter-count-label">Carregando...</small>
                     </div>
                     
-                    <input type="text" id="search-spell" class="ink-input mb-10" placeholder="🔍 Buscar nome, pronúncia ou condição...">
+                    <input type="text" id="search-spell" class="ink-input mb-10" placeholder="Buscar nome, pronúncia ou condição...">
                     
                     <label class="filter-label">Ordenar por:
                         <select id="sort-spell" class="ink-select mb-10">
                             <option value="alfabetica">Ordem Alfabética (A-Z)</option>
-                            <option value="nivel-asc">Nível (1 → 7)</option>
-                            <option value="nivel-desc">Nível (7 → 1)</option>
+                            <option value="nivel-asc">Nível (1 a 7)</option>
+                            <option value="nivel-desc">Nível (7 a 1)</option>
                         </select>
                     </label>
 
@@ -443,15 +443,15 @@
                     </div>
 
                     <div class="sidebar-buttons-stack">
-                        <button type="button" id="btn-reset-spell-filters" class="btn-secondary">🧹 Limpar Filtros</button>
+                        <button type="button" id="btn-reset-spell-filters" class="btn-secondary">Limpar Filtros</button>
                         <button type="button" id="btn-export-spell-list" class="btn-submit" style="font-size: 0.9rem; padding: 8px;">
-                            📦 Exportar Lista (.json)
+                            Exportar Lista (.json)
                         </button>
                     </div>
 
                     <hr class="ministry-divider">
                     
-                    <h4 class="list-title">Encantamentos (Clique p/ Carregar)</h4>
+                    <h4 class="list-title">Encantamentos (Clique para Carregar)</h4>
                     <ul id="spell-list" class="record-list">
                         <li class="empty-msg">Carregando índice...</li>
                     </ul>
@@ -459,7 +459,7 @@
 
                 <section class="archive-viewer bureaucracy-box">
                     <div id="spell-viewer-content" class="viewer-content empty-viewer">
-                        <p>🪄 Selecione um feitiço na lista ao lado para carregar individualmente sua pronúncia, categoria, perícia de conjuração, condição aplicada e efeito completo.</p>
+                        <p>Selecione um feitiço na lista ao lado para carregar individualmente sua pronúncia, categoria, perícia de conjuração, condição aplicada e efeito completo.</p>
                     </div>
                 </section>
 
@@ -471,7 +471,7 @@
              ===================================================================== -->
         <main id="tab-registro-feiticos" class="tab-content hidden">
             <div class="mb-10" style="display:flex; justify-content:space-between; align-items:center;">
-                <button type="button" class="btn-secondary" data-target="tab-arquivo-feiticos">← Voltar ao Arquivo de Feitiços</button>
+                <button type="button" class="btn-secondary" data-target="tab-arquivo-feiticos">Voltar ao Arquivo de Feitiços</button>
             </div>
             <form id="form-spell" class="bureaucracy-box">
                 <h3 class="section-title">1. Registro Individual de Feitiço (C.E.F.)</h3>
@@ -525,7 +525,7 @@
                 <h3 class="section-title mt-20">2. Descrição, Mecânica e Regras do Feitiço</h3>
                 <textarea id="spell-desc" class="ink-textarea" rows="5" required placeholder="Descreva os efeitos visuais, mecânica de jogo, dano/cura e testes exigidos..."></textarea>
 
-                <button type="submit" class="btn-submit mt-20">🪄 Catalogar Feitiço no Grimório Ministerial</button>
+                <button type="submit" class="btn-submit mt-20">Catalogar Feitiço no Grimório Ministerial</button>
             </form>
 
             <div class="bureaucracy-box mt-20">
@@ -536,7 +536,7 @@
                     <label style="flex: 1;">Ou carregue um arquivo JSON:
                         <input type="file" id="bulk-spell-file" accept=".json" class="ink-input">
                     </label>
-                    <button type="button" id="btn-bulk-import-spells" class="btn-submit" style="width: auto; padding: 12px 30px;">📥 Processar Lote de Feitiços</button>
+                    <button type="button" id="btn-bulk-import-spells" class="btn-submit" style="width: auto; padding: 12px 30px;">Processar Lote de Feitiços</button>
                 </div>
             </div>
         </main>
@@ -549,18 +549,18 @@
                 
                 <aside class="archive-sidebar bureaucracy-box">
                     <div class="sidebar-header-row">
-                        <h3 class="section-title" style="margin-bottom: 4px;">🌿 Filtros (Herbologia)</h3>
+                        <h3 class="section-title" style="margin-bottom: 4px;">Filtros (Herbologia)</h3>
                         <small id="plant-filter-count" class="filter-count-label">Carregando...</small>
                     </div>
                     
-                    <input type="text" id="search-plant" class="ink-input mb-10" placeholder="🔍 Buscar planta ou nome científico...">
+                    <input type="text" id="search-plant" class="ink-input mb-10" placeholder="Buscar planta ou nome científico...">
                     
                     <label class="filter-label">Ordenar por:
                         <select id="sort-plant" class="ink-select mb-10">
                             <option value="alfabetica">Ordem Alfabética (A-Z)</option>
-                            <option value="nivel-asc">Nível de Herbologia (1 → 7)</option>
-                            <option value="nivel-desc">Nível de Herbologia (7 → 1)</option>
-                            <option value="cd-asc">Dificuldade de Manejo (CD ↑)</option>
+                            <option value="nivel-asc">Nível de Herbologia (1 a 7)</option>
+                            <option value="nivel-desc">Nível de Herbologia (7 a 1)</option>
+                            <option value="cd-asc">Dificuldade de Manejo (CD Crescente)</option>
                         </select>
                     </label>
 
@@ -588,15 +588,15 @@
                     </div>
 
                     <div class="sidebar-buttons-stack">
-                        <button type="button" id="btn-reset-plant-filters" class="btn-secondary">🧹 Limpar Filtros</button>
+                        <button type="button" id="btn-reset-plant-filters" class="btn-secondary">Limpar Filtros</button>
                         <button type="button" id="btn-export-plant-list" class="btn-submit" style="font-size: 0.9rem; padding: 8px;">
-                            📦 Exportar Lista (.json)
+                            Exportar Lista (.json)
                         </button>
                     </div>
 
                     <hr class="ministry-divider">
                     
-                    <h4 class="list-title">Espécies Botânicas (Clique p/ Carregar)</h4>
+                    <h4 class="list-title">Espécies Botânicas (Clique para Carregar)</h4>
                     <ul id="plant-list" class="record-list">
                         <li class="empty-msg">Carregando índice...</li>
                     </ul>
@@ -604,7 +604,7 @@
 
                 <section class="archive-viewer bureaucracy-box">
                     <div id="plant-viewer-content" class="viewer-content empty-viewer">
-                        <p>🌿 Selecione uma planta mágica na lista ao lado para carregar individualmente sua ficha botânica, CD de manejo, propriedades curativas/tóxicas e aplicações em poções.</p>
+                        <p>Selecione uma planta mágica na lista ao lado para carregar individualmente sua ficha botânica, CD de manejo, propriedades curativas/tóxicas e aplicações em poções.</p>
                     </div>
                 </section>
 
@@ -616,7 +616,7 @@
              ===================================================================== -->
         <main id="tab-registro-plantas" class="tab-content hidden">
             <div class="mb-10" style="display:flex; justify-content:space-between; align-items:center;">
-                <button type="button" class="btn-secondary" data-target="tab-arquivo-plantas">← Voltar ao Arquivo de Plantas</button>
+                <button type="button" class="btn-secondary" data-target="tab-arquivo-plantas">Voltar ao Arquivo de Plantas</button>
             </div>
             <form id="form-plant" class="bureaucracy-box">
                 <h3 class="section-title">1. Registro Botânico no Herbário Ministerial</h3>
@@ -653,7 +653,7 @@
                                     <option value="7">Nível 7 (Grão-Mestre)</option>
                                 </select>
                             </label>
-                            <label class="flex-1">CD de Manejo & Colheita:
+                            <label class="flex-1">CD de Manejo e Colheita:
                                 <input type="number" id="plant-cd" class="ink-input" value="12" min="5" max="35">
                             </label>
                             <label class="flex-2">Classificação Ministerial:
@@ -662,7 +662,7 @@
                         </div>
 
                         <div class="form-row">
-                            <label class="flex-1">Requisitos de Manejo & EPI:
+                            <label class="flex-1">Requisitos de Manejo e EPI:
                                 <input type="text" id="plant-manejo" class="ink-input" placeholder="Ex: Exige Luvas de Couro de Dragão ou Abafadores">
                             </label>
                             <label class="flex-1">Principais Usos Alquímicos:
@@ -672,13 +672,13 @@
                     </div>
                 </div>
 
-                <h3 class="section-title mt-20">2. Descrição Morfológica, Habitat & Comportamento</h3>
+                <h3 class="section-title mt-20">2. Descrição Morfológica, Habitat e Comportamento</h3>
                 <textarea id="plant-descricao" class="ink-textarea" rows="4" required placeholder="Descreva a aparência da planta, seu habitat natural e comportamento mágico..."></textarea>
 
-                <h3 class="section-title mt-20">3. Peculiaridades Técnicas, Colheita & Mecânica de Efeito</h3>
+                <h3 class="section-title mt-20">3. Peculiaridades Técnicas, Colheita e Mecânica de Efeito</h3>
                 <textarea id="plant-peculiaridades" class="ink-textarea" rows="5" placeholder="Detalhe o nível de herbologia, CD de manejo, efeito imediato e aplicações alquímicas..."></textarea>
 
-                <button type="submit" class="btn-submit mt-20">🌿 Catalogar Planta no Herbário Ministerial</button>
+                <button type="submit" class="btn-submit mt-20">Catalogar Planta no Herbário Ministerial</button>
             </form>
 
             <div class="bureaucracy-box mt-20">
@@ -689,7 +689,7 @@
                     <label style="flex: 1;">Ou carregue um arquivo JSON:
                         <input type="file" id="bulk-plant-file" accept=".json" class="ink-input">
                     </label>
-                    <button type="button" id="btn-bulk-import-plants" class="btn-submit" style="width: auto; padding: 12px 30px;">📥 Processar Lote de Plantas</button>
+                    <button type="button" id="btn-bulk-import-plants" class="btn-submit" style="width: auto; padding: 12px 30px;">Processar Lote de Plantas</button>
                 </div>
             </div>
         </main>
@@ -702,19 +702,19 @@
                 
                 <aside class="archive-sidebar bureaucracy-box">
                     <div class="sidebar-header-row">
-                        <h3 class="section-title" style="margin-bottom: 4px;">⚗️ Filtros (Alquimia)</h3>
+                        <h3 class="section-title" style="margin-bottom: 4px;">Filtros (Alquimia)</h3>
                         <small id="potion-filter-count" class="filter-count-label">Carregando...</small>
                     </div>
                     
-                    <input type="text" id="search-potion" class="ink-input mb-10" placeholder="🔍 Buscar poção, elixir ou composto...">
+                    <input type="text" id="search-potion" class="ink-input mb-10" placeholder="Buscar poção, elixir ou composto...">
                     
                     <label class="filter-label">Ordenar por:
                         <select id="sort-potion" class="ink-select mb-10">
                             <option value="alfabetica">Ordem Alfabética (A-Z)</option>
-                            <option value="nivel-asc">Nível Alquímico (1 → 7)</option>
-                            <option value="nivel-desc">Nível Alquímico (7 → 1)</option>
-                            <option value="cd-asc">Dificuldade de Preparo (CD ↑)</option>
-                            <option value="cd-desc">Dificuldade de Preparo (CD ↓)</option>
+                            <option value="nivel-asc">Nível Alquímico (1 a 7)</option>
+                            <option value="nivel-desc">Nível Alquímico (7 a 1)</option>
+                            <option value="cd-asc">Dificuldade de Preparo (CD Crescente)</option>
+                            <option value="cd-desc">Dificuldade de Preparo (CD Decrescente)</option>
                         </select>
                     </label>
 
@@ -760,15 +760,15 @@
                     </label>
 
                     <div class="sidebar-buttons-stack">
-                        <button type="button" id="btn-reset-potion-filters" class="btn-secondary">🧹 Limpar Filtros</button>
+                        <button type="button" id="btn-reset-potion-filters" class="btn-secondary">Limpar Filtros</button>
                         <button type="button" id="btn-export-potion-list" class="btn-submit" style="font-size: 0.9rem; padding: 8px;">
-                            📦 Exportar Lista (.json)
+                            Exportar Lista (.json)
                         </button>
                     </div>
 
                     <hr class="ministry-divider">
                     
-                    <h4 class="list-title">Compostos Alquímicos (Clique p/ Carregar)</h4>
+                    <h4 class="list-title">Compostos Alquímicos (Clique para Carregar)</h4>
                     <ul id="potion-list" class="record-list">
                         <li class="empty-msg">Carregando índice...</li>
                     </ul>
@@ -776,7 +776,7 @@
 
                 <section class="archive-viewer bureaucracy-box">
                     <div id="potion-viewer-content" class="viewer-content empty-viewer">
-                        <p>⚗️ Selecione uma poção na lista ao lado para carregar individualmente sua receita, ingredientes exigidos, tempo de fermentação, dificuldade CD e efeitos mecânicos.</p>
+                        <p>Selecione uma poção na lista ao lado para carregar individualmente sua receita, ingredientes exigidos, tempo de fermentação, dificuldade CD e efeitos mecânicos.</p>
                     </div>
                 </section>
 
@@ -788,7 +788,7 @@
              ===================================================================== -->
         <main id="tab-registro-pocoes" class="tab-content hidden">
             <div class="mb-10" style="display:flex; justify-content:space-between; align-items:center;">
-                <button type="button" class="btn-secondary" data-target="tab-arquivo-pocoes">← Voltar ao Arquivo de Poções</button>
+                <button type="button" class="btn-secondary" data-target="tab-arquivo-pocoes">Voltar ao Arquivo de Poções</button>
             </div>
             <form id="form-potion" class="bureaucracy-box">
                 <h3 class="section-title">1. Registro de Composto no Catálogo Alquímico</h3>
@@ -840,13 +840,13 @@
                     </label>
                 </div>
 
-                <h3 class="section-title mt-20">2. Efeito Mecânico & Propriedades Mágicas</h3>
+                <h3 class="section-title mt-20">2. Efeito Mecânico e Propriedades Mágicas</h3>
                 <textarea id="potion-efeito" class="ink-textarea" rows="3" required placeholder="Descreva os efeitos diretos ao ingerir ou aplicar a poção..."></textarea>
 
                 <h3 class="section-title mt-20">3. Ingredientes do Caldeirão</h3>
                 <textarea id="potion-ingredientes" class="ink-textarea" rows="3" required placeholder="Liste os ingredientes vegetais, animais e minerais necessários..."></textarea>
 
-                <h3 class="section-title mt-20">4. Características Visuais, Aroma & Lore</h3>
+                <h3 class="section-title mt-20">4. Características Visuais, Aroma e Lore</h3>
                 <textarea id="potion-descricao" class="ink-textarea" rows="4" required placeholder="Cor do líquido, consistência, formato do vapor, aroma e história..."></textarea>
 
                 <div class="form-row mt-10">
@@ -855,7 +855,7 @@
                     </label>
                 </div>
 
-                <button type="submit" class="btn-submit mt-20">⚗️ Catalogar Poção no Catálogo Alquímico</button>
+                <button type="submit" class="btn-submit mt-20">Catalogar Poção no Catálogo Alquímico</button>
             </form>
 
             <div class="bureaucracy-box mt-20">
@@ -866,7 +866,7 @@
                     <label style="flex: 1;">Ou carregue um arquivo JSON:
                         <input type="file" id="bulk-potion-file" accept=".json" class="ink-input">
                     </label>
-                    <button type="button" id="btn-bulk-import-potions" class="btn-submit" style="width: auto; padding: 12px 30px;">📥 Processar Lote de Poções</button>
+                    <button type="button" id="btn-bulk-import-potions" class="btn-submit" style="width: auto; padding: 12px 30px;">Processar Lote de Poções</button>
                 </div>
             </div>
         </main>

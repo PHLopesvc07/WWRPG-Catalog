@@ -1,99 +1,101 @@
-# 📜 Arquivo Geral do Ministério da Magia — W&W RPG Catalog
+# Arquivo Geral do Ministerio da Magia — W&W RPG Catalog
 
-Aplicação web modular de catalogação, consulta rápida, filtragem avançada e exportação oficial de registros para o sistema de RPG de mesa **Witches & Wizards (W&W)**.
+Aplicacao web de catalogacao, consulta rapida e exportacao de recursos para o sistema **Wands & Wizards RPG (W&W)**, estruturada em quatro arquivos departamentais independentes:
 
-Projetada com **Arquitetura de Carregamento Individual Sob Demanda (Two-Tier Lazy Loading)** para garantir inicialização instantânea mesmo com mais de **512 registros oficiais** e dezenas de ilustrações.
-
----
-
-## 🏛️ Os 4 Espaços de Catálogo Ministerial
-
-O sistema contempla espaços dedicados de **Arquivo de Consulta** e **Registro / Importação em Massa** para cada um dos 4 pilares do sistema W&W RPG:
-
-### 1. 🐾 Catálogo de Animais & Criaturas Mágicas (D.R.C.C.M.) — *92 Espécies Oficiais*
-* **Identificação Ministerial:** Espécie Mágica, Classificação do Ministério (`X`, `XX`, `XXX`, `XXXX`, `XXXXX`, `XX-XXXX`), Licença exigida (`Comum`, `Magizoologista`, `Não permitido`), Porte (`Pequeno`, `Médio`, `Grande`, `Enorme`), Tamanho/Peso adulto, Origem (`Natural`, `Artificial`), Locomoção (`Terrestres`, `Aéreos`, `Aquáticos`, `Aquaéros`), **Velocidade de Ação**, Interação (`Pacífico`, `Agressivo`) e Tipo (`Simples`, `Neutro`, `Consciente`, `Bestial`).
-* **Atributos Físicos e Animais (`-5` a `+10`):** `Corpo`, `Destreza`, `Vitalidade`, `Instinto`, `Carisma`, `Inteligência` e `Sabedoria`.
-* **Habilidades Especiais de Combate & Instinto:** Quatro categorias táticas (`⚔️ Dano`, `🛡️ Reação`, `🌪️ Ambiente` e `✨ Extra`) com nome, fórmula de rolagem/CD e descrição mecânica.
-* **Prontuário Médico-Veterinário:** Limites de Injúria `Leve`, `Média`, `Pesada` e condições customizadas.
-* **Galeria de Retratos (`assets/animais/`):** Ilustrações carregadas individualmente (`loading="lazy"`) apenas quando a criatura é selecionada.
-
-### 2. 🪄 Grande Compêndio de Feitiçaria (C.E.F.) — *210 Feitiços Oficiais*
-* **Dados Catalogados:** Nome do Encantamento (`name`), Pronúncia Fonética (`pronuncia`), Categoria Mágica (`Charme`, `Transfiguração`, `Azaração`, `Maldição Menor`, `Maldição`, `Contrafeitiço`, `Cura`), Nível de Dificuldade (`1` a `7`), Natureza (`Ataque`, `Proteção`, `Cura`, `Utilitário`, `Contrafeitiço`), **Condição Aplicada (`condicao`, ex: `(C) Desarmado`)** e Descrição completa (`desc`).
-* **Mapeamento Automático de Perícia (W&W):** Associa automaticamente a categoria do feitiço à perícia de conjuração correspondente na ficha de personagem (`Prática`, `Transfiguração`, `DCAT`, `Dificuldade/Lógica`, `Cura`).
-
-### 3. 🌿 Compêndio de Herbologia & Botânica Mágica — *44 Plantas Oficiais*
-* **Dados Catalogados:** Nome Popular / Inglês / Científico (`nome`), Disponibilidade Ministerial (`Popular` ou `Difícil de Adquirir`), Nível de Herbologia (`1` a `7`), Dificuldade de Manejo e Colheita (`CD`), Descrição Morfológica (`descricao`) e Peculiaridades Técnicas (`peculiaridades`: EPIs exigidos, mecânica/efeito imediato, uso alquímico e classificação de sementes).
-
-### 4. ⚗️ Catálogo Alquímico de Poções — *166 Compostos Oficiais*
-* **Dados Catalogados:** Nome (`nome`), Classificação (`Poção`, `Elixir`, `Antídoto`, `Veneno`, `Filtro do Amor`, `Solução`, `Pomada`, `Pasta`, `Tônico`, `Gás Alquímico`), Nível Alquímico (`1` a `7`), Parâmetros de Sistema (`sistema.dificuldade_cd`, `sistema.tempo_preparo`, `sistema.duracao`, `sistema.administracao`), Efeito Mecânico (`efeito`), Ingredientes do Caldeirão (`ingredientes`), Características Físicas/Aroma/Lore (`descricao`) e Metadados de Referência (`meta`).
+1. **D.R.C.C.M. — Animais e Criaturas Magicas** (92 especies catalogadas com retratos, atributos, habilidades de combate e prontuario de injurias)
+2. **C.E.F. — Grande Compendio de Feiticos** (210 encantamentos catalogados com pronuncia, nivel 1 a 7, categoria magica, pericia de conjuracao e condicao aplicada)
+3. **Compendio de Herbologia e Botanica Magica** (44 plantas magicas classificadas por raridade, nivel de herbologia, CD de manejo e usos alquimicos)
+4. **Catalogo Alquimico de Pocoes** (166 compostos, elixires, antidotos e venenos com CD de preparo, tempo de fermentacao, via de administracao e ingredientes)
 
 ---
 
-## ⚡ Arquitetura de Carregamento Individual (Alta Performance)
+## Guia de Consulta da API
 
-Para evitar o download pesado de coleções inteiras na abertura da página, o serviço [`js/services/database.js`](./js/services/database.js) implementa o carregamento em duas camadas (**Two-Tier On-Demand Loading**):
+Para integrar este catalogo a fichas de personagem (como o **WWRPG-Ficha**), bots ou ferramentas externas, consulte o documento dedicado:
 
-1. **Camada 1 — Índice Leve (`fetchCatalogIndex`):**
-   * Ao abrir qualquer catálogo, o sistema lê apenas o documento de resumo (`indice.json` e índice remoto), contendo somente os campos necessários para a listagem lateral e filtros (`id`, `nome`/`name`, `classificacao`/`lvl`/`categoria`/`tipo`).
-   * A renderização e filtragem de centenas de itens ocorrem em **menos de 10 ms**.
-2. **Camada 2 — Carregamento Individual Sob Demanda (`fetchItemById`):**
-   * A ficha completa de um item (descrições extensas, habilidades, ingredientes, prontuário veterinário e imagem) é requisitada **individualmente apenas quando o usuário clica no item desejado**, sendo armazenada em um cache em memória (`Map`) para releitura instantânea (`0 ms`).
+- **[Guia de Consulta da API (`API_GUIDE.md`)](./API_GUIDE.md)**: Documentacao completa dos endpoints HTTP estaticos (`indice.json` e `itens/{id}.json`), funcoes do modulo ES6 (`js/services/database.js`), exemplos em JavaScript/`curl` e esquemas JSON de todas as quatro colecoes.
 
 ---
 
-## 📂 Estrutura de Diretórios
+## Arquitetura de Desempenho e Carregamento Individual
+
+O sistema opera com carregamento em duas camadas (Two-Tier Lazy Loading) e otimizacoes de renderizacao para garantir navegacao imediata:
+
+- **Carregamento Sob Demanda por Aba (`ensureLoaded`):** Na abertura da aplicacao, apenas o indice da aba ativa e processado. Os catalogos de Feiticos, Plantas e Pocoes sao carregados sob demanda no instante em que o usuario acessa a respectiva aba.
+- **Camada 1 (Indices Leves):** Cada modulo carrega inicialmente apenas seu arquivo `indice.json`, permitindo filtragem e ordenacao instantaneas em memoria.
+- **Camada 2 (Documentos Individuais com Cache em Memoria):** Ao selecionar um registro na barra lateral, a aplicacao requisita apenas o arquivo `./<categoria>/itens/<id>.json` correspondente e armazena-o em cache (`Map`) para exibicao imediata em consultas subsequentes.
+- **Delegacao de Eventos e Debounce:** As listas laterais utilizam um unico listener delegado por container (`ul.record-list`) com `contain: content` no CSS e debounce de `80ms` nos campos de busca textual, evitando recriacao de listeners e reflows desnecessarios.
+- **Ativos Graficos Otimizados:** As texturas de pergaminho e retratos de criaturas foram comprimidas e utilizam carregamento nativo assincrono (`loading="lazy" decoding="async"`).
+
+---
+
+## Sistema Visual
+
+A interface combina a identidade tipografica do **WWRPG-Ficha** com o guia tecnico **Ministry Bureaucracy (`design.md`)**, oferecendo tres modos de leitura persistidos em `localStorage`:
+
+- **Modo Claro (Pergaminho Ministerial):** Textura de pergaminho classico com tipografia serifada editorial (`Playfair Display`), dados tecnicos monoespacados (`JetBrains Mono`) e carimbos datilografados (`Special Elite`).
+- **Modo Escuro (Pergaminho Noturno):** Superficies escuras de alto contraste com detalhes em dourado ministerial (`#f1c40f`).
+- **Modo Terminal Tatico:** Estetica inspirada em terminais governamentais (`#0B1011`), com bordas chanfradas e acentos em ouro velho (`#D4AF37`) e verde-azulado (`#4A9E8E`).
+
+---
+
+## Estrutura de Diretorios
 
 ```text
 WWcatalog/
-├── index.html                      # Interface principal com os 4 espaços de catálogo
-├── README.md                       # Documentação oficial do sistema
-├── assets/
-│   └── animais/                    # 91 retratos individuais de criaturas mágicas (carregamento lazy)
+├── index.html                  # Interface principal com os 4 espacos de catalogo e formularios
+├── README.md                   # Documentacao geral do projeto
+├── API_GUIDE.md                # Guia de consulta da API e esquemas JSON
 ├── css/
-│   ├── variables.css               # Paleta de cores de pergaminho, selos e tipografia
-│   ├── base.css                    # Reset e regras tipográficas globais
-│   ├── layout.css                  # Grids responsivos e navegação departamental
-│   └── components.css              # Fichas ministeriais, cartões de habilidade e selos
+│   ├── variables.css           # Tokens de cores, fontes e superficies dos 3 temas
+│   ├── base.css                # Reset, tipografia e estilos de formulario
+│   ├── layout.css              # Cabecalho, abas, grids de 2 colunas e responsividade
+│   └── components.css          # Fichas completas, badges, carimbos e listas otimizadas
 ├── js/
-│   ├── main.js                     # Inicialização dos 4 controladores de catálogo
-│   ├── controllers/
-│   │   ├── TabController.js        # Alternância entre os 8 painéis (4 Arquivos + 4 Registros)
-│   │   ├── CreatureController.js   # CRUD, filtros e carregamento individual de Animais (D.R.C.C.M.)
-│   │   ├── SpellController.js      # CRUD, filtros e carregamento individual de Feitiços (C.E.F.)
-│   │   ├── PlantController.js      # CRUD, filtros e carregamento individual de Plantas (Herbologia)
-│   │   └── PotionController.js     # CRUD, filtros e carregamento individual de Poções (Alquimia)
+│   ├── main.js                 # Inicializacao, controle de temas e carregamento sob demanda por aba
 │   ├── services/
-│   │   ├── firebaseConfig.js       # Configuração interna de conexão com o banco de dados
-│   │   └── database.js             # Camada de persistência e carregamento individual sob demanda
+│   │   └── database.js         # Camada de dados (indices leves, itens individuais, cache e exportacao)
+│   ├── controllers/
+│   │   ├── TabController.js      # Navegacao entre abas e emissao do evento tab-opened
+│   │   ├── CreatureController.js # Controlador de Animais Magicos (D.R.C.C.M.)
+│   │   ├── SpellController.js    # Controlador de Feiticos (C.E.F.)
+│   │   ├── PlantController.js    # Controlador de Plantas (Herbologia)
+│   │   └── PotionController.js   # Controlador de Pocoes (Alquimia)
 │   └── utils/
-│       └── helpers.js              # Sanitização, compressão de imagens via Canvas e exportação JSON
+│       └── helpers.js          # Utilitarios de sanitizacao HTML, Base64 e exportacao JSON
+├── assets/
+│   ├── img/                    # Texturas de pergaminho e emblemas otimizados
+│   └── animais/                # 91 ilustracoes de criaturas magicas otimizadas
 ├── dados/
-│   ├── indice.json                 # Índice leve das 92 criaturas mágicas
-│   ├── catalogo_criaturas.json     # Compêndio completo de criaturas
-│   └── itens/                      # 92 arquivos JSON individuais (<id>.json)
+│   ├── indice.json             # Indice leve de criaturas (92 registros)
+│   ├── catalogo_criaturas.json # Pacote completo de criaturas
+│   └── itens/                  # 92 arquivos JSON individuais de criaturas
 ├── feiticos/
-│   ├── indice.json                 # Índice leve dos 210 feitiços
-│   ├── indice_feiticos.json        # Compêndio completo de feitiços
-│   └── itens/                      # 210 arquivos JSON individuais (<id>.json)
+│   ├── indice.json             # Indice leve de feiticos (210 registros)
+│   ├── catalogo_feiticos.json  # Pacote completo de feiticos
+│   └── itens/                  # 210 arquivos JSON individuais de feiticos
 ├── plantas/
-│   ├── indice.json                 # Índice leve das 44 plantas mágicas
-│   ├── indice_plantas.json         # Compêndio completo de herbologia
-│   └── itens/                      # 44 arquivos JSON individuais (<id>.json)
+│   ├── indice.json             # Indice leve de plantas (44 registros)
+│   ├── catalogo_plantas.json   # Pacote completo de plantas
+│   └── itens/                  # 44 arquivos JSON individuais de plantas
 └── pocoes/
-    ├── indice.json                 # Índice leve das 166 poções alquímicas
-    ├── indice_pocoes.json          # Compêndio completo de poções
-    └── itens/                      # 166 arquivos JSON individuais (<id>.json)
+    ├── indice.json             # Indice leve de pocoes (166 registros)
+    ├── catalogo_pocoes.json    # Pacote completo de pocoes
+    └── itens/                  # 166 arquivos JSON individuais de pocoes
 ```
 
 ---
 
-## 🚀 Como Executar Localmente
+## Como Executar Localmente
 
-Por utilizar módulos nativos do JavaScript (`ES6 Modules`) e requisições `fetch` para carregamento individual de arquivos JSON, abra o diretório utilizando qualquer servidor HTTP estático:
+Por utilizar ES6 Modules (`<script type="module">`) e requisicoes `fetch` para os arquivos JSON, sirva a pasta raiz por meio de um servidor HTTP estatico:
 
-1. **VS Code (Live Server):** Clique em *"Go Live"* na barra inferior com o `index.html` aberto.
-2. **Python:**
-   ```bash
-   python -m http.server 8080
-   ```
-   E acesse `http://localhost:8080` no navegador.
+```bash
+# Opcao 1: Node.js (npx)
+npx serve .
+
+# Opcao 2: Python 3
+python -m http.server 8080
+```
+
+Em seguida, acesse `http://localhost:8080` (ou a porta indicada no terminal) pelo navegador.
