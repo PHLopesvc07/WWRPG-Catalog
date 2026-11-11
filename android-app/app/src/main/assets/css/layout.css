@@ -1,0 +1,225 @@
+/* ==========================================================================
+   LAYOUT.CSS — MINISTÉRIO DA MAGIA (WWRPG CATALOG)
+   Estrutura Principal, Header Oficial, Abas de Pasta e Grids
+   ========================================================================== */
+
+.parchment-container {
+    max-width: 1360px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   CABEÇALHO OFICIAL DO MINISTÉRIO (IDÊNTICO AO WWRPG-FICHA)
+   ========================================================================== */
+.ministry-header {
+    text-align: center;
+    margin-bottom: 28px;
+    border: 6px double var(--ink);
+    padding: 30px 25px;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 2px 2px 10px rgba(92, 75, 81, 0.12);
+
+    background-image: url('../assets/img/LogoMinisterio.png');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 30px) center;
+    background-size: 115px;
+}
+
+body.dark-mode .ministry-header {
+    background-color: rgba(20, 20, 15, 0.85);
+}
+
+body.terminal-mode .ministry-header {
+    background-color: #0f131c;
+    border: 1px solid rgba(0, 240, 255, 0.35);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.12);
+    background-image: none;
+    border-radius: 4px;
+}
+
+.header-titles h1 {
+    font-size: 2.4rem;
+    border-bottom: 2px solid var(--ink);
+    display: inline-block;
+    padding: 0 20px 10px;
+    margin-bottom: 10px;
+}
+
+body.terminal-mode .header-titles h1 {
+    color: #00f0ff;
+    border-bottom-color: rgba(0, 240, 255, 0.4);
+    text-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+}
+
+.header-titles h2 {
+    font-size: 1.15rem;
+    font-weight: normal;
+    font-family: var(--font-typewriter);
+    text-transform: uppercase;
+}
+
+.header-titles p {
+    font-size: 0.92rem;
+    font-style: italic;
+    opacity: 0.85;
+    margin-top: 6px;
+}
+
+.theme-controls {
+    position: absolute;
+    top: 18px;
+    left: 20px;
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+/* ==========================================================================
+   NAVEGAÇÃO EM ABAS DE PASTA BUROCRÁTICA (.tabs-nav & .main-content)
+   ========================================================================== */
+.catalog-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tabs-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 0;
+    border-bottom: 4px solid var(--ink);
+    padding-left: 16px;
+    align-items: flex-end;
+}
+
+body.terminal-mode .tabs-nav {
+    border-bottom: 1px solid rgba(0, 240, 255, 0.35);
+}
+
+.sub-actions-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    padding-bottom: 6px;
+    padding-right: 8px;
+}
+
+.main-content-shell {
+    background-color: var(--parchment);
+    border: 4px solid var(--ink);
+    border-top: none;
+    padding: 25px;
+    box-shadow: 5px 5px 15px rgba(92, 75, 81, 0.22);
+    position: relative;
+}
+
+body.terminal-mode .main-content-shell {
+    background-color: var(--surface-panel);
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    border-top: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65);
+    border-radius: 0 0 6px 6px;
+}
+
+/* ==========================================================================
+   GRIDS DO FORMULÁRIO E DO ARQUIVO
+   ========================================================================== */
+.form-grid-layout {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 22px;
+    align-items: start;
+    margin-top: 10px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.flex-1 { flex: 1; min-width: 145px; }
+.flex-2 { flex: 2; min-width: 220px; }
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+    gap: 14px;
+    margin-top: 10px;
+}
+
+.abilities-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 10px;
+}
+
+.archive-layout {
+    display: grid;
+    grid-template-columns: 370px 1fr;
+    gap: 24px;
+    min-height: 680px;
+    align-items: start;
+}
+
+.archive-sidebar {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.filter-count-label {
+    color: var(--ink-secondary);
+    font-style: italic;
+    font-size: 0.85rem;
+}
+
+.filter-two-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.sidebar-buttons-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+@media (max-width: 980px) {
+    .ministry-header {
+        background-image: none;
+        padding-top: 65px;
+    }
+
+    .form-grid-layout,
+    .archive-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .tabs-nav {
+        padding-left: 6px;
+    }
+
+    .sub-actions-bar {
+        width: 100%;
+        justify-content: center;
+        padding-top: 8px;
+    }
+}

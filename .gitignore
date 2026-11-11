@@ -1,0 +1,5 @@
+# Android build outputs and intermediate files
+android-app/app/build/
+android-app/.gradle/
+android-app/build/
+android-app/local.properties

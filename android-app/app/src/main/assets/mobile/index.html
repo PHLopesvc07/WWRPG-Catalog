@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#d9c39a">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Arquivo Ministerial Mobile — W&W RPG</title>
+
+    <!-- Fontes Oficiais -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@700&family=Space+Grotesk:wght@400;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+    <!-- CSS Base do Projeto e Otimizações Mobile -->
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/mobile.css">
+
+    <!-- Script Principal Mobile -->
+    <script type="module" src="./mobile.js" defer></script>
+</head>
+<body class="mobile-body">
+
+    <div class="mobile-app-shell">
+        
+        <!-- CABEÇALHO COMPACTO MOBILE -->
+        <header class="mobile-header">
+            <div class="mobile-header-title">
+                <h1>Ministério da Magia</h1>
+                <small>Arquivo Geral • Versão Móvel</small>
+            </div>
+            <div class="mobile-header-actions">
+                <button type="button" id="mobile-btn-theme" class="mobile-btn-pill">Modo</button>
+            </div>
+        </header>
+
+        <!-- ÁREA DE CONTEÚDO PRINCIPAL (ABAS SELECIONADAS VIA BOTTOM NAV) -->
+        <main class="mobile-content">
+
+            <!-- ==========================================
+                 ABA 1: ANIMAIS MÁGICOS (D.R.C.C.M.)
+                 ========================================== -->
+            <section id="mobile-pane-creatures" class="mobile-tab-pane active">
+                <div class="mobile-filter-bar">
+                    <div class="mobile-search-row">
+                        <input type="text" id="m-search-creature" class="ink-input" placeholder="Buscar criatura...">
+                        <button type="button" class="mobile-btn-pill btn-toggle-filters" data-target="m-filter-details-creatures">Filtros</button>
+                    </div>
+
+                    <div id="m-filter-details-creatures" class="mobile-filter-details">
+                        <div class="mobile-filter-row">
+                            <label class="mobile-filter-label">Ordenar:
+                                <select id="m-sort-creature" class="ink-select">
+                                    <option value="alfabetica">A-Z</option>
+                                    <option value="perigo-asc">Perigo X a XXXXX</option>
+                                    <option value="perigo-desc">Perigo XXXXX a X</option>
+                                </select>
+                            </label>
+                            <label class="mobile-filter-label">Classificação:
+                                <select id="m-filter-class" class="ink-select">
+                                    <option value="">Todas</option>
+                                    <option value="X">X</option>
+                                    <option value="XX">XX</option>
+                                    <option value="XXX">XXX</option>
+                                    <option value="XXXX">XXXX</option>
+                                    <option value="XXXXX">XXXXX</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="mobile-filter-row">
+                            <label class="mobile-filter-label">Tipo:
+                                <select id="m-filter-tipo" class="ink-select">
+                                    <option value="">Todos</option>
+                                    <option value="Simples">Simples</option>
+                                    <option value="Neutro">Neutro</option>
+                                    <option value="Consciente">Consciente</option>
+                                    <option value="Bestial">Bestial</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <ul id="m-list-creatures" class="mobile-record-list">
+                    <li class="empty-msg">Consultando animais no Firestore...</li>
+                </ul>
+            </section>
+
+            <!-- ==========================================
+                 ABA 2: FEITIÇOS (C.E.F.)
+                 ========================================== -->
+            <section id="mobile-pane-spells" class="mobile-tab-pane">
+                <div class="mobile-filter-bar">
+                    <div class="mobile-search-row">
+                        <input type="text" id="m-search-spell" class="ink-input" placeholder="Buscar feitiço ou efeito...">
+                        <button type="button" class="mobile-btn-pill btn-toggle-filters" data-target="m-filter-details-spells">Filtros</button>
+                    </div>
+
+                    <div id="m-filter-details-spells" class="mobile-filter-details">
+                        <div class="mobile-filter-row">
+                            <label class="mobile-filter-label">Ordenar:
+                                <select id="m-sort-spell" class="ink-select">
+                                    <option value="alfabetica">A-Z</option>
+                                    <option value="nivel-asc">Nível 1 a 7</option>
+                                    <option value="nivel-desc">Nível 7 a 1</option>
+                                </select>
+                            </label>
+                            <label class="mobile-filter-label">Nível:
+                                <select id="m-filter-spell-lvl" class="ink-select">
+                                    <option value="">Todos</option>
+                                    <option value="1">Nível 1</option>
+                                    <option value="2">Nível 2</option>
+                                    <option value="3">Nível 3</option>
+                                    <option value="4">Nível 4</option>
+                                    <option value="5">Nível 5</option>
+                                    <option value="6">Nível 6</option>
+                                    <option value="7">Nível 7</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="mobile-filter-row">
+                            <label class="mobile-filter-label">Categoria:
+                                <select id="m-filter-spell-cat" class="ink-select">
+                                    <option value="">Todas</option>
+                                    <option value="Charme">Charme</option>
+                                    <option value="Transfiguração">Transfiguração</option>
+                                    <option value="Azaração">Azaração</option>
+                                    <option value="Maldição">Maldição</option>
+                                    <option value="Cura">Cura</option>
+                                    <option value="Contrafeitiço">Contrafeitiço</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <ul id="m-list-spells" class="mobile-record-list">
+                    <li class="empty-msg">Consultando encantamentos no Firestore...</li>
+                </ul>
+            </section>
+
+            <!-- ==========================================
+                 ABA 3: PLANTAS MÁGICAS (HERBOLOGIA)
+                 ========================================== -->
+            <section id="mobile-pane-plants" class="mobile-tab-pane">
+                <div class="mobile-filter-bar">
+                    <div class="mobile-search-row">
+                        <input type="text" id="m-search-plant" class="ink-input" placeholder="Buscar planta...">
+                        <button type="button" class="mobile-btn-pill btn-toggle-filters" data-target="m-filter-details-plants">Filtros</button>
+                    </div>
+
+                    <div id="m-filter-details-plants" class="mobile-filter-details">
+                        <div class="mobile-filter-row">
+                            <label class="mobile-filter-label">Ordenar:
+                                <select id="m-sort-plant" class="ink-select">
+                                    <option value="alfabetica">A-Z</option>
+                                    <option value="nivel-asc">Nível 1 a 7</option>
+                                    <option value="nivel-desc">Nível 7 a 1</option>
+                                </select>
+                            </label>
+                            <label class="mobile-filter-label">Disponibilidade:
+                                <select id="m-filter-plant-cat" class="ink-select">
+                                    <option value="">Todas</option>
+                                    <option value="Popular">Popular</option>
+                                    <option value="Difícil de Adquirir">Difícil de Adquirir</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="mobile-filter-row">
+                            <label class="mobile-filter-label">Nível de Herbologia:
+                                <select id="m-filter-plant-lvl" class="ink-select">
+                                    <option value="">Todos</option>
+                                    <option value="1">Nível 1</option>
+                                    <option value="2">Nível 2</option>
+                                    <option value="3">Nível 3</option>
+                                    <option value="4">Nível 4</option>
+                                    <option value="5">Nível 5</option>
+                                    <option value="6">Nível 6</option>
+                                    <option value="7">Nível 7</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <ul id="m-list-plants" class="mobile-record-list">
+                    <li class="empty-msg">Consultando herbário no Firestore...</li>
+                </ul>
+            </section>
+
+            <!-- ==========================================
+                 ABA 4: POÇÕES ALQUÍMICAS
+                 ========================================== -->
+            <section id="mobile-pane-potions" class="mobile-tab-pane">
+                <div class="mobile-filter-bar">
+                    <div class="mobile-search-row">
+                        <input type="text" id="m-search-potion" class="ink-input" placeholder="Buscar poção...">
+                        <button type="button" class="mobile-btn-pill btn-toggle-filters" data-target="m-filter-details-potions">Filtros</button>
+                    </div>
+
+                    <div id="m-filter-details-potions" class="mobile-filter-details">
+                        <div class="mobile-filter-row">
+                            <label class="mobile-filter-label">Ordenar:
+                                <select id="m-sort-potion" class="ink-select">
+                                    <option value="alfabetica">A-Z</option>
+                                    <option value="nivel-asc">Nível 1 a 7</option>
+                                    <option value="nivel-desc">Nível 7 a 1</option>
+                                </select>
+                            </label>
+                            <label class="mobile-filter-label">Nível Alquímico:
+                                <select id="m-filter-potion-lvl" class="ink-select">
+                                    <option value="">Todos</option>
+                                    <option value="1">Nível 1</option>
+                                    <option value="2">Nível 2</option>
+                                    <option value="3">Nível 3</option>
+                                    <option value="4">Nível 4</option>
+                                    <option value="5">Nível 5</option>
+                                    <option value="6">Nível 6</option>
+                                    <option value="7">Nível 7</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="mobile-filter-row">
+                            <label class="mobile-filter-label">Tipo:
+                                <select id="m-filter-potion-tipo" class="ink-select">
+                                    <option value="">Todos</option>
+                                    <option value="Poção">Poção</option>
+                                    <option value="Elixir">Elixir</option>
+                                    <option value="Antídoto">Antídoto</option>
+                                    <option value="Veneno">Veneno</option>
+                                    <option value="Solução">Solução</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <ul id="m-list-potions" class="mobile-record-list">
+                    <li class="empty-msg">Consultando boticário no Firestore...</li>
+                </ul>
+            </section>
+
+        </main>
+
+        <!-- ==========================================
+             BOTTOM NAVIGATION BAR (PADRÃO ANDROID)
+             ========================================== -->
+        <nav class="mobile-bottom-nav">
+            <button type="button" class="mobile-nav-item active" data-target="mobile-pane-creatures">
+                <span>Animais</span>
+                <span id="m-badge-creatures" class="nav-badge">0</span>
+            </button>
+            <button type="button" class="mobile-nav-item" data-target="mobile-pane-spells">
+                <span>Feitiços</span>
+                <span id="m-badge-spells" class="nav-badge">0</span>
+            </button>
+            <button type="button" class="mobile-nav-item" data-target="mobile-pane-plants">
+                <span>Plantas</span>
+                <span id="m-badge-plants" class="nav-badge">0</span>
+            </button>
+            <button type="button" class="mobile-nav-item" data-target="mobile-pane-potions">
+                <span>Poções</span>
+                <span id="m-badge-potions" class="nav-badge">0</span>
+            </button>
+        </nav>
+
+        <!-- ==========================================
+             MODAL BOTTOM SHEET DE LEITURA COMPLETA
+             ========================================== -->
+        <div id="mobile-sheet-modal" class="mobile-sheet-modal">
+            <div class="mobile-sheet-dialog">
+                <div class="pull-bar" style="margin-top: 8px;"></div>
+                <div class="mobile-sheet-top-bar">
+                    <strong id="mobile-modal-title" style="font-family: var(--font-serif); font-size: 1.05rem;">Ficha Detalhada</strong>
+                    <button type="button" id="mobile-modal-close" class="mobile-btn-pill">Fechar</button>
+                </div>
+                <div id="mobile-modal-body" class="mobile-sheet-body">
+                    <!-- Ficha preenchida dinamicamente -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
