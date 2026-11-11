@@ -1,7 +1,7 @@
 /**
  * PONTO DE ENTRADA PRINCIPAL — ARQUIVO GERAL DO MINISTÉRIO DA MAGIA (W&W RPG)
- * Inicializa os 4 Catálogos (Animais, Feitiços, Plantas e Poções) com carregamento
- * sob demanda por aba para garantir navegação fluida e sem travamentos.
+ * Inicializa e carrega paralelamente todos os 4 Catálogos (Animais, Feitiços, Plantas e Poções)
+ * para que todas as listas fiquem prontas de imediato com máxima agilidade.
  */
 
 import { TabController } from "./controllers/TabController.js";
@@ -28,15 +28,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
     document.addEventListener("tab-opened", e => {
-        const targetId = e.detail?.targetId;
+        const targetId = e.detail?.tabId;
         const ctrl = tabControllerMap[targetId];
-        if (ctrl) {
+        if (ctrl && !ctrl.loaded) {
             ctrl.ensureLoaded();
         }
     });
 
     await initDatabaseConnection();
-    await creatureCtrl.ensureLoaded();
+
+    // Carregamento paralelo em lote de todos os 4 catálogos imediatamente
+    await Promise.allSettled([
+        creatureCtrl.ensureLoaded(),
+        spellCtrl.ensureLoaded(),
+        plantCtrl.ensureLoaded(),
+        potionCtrl.ensureLoaded()
+    ]);
 });
 
 function setupThemeControls() {

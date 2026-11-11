@@ -1,7 +1,8 @@
 /**
  * SERVIÇO DE BANCO DE DADOS E CARREGAMENTO INDIVIDUAL SOB DEMANDA (FIRESTORE)
  * Todos os índices e documentos individuais (incluindo retratos Base64 de criaturas)
- * são consultados diretamente do Cloud Firestore com cache em memória.
+ * são consultados diretamente do Cloud Firestore com cache em memória e cache local persistente
+ * para proporcionar velocidade instantânea.
  */
 
 import { DATABASE_CONFIG } from "./firebaseConfig.js";
@@ -289,17 +290,67 @@ function extractPlantCd(peculiaridades = "") {
     return m ? Number(m[1]) : 12;
 }
 
+// Auxiliares de cache local no navegador para aceleração máxima
+function getLocalCacheIndex(collectionName) {
+    try {
+        const raw = localStorage.getItem(`ww_idx_${collectionName}`);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : null;
+    } catch {
+        return null;
+    }
+}
+
+function setLocalCacheIndex(collectionName, list) {
+    try {
+        localStorage.setItem(`ww_idx_${collectionName}`, JSON.stringify(list));
+    } catch {
+        // quota excedida ou inacessível
+    }
+}
+
+function getLocalCacheItem(collectionName, id) {
+    try {
+        const raw = sessionStorage.getItem(`ww_doc_${collectionName}_${id}`);
+        if (!raw) return null;
+        return JSON.parse(raw);
+    } catch {
+        return null;
+    }
+}
+
+function setLocalCacheItem(collectionName, id, data) {
+    try {
+        sessionStorage.setItem(`ww_doc_${collectionName}_${id}`, JSON.stringify(data));
+    } catch {
+        // quota excedida ou inacessível
+    }
+}
+
 /**
  * 1. CARREGAMENTO RÁPIDO DO ÍNDICE DA COLEÇÃO NO FIRESTORE (Tier 1)
  */
 export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
+    // 1.1 Cache em memória ativa (0ms)
     if (!forceRefresh && indexMemoryCache.has(collectionName)) {
         return indexMemoryCache.get(collectionName);
     }
 
+    // 1.2 Cache local persistente para inicialização imediata
+    if (!forceRefresh) {
+        const localCached = getLocalCacheIndex(collectionName);
+        if (localCached && localCached.length > 0) {
+            indexMemoryCache.set(collectionName, localCached);
+            // Atualiza em background sem travar o usuário
+            fetchCatalogIndex(collectionName, true).catch(() => {});
+            return localCached;
+        }
+    }
+
     const summaryMap = new Map();
 
-    // 1.1 Consulta o documento de índice leve no Firestore (_indexes/{collectionName})
+    // 1.3 Consulta o documento de índice leve no Firestore (_indexes/{collectionName})
     const remoteIdx = await firestoreGetDoc("_indexes", collectionName);
     if (remoteIdx && Array.isArray(remoteIdx.items)) {
         const remoteDeleted = new Set(remoteIdx.deletedIds || []);
@@ -310,7 +361,7 @@ export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
             }
         }
     } else {
-        // 1.2 Fallback: se o documento _indexes não existir, lista os documentos da coleção diretamente do Firestore
+        // 1.4 Fallback: se o documento _indexes não existir, lista os documentos da coleção diretamente do Firestore
         const docs = await firestoreListCollection(collectionName);
         for (const doc of docs) {
             const summary = buildSummaryEntry(collectionName, doc);
@@ -324,6 +375,7 @@ export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
 
     const resultList = Array.from(summaryMap.values());
     indexMemoryCache.set(collectionName, resultList);
+    setLocalCacheIndex(collectionName, resultList);
     return resultList;
 }
 
@@ -334,16 +386,24 @@ export async function fetchItemById(collectionName, id) {
     if (!id) return null;
     const cacheKey = `${collectionName}:${id}`;
 
-    // 1. Cache em memória para acesso repetido instantâneo
+    // 1. Cache em memória para acesso repetido instantâneo (0ms)
     if (itemMemoryCache.has(cacheKey)) {
         return itemMemoryCache.get(cacheKey);
     }
 
-    // 2. Busca documento individual diretamente no Cloud Firestore
+    // 2. Cache em sessionStorage
+    const sessionCached = getLocalCacheItem(collectionName, id);
+    if (sessionCached) {
+        itemMemoryCache.set(cacheKey, sessionCached);
+        return sessionCached;
+    }
+
+    // 3. Busca documento individual diretamente no Cloud Firestore
     const remoteDoc = await firestoreGetDoc(collectionName, id);
     if (remoteDoc) {
         const data = { id, ...remoteDoc };
         itemMemoryCache.set(cacheKey, data);
+        setLocalCacheItem(collectionName, id, data);
         return data;
     }
 
@@ -378,6 +438,7 @@ export async function saveRecord(collectionName, dataObject, prefix = "registro"
 
     const cacheKey = `${collectionName}:${id}`;
     itemMemoryCache.set(cacheKey, fullRecord);
+    setLocalCacheItem(collectionName, id, fullRecord);
 
     const currentIndex = await fetchCatalogIndex(collectionName);
     const newSummary = buildSummaryEntry(collectionName, fullRecord);
@@ -388,6 +449,7 @@ export async function saveRecord(collectionName, dataObject, prefix = "registro"
         currentIndex.push(newSummary);
     }
     indexMemoryCache.set(collectionName, currentIndex);
+    setLocalCacheIndex(collectionName, currentIndex);
 
     const savedToCloud = await firestoreSetDoc(collectionName, id, fullRecord);
     if (savedToCloud) {
@@ -422,11 +484,13 @@ export async function saveBulkRecords(collectionName, dataArray, prefix = "item"
         };
         normalizedRecords.push(fullRecord);
         itemMemoryCache.set(`${collectionName}:${id}`, fullRecord);
+        setLocalCacheItem(collectionName, id, fullRecord);
         indexMap.set(id, buildSummaryEntry(collectionName, fullRecord));
     }
 
     const updatedIndexList = Array.from(indexMap.values());
     indexMemoryCache.set(collectionName, updatedIndexList);
+    setLocalCacheIndex(collectionName, updatedIndexList);
 
     let savedToCloud = true;
     const CHUNK_SIZE = 20;
@@ -455,10 +519,16 @@ export async function saveBulkRecords(collectionName, dataArray, prefix = "item"
 export async function deleteRecord(collectionName, id) {
     if (!id) return false;
     itemMemoryCache.delete(`${collectionName}:${id}`);
+    try {
+        sessionStorage.removeItem(`ww_doc_${collectionName}_${id}`);
+    } catch {
+        // Ignora
+    }
 
     const currentIndex = await fetchCatalogIndex(collectionName);
     const filteredIndex = currentIndex.filter(item => item.id !== id);
     indexMemoryCache.set(collectionName, filteredIndex);
+    setLocalCacheIndex(collectionName, filteredIndex);
 
     await firestoreDeleteDoc(collectionName, id);
     await syncCollectionIndex(collectionName, filteredIndex);
