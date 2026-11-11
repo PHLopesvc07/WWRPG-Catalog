@@ -23,10 +23,9 @@ A aplicacao mobile oferece:
 
 ---
 
-## Guia de Consulta da API
+## Guias de Uso e Documentacao
 
-Para integrar este catalogo a fichas de personagem (como o **WWRPG-Ficha**), bots ou ferramentas externas consultando diretamente o Cloud Firestore, acesse o documento dedicado:
-
+- **[Guia Simples de Navegacao (`NAVIGATION_GUIDE.md`)](./NAVIGATION_GUIDE.md)**: Manual pratico explicando como alternar entre abas, utilizar filtros, ordenar itens e navegar na versao web e no aplicativo movel Android.
 - **[Guia de Consulta da API (`API_GUIDE.md`)](./API_GUIDE.md)**: Documentacao completa dos endpoints REST do Cloud Firestore (`_indexes/{colecao}` e `{colecao}/{id}`), funcoes do modulo ES6 (`js/services/database.js`), exemplos em JavaScript/`curl` e esquemas JSON de todas as quatro colecoes.
 
 ---
