@@ -7,6 +7,7 @@
 
 import { DATABASE_CONFIG } from "./firebaseConfig.js";
 import { sanitizeFilename } from "../utils/helpers.js";
+import { FALLBACK_INDEXES } from "../data/fallbackData.js";
 
 export const COLLECTIONS = {
     CREATURES: "creatures",
@@ -348,35 +349,61 @@ export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
         }
     }
 
-    const summaryMap = new Map();
-
-    // 1.3 Consulta o documento de índice leve no Firestore (_indexes/{collectionName})
-    const remoteIdx = await firestoreGetDoc("_indexes", collectionName);
-    if (remoteIdx && Array.isArray(remoteIdx.items)) {
-        const remoteDeleted = new Set(remoteIdx.deletedIds || []);
-        for (const entry of remoteIdx.items) {
-            const summary = buildSummaryEntry(collectionName, entry);
-            if (!remoteDeleted.has(summary.id)) {
-                summaryMap.set(summary.id, summary);
-            }
-        }
-    } else {
-        // 1.4 Fallback: se o documento _indexes não existir, lista os documentos da coleção diretamente do Firestore
-        const docs = await firestoreListCollection(collectionName);
-        for (const doc of docs) {
-            const summary = buildSummaryEntry(collectionName, doc);
-            summaryMap.set(summary.id, summary);
-            itemMemoryCache.set(`${collectionName}:${summary.id}`, doc);
-        }
-        if (summaryMap.size > 0) {
-            await syncCollectionIndex(collectionName, Array.from(summaryMap.values()));
-        }
+    // 1.3 Se ainda não temos dados e não é refresh forçado, usa o fallback local embutido
+    if (!forceRefresh && FALLBACK_INDEXES && Array.isArray(FALLBACK_INDEXES[collectionName]) && FALLBACK_INDEXES[collectionName].length > 0) {
+        const defaultList = FALLBACK_INDEXES[collectionName].map(item => buildSummaryEntry(collectionName, item));
+        indexMemoryCache.set(collectionName, defaultList);
+        setLocalCacheIndex(collectionName, defaultList);
+        // Sincroniza em background
+        fetchCatalogIndex(collectionName, true).catch(() => {});
+        return defaultList;
     }
 
-    const resultList = Array.from(summaryMap.values());
-    indexMemoryCache.set(collectionName, resultList);
-    setLocalCacheIndex(collectionName, resultList);
-    return resultList;
+    const summaryMap = new Map();
+
+    try {
+        // 1.4 Consulta o documento de índice leve no Firestore (_indexes/{collectionName})
+        const remoteIdx = await firestoreGetDoc("_indexes", collectionName);
+        if (remoteIdx && Array.isArray(remoteIdx.items)) {
+            const remoteDeleted = new Set(remoteIdx.deletedIds || []);
+            for (const entry of remoteIdx.items) {
+                const summary = buildSummaryEntry(collectionName, entry);
+                if (!remoteDeleted.has(summary.id)) {
+                    summaryMap.set(summary.id, summary);
+                }
+            }
+        } else {
+            // 1.5 Fallback remoto: se o documento _indexes não existir, lista os documentos da coleção diretamente do Firestore
+            const docs = await firestoreListCollection(collectionName);
+            for (const doc of docs) {
+                const summary = buildSummaryEntry(collectionName, doc);
+                summaryMap.set(summary.id, summary);
+                itemMemoryCache.set(`${collectionName}:${summary.id}`, doc);
+            }
+            if (summaryMap.size > 0) {
+                await syncCollectionIndex(collectionName, Array.from(summaryMap.values())).catch(() => {});
+            }
+        }
+    } catch (err) {
+        console.warn(`[Catalog] Falha ao consultar índice remoto de ${collectionName}:`, err);
+    }
+
+    // Se o Firestore respondeu com itens, salva no cache e atualiza a memória
+    if (summaryMap.size > 0) {
+        const resultList = Array.from(summaryMap.values());
+        indexMemoryCache.set(collectionName, resultList);
+        setLocalCacheIndex(collectionName, resultList);
+        return resultList;
+    }
+
+    // Fallback de emergência: se a rede falhou e nada foi baixado, usa o fallback local
+    if (FALLBACK_INDEXES && Array.isArray(FALLBACK_INDEXES[collectionName])) {
+        const defaultList = FALLBACK_INDEXES[collectionName].map(item => buildSummaryEntry(collectionName, item));
+        indexMemoryCache.set(collectionName, defaultList);
+        return defaultList;
+    }
+
+    return [];
 }
 
 /**

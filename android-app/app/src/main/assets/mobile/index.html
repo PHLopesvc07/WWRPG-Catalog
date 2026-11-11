@@ -20,8 +20,8 @@
     <link rel="stylesheet" href="../css/components.css">
     <link rel="stylesheet" href="../css/mobile.css">
 
-    <!-- Script Principal Mobile -->
-    <script type="module" src="./mobile.js" defer></script>
+    <!-- Script Principal Mobile (Bundle Autônomo e Resiliente para Android WebView e Offline) -->
+    <script src="./mobile.bundle.js" defer></script>
 </head>
 <body class="mobile-body">
 
@@ -35,7 +35,7 @@
             </div>
             <div class="mobile-header-actions">
                 <button type="button" id="mobile-btn-theme" class="mobile-btn-pill">Modo</button>
-                
+                <a href="../index.html" class="mobile-btn-pill" title="Mudar para Versão Desktop">Desktop</a>
             </div>
         </header>
 

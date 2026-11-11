@@ -563,6 +563,16 @@ class MobileCatalogApp {
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    new MobileCatalogApp();
-});
+function startMobileApp() {
+    try {
+        new MobileCatalogApp();
+    } catch (err) {
+        console.error("[MobileApp] Erro ao iniciar:", err);
+    }
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", startMobileApp);
+} else {
+    startMobileApp();
+}

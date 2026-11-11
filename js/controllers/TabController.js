@@ -5,8 +5,6 @@
 
 export class TabController {
     constructor() {
-        this.tabButtons = document.querySelectorAll(".tab-btn[data-target]");
-        this.tabContents = document.querySelectorAll(".tab-content");
         this.init();
     }
 
@@ -27,23 +25,27 @@ export class TabController {
         const targetEl = document.getElementById(tabId);
         if (!targetEl) return;
 
-        // Oculta todas as abas de conteúdo
-        this.tabContents.forEach(tab => {
+        // Oculta todas as abas de conteúdo dinamicamente
+        const allTabs = document.querySelectorAll(".tab-content");
+        allTabs.forEach(tab => {
             tab.classList.remove("active");
             tab.classList.add("hidden");
         });
 
-        // Desativa todos os botões de navegação
-        document.querySelectorAll(".tab-btn[data-target]").forEach(btn => {
+        // Atualiza todos os botões de navegação
+        document.querySelectorAll("[data-target]").forEach(btn => {
             const isTarget = btn.getAttribute("data-target") === tabId;
             btn.classList.toggle("active", isTarget);
             btn.setAttribute("aria-pressed", isTarget ? "true" : "false");
         });
 
-        // Exibe a aba selecionada
+        // Exibe a aba selecionada com prioridade
         targetEl.classList.remove("hidden");
         targetEl.classList.add("active");
 
-        document.dispatchEvent(new CustomEvent("tab-opened", { detail: { tabId } }));
+        // Rola suavemente ao topo caso necessário
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        document.dispatchEvent(new CustomEvent("tab-opened", { detail: { tabId, targetId: tabId } }));
     }
 }

@@ -35,6 +35,10 @@ class MainActivity : ComponentActivity() {
                 databaseEnabled = true
                 allowFileAccess = true
                 allowContentAccess = true
+                @Suppress("DEPRECATION")
+                allowFileAccessFromFileURLs = true
+                @Suppress("DEPRECATION")
+                allowUniversalAccessFromFileURLs = true
                 useWideViewPort = true
                 loadWithOverviewMode = true
                 cacheMode = WebSettings.LOAD_DEFAULT
@@ -60,10 +64,22 @@ class MainActivity : ComponentActivity() {
                     }
                     return false
                 }
+
+                override fun onReceivedError(
+                    view: WebView?,
+                    errorCode: Int,
+                    description: String?,
+                    failingUrl: String?
+                ) {
+                    android.util.Log.e("WWCatalog", "WebView error: $errorCode - $description ($failingUrl)")
+                }
             }
 
             webChromeClient = object : WebChromeClient() {
                 override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
+                    if (consoleMessage != null) {
+                        android.util.Log.d("WWCatalog", "[JS ${consoleMessage.messageLevel()}] ${consoleMessage.message()} (linha ${consoleMessage.lineNumber()})")
+                    }
                     return super.onConsoleMessage(consoleMessage)
                 }
             }

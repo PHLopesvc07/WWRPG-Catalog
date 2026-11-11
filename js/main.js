@@ -11,40 +11,50 @@ import { PlantController } from "./controllers/PlantController.js";
 import { PotionController } from "./controllers/PotionController.js";
 import { initDatabaseConnection } from "./services/database.js";
 
-document.addEventListener("DOMContentLoaded", async () => {
-    setupThemeControls();
+async function startApp() {
+    try {
+        setupThemeControls();
 
-    new TabController();
-    const creatureCtrl = new CreatureController();
-    const spellCtrl = new SpellController();
-    const plantCtrl = new PlantController();
-    const potionCtrl = new PotionController();
+        new TabController();
+        const creatureCtrl = new CreatureController();
+        const spellCtrl = new SpellController();
+        const plantCtrl = new PlantController();
+        const potionCtrl = new PotionController();
 
-    const tabControllerMap = {
-        "tab-arquivo-criaturas": creatureCtrl,
-        "tab-arquivo-feiticos": spellCtrl,
-        "tab-arquivo-plantas": plantCtrl,
-        "tab-arquivo-pocoes": potionCtrl
-    };
+        const tabControllerMap = {
+            "tab-arquivo-criaturas": creatureCtrl,
+            "tab-arquivo-feiticos": spellCtrl,
+            "tab-arquivo-plantas": plantCtrl,
+            "tab-arquivo-pocoes": potionCtrl
+        };
 
-    document.addEventListener("tab-opened", e => {
-        const targetId = e.detail?.tabId;
-        const ctrl = tabControllerMap[targetId];
-        if (ctrl && !ctrl.loaded) {
-            ctrl.ensureLoaded();
-        }
-    });
+        document.addEventListener("tab-opened", e => {
+            const targetId = e.detail?.tabId || e.detail?.targetId;
+            const ctrl = tabControllerMap[targetId];
+            if (ctrl && !ctrl.loaded) {
+                ctrl.ensureLoaded();
+            }
+        });
 
-    await initDatabaseConnection();
+        await initDatabaseConnection();
 
-    // Carregamento paralelo em lote de todos os 4 catálogos imediatamente
-    await Promise.allSettled([
-        creatureCtrl.ensureLoaded(),
-        spellCtrl.ensureLoaded(),
-        plantCtrl.ensureLoaded(),
-        potionCtrl.ensureLoaded()
-    ]);
-});
+        // Carregamento paralelo em lote de todos os 4 catálogos imediatamente
+        await Promise.allSettled([
+            creatureCtrl.ensureLoaded(),
+            spellCtrl.ensureLoaded(),
+            plantCtrl.ensureLoaded(),
+            potionCtrl.ensureLoaded()
+        ]);
+    } catch (err) {
+        console.error("[W&W Catalog] Erro ao inicializar catálogos:", err);
+    }
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", startApp);
+} else {
+    startApp();
+}
 
 function setupThemeControls() {
     const btnTheme = document.getElementById("btn-theme-toggle");

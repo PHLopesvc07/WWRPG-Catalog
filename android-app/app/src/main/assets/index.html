@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquivo Geral do Ministério da Magia — W&W RPG</title>
+    
+    <!-- Fontes Oficiais WWRPG-Ficha & Design System -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@700&family=Space+Grotesk:wght@400;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+    
+    <!-- CSS Modularizado -->
+    <link rel="stylesheet" href="./css/variables.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/components.css">
+
+    <!-- Módulo Principal ES6 -->
+    <!-- Script Principal do Catálogo Ministerial (Bundle Autônomo e Resiliente para Desktop, Local e Offline) -->
+    <script src="./js/bundle.js" defer></script>
+</head>
+<body>
+    <script>
+        const savedTheme = localStorage.getItem('wwrpg-theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+        } else if (savedTheme === 'terminal') {
+            document.body.classList.add('terminal-mode');
+        }
+    </script>
+
+    <div class="parchment-container">
+        
+        <!-- CABEÇALHO OFICIAL DO MINISTÉRIO (PADRÃO WWRPG-FICHA) -->
+        <header class="ministry-header">
+            <div class="theme-controls">
+                <button type="button" id="btn-theme-toggle" class="btn-gold btn-theme-toggle" aria-label="Alternar Modo de Leitura" title="Alternar Modo Claro / Escuro (WWRPG-Ficha)">
+                    Modo Escuro
+                </button>
+                <button type="button" id="btn-terminal-toggle" class="btn-teal btn-theme-toggle" aria-label="Alternar Modo Terminal" title="Alternar Modo Terminal Tático (design.md)">
+                    Modo Terminal
+                </button>
+                <a href="./mobile/index.html" class="btn-secondary btn-theme-toggle" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;" title="Abrir Versão Móvel Otimizada">
+                    Versão Móvel
+                </a>
+            </div>
+
+            <div class="header-titles">
+                <h1>Ministério da Magia</h1>
+                <h2>Arquivo Geral de Catalogação • D.R.C.C.M. • C.E.F. • Herbologia • Alquimia</h2>
+                <p>Formulário Oficial de Consulta e Registro Mágico — Sistema W&W RPG</p>
+            </div>
+        </header>
+
+        <!-- NAVEGAÇÃO EM ABAS DE PASTA BUROCRÁTICA -->
+        <nav class="tabs-nav" aria-label="Navegação dos Arquivos do Ministério">
+            <button class="tab-btn active" data-target="tab-arquivo-criaturas">
+                I. Animais Mágicos <span id="count-badge-creatures" class="nav-count-badge">92</span>
+            </button>
+            <button class="tab-btn" data-target="tab-arquivo-feiticos">
+                II. Feitiços <span id="count-badge-spells" class="nav-count-badge">210</span>
+            </button>
+            <button class="tab-btn" data-target="tab-arquivo-plantas">
+                III. Plantas <span id="count-badge-plants" class="nav-count-badge">44</span>
+            </button>
+            <button class="tab-btn" data-target="tab-arquivo-pocoes">
+                IV. Poções <span id="count-badge-potions" class="nav-count-badge">166</span>
+            </button>
+
+            <div class="sub-actions-bar">
+                <button class="tab-btn tab-btn-reg" data-target="tab-registro-criaturas">+ Registrar Animal</button>
+                <button class="tab-btn tab-btn-reg" data-target="tab-registro-feiticos">+ Registrar Feitiço</button>
+                <button class="tab-btn tab-btn-reg" data-target="tab-registro-plantas">+ Registrar Planta</button>
+                <button class="tab-btn tab-btn-reg" data-target="tab-registro-pocoes">+ Registrar Poção</button>
+            </div>
+        </nav>
+
+        <div class="main-content-shell">
+
+        <!-- =====================================================================
+             ESPAÇO 1A: ARQUIVO DE ANIMAIS / CRIATURAS MÁGICAS (D.R.C.C.M.)
+             ===================================================================== -->
+        <main id="tab-arquivo-criaturas" class="tab-content active">
+            <div class="archive-layout">
+                
+                <aside class="archive-sidebar bureaucracy-box">
+                    <div class="sidebar-header-row">
+                        <h3 class="section-title" style="margin-bottom: 4px;">Filtros (D.R.C.C.M.)</h3>
+                        <small id="creature-filter-count" class="filter-count-label">Carregando...</small>
+                    </div>
+                    
+                    <input type="text" id="search-creature" class="ink-input mb-10" placeholder="Buscar espécie mágica...">
+                    
+                    <label class="filter-label">Ordenar por:
+                        <select id="sort-creature" class="ink-select mb-10">
+                            <option value="alfabetica">Ordem Alfabética (A-Z)</option>
+                            <option value="perigo-asc">Periculosidade (X a XXXXX)</option>
+                            <option value="perigo-desc">Periculosidade (XXXXX a X)</option>
+                        </select>
+                    </label>
+
+                    <div class="filter-two-cols">
+                        <label class="filter-label">Classificação M.M.:
+                            <select id="filter-class" class="ink-select mb-10">
+                                <option value="">Todas</option>
+                                <option value="X">X</option>
+                                <option value="XX">XX</option>
+                                <option value="XXX">XXX</option>
+                                <option value="XXXX">XXXX</option>
+                                <option value="XXXXX">XXXXX</option>
+                                <option value="XX-XXXX">XX-XXXX</option>
+                            </select>
+                        </label>
+
+                        <label class="filter-label">Licença:
+                            <select id="filter-licenca" class="ink-select mb-10">
+                                <option value="">Todas</option>
+                                <option value="Comum">Comum</option>
+                                <option value="Magizoologista">Magizoologista</option>
+                                <option value="Não permitido">Não permitido</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="filter-two-cols">
+                        <label class="filter-label">Locomoção:
+                            <select id="filter-locomocao" class="ink-select mb-10">
+                                <option value="">Todas</option>
+                                <option value="Terrestres">Terrestres</option>
+                                <option value="Aéreos">Aéreos</option>
+                                <option value="Aquáticos">Aquáticos</option>
+                                <option value="Aquaéros">Aquaéros</option>
+                            </select>
+                        </label>
+
+                        <label class="filter-label">Porte:
+                            <select id="filter-porte" class="ink-select mb-10">
+                                <option value="">Todos</option>
+                                <option value="Pequeno">Pequeno</option>
+                                <option value="Médio">Médio</option>
+                                <option value="Grande">Grande</option>
+                                <option value="Enorme">Enorme</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="filter-two-cols">
+                        <label class="filter-label">Interação:
+                            <select id="filter-interacao" class="ink-select mb-10">
+                                <option value="">Todas</option>
+                                <option value="Pacífico">Pacífico</option>
+                                <option value="Agressivo">Agressivo</option>
+                            </select>
+                        </label>
+
+                        <label class="filter-label">Tipo:
+                            <select id="filter-tipo" class="ink-select mb-10">
+                                <option value="">Todos</option>
+                                <option value="Simples">Simples</option>
+                                <option value="Neutro">Neutro</option>
+                                <option value="Consciente">Consciente</option>
+                                <option value="Bestial">Bestial</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="sidebar-buttons-stack">
+                        <button type="button" id="btn-reset-filters" class="btn-secondary">Limpar Filtros</button>
+                        <button type="button" id="btn-export-selected-creatures" class="btn-submit" style="font-size: 0.9rem; padding: 8px;">
+                            Exportar Lista (.json)
+                        </button>
+                    </div>
+
+                    <hr class="ministry-divider">
+                    
+                    <h4 class="list-title">Espécies Catalogadas (Clique para Carregar)</h4>
+                    <ul id="creature-list" class="record-list">
+                        <li class="empty-msg">Carregando índice...</li>
+                    </ul>
+                </aside>
+
+                <section class="archive-viewer bureaucracy-box">
+                    <div id="creature-viewer-content" class="viewer-content empty-viewer">
+                        <p>Selecione uma criatura mágica na lista ao lado para carregar sua ficha individual completa, atributos, habilidades de combate e prontuário veterinário.</p>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <!-- =====================================================================
+             ESPAÇO 1B: REGISTRO & IMPORTAÇÃO DE ANIMAIS / CRIATURAS MÁGICAS
+             ===================================================================== -->
+        <main id="tab-registro-criaturas" class="tab-content hidden">
+            <div class="mb-10" style="display:flex; justify-content:space-between; align-items:center;">
+                <button type="button" class="btn-secondary" data-target="tab-arquivo-criaturas">Voltar ao Arquivo de Animais</button>
+            </div>
+            <form id="form-creature" class="bureaucracy-box">
+                <h3 class="section-title">1. Ficha de Registro Ministerial (D.R.C.C.M.)</h3>
+                
+                <div class="form-grid-layout">
+                    <div class="photo-upload-zone">
+                        <img id="preview-foto" class="photo-preview hidden" src="" alt="Retrato da Criatura">
+                        <label for="reg-foto" class="upload-label" id="label-foto">Anexar Retrato ou Ilustração</label>
+                        <input type="file" id="reg-foto" class="hidden" accept="image/*">
+                    </div>
+
+                    <div class="main-fields-zone">
+                        <div class="form-row">
+                            <label class="flex-2">Espécie Mágica:
+                                <input type="text" id="reg-nome" class="ink-input" required placeholder="Ex: Acromantula (Acromântula)">
+                            </label>
+                            <label class="flex-1">Classificação (M.M.):
+                                <select id="reg-classificacao" class="ink-select" required>
+                                    <option value="X">X (Tedioso)</option>
+                                    <option value="XX">XX (Inofensivo)</option>
+                                    <option value="XXX" selected>XXX (Bruxo Competente)</option>
+                                    <option value="XXXX">XXXX (Perigoso / Exige Especialista)</option>
+                                    <option value="XXXXX">XXXXX (Mata Bruxos / Impossível Domesticar)</option>
+                                    <option value="XX-XXXX">XX-XXXX (Variável por Raça)</option>
+                                </select>
+                            </label>
+                            <label class="flex-1">Licença Necessária:
+                                <select id="reg-licenca" class="ink-select" required>
+                                    <option value="Comum">Comum</option>
+                                    <option value="Magizoologista">Magizoologista</option>
+                                    <option value="Não permitido">Não permitido</option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <div class="form-row">
+                            <label class="flex-1">Porte (Categoria):
+                                <select id="reg-porte" class="ink-select">
+                                    <option value="Pequeno">Pequeno</option>
+                                    <option value="Médio" selected>Médio</option>
+                                    <option value="Grande">Grande</option>
+                                    <option value="Enorme">Enorme</option>
+                                </select>
+                            </label>
+                            <label class="flex-1">Tamanho (Adulto):
+                                <input type="text" id="reg-tamanho" class="ink-input" placeholder="Ex: 4.5 metros">
+                            </label>
+                            <label class="flex-1">Peso (Adulto):
+                                <input type="text" id="reg-peso" class="ink-input" placeholder="Ex: 150 kg">
+                            </label>
+                            <label class="flex-1">Origem:
+                                <select id="reg-origem" class="ink-select">
+                                    <option value="Natural">Natural</option>
+                                    <option value="Artificial">Artificial</option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <div class="form-row">
+                            <label class="flex-1">Locomoção:
+                                <select id="reg-locomocao" class="ink-select">
+                                    <option value="Terrestres">Terrestres</option>
+                                    <option value="Aéreos">Aéreos</option>
+                                    <option value="Aquáticos">Aquáticos</option>
+                                    <option value="Aquaéros">Aquaéros</option>
+                                </select>
+                            </label>
+                            <label class="flex-1">Velocidade de Ação:
+                                <input type="text" id="reg-velocidade" class="ink-input" placeholder="Ex: 4.0m por ação">
+                            </label>
+                            <label class="flex-1">Interação:
+                                <select id="reg-interacao" class="ink-select">
+                                    <option value="Pacífico">Pacífico</option>
+                                    <option value="Agressivo">Agressivo</option>
+                                </select>
+                            </label>
+                            <label class="flex-1">Tipo de Criatura:
+                                <select id="reg-tipo" class="ink-select" required>
+                                    <option value="Simples">Simples</option>
+                                    <option value="Neutro" selected>Neutro</option>
+                                    <option value="Consciente">Consciente</option>
+                                    <option value="Bestial">Bestial</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="section-title mt-20">2. Atributos Físicos e Animais (-5 a +10)</h3>
+                <div class="stats-grid">
+                    <label class="attr-box">Corpo: <input type="number" id="attr-corpo" class="ink-input" value="0" min="-5" max="15"></label>
+                    <label class="attr-box">Destreza: <input type="number" id="attr-destreza" class="ink-input" value="0" min="-5" max="15"></label>
+                    <label class="attr-box">Vitalidade: <input type="number" id="attr-vitalidade" class="ink-input" value="0" min="-5" max="15"></label>
+                    <label class="attr-box dynamic-reg-attr" data-types="Bestial,Neutro,Consciente">Instinto: <input type="number" id="attr-instinto" class="ink-input" value="0" min="-5" max="15"></label>
+                    <label class="attr-box dynamic-reg-attr" data-types="Neutro,Consciente">Carisma: <input type="number" id="attr-carisma" class="ink-input" value="0" min="-5" max="15"></label>
+                    <label class="attr-box dynamic-reg-attr" data-types="Consciente">Inteligência: <input type="number" id="attr-inteligencia" class="ink-input" value="0" min="-5" max="15"></label>
+                    <label class="attr-box dynamic-reg-attr" data-types="Consciente">Sabedoria: <input type="number" id="attr-sabedoria" class="ink-input" value="0" min="-5" max="15"></label>
+                </div>
+
+                <h3 class="section-title mt-20">3. Habilidades Especiais (Combate e Instinto)</h3>
+                <div class="abilities-form-grid">
+                    <div class="bureaucracy-box inner-box">
+                        <strong>Habilidade de Dano</strong>
+                        <div class="form-row mt-10">
+                            <input type="text" id="hab-dano-nome" class="ink-input flex-2" placeholder="Nome (ex: Picada Venenosa)">
+                            <input type="text" id="hab-dano-rolagem" class="ink-input flex-1" placeholder="Fórmula (ex: 1d10 + Corpo)">
+                        </div>
+                        <input type="text" id="hab-dano-desc" class="ink-input mt-10" placeholder="Descrição mecânica do ataque...">
+                    </div>
+
+                    <div class="bureaucracy-box inner-box">
+                        <strong>Habilidade de Reação</strong>
+                        <div class="form-row mt-10">
+                            <input type="text" id="hab-reacao-nome" class="ink-input flex-2" placeholder="Nome (ex: Desvio de Oito Olhos)">
+                            <input type="text" id="hab-reacao-rolagem" class="ink-input flex-1" placeholder="Fórmula (ex: 1d30 + Instinto)">
+                        </div>
+                        <input type="text" id="hab-reacao-desc" class="ink-input mt-10" placeholder="Descrição da reação defensiva...">
+                    </div>
+
+                    <div class="bureaucracy-box inner-box">
+                        <strong>Habilidade de Ambiente</strong>
+                        <div class="form-row mt-10">
+                            <input type="text" id="hab-ambiente-nome" class="ink-input flex-2" placeholder="Nome (ex: Teia Abobadada)">
+                            <input type="text" id="hab-ambiente-rolagem" class="ink-input flex-1" placeholder="Fórmula (ex: CD 20 + Instinto)">
+                        </div>
+                        <input type="text" id="hab-ambiente-desc" class="ink-input mt-10" placeholder="Descrição do efeito ambiental...">
+                    </div>
+
+                    <div class="bureaucracy-box inner-box">
+                        <strong>Habilidade Extra / Passiva</strong>
+                        <div class="form-row mt-10">
+                            <input type="text" id="hab-extra-nome" class="ink-input flex-2" placeholder="Nome (ex: Fala Humana)">
+                            <input type="text" id="hab-extra-rolagem" class="ink-input flex-1" placeholder="Fórmula (ex: Passivo)">
+                        </div>
+                        <input type="text" id="hab-extra-desc" class="ink-input mt-10" placeholder="Descrição da peculiaridade mágica...">
+                    </div>
+                </div>
+
+                <h3 class="section-title mt-20">4. Prontuário Médico-Veterinário (Limites de Injúria)</h3>
+                <div class="bureaucracy-box inner-box">
+                    <div class="form-row">
+                        <div class="injury-row flex-1">
+                            <label>Leve (Atual/Máx):</label>
+                            <input type="number" id="reg-inj-leve-curr" class="ink-input short-input" value="0" min="0"> / 
+                            <input type="number" id="reg-inj-leve-max" class="ink-input short-input" value="3" min="1">
+                        </div>
+                        <div class="injury-row flex-1">
+                            <label>Média (Atual/Máx):</label>
+                            <input type="number" id="reg-inj-media-curr" class="ink-input short-input" value="0" min="0"> / 
+                            <input type="number" id="reg-inj-media-max" class="ink-input short-input" value="2" min="1">
+                        </div>
+                        <div class="injury-row flex-1">
+                            <label>Pesada (Atual/Máx):</label>
+                            <input type="number" id="reg-inj-pesada-curr" class="ink-input short-input" value="0" min="0"> / 
+                            <input type="number" id="reg-inj-pesada-max" class="ink-input short-input" value="1" min="1">
+                        </div>
+                    </div>
+                    <div id="reg-custom-injuries-container" class="mt-10"></div>
+                    <button type="button" id="btn-add-reg-injury" class="btn-secondary mt-10">+ Adicionar Condição / Ferimento Específico</button>
+                </div>
+
+                <h3 class="section-title mt-20">5. Descrição Física, Habitat e Temperamento</h3>
+                <textarea id="reg-descricao" class="ink-textarea" rows="5" placeholder="Descreva os hábitos, habitat, alimentação e particularidades mágicas da espécie..."></textarea>
+
+                <button type="submit" class="btn-submit mt-20">Catalogar Criatura no Arquivo Ministerial</button>
+            </form>
+
+            <div class="bureaucracy-box mt-20">
+                <h3 class="section-title">Importação em Massa de Criaturas (JSON)</h3>
+                <p>Cole uma lista JSON de criaturas ou selecione um arquivo <code>.json</code> para importar em lote no catálogo.</p>
+                <textarea id="bulk-creature-input" class="ink-textarea mt-10" rows="5" placeholder='[{"nome": "Pelúcio", "classificacao": "XXX", "licenca": "Comum", "tipo": "Neutro", ...}]'></textarea>
+                <div class="form-row mt-10" style="align-items: center;">
+                    <label style="flex: 1;">Ou carregue um arquivo JSON:
+                        <input type="file" id="bulk-creature-file" accept=".json" class="ink-input">
+                    </label>
+                    <button type="button" id="btn-bulk-import-creatures" class="btn-submit" style="width: auto; padding: 12px 30px;">Processar Lote de Criaturas</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- =====================================================================
+             ESPAÇO 2A: ARQUIVO DE FEITIÇOS (C.E.F.)
+             ===================================================================== -->
+        <main id="tab-arquivo-feiticos" class="tab-content hidden">
+            <div class="archive-layout">
+                
+                <aside class="archive-sidebar bureaucracy-box">
+                    <div class="sidebar-header-row">
+                        <h3 class="section-title" style="margin-bottom: 4px;">Filtros (C.E.F.)</h3>
+                        <small id="spell-filter-count" class="filter-count-label">Carregando...</small>
+                    </div>
+                    
+                    <input type="text" id="search-spell" class="ink-input mb-10" placeholder="Buscar nome, pronúncia ou condição...">
+                    
+                    <label class="filter-label">Ordenar por:
+                        <select id="sort-spell" class="ink-select mb-10">
+                            <option value="alfabetica">Ordem Alfabética (A-Z)</option>
+                            <option value="nivel-asc">Nível (1 a 7)</option>
+                            <option value="nivel-desc">Nível (7 a 1)</option>
+                        </select>
+                    </label>
+
+                    <div class="filter-two-cols">
+                        <label class="filter-label">Nível:
+                            <select id="filter-spell-lvl" class="ink-select mb-10">
+                                <option value="">Todos</option>
+                                <option value="1">Nível 1</option>
+                                <option value="2">Nível 2</option>
+                                <option value="3">Nível 3</option>
+                                <option value="4">Nível 4</option>
+                                <option value="5">Nível 5</option>
+                                <option value="6">Nível 6</option>
+                                <option value="7">Nível 7</option>
+                            </select>
+                        </label>
+
+                        <label class="filter-label">Categoria:
+                            <select id="filter-spell-cat" class="ink-select mb-10">
+                                <option value="">Todas</option>
+                                <option value="Charme">Charme / Feitiço</option>
+                                <option value="Transfiguração">Transfiguração</option>
+                                <option value="Azaração">Azaração</option>
+                                <option value="Maldição Menor">Maldição Menor</option>
+                                <option value="Maldição">Maldição</option>
+                                <option value="Contrafeitiço">Contrafeitiço</option>
+                                <option value="Cura">Cura</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="filter-two-cols">
+                        <label class="filter-label">Natureza / Tipo:
+                            <select id="filter-spell-tipo" class="ink-select mb-10">
+                                <option value="">Todos</option>
+                                <option value="Ataque">Ataque / Dano</option>
+                                <option value="Proteção">Defesa / Proteção</option>
+                                <option value="Cura">Cura</option>
+                                <option value="Utilitário">Utilitário</option>
+                                <option value="Contrafeitiço">Contrafeitiço</option>
+                            </select>
+                        </label>
+
+                        <label class="filter-label">Condição (C):
+                            <select id="filter-spell-cond" class="ink-select mb-10">
+                                <option value="">Todos</option>
+                                <option value="com_condicao">Com Condição (C)</option>
+                                <option value="sem_condicao">Sem Condição</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="sidebar-buttons-stack">
+                        <button type="button" id="btn-reset-spell-filters" class="btn-secondary">Limpar Filtros</button>
+                        <button type="button" id="btn-export-spell-list" class="btn-submit" style="font-size: 0.9rem; padding: 8px;">
+                            Exportar Lista (.json)
+                        </button>
+                    </div>
+
+                    <hr class="ministry-divider">
+                    
+                    <h4 class="list-title">Encantamentos (Clique para Carregar)</h4>
+                    <ul id="spell-list" class="record-list">
+                        <li class="empty-msg">Carregando índice...</li>
+                    </ul>
+                </aside>
+
+                <section class="archive-viewer bureaucracy-box">
+                    <div id="spell-viewer-content" class="viewer-content empty-viewer">
+                        <p>Selecione um feitiço na lista ao lado para carregar individualmente sua pronúncia, categoria, perícia de conjuração, condição aplicada e efeito completo.</p>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <!-- =====================================================================
+             ESPAÇO 2B: REGISTRO & IMPORTAÇÃO DE FEITIÇOS
+             ===================================================================== -->
+        <main id="tab-registro-feiticos" class="tab-content hidden">
+            <div class="mb-10" style="display:flex; justify-content:space-between; align-items:center;">
+                <button type="button" class="btn-secondary" data-target="tab-arquivo-feiticos">Voltar ao Arquivo de Feitiços</button>
+            </div>
+            <form id="form-spell" class="bureaucracy-box">
+                <h3 class="section-title">1. Registro Individual de Feitiço (C.E.F.)</h3>
+                
+                <div class="form-row">
+                    <label class="flex-2">Nome do Feitiço (Encantamento):
+                        <input type="text" id="spell-name" class="ink-input" required placeholder="Ex: Expelliarmus">
+                    </label>
+                    <label class="flex-2">Pronúncia Fonética:
+                        <input type="text" id="spell-pronunciation" class="ink-input" placeholder="Ex: eks-pe-li-AR-mus">
+                    </label>
+                </div>
+
+                <div class="form-row">
+                    <label class="flex-1">Categoria Mágica:
+                        <select id="spell-cat" class="ink-select" required>
+                            <option value="Charme" selected>Charme (Feitiço)</option>
+                            <option value="Transfiguração">Transfiguração</option>
+                            <option value="Azaração">Azaração</option>
+                            <option value="Maldição Menor">Maldição Menor</option>
+                            <option value="Maldição">Maldição</option>
+                            <option value="Contrafeitiço">Contrafeitiço</option>
+                            <option value="Cura">Cura</option>
+                        </select>
+                    </label>
+                    <label class="flex-1">Nível de Dificuldade (1 a 7):
+                        <select id="spell-lvl" class="ink-select" required>
+                            <option value="1">Nível 1</option>
+                            <option value="2">Nível 2</option>
+                            <option value="3">Nível 3</option>
+                            <option value="4">Nível 4</option>
+                            <option value="5">Nível 5</option>
+                            <option value="6">Nível 6</option>
+                            <option value="7">Nível 7</option>
+                        </select>
+                    </label>
+                    <label class="flex-1">Natureza / Tipo de Efeito:
+                        <select id="spell-tipo" class="ink-select" required>
+                            <option value="Ataque">Ataque / Dano</option>
+                            <option value="Proteção">Defesa / Proteção</option>
+                            <option value="Cura">Cura</option>
+                            <option value="Utilitário" selected>Utilitário</option>
+                            <option value="Contrafeitiço">Contrafeitiço</option>
+                        </select>
+                    </label>
+                    <label class="flex-1">Condição Aplicada:
+                        <input type="text" id="spell-condicao" class="ink-input" value="Nenhuma" placeholder="Ex: (C) Desarmado ou Nenhuma">
+                    </label>
+                </div>
+
+                <h3 class="section-title mt-20">2. Descrição, Mecânica e Regras do Feitiço</h3>
+                <textarea id="spell-desc" class="ink-textarea" rows="5" required placeholder="Descreva os efeitos visuais, mecânica de jogo, dano/cura e testes exigidos..."></textarea>
+
+                <button type="submit" class="btn-submit mt-20">Catalogar Feitiço no Grimório Ministerial</button>
+            </form>
+
+            <div class="bureaucracy-box mt-20">
+                <h3 class="section-title">Importação em Massa de Feitiços (JSON)</h3>
+                <p>Cole uma lista JSON de feitiços ou selecione um arquivo <code>.json</code> para importar em lote no catálogo.</p>
+                <textarea id="bulk-spell-input" class="ink-textarea mt-10" rows="5" placeholder='[{"name": "Lumos", "pronuncia": "LU-mos", "cat": "Charme", "lvl": "1", "tipo": "Utilitário", "condicao": "Nenhuma", "desc": "Ilumina a ponta da varinha."}]'></textarea>
+                <div class="form-row mt-10" style="align-items: center;">
+                    <label style="flex: 1;">Ou carregue um arquivo JSON:
+                        <input type="file" id="bulk-spell-file" accept=".json" class="ink-input">
+                    </label>
+                    <button type="button" id="btn-bulk-import-spells" class="btn-submit" style="width: auto; padding: 12px 30px;">Processar Lote de Feitiços</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- =====================================================================
+             ESPAÇO 3A: ARQUIVO DE PLANTAS / HERBOLOGIA MÁGICA
+             ===================================================================== -->
+        <main id="tab-arquivo-plantas" class="tab-content hidden">
+            <div class="archive-layout">
+                
+                <aside class="archive-sidebar bureaucracy-box">
+                    <div class="sidebar-header-row">
+                        <h3 class="section-title" style="margin-bottom: 4px;">Filtros (Herbologia)</h3>
+                        <small id="plant-filter-count" class="filter-count-label">Carregando...</small>
+                    </div>
+                    
+                    <input type="text" id="search-plant" class="ink-input mb-10" placeholder="Buscar planta ou nome científico...">
+                    
+                    <label class="filter-label">Ordenar por:
+                        <select id="sort-plant" class="ink-select mb-10">
+                            <option value="alfabetica">Ordem Alfabética (A-Z)</option>
+                            <option value="nivel-asc">Nível de Herbologia (1 a 7)</option>
+                            <option value="nivel-desc">Nível de Herbologia (7 a 1)</option>
+                            <option value="cd-asc">Dificuldade de Manejo (CD Crescente)</option>
+                        </select>
+                    </label>
+
+                    <div class="filter-two-cols">
+                        <label class="filter-label">Disponibilidade:
+                            <select id="filter-plant-cat" class="ink-select mb-10">
+                                <option value="">Todas</option>
+                                <option value="Popular">Popular (Comum)</option>
+                                <option value="Difícil de Adquirir">Difícil de Adquirir (Rara/Restrita)</option>
+                            </select>
+                        </label>
+
+                        <label class="filter-label">Nível (1 a 7):
+                            <select id="filter-plant-lvl" class="ink-select mb-10">
+                                <option value="">Todos</option>
+                                <option value="1">Nível 1</option>
+                                <option value="2">Nível 2</option>
+                                <option value="3">Nível 3</option>
+                                <option value="4">Nível 4</option>
+                                <option value="5">Nível 5</option>
+                                <option value="6">Nível 6</option>
+                                <option value="7">Nível 7</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="sidebar-buttons-stack">
+                        <button type="button" id="btn-reset-plant-filters" class="btn-secondary">Limpar Filtros</button>
+                        <button type="button" id="btn-export-plant-list" class="btn-submit" style="font-size: 0.9rem; padding: 8px;">
+                            Exportar Lista (.json)
+                        </button>
+                    </div>
+
+                    <hr class="ministry-divider">
+                    
+                    <h4 class="list-title">Espécies Botânicas (Clique para Carregar)</h4>
+                    <ul id="plant-list" class="record-list">
+                        <li class="empty-msg">Carregando índice...</li>
+                    </ul>
+                </aside>
+
+                <section class="archive-viewer bureaucracy-box">
+                    <div id="plant-viewer-content" class="viewer-content empty-viewer">
+                        <p>Selecione uma planta mágica na lista ao lado para carregar individualmente sua ficha botânica, CD de manejo, propriedades curativas/tóxicas e aplicações em poções.</p>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <!-- =====================================================================
+             ESPAÇO 3B: REGISTRO & IMPORTAÇÃO DE PLANTAS MÁGICAS
+             ===================================================================== -->
+        <main id="tab-registro-plantas" class="tab-content hidden">
+            <div class="mb-10" style="display:flex; justify-content:space-between; align-items:center;">
+                <button type="button" class="btn-secondary" data-target="tab-arquivo-plantas">Voltar ao Arquivo de Plantas</button>
+            </div>
+            <form id="form-plant" class="bureaucracy-box">
+                <h3 class="section-title">1. Registro Botânico no Herbário Ministerial</h3>
+
+                <div class="form-grid-layout">
+                    <div class="photo-upload-zone">
+                        <img id="preview-plant-foto" class="photo-preview hidden" src="" alt="Ilustração da Planta">
+                        <label for="plant-foto" class="upload-label" id="label-plant-foto">Anexar Ilustração Botânica</label>
+                        <input type="file" id="plant-foto" class="hidden" accept="image/*">
+                    </div>
+
+                    <div class="main-fields-zone">
+                        <div class="form-row">
+                            <label class="flex-2">Nome da Planta (Comum / Inglês / Científico):
+                                <input type="text" id="plant-nome" class="ink-input" required placeholder="Ex: Ditamno (Dittany / Origanum dictamnus)">
+                            </label>
+                            <label class="flex-1">Categoria de Aquisição:
+                                <select id="plant-categoria" class="ink-select" required>
+                                    <option value="Popular" selected>Popular (Comércio Livre)</option>
+                                    <option value="Difícil de Adquirir">Difícil de Adquirir (Rara / Controlada)</option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <div class="form-row">
+                            <label class="flex-1">Nível de Herbologia (1 a 7):
+                                <select id="plant-nivel" class="ink-select" required>
+                                    <option value="1">Nível 1 (Aprendiz)</option>
+                                    <option value="2">Nível 2 (Iniciante)</option>
+                                    <option value="3">Nível 3 (Intermediário)</option>
+                                    <option value="4">Nível 4 (Avançado)</option>
+                                    <option value="5">Nível 5 (Perito)</option>
+                                    <option value="6">Nível 6 (Mestre)</option>
+                                    <option value="7">Nível 7 (Grão-Mestre)</option>
+                                </select>
+                            </label>
+                            <label class="flex-1">CD de Manejo e Colheita:
+                                <input type="number" id="plant-cd" class="ink-input" value="12" min="5" max="35">
+                            </label>
+                            <label class="flex-2">Classificação Ministerial:
+                                <input type="text" id="plant-classificacao-min" class="ink-input" placeholder="Ex: Artigo Comerciável Livre (Semente Nível 1)">
+                            </label>
+                        </div>
+
+                        <div class="form-row">
+                            <label class="flex-1">Requisitos de Manejo e EPI:
+                                <input type="text" id="plant-manejo" class="ink-input" placeholder="Ex: Exige Luvas de Couro de Dragão ou Abafadores">
+                            </label>
+                            <label class="flex-1">Principais Usos Alquímicos:
+                                <input type="text" id="plant-uso" class="ink-input" placeholder="Ex: Poção Wiggenweld, Poção Polissuco">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="section-title mt-20">2. Descrição Morfológica, Habitat e Comportamento</h3>
+                <textarea id="plant-descricao" class="ink-textarea" rows="4" required placeholder="Descreva a aparência da planta, seu habitat natural e comportamento mágico..."></textarea>
+
+                <h3 class="section-title mt-20">3. Peculiaridades Técnicas, Colheita e Mecânica de Efeito</h3>
+                <textarea id="plant-peculiaridades" class="ink-textarea" rows="5" placeholder="Detalhe o nível de herbologia, CD de manejo, efeito imediato e aplicações alquímicas..."></textarea>
+
+                <button type="submit" class="btn-submit mt-20">Catalogar Planta no Herbário Ministerial</button>
+            </form>
+
+            <div class="bureaucracy-box mt-20">
+                <h3 class="section-title">Importação em Massa de Plantas (JSON)</h3>
+                <p>Cole uma lista JSON de plantas mágicas ou selecione um arquivo <code>.json</code> para importar em lote no catálogo.</p>
+                <textarea id="bulk-plant-input" class="ink-textarea mt-10" rows="5" placeholder='[{"nome": "Mandrágora (Mandrake)", "categoria": "difícil de adquirir", "descricao": "...", "peculiaridades": "..."}]'></textarea>
+                <div class="form-row mt-10" style="align-items: center;">
+                    <label style="flex: 1;">Ou carregue um arquivo JSON:
+                        <input type="file" id="bulk-plant-file" accept=".json" class="ink-input">
+                    </label>
+                    <button type="button" id="btn-bulk-import-plants" class="btn-submit" style="width: auto; padding: 12px 30px;">Processar Lote de Plantas</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- =====================================================================
+             ESPAÇO 4A: ARQUIVO DE POÇÕES / ALQUIMIA
+             ===================================================================== -->
+        <main id="tab-arquivo-pocoes" class="tab-content hidden">
+            <div class="archive-layout">
+                
+                <aside class="archive-sidebar bureaucracy-box">
+                    <div class="sidebar-header-row">
+                        <h3 class="section-title" style="margin-bottom: 4px;">Filtros (Alquimia)</h3>
+                        <small id="potion-filter-count" class="filter-count-label">Carregando...</small>
+                    </div>
+                    
+                    <input type="text" id="search-potion" class="ink-input mb-10" placeholder="Buscar poção, elixir ou composto...">
+                    
+                    <label class="filter-label">Ordenar por:
+                        <select id="sort-potion" class="ink-select mb-10">
+                            <option value="alfabetica">Ordem Alfabética (A-Z)</option>
+                            <option value="nivel-asc">Nível Alquímico (1 a 7)</option>
+                            <option value="nivel-desc">Nível Alquímico (7 a 1)</option>
+                            <option value="cd-asc">Dificuldade de Preparo (CD Crescente)</option>
+                            <option value="cd-desc">Dificuldade de Preparo (CD Decrescente)</option>
+                        </select>
+                    </label>
+
+                    <div class="filter-two-cols">
+                        <label class="filter-label">Nível (1 a 7):
+                            <select id="filter-potion-lvl" class="ink-select mb-10">
+                                <option value="">Todos</option>
+                                <option value="1">Nível 1</option>
+                                <option value="2">Nível 2</option>
+                                <option value="3">Nível 3</option>
+                                <option value="4">Nível 4</option>
+                                <option value="5">Nível 5</option>
+                                <option value="6">Nível 6</option>
+                                <option value="7">Nível 7</option>
+                            </select>
+                        </label>
+
+                        <label class="filter-label">Tipo de Composto:
+                            <select id="filter-potion-tipo" class="ink-select mb-10">
+                                <option value="">Todos</option>
+                                <option value="Poção">Poção</option>
+                                <option value="Elixir">Elixir</option>
+                                <option value="Antídoto">Antídoto</option>
+                                <option value="Veneno">Veneno</option>
+                                <option value="Filtro do Amor">Filtro do Amor</option>
+                                <option value="Solução">Solução</option>
+                                <option value="Pomada">Pomada / Unguento</option>
+                                <option value="Pasta">Pasta</option>
+                                <option value="Tônico">Tônico / Concocto</option>
+                                <option value="Gás">Gás / Essência</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <label class="filter-label">Via de Administração:
+                        <select id="filter-potion-admin" class="ink-select mb-10">
+                            <option value="">Todas</option>
+                            <option value="Ingestão">Ingestão</option>
+                            <option value="Inalação">Inalação</option>
+                            <option value="Contato">Aplicação Tópica / Contato</option>
+                            <option value="Arremesso">Arremesso / Aspersão</option>
+                        </select>
+                    </label>
+
+                    <div class="sidebar-buttons-stack">
+                        <button type="button" id="btn-reset-potion-filters" class="btn-secondary">Limpar Filtros</button>
+                        <button type="button" id="btn-export-potion-list" class="btn-submit" style="font-size: 0.9rem; padding: 8px;">
+                            Exportar Lista (.json)
+                        </button>
+                    </div>
+
+                    <hr class="ministry-divider">
+                    
+                    <h4 class="list-title">Compostos Alquímicos (Clique para Carregar)</h4>
+                    <ul id="potion-list" class="record-list">
+                        <li class="empty-msg">Carregando índice...</li>
+                    </ul>
+                </aside>
+
+                <section class="archive-viewer bureaucracy-box">
+                    <div id="potion-viewer-content" class="viewer-content empty-viewer">
+                        <p>Selecione uma poção na lista ao lado para carregar individualmente sua receita, ingredientes exigidos, tempo de fermentação, dificuldade CD e efeitos mecânicos.</p>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <!-- =====================================================================
+             ESPAÇO 4B: REGISTRO & IMPORTAÇÃO DE POÇÕES
+             ===================================================================== -->
+        <main id="tab-registro-pocoes" class="tab-content hidden">
+            <div class="mb-10" style="display:flex; justify-content:space-between; align-items:center;">
+                <button type="button" class="btn-secondary" data-target="tab-arquivo-pocoes">Voltar ao Arquivo de Poções</button>
+            </div>
+            <form id="form-potion" class="bureaucracy-box">
+                <h3 class="section-title">1. Registro de Composto no Catálogo Alquímico</h3>
+
+                <div class="form-row">
+                    <label class="flex-2">Nome da Poção (Português / Original):
+                        <input type="text" id="potion-nome" class="ink-input" required placeholder="Ex: Poção Wiggenweld (Wiggenweld Potion)">
+                    </label>
+                    <label class="flex-1">Classificação / Tipo:
+                        <select id="potion-tipo" class="ink-select" required>
+                            <option value="Poção" selected>Poção</option>
+                            <option value="Poção Curativa">Poção Curativa</option>
+                            <option value="Elixir">Elixir</option>
+                            <option value="Antídoto">Antídoto</option>
+                            <option value="Veneno">Veneno</option>
+                            <option value="Poção (Filtro do Amor)">Poção (Filtro do Amor)</option>
+                            <option value="Solução">Solução</option>
+                            <option value="Pomada">Pomada / Unguento</option>
+                            <option value="Pasta">Pasta</option>
+                            <option value="Tônico">Tônico / Concocto</option>
+                            <option value="Gás Alquímico">Gás Alquímico / Essência</option>
+                        </select>
+                    </label>
+                    <label class="flex-1">Nível Alquímico (1 a 7):
+                        <select id="potion-nivel" class="ink-select" required>
+                            <option value="1">Nível 1</option>
+                            <option value="2">Nível 2</option>
+                            <option value="3">Nível 3</option>
+                            <option value="4">Nível 4</option>
+                            <option value="5">Nível 5</option>
+                            <option value="6">Nível 6</option>
+                            <option value="7">Nível 7</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="form-row">
+                    <label class="flex-1">Dificuldade de Preparo (CD):
+                        <input type="number" id="potion-cd" class="ink-input" value="14" min="8" max="35" required>
+                    </label>
+                    <label class="flex-1">Tempo de Preparo:
+                        <input type="text" id="potion-preparo" class="ink-input" value="1 hora" placeholder="Ex: 2 horas e 30 minutos">
+                    </label>
+                    <label class="flex-1">Duração do Efeito:
+                        <input type="text" id="potion-duracao" class="ink-input" value="Instantâneo" placeholder="Ex: 1d6 horas">
+                    </label>
+                    <label class="flex-1">Via de Administração:
+                        <input type="text" id="potion-admin" class="ink-input" value="Ingestão" placeholder="Ex: Ingestão ou Tópico">
+                    </label>
+                </div>
+
+                <h3 class="section-title mt-20">2. Efeito Mecânico e Propriedades Mágicas</h3>
+                <textarea id="potion-efeito" class="ink-textarea" rows="3" required placeholder="Descreva os efeitos diretos ao ingerir ou aplicar a poção..."></textarea>
+
+                <h3 class="section-title mt-20">3. Ingredientes do Caldeirão</h3>
+                <textarea id="potion-ingredientes" class="ink-textarea" rows="3" required placeholder="Liste os ingredientes vegetais, animais e minerais necessários..."></textarea>
+
+                <h3 class="section-title mt-20">4. Características Visuais, Aroma e Lore</h3>
+                <textarea id="potion-descricao" class="ink-textarea" rows="4" required placeholder="Cor do líquido, consistência, formato do vapor, aroma e história..."></textarea>
+
+                <div class="form-row mt-10">
+                    <label class="flex-1">Link de Referência / Wiki (Opcional):
+                        <input type="url" id="potion-wiki" class="ink-input" placeholder="https://harrypotter.fandom.com/wiki/...">
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-submit mt-20">Catalogar Poção no Catálogo Alquímico</button>
+            </form>
+
+            <div class="bureaucracy-box mt-20">
+                <h3 class="section-title">Importação em Massa de Poções (JSON)</h3>
+                <p>Cole uma lista JSON de poções ou selecione um arquivo <code>.json</code> para importar em lote no catálogo.</p>
+                <textarea id="bulk-potion-input" class="ink-textarea mt-10" rows="5" placeholder='[{"tipo": "Poção", "nome": "Felix Felicis", "nível": 7, "efeito": "...", "ingredientes": "...", "descrição": "...", "sistema": {"tempo_preparo": "6 meses", "duracao": "12 horas", "dificuldade_cd": 26, "administracao": "Ingestão"}}]'></textarea>
+                <div class="form-row mt-10" style="align-items: center;">
+                    <label style="flex: 1;">Ou carregue um arquivo JSON:
+                        <input type="file" id="bulk-potion-file" accept=".json" class="ink-input">
+                    </label>
+                    <button type="button" id="btn-bulk-import-potions" class="btn-submit" style="width: auto; padding: 12px 30px;">Processar Lote de Poções</button>
+                </div>
+            </div>
+        </main>
+
+        </div>
+    </div>
+
+</body>
+</html>
