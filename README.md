@@ -13,8 +13,8 @@ Aplicacao web de catalogacao, consulta rapida e exportacao de recursos para o si
 
 A versao compilada e instalavel para dispositivos Android esta disponivel na release oficial do repositorio com rastreamento automatico de atualizacoes:
 
-- **Download Direto (.apk):** [WWcatalog.apk (Release v1.0.1)](https://github.com/PHLopesvc07/WWRPG-Catalog/releases/download/v1.0.1/WWcatalog.apk)
-- **Pagina da Release:** [Release v1.0.1 no GitHub](https://github.com/PHLopesvc07/WWRPG-Catalog/releases/tag/v1.0.1)
+- **Download Direto (.apk):** [WWcatalog.apk (Release v1.0.2)](https://github.com/PHLopesvc07/WWRPG-Catalog/releases/download/v1.0.2/WWcatalog.apk)
+- **Pagina da Release:** [Release v1.0.2 no GitHub](https://github.com/PHLopesvc07/WWRPG-Catalog/releases/tag/v1.0.2)
 
 A aplicacao mobile oferece:
 - Rastreamento automatico de releases via API do GitHub com notificacao e download integrado de novas versoes.
