@@ -1,0 +1,457 @@
+/* ==========================================================================
+   MOBILE.CSS — LAYOUT E COMPONENTES OTIMIZADOS PARA DISPOSITIVOS MÓVEIS / ANDROID
+   Adaptado para telas touch, visualizadores modais/bottom-sheet, navegação fixa
+   inferior e botões acessíveis de toque.
+   ========================================================================== */
+
+:root {
+    --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-area-top: env(safe-area-inset-top, 0px);
+    --mobile-nav-height: 60px;
+    --mobile-header-height: 56px;
+}
+
+/* Reset de toque e renderização suave em telas móveis */
+html, body {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    overscroll-behavior-y: none;
+}
+
+body.mobile-body {
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    background-color: var(--parchment);
+    overflow-x: hidden;
+}
+
+.mobile-app-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    padding-bottom: calc(var(--mobile-nav-height) + var(--safe-area-bottom) + 10px);
+}
+
+/* ==========================================================================
+   CABEÇALHO MOBILE COMPACTO
+   ========================================================================== */
+.mobile-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: var(--parchment);
+    border-bottom: 2px solid var(--ink);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .mobile-header {
+    background-color: #1a1714;
+    border-bottom-color: var(--magic-gold);
+}
+
+body.terminal-mode .mobile-header {
+    background-color: #0d1217;
+    border-bottom: 1px solid var(--tactical-teal);
+}
+
+.mobile-header-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-header-title h1 {
+    font-size: 1.15rem;
+    margin: 0;
+    padding: 0;
+    border: none;
+    line-height: 1.2;
+    font-family: var(--font-serif);
+}
+
+.mobile-header-title small {
+    font-size: 0.75rem;
+    color: var(--ink-secondary);
+    font-family: var(--font-typewriter);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.mobile-header-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.mobile-btn-pill {
+    background: transparent;
+    border: 1px solid var(--ink);
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 0.78rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+body.dark-mode .mobile-btn-pill {
+    border-color: var(--magic-gold);
+    color: var(--magic-gold);
+}
+
+body.terminal-mode .mobile-btn-pill {
+    border-color: var(--tactical-teal);
+    color: var(--tactical-teal);
+}
+
+/* ==========================================================================
+   CONTEÚDO PRINCIPAL E ABAS MOBILE
+   ========================================================================== */
+.mobile-content {
+    flex: 1;
+    padding: 12px;
+}
+
+.mobile-tab-pane {
+    display: none;
+}
+
+.mobile-tab-pane.active {
+    display: block;
+}
+
+/* Barra de filtros colapsável ou compacta */
+.mobile-filter-bar {
+    background: var(--parchment-accent);
+    border: 1px solid var(--ink);
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+body.dark-mode .mobile-filter-bar {
+    background: #231f1a;
+    border-color: rgba(241, 196, 15, 0.4);
+}
+
+body.terminal-mode .mobile-filter-bar {
+    background: #11171d;
+    border-color: rgba(0, 240, 255, 0.3);
+}
+
+.mobile-search-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.mobile-search-row input {
+    margin: 0;
+    flex: 1;
+    height: 42px;
+    font-size: 0.95rem;
+}
+
+.mobile-filter-details {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--ink);
+    display: none;
+}
+
+.mobile-filter-details.open {
+    display: block;
+}
+
+.mobile-filter-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.mobile-filter-label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.78rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+}
+
+.mobile-filter-label select,
+.mobile-filter-label input {
+    height: 38px;
+    font-size: 0.88rem;
+    margin-top: 3px;
+    border-radius: 4px;
+}
+
+/* Lista de registros otimizada para toque */
+.mobile-record-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    contain: content;
+}
+
+.mobile-record-list .record-list-item {
+    min-height: 56px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    border: 1px solid var(--ink);
+    background-color: var(--parchment);
+    display: flex;
+    align-items: center;
+    transition: background 0.15s ease, transform 0.1s ease;
+    cursor: pointer;
+}
+
+.mobile-record-list .record-list-item:active {
+    background-color: var(--muted-teal);
+    transform: scale(0.99);
+}
+
+body.dark-mode .mobile-record-list .record-list-item {
+    background-color: #24201c;
+    border-color: rgba(241, 196, 15, 0.25);
+}
+
+body.dark-mode .mobile-record-list .record-list-item:active {
+    background-color: #38312a;
+}
+
+body.terminal-mode .mobile-record-list .record-list-item {
+    background-color: #121920;
+    border-color: rgba(0, 240, 255, 0.2);
+}
+
+body.terminal-mode .mobile-record-list .record-list-item:active {
+    background-color: #1c2732;
+}
+
+/* ==========================================================================
+   MODAL / BOTTOM SHEET DO VISUALIZADOR DE FICHA COMPLETA
+   ========================================================================== */
+.mobile-sheet-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(2px);
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.mobile-sheet-modal.open {
+    display: flex;
+}
+
+.mobile-sheet-dialog {
+    background: var(--parchment);
+    border-top: 3px solid var(--ink);
+    border-radius: 16px 16px 0 0;
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.35);
+    animation: slideUp 0.22s cubic-bezier(0.1, 0.9, 0.2, 1);
+}
+
+body.dark-mode .mobile-sheet-dialog {
+    background: #1e1a16;
+    border-top-color: var(--magic-gold);
+}
+
+body.terminal-mode .mobile-sheet-dialog {
+    background: #0f151c;
+    border-top-color: var(--tactical-teal);
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+.mobile-sheet-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ink);
+}
+
+.mobile-sheet-top-bar .pull-bar {
+    width: 38px;
+    height: 4px;
+    background: var(--ink-secondary);
+    border-radius: 2px;
+    margin: 0 auto;
+}
+
+.mobile-sheet-body {
+    padding: 16px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    flex: 1;
+}
+
+.mobile-sheet-body .creature-sheet-card {
+    border: none;
+    padding: 0;
+    box-shadow: none;
+    background: transparent;
+}
+
+.mobile-sheet-body .sheet-hero-grid {
+    grid-template-columns: 1fr;
+}
+
+.mobile-sheet-body .creature-portrait-frame {
+    width: 100%;
+    max-height: 220px;
+    margin-bottom: 12px;
+}
+
+.mobile-sheet-body .creature-sheet-photo {
+    height: 100%;
+    max-height: 220px;
+    width: 100%;
+    object-fit: contain;
+}
+
+.mobile-sheet-body .sheet-top-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.mobile-sheet-body .stats-pills-row {
+    gap: 6px;
+}
+
+.mobile-sheet-body .stat-pill {
+    flex: 1 1 calc(33.3% - 6px);
+    padding: 6px 8px;
+}
+
+/* ==========================================================================
+   BARRA DE NAVEGAÇÃO INFERIOR FIXA (BOTTOM NAVIGATION - ANDROID STYLE)
+   ========================================================================== */
+.mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(var(--mobile-nav-height) + var(--safe-area-bottom));
+    padding-bottom: var(--safe-area-bottom);
+    background-color: var(--parchment);
+    border-top: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 50;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.12);
+}
+
+body.dark-mode .mobile-bottom-nav {
+    background-color: #1a1714;
+    border-top-color: var(--magic-gold);
+}
+
+body.terminal-mode .mobile-bottom-nav {
+    background-color: #0d1217;
+    border-top-color: var(--tactical-teal);
+}
+
+.mobile-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: var(--ink);
+    opacity: 0.65;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    gap: 3px;
+    padding: 4px 2px;
+    text-decoration: none;
+}
+
+.mobile-nav-item.active {
+    opacity: 1;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+body.dark-mode .mobile-nav-item.active {
+    color: var(--magic-gold);
+}
+
+body.terminal-mode .mobile-nav-item.active {
+    color: var(--tactical-teal);
+}
+
+.mobile-nav-item .nav-badge {
+    background: var(--magic-gold);
+    color: #1a1714;
+    border-radius: 10px;
+    padding: 1px 6px;
+    font-size: 0.68rem;
+    font-family: var(--font-mono);
+    font-weight: bold;
+}
+
+body.dark-mode .mobile-nav-item .nav-badge {
+    background: var(--magic-gold);
+    color: #000;
+}
+
+body.terminal-mode .mobile-nav-item .nav-badge {
+    background: var(--tactical-teal);
+    color: #000;
+}
+
+/* ==========================================================================
+   FORMULÁRIOS MOBILE
+   ========================================================================== */
+.mobile-form-section {
+    padding: 12px;
+}
+
+.mobile-form-section .form-row {
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mobile-form-section .flex-1,
+.mobile-form-section .flex-2 {
+    width: 100%;
+}
+
+.mobile-form-section .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
