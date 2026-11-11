@@ -1,17 +1,8 @@
 /**
  * SERVIÇO DE BANCO DE DADOS E CARREGAMENTO INDIVIDUAL SOB DEMANDA
- * Arquitetura Two-Tier: Índice Leve + Documento Individual sob Demanda
+ * Zero dependências externas de CDN — Inicialização instantânea + Sincronização REST na Nuvem
  */
 
-import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import {
-    getFirestore,
-    doc,
-    getDoc,
-    setDoc,
-    deleteDoc,
-    writeBatch
-} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 import { DATABASE_CONFIG } from "./firebaseConfig.js";
 import { sanitizeFilename } from "../utils/helpers.js";
 
@@ -49,21 +40,157 @@ const COLLECTION_META = {
     }
 };
 
-let dbInstance = null;
+const PROJECT_ID = DATABASE_CONFIG.projectId || "wwcatalog-10546";
+const FIRESTORE_BASE_URL = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents`;
+const FIRESTORE_COMMIT_URL = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents:commit`;
 
 // Cache em memória para itens já abertos individualmente
 const itemMemoryCache = new Map();
 // Cache em memória dos índices leves por coleção
 const indexMemoryCache = new Map();
 
-export async function initDatabaseConnection() {
+/**
+ * Converte valores JavaScript para o formato REST do Firestore
+ */
+function toFirestoreValue(val) {
+    if (val === null || val === undefined) return { nullValue: null };
+    if (typeof val === "boolean") return { booleanValue: val };
+    if (typeof val === "number") {
+        return Number.isInteger(val) ? { integerValue: String(val) } : { doubleValue: val };
+    }
+    if (typeof val === "string") return { stringValue: val };
+    if (Array.isArray(val)) {
+        return { arrayValue: { values: val.map(toFirestoreValue) } };
+    }
+    if (typeof val === "object") {
+        const fields = {};
+        for (const [k, v] of Object.entries(val)) {
+            if (v !== undefined) fields[k] = toFirestoreValue(v);
+        }
+        return { mapValue: { fields } };
+    }
+    return { stringValue: String(val) };
+}
+
+function toFirestoreFields(obj) {
+    const fields = {};
+    for (const [k, v] of Object.entries(obj)) {
+        if (v !== undefined) fields[k] = toFirestoreValue(v);
+    }
+    return fields;
+}
+
+/**
+ * Converte valores do formato REST do Firestore para objetos JavaScript nativos
+ */
+function fromFirestoreValue(valObj) {
+    if (!valObj || typeof valObj !== "object") return null;
+    if ("nullValue" in valObj) return null;
+    if ("booleanValue" in valObj) return Boolean(valObj.booleanValue);
+    if ("integerValue" in valObj) return parseInt(valObj.integerValue, 10);
+    if ("doubleValue" in valObj) return parseFloat(valObj.doubleValue);
+    if ("stringValue" in valObj) return valObj.stringValue;
+    if ("timestampValue" in valObj) return valObj.timestampValue;
+    if ("arrayValue" in valObj) {
+        const vals = valObj.arrayValue?.values || [];
+        return vals.map(fromFirestoreValue);
+    }
+    if ("mapValue" in valObj) {
+        const fields = valObj.mapValue?.fields || {};
+        const out = {};
+        for (const [k, v] of Object.entries(fields)) {
+            out[k] = fromFirestoreValue(v);
+        }
+        return out;
+    }
+    return null;
+}
+
+function fromFirestoreDoc(docJson) {
+    if (!docJson || !docJson.fields) return null;
+    const out = {};
+    for (const [k, v] of Object.entries(docJson.fields)) {
+        out[k] = fromFirestoreValue(v);
+    }
+    return out;
+}
+
+async function fetchWithTimeout(url, options = {}, timeoutMs = 4500) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
     try {
-        const app = getApps().length === 0 ? initializeApp(DATABASE_CONFIG) : getApp();
-        dbInstance = getFirestore(app);
-        return dbInstance;
+        return await fetch(url, { ...options, signal: controller.signal });
+    } finally {
+        clearTimeout(timer);
+    }
+}
+
+async function firestoreGetDoc(collectionPath, docId) {
+    try {
+        const res = await fetchWithTimeout(`${FIRESTORE_BASE_URL}/${collectionPath}/${encodeURIComponent(docId)}`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return fromFirestoreDoc(json);
     } catch {
         return null;
     }
+}
+
+async function firestoreSetDoc(collectionPath, docId, dataObj) {
+    try {
+        const res = await fetchWithTimeout(
+            `${FIRESTORE_BASE_URL}/${collectionPath}/${encodeURIComponent(docId)}`,
+            {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ fields: toFirestoreFields(dataObj) })
+            },
+            6000
+        );
+        return res.ok;
+    } catch {
+        return false;
+    }
+}
+
+async function firestoreDeleteDoc(collectionPath, docId) {
+    try {
+        const res = await fetchWithTimeout(
+            `${FIRESTORE_BASE_URL}/${collectionPath}/${encodeURIComponent(docId)}`,
+            { method: "DELETE" },
+            5000
+        );
+        return res.ok;
+    } catch {
+        return false;
+    }
+}
+
+async function firestoreBatchWrite(collectionPath, recordsArray) {
+    try {
+        const writes = recordsArray.map(rec => ({
+            update: {
+                name: `projects/${PROJECT_ID}/databases/(default)/documents/${collectionPath}/${rec.id}`,
+                fields: toFirestoreFields(rec)
+            }
+        }));
+        const res = await fetchWithTimeout(
+            FIRESTORE_COMMIT_URL,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ writes })
+            },
+            10000
+        );
+        return res.ok;
+    } catch {
+        return false;
+    }
+}
+
+export async function initDatabaseConnection() {
+    return true;
 }
 
 export function buildItemId(collectionName, item, prefix = "") {
@@ -176,7 +303,7 @@ function saveLocalCustomItem(collectionName, id, itemData) {
         map[id] = itemData;
         localStorage.setItem(`ww_custom_${collectionName}`, JSON.stringify(map));
     } catch {
-        // Ignora caso localStorage esteja cheio
+        // Ignora
     }
 }
 
@@ -220,6 +347,7 @@ export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
     const summaryMap = new Map();
     const deletedIds = getLocalDeletedIds(collectionName);
 
+    // 1.1 Carrega o índice local imediatamente (instantâneo)
     try {
         const response = await fetch(meta.indexFile);
         if (response.ok) {
@@ -234,9 +362,10 @@ export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
             }
         }
     } catch {
-        // Ignora erro local
+        // Continua caso offline
     }
 
+    // 1.2 Mescla itens customizados locais
     const localCustomMap = getLocalCustomItemsMap(collectionName);
     Object.entries(localCustomMap).forEach(([id, fullItem]) => {
         if (!deletedIds.has(id)) {
@@ -245,31 +374,20 @@ export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
         }
     });
 
-    if (!dbInstance) {
-        await initDatabaseConnection();
-    }
-
-    if (dbInstance) {
-        try {
-            const idxDocRef = doc(dbInstance, "_indexes", collectionName);
-            const idxSnap = await getDoc(idxDocRef);
-
-            if (idxSnap.exists()) {
-                const idxData = idxSnap.data();
-                const remoteDeleted = new Set(idxData.deletedIds || []);
-                remoteDeleted.forEach(delId => summaryMap.delete(delId));
-
-                if (Array.isArray(idxData.items)) {
-                    idxData.items.forEach(entry => {
-                        const summary = buildSummaryEntry(collectionName, entry);
-                        if (!deletedIds.has(summary.id) && !remoteDeleted.has(summary.id)) {
-                            summaryMap.set(summary.id, summary);
-                        }
-                    });
-                }
+    // 1.3 Consulta assíncrona ao índice remoto (se houve adições externas ou se local estava vazio)
+    if (forceRefresh || summaryMap.size === 0) {
+        const remoteIdx = await firestoreGetDoc("_indexes", collectionName);
+        if (remoteIdx) {
+            const remoteDeleted = new Set(remoteIdx.deletedIds || []);
+            remoteDeleted.forEach(delId => summaryMap.delete(delId));
+            if (Array.isArray(remoteIdx.items)) {
+                remoteIdx.items.forEach(entry => {
+                    const summary = buildSummaryEntry(collectionName, entry);
+                    if (!deletedIds.has(summary.id) && !remoteDeleted.has(summary.id)) {
+                        summaryMap.set(summary.id, summary);
+                    }
+                });
             }
-        } catch {
-            // Opera perfeitamente com os índices locais caso sem rede
         }
     }
 
@@ -285,30 +403,19 @@ export async function fetchItemById(collectionName, id) {
     if (!id) return null;
     const cacheKey = `${collectionName}:${id}`;
 
+    // 1. Cache em memória (0ms)
     if (itemMemoryCache.has(cacheKey)) {
         return itemMemoryCache.get(cacheKey);
     }
 
+    // 2. Itens customizados locais
     const customMap = getLocalCustomItemsMap(collectionName);
     if (customMap[id]) {
         itemMemoryCache.set(cacheKey, customMap[id]);
         return customMap[id];
     }
 
-    if (dbInstance) {
-        try {
-            const docRef = doc(dbInstance, collectionName, id);
-            const snap = await getDoc(docRef);
-            if (snap.exists()) {
-                const data = { id: snap.id, ...snap.data() };
-                itemMemoryCache.set(cacheKey, data);
-                return data;
-            }
-        } catch {
-            // Fallback para arquivo JSON individual
-        }
-    }
-
+    // 3. Arquivo JSON individual local (instantâneo para itens do compêndio base)
     const meta = COLLECTION_META[collectionName];
     if (meta) {
         try {
@@ -320,8 +427,16 @@ export async function fetchItemById(collectionName, id) {
                 return data;
             }
         } catch {
-            return null;
+            // Segue para busca remota
         }
+    }
+
+    // 4. Busca documento individual no banco remoto
+    const remoteDoc = await firestoreGetDoc(collectionName, id);
+    if (remoteDoc) {
+        const data = { id, ...remoteDoc };
+        itemMemoryCache.set(cacheKey, data);
+        return data;
     }
 
     return null;
@@ -334,14 +449,12 @@ export async function fetchItemsByIds(collectionName, ids = []) {
 }
 
 async function syncCollectionIndex(collectionName, currentSummaryList, deletedIds = []) {
-    if (!dbInstance) return;
-    const idxRef = doc(dbInstance, "_indexes", collectionName);
-    await setDoc(idxRef, {
+    await firestoreSetDoc("_indexes", collectionName, {
         updatedAt: new Date().toISOString(),
         count: currentSummaryList.length,
         items: currentSummaryList,
         deletedIds
-    }, { merge: true });
+    });
 }
 
 /**
@@ -369,20 +482,9 @@ export async function saveRecord(collectionName, dataObject, prefix = "registro"
     }
     indexMemoryCache.set(collectionName, currentIndex);
 
-    let savedToCloud = false;
-    if (!dbInstance) {
-        await initDatabaseConnection();
-    }
-
-    if (dbInstance) {
-        try {
-            const docRef = doc(dbInstance, collectionName, id);
-            await setDoc(docRef, fullRecord, { merge: true });
-            await syncCollectionIndex(collectionName, currentIndex);
-            savedToCloud = true;
-        } catch {
-            // Mantido localmente
-        }
+    const savedToCloud = await firestoreSetDoc(collectionName, id, fullRecord);
+    if (savedToCloud) {
+        await syncCollectionIndex(collectionName, currentIndex);
     }
 
     if (options.downloadBackup) {
@@ -420,32 +522,19 @@ export async function saveBulkRecords(collectionName, dataArray, prefix = "item"
     const updatedIndexList = Array.from(indexMap.values());
     indexMemoryCache.set(collectionName, updatedIndexList);
 
-    let savedToCloud = false;
-    if (!dbInstance) {
-        await initDatabaseConnection();
+    let savedToCloud = true;
+    const CHUNK_SIZE = 200;
+    for (let i = 0; i < normalizedRecords.length; i += CHUNK_SIZE) {
+        const chunk = normalizedRecords.slice(i, i + CHUNK_SIZE);
+        const ok = await firestoreBatchWrite(collectionName, chunk);
+        if (!ok) savedToCloud = false;
+        if (onProgress) {
+            onProgress(Math.min(i + chunk.length, normalizedRecords.length), normalizedRecords.length);
+        }
     }
 
-    if (dbInstance) {
-        try {
-            const CHUNK_SIZE = 400;
-            for (let i = 0; i < normalizedRecords.length; i += CHUNK_SIZE) {
-                const chunk = normalizedRecords.slice(i, i + CHUNK_SIZE);
-                const batch = writeBatch(dbInstance);
-                chunk.forEach(rec => {
-                    const docRef = doc(dbInstance, collectionName, rec.id);
-                    batch.set(docRef, rec, { merge: true });
-                });
-                await batch.commit();
-                if (onProgress) {
-                    onProgress(Math.min(i + chunk.length, normalizedRecords.length), normalizedRecords.length);
-                }
-            }
-
-            await syncCollectionIndex(collectionName, updatedIndexList);
-            savedToCloud = true;
-        } catch {
-            // Mantido localmente
-        }
+    if (savedToCloud) {
+        await syncCollectionIndex(collectionName, updatedIndexList);
     }
 
     return {
@@ -466,17 +555,10 @@ export async function deleteRecord(collectionName, id) {
     const filteredIndex = currentIndex.filter(item => item.id !== id);
     indexMemoryCache.set(collectionName, filteredIndex);
 
-    if (dbInstance) {
-        try {
-            await deleteDoc(doc(dbInstance, collectionName, id));
-            const deletedIds = Array.from(getLocalDeletedIds(collectionName));
-            await syncCollectionIndex(collectionName, filteredIndex, deletedIds);
-            return true;
-        } catch {
-            return false;
-        }
-    }
-    return false;
+    const deletedIds = Array.from(getLocalDeletedIds(collectionName));
+    await firestoreDeleteDoc(collectionName, id);
+    await syncCollectionIndex(collectionName, filteredIndex, deletedIds);
+    return true;
 }
 
 export function downloadJsonFile(dataObject, filename = "exportacao_ministerial.json") {

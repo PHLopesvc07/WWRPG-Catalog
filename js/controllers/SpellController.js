@@ -104,6 +104,8 @@ export class SpellController {
         await this.loadCatalog(true);
 
         alert(`Feitiço "${spellData.name}" catalogado com sucesso no Grimório Ministerial!`);
+        document.querySelector('[data-target="tab-arquivo-feiticos"]')?.click();
+        await this.selectAndLoadSpell(result.id);
     }
 
     async handleBulkImport() {
@@ -140,6 +142,10 @@ export class SpellController {
         this.indexData = await fetchCatalogIndex(COLLECTIONS.SPELLS, forceRefresh);
         this.updateBadgeCount();
         this.applyFilters();
+
+        if (!this.activeSpellId && this.filteredIndex.length > 0) {
+            this.selectAndLoadSpell(this.filteredIndex[0].id);
+        }
     }
 
     updateBadgeCount() {

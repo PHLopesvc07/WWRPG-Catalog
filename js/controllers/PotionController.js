@@ -112,6 +112,8 @@ export class PotionController {
         await this.loadCatalog(true);
 
         alert(`Poção "${potionData.nome}" catalogada com sucesso no Catálogo Alquímico!`);
+        document.querySelector('[data-target="tab-arquivo-pocoes"]')?.click();
+        await this.selectAndLoadPotion(result.id);
     }
 
     async handleBulkImport() {
@@ -148,6 +150,10 @@ export class PotionController {
         this.indexData = await fetchCatalogIndex(COLLECTIONS.POTIONS, forceRefresh);
         this.updateBadgeCount();
         this.applyFilters();
+
+        if (!this.activePotionId && this.filteredIndex.length > 0) {
+            this.selectAndLoadPotion(this.filteredIndex[0].id);
+        }
     }
 
     updateBadgeCount() {

@@ -1,27 +1,49 @@
+/**
+ * CONTROLADOR DE NAVEGAÇÃO ENTRE ABAS (ARQUIVOS & REGISTROS)
+ * Garante sincronia total entre as classes .active e .hidden em todos os 8 painéis.
+ */
+
 export class TabController {
     constructor() {
-        this.tabButtons = document.querySelectorAll('.tab-btn');
-        this.tabContents = document.querySelectorAll('.tab-content');
+        this.tabButtons = document.querySelectorAll(".tab-btn[data-target]");
+        this.tabContents = document.querySelectorAll(".tab-content");
         this.init();
     }
 
     init() {
-        this.tabButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                // e.currentTarget garante que estamos pegando o atributo do botão, e não do texto dentro dele
-                const targetId = e.currentTarget.getAttribute('data-target');
-                this.openTab(targetId, e.currentTarget);
-            });
+        // Delegação de eventos global para suportar botões na barra superior e botões internos ("+ Novo Registro" / "← Voltar ao Arquivo")
+        document.addEventListener("click", e => {
+            const btn = e.target.closest("[data-target]");
+            if (!btn) return;
+            const targetId = btn.getAttribute("data-target");
+            if (targetId && targetId.startsWith("tab-")) {
+                e.preventDefault();
+                this.openTab(targetId);
+            }
         });
     }
 
-    openTab(tabId, clickedBtn) {
-        this.tabContents.forEach(tab => tab.classList.remove('active'));
-        this.tabButtons.forEach(btn => btn.classList.remove('active'));
-        
-        document.getElementById(tabId).classList.add('active');
-        clickedBtn.classList.add('active');
+    openTab(tabId) {
+        const targetEl = document.getElementById(tabId);
+        if (!targetEl) return;
 
-        document.dispatchEvent(new CustomEvent('tab-opened', { detail: { tabId } }));
+        // Oculta todas as abas de conteúdo
+        this.tabContents.forEach(tab => {
+            tab.classList.remove("active");
+            tab.classList.add("hidden");
+        });
+
+        // Desativa todos os botões de navegação
+        document.querySelectorAll(".tab-btn[data-target]").forEach(btn => {
+            const isTarget = btn.getAttribute("data-target") === tabId;
+            btn.classList.toggle("active", isTarget);
+            btn.setAttribute("aria-pressed", isTarget ? "true" : "false");
+        });
+
+        // Exibe a aba selecionada
+        targetEl.classList.remove("hidden");
+        targetEl.classList.add("active");
+
+        document.dispatchEvent(new CustomEvent("tab-opened", { detail: { tabId } }));
     }
 }

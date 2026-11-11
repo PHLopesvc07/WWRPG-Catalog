@@ -229,6 +229,8 @@ export class CreatureController {
 
         await this.loadCatalog(true);
         alert(`Criatura "${creatureData.nome}" catalogada com sucesso no Arquivo Ministerial!`);
+        document.querySelector('[data-target="tab-arquivo-criaturas"]')?.click();
+        await this.selectAndLoadCreature(result.id);
     }
 
     async handleBulkImport() {
@@ -268,6 +270,10 @@ export class CreatureController {
         this.indexData = await fetchCatalogIndex(COLLECTIONS.CREATURES, forceRefresh);
         this.updateBadgeCount();
         this.applyFilters();
+
+        if (!this.activeCreatureId && this.filteredIndex.length > 0) {
+            this.selectAndLoadCreature(this.filteredIndex[0].id);
+        }
     }
 
     updateBadgeCount() {

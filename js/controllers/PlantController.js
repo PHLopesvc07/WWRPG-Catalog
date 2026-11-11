@@ -140,6 +140,8 @@ export class PlantController {
 
         await this.loadCatalog(true);
         alert(`Planta "${plantData.nome}" catalogada com sucesso no Herbário Ministerial!`);
+        document.querySelector('[data-target="tab-arquivo-plantas"]')?.click();
+        await this.selectAndLoadPlant(result.id);
     }
 
     async handleBulkImport() {
@@ -176,6 +178,10 @@ export class PlantController {
         this.indexData = await fetchCatalogIndex(COLLECTIONS.PLANTS, forceRefresh);
         this.updateBadgeCount();
         this.applyFilters();
+
+        if (!this.activePlantId && this.filteredIndex.length > 0) {
+            this.selectAndLoadPlant(this.filteredIndex[0].id);
+        }
     }
 
     updateBadgeCount() {

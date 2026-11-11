@@ -116,7 +116,7 @@ body.terminal-mode .tab-btn.tab-btn-reg {
     background-color: var(--surface-box-bg);
 }
 
-.bureaucracy-box > h3.section-title {
+.bureaucracy-box > h3.section-title:first-child {
     font-size: 1.05rem;
     background-color: var(--parchment);
     display: inline-block;

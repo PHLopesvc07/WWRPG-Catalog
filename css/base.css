@@ -58,6 +58,15 @@ code {
     display: none !important;
 }
 
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeInForm 0.25s ease-out;
+}
+
 .mt-10 { margin-top: 10px; }
 .mt-15 { margin-top: 15px; }
 .mt-20 { margin-top: 20px; }
