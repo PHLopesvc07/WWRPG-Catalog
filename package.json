@@ -1,0 +1,22 @@
+{
+  "name": "wwcatalog",
+  "version": "1.0.4",
+  "description": "Arquivo Geral do Ministério da Magia — W&W RPG Catalog (React & React Native)",
+  "scripts": {
+    "dev:web": "npm --prefix web run dev",
+    "build:web": "npm --prefix web run build",
+    "preview:web": "npm --prefix web run preview",
+    "start:mobile": "npm --prefix mobile-rn start",
+    "build:bundles": "node scripts/build-bundle.js",
+    "build:all": "npm run build:bundles && npm run build:web"
+  },
+  "keywords": [
+    "rpg",
+    "react",
+    "react-native",
+    "firestore",
+    "wands-and-wizards"
+  ],
+  "author": "PHLopesvc07",
+  "license": "MIT"
+}

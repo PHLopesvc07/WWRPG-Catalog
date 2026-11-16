@@ -1,11 +1,44 @@
-# Arquivo Geral do Ministerio da Magia — W&W RPG Catalog
+# Arquivo Geral do Ministerio da Magia — W&W RPG Catalog (React & React Native)
 
-Aplicacao web de catalogacao, consulta rapida e exportacao de recursos para o sistema **Wands & Wizards RPG (W&W)**, conectada diretamente ao **Cloud Firestore** e estruturada em quatro arquivos departamentais independentes:
+Aplicacao oficial de catalogacao, consulta rapida e exportacao de recursos para o sistema **Wands & Wizards RPG (W&W)**, conectada diretamente ao **Cloud Firestore** e agora modernizada com **React** (Web) e **React Native** (Mobile), estruturada em quatro arquivos departamentais independentes:
 
 1. **D.R.C.C.M. — Animais e Criaturas Magicas** (92 especies armazenadas no Firestore com retratos embutidos em Base64, atributos, habilidades de combate e prontuario de injurias)
 2. **C.E.F. — Grande Compendio de Feiticos** (210 encantamentos armazenados no Firestore com pronuncia, nivel 1 a 7, categoria magica, pericia de conjuracao e condicao aplicada)
 3. **Compendio de Herbologia e Botanica Magica** (44 plantas magicas armazenadas no Firestore classificadas por raridade, nivel de herbologia, CD de manejo e usos alquimicos)
 4. **Catalogo Alquimico de Pocoes** (166 compostos, elixires, antidotos e venenos armazenados no Firestore com CD de preparo, tempo de fermentacao, via de administracao e ingredientes)
+
+---
+
+## Arquitetura Moderna (React & React Native)
+
+O ecossistema foi estruturado para compartilhamento de regras de negocio e resiliencia de dados:
+
+- **`web/` (React + Vite)**: Aplicacao web completa em componentes React modulares, com gerenciamento reativo de estado, filtros instantaneos, modais de cadastro e suporte integral aos tres temas ministeriais (Pergaminho Claro, Noturno e Terminal Tatico).
+- **`mobile-rn/` (React Native)**: Aplicacao movel nativa em React Native utilizando `FlatList` de alta performance, Bottom Sheet modais, Bottom Navigation Bar nativa e alternador de temas.
+- **`shared/` (Modulo Compartilhado)**: Servico central de dados (`database.js`), fallback offline de 512 registros (`fallbackData.js`), configuracoes do Firebase (`firebaseConfig.js`) e rastreador de releases no GitHub (`updater.js`).
+
+---
+
+## Como Executar
+
+### Aplicacao Web (React)
+```bash
+# Entrar no diretorio web e iniciar o servidor de desenvolvimento
+npm run dev:web
+# ou diretamente dentro de web:
+cd web && npm run dev
+
+# Compilar para producao
+npm run build:web
+```
+
+### Aplicacao Movel (React Native)
+```bash
+# Iniciar o empacotador Metro do React Native
+npm run start:mobile
+# ou diretamente dentro de mobile-rn:
+cd mobile-rn && npm start
+```
 
 ---
 
@@ -56,29 +89,36 @@ A interface combina a identidade tipografica do **WWRPG-Ficha** com o guia tecni
 
 ```text
 WWcatalog/
-├── index.html                  # Interface principal com os 4 espacos de catalogo e formularios
-├── README.md                   # Documentacao geral do projeto
-├── API_GUIDE.md                # Guia de consulta da API Cloud Firestore e esquemas JSON
-├── css/
-│   ├── variables.css           # Tokens de cores, fontes e superficies dos 3 temas
-│   ├── base.css                # Reset, tipografia e estilos de formulario
-│   ├── layout.css              # Cabecalho, abas, grids de 2 colunas e responsividade
-│   └── components.css          # Fichas completas, badges, carimbos e listas otimizadas
-├── js/
-│   ├── main.js                 # Inicializacao, controle de temas e carregamento sob demanda por aba
+├── package.json                # Scripts unificados de build e desenvolvimento
+├── web/                        # Aplicacao Web em React (Vite)
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── index.html
+│   └── src/
+│       ├── main.jsx
+│       ├── App.jsx
+│       └── components/         # Componentes React modulares (Header, TabsNav, Archives, Forms)
+├── mobile-rn/                  # Aplicacao Movel em React Native
+│   ├── package.json
+│   ├── app.json
+│   ├── index.js
+│   └── src/
+│       ├── App.js              # Ponto de entrada nativo com ThemeProvider e modais
+│       ├── screens/            # Telas nativas (Creatures, Spells, Plants, Potions)
+│       ├── components/         # BottomNav, DetailModal
+│       └── theme/              # Contexto de temas (Pergaminho, Noturno, Terminal)
+├── shared/                     # Logica central compartilhada entre Web e Mobile
 │   ├── services/
-│   │   ├── firebaseConfig.js   # Configuracao do projeto Cloud Firestore (wwcatalog-10546)
-│   │   └── database.js         # Cliente REST Cloud Firestore (indices, itens individuais e escrita)
-│   ├── controllers/
-│   │   ├── TabController.js      # Navegacao entre abas e emissao do evento tab-opened
-│   │   ├── CreatureController.js # Controlador de Animais Magicos (D.R.C.C.M.)
-│   │   ├── SpellController.js    # Controlador de Feiticos (C.E.F.)
-│   │   ├── PlantController.js    # Controlador de Plantas (Herbologia)
-│   │   └── PotionController.js   # Controlador de Pocoes (Alquimia)
+│   │   ├── database.js         # Cliente REST Cloud Firestore com cache multi-tier
+│   │   ├── firebaseConfig.js   # Configuracao oficial wwcatalog-10546
+│   │   └── updater.js          # Rastreamento de releases na API do GitHub
+│   ├── data/
+│   │   └── fallbackData.js     # 512 registros embutidos para inicializacao instantanea (0ms)
 │   └── utils/
-│       └── helpers.js          # Utilitarios de sanitizacao HTML, Base64 e exportacao JSON
-└── assets/
-    └── img/                    # Texturas de pergaminho e emblemas de interface do Ministerio
+│       └── helpers.js          # Sanitizacao, Base64 e exportacao JSON
+├── android-app/                # Pacote Android nativo compilado (APK v1.0.3)
+├── assets/                     # Recursos visuais oficiais do Ministerio da Magia
+└── WWcatalog.apk               # Instalador executavel oficial para dispositivos Android
 ```
 
 ---

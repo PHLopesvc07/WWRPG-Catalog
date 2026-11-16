@@ -1,0 +1,71 @@
+/* ==========================================================================
+   BASE.CSS — MINISTÉRIO DA MAGIA (WWRPG CATALOG)
+   Reset, Tipografia, Acessibilidade e Fundo Otimizado
+   ========================================================================== */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:focus-visible {
+    outline: 2px dashed var(--stamp-red);
+    outline-offset: 4px;
+    border-radius: 2px;
+}
+
+body {
+    background-color: var(--parchment);
+    background-image: var(--bg-pergaminho);
+    background-size: cover;
+    background-position: center top;
+    background-repeat: repeat-y;
+
+    color: var(--ink);
+    font-family: var(--font-typewriter);
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 20px;
+    min-height: 100vh;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body.terminal-mode {
+    background-color: #0a0e16;
+    background-image:
+        radial-gradient(circle at 15% 15%, rgba(0, 240, 255, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 45%);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+code {
+    font-family: var(--font-mono);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.mt-10 { margin-top: 10px; }
+.mt-15 { margin-top: 15px; }
+.mt-20 { margin-top: 20px; }
+.mb-10 { margin-bottom: 10px; }
