@@ -46,8 +46,8 @@ cd mobile-rn && npm start
 
 A versao compilada e instalavel para dispositivos Android esta disponivel na release oficial do repositorio com rastreamento automatico de atualizacoes:
 
-- **Download Direto (.apk):** [WWcatalog.apk (Release v1.0.3)](https://github.com/PHLopesvc07/WWRPG-Catalog/releases/download/v1.0.3/WWcatalog.apk)
-- **Pagina da Release:** [Release v1.0.3 no GitHub](https://github.com/PHLopesvc07/WWRPG-Catalog/releases/tag/v1.0.3)
+- **Download Direto (.apk):** [WWcatalog.apk (Release v1.1.0)](https://github.com/PHLopesvc07/WWRPG-Catalog/releases/download/v1.1.0/WWcatalog.apk)
+- **Pagina da Release:** [Release v1.1.0 no GitHub](https://github.com/PHLopesvc07/WWRPG-Catalog/releases/tag/v1.1.0)
 
 A aplicacao mobile oferece:
 - Rastreamento automatico de releases via API do GitHub com notificacao e download integrado de novas versoes.
@@ -116,7 +116,7 @@ WWcatalog/
 │   │   └── fallbackData.js     # 512 registros embutidos para inicializacao instantanea (0ms)
 │   └── utils/
 │       └── helpers.js          # Sanitizacao, Base64 e exportacao JSON
-├── android-app/                # Pacote Android nativo compilado (APK v1.0.3)
+├── android-app/                # Pacote Android nativo compilado (APK v1.1.0)
 ├── assets/                     # Recursos visuais oficiais do Ministerio da Magia
 └── WWcatalog.apk               # Instalador executavel oficial para dispositivos Android
 ```

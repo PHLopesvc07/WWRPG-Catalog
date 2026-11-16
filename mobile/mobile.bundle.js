@@ -88,7 +88,7 @@ function escapeHtml(str) {
 const REPO_OWNER = "PHLopesvc07";
 const REPO_NAME = "WWRPG-Catalog";
 const GITHUB_API_URL = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/releases/latest`;
-const CURRENT_APP_VERSION = "1.0.3";
+const CURRENT_APP_VERSION = "1.1.0";
 
 /**
  * Compara duas versões em formato semver (ex: "v1.0.1" e "v1.0.0")
