@@ -4,10 +4,10 @@ O projeto Arquivo Geral do Ministério da Magia — W&W RPG Catalog foi desenvol
 
 **Integrantes:**
 
-Erick Joshua Revollo
-Pedro Henrique Lopes Vilela Coelho
-Tiago Bondezan Bazani
-Yuri Shinnishi de Queiroz Rossi
+- Erick Joshua Revollo
+- Pedro Henrique Lopes Vilela Coelho
+- Tiago Bondezan Bazani
+- Yuri Shinnishi de Queiroz Rossi
 
 # Arquivo Geral do Ministerio da Magia — W&W RPG Catalog (React & React Native)
 
