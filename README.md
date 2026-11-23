@@ -1,3 +1,14 @@
+# Equipe de Desenvolvimento
+
+O projeto Arquivo Geral do Ministério da Magia — W&W RPG Catalog foi desenvolvido por uma equipe de quatro integrantes, responsáveis pela concepção, desenvolvimento e estruturação do ecossistema de catalogação.
+
+**Integrantes:**
+
+Erick Joshua Revollo
+Pedro Henrique Lopes Vilela Coelho
+Tiago Bondezan Bazani
+Yuri Shinnishi de Queiroz Rossi
+
 # Arquivo Geral do Ministerio da Magia — W&W RPG Catalog (React & React Native)
 
 Aplicacao oficial de catalogacao, consulta rapida e exportacao de recursos para o sistema **Wands & Wizards RPG (W&W)**, conectada diretamente ao **Cloud Firestore** e agora modernizada com **React** (Web) e **React Native** (Mobile), estruturada em quatro arquivos departamentais independentes:
@@ -136,16 +147,3 @@ python -m http.server 8080
 ```
 
 Em seguida, acesse `http://localhost:8080` (ou a porta indicada no terminal) pelo navegador.
-
-Equipe de Desenvolvimento
-
-O projeto Arquivo Geral do Ministério da Magia — W&W RPG Catalog foi desenvolvido por uma equipe de quatro integrantes, responsáveis pela concepção, desenvolvimento e estruturação do ecossistema de catalogação.
-
-Integrantes:
-
-Erick Joshua Revollo
-Pedro Henrique Lopes Vilela Coelho
-Tiago Bondezan Bazani
-Yuri Shinnishi de Queiroz Rossi
-
-Equipe responsável pelo desenvolvimento e manutenção do sistema W&W RPG Catalog.
