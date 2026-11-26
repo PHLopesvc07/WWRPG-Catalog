@@ -9,6 +9,13 @@ O projeto Arquivo Geral do Ministério da Magia — W&W RPG Catalog foi desenvol
 - Tiago Bondezan Bazani
 - Yuri Shinnishi de Queiroz Rossi
 
+## Guias de Uso e Documentacao
+
+- **[Guia Simples de Navegacao (`NAVIGATION_GUIDE.md`)](./NAVIGATION_GUIDE.md)**: Manual básico de navegação pelo software.
+- **[Guia de Consulta da API (`API_GUIDE.md`)](./API_GUIDE.md)**: Documentacao dos endpoints REST do Cloud Firestore (`_indexes/{colecao}` e `{colecao}/{id}`), funcoes do modulo ES6 (`js/services/database.js`), exemplos em JavaScript/`curl` e esquemas JSON de todas as quatro colecoes.
+
+---
+
 ## Como Executar
 
 ### Aplicacao Web (React)
