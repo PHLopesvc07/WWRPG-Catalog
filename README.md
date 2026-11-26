@@ -9,17 +9,6 @@ O projeto Arquivo Geral do Ministério da Magia — W&W RPG Catalog foi desenvol
 - Tiago Bondezan Bazani
 - Yuri Shinnishi de Queiroz Rossi
 
-# Arquivo Geral do Ministerio da Magia — W&W RPG Catalog (React & React Native)
-
-Aplicacao oficial de catalogacao, consulta rapida e exportacao de recursos para o sistema **Wands & Wizards RPG (W&W)**, conectada diretamente ao **Cloud Firestore** e agora modernizada com **React** (Web) e **React Native** (Mobile), estruturada em quatro arquivos departamentais independentes:
-
-1. **D.R.C.C.M. — Animais e Criaturas Magicas** (92 especies armazenadas no Firestore com retratos embutidos em Base64, atributos, habilidades de combate e prontuario de injurias)
-2. **C.E.F. — Grande Compendio de Feiticos** (210 encantamentos armazenados no Firestore com pronuncia, nivel 1 a 7, categoria magica, pericia de conjuracao e condicao aplicada)
-3. **Compendio de Herbologia e Botanica Magica** (44 plantas magicas armazenadas no Firestore classificadas por raridade, nivel de herbologia, CD de manejo e usos alquimicos)
-4. **Catalogo Alquimico de Pocoes** (166 compostos, elixires, antidotos e venenos armazenados no Firestore com CD de preparo, tempo de fermentacao, via de administracao e ingredientes)
-
----
-
 ## Como Executar
 
 ### Aplicacao Web (React)
