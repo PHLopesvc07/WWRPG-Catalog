@@ -1,6 +1,6 @@
 # Guia de Consulta da API do Catalogo (Cloud Firestore) — W&W RPG
 
-Este documento descreve como consultar programaticamente os dados do **Arquivo Geral do Ministerio da Magia (WWRPG-Catalog)** diretamente no banco de dados **Cloud Firestore** a partir de aplicacoes externas (como fichas de personagem, roladores de dados, bots ou paineis do mestre) ou dentro do proprio ecossistema web do projeto.
+Como consultar os dados do **Arquivo Geral do Ministério da Magia (WWRPG-Catalog)** diretamente no banco de dados **Cloud Firestore** a partir de aplicações externas (como fichas de personagem, roladores de dados, bots ou painéis do mestre) ou dentro do próprio ecossistema web do projeto.
 
 ---
 
