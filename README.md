@@ -20,16 +20,6 @@ Aplicacao oficial de catalogacao, consulta rapida e exportacao de recursos para 
 
 ---
 
-## Arquitetura Moderna (React & React Native)
-
-O ecossistema foi estruturado para compartilhamento de regras de negocio e resiliencia de dados:
-
-- **`web/` (React + Vite)**: Aplicacao web completa em componentes React modulares, com gerenciamento reativo de estado, filtros instantaneos, modais de cadastro e suporte integral aos tres temas ministeriais (Pergaminho Claro, Noturno e Terminal Tatico).
-- **`mobile-rn/` (React Native)**: Aplicacao movel nativa em React Native utilizando `FlatList` de alta performance, Bottom Sheet modais, Bottom Navigation Bar nativa e alternador de temas.
-- **`shared/` (Modulo Compartilhado)**: Servico central de dados (`database.js`), fallback offline de 512 registros (`fallbackData.js`), configuracoes do Firebase (`firebaseConfig.js`) e rastreador de releases no GitHub (`updater.js`).
-
----
-
 ## Como Executar
 
 ### Aplicacao Web (React)
@@ -78,22 +68,6 @@ A aplicacao mobile oferece:
 ## Arquitetura Cloud Firestore e Carregamento Individual
 
 Nenhum arquivo JSON de catalogo ou imagem de criatura fica armazenado localmente no codigo-fonte; todos os dados sao puxados sob demanda do **Cloud Firestore** (`wwcatalog-10546`):
-
-- **Carregamento Sob Demanda por Aba (`ensureLoaded`):** Na abertura da aplicacao, apenas o indice da aba ativa e requisitado ao Firestore. Os catalogos de Feiticos, Plantas e Pocoes sao consultados no momento em que o usuario abre a respectiva aba.
-- **Camada 1 (Indices Leves em `_indexes/{colecao}`):** Cada modulo consulta inicialmente apenas o documento de indice leve da sua colecao no Firestore, permitindo filtragem e ordenacao instantaneas em memoria sem trafegar descricoes longas ou imagens Base64.
-- **Camada 2 (Documentos Individuais em `{colecao}/{id}` com Cache em Memoria):** Ao clicar em um item na lista lateral, a aplicacao requisita apenas aquele documento individual no Firestore (incluindo a imagem `fotoBase64` da criatura) e o mantem em cache (`Map`) para exibicao instantanea em consultas repetidas.
-- **Delegacao de Eventos e Debounce:** As listas laterais utilizam um unico listener delegado por container (`ul.record-list`) com `contain: content` no CSS e debounce de `80ms` nos campos de busca textual.
-
----
-
-## Sistema Visual
-
-A interface combina a identidade tipografica do **WWRPG-Ficha** com o guia tecnico **Ministry Bureaucracy (`design.md`)**, oferecendo tres modos de leitura persistidos em `localStorage`:
-
-- **Modo Claro (Pergaminho Ministerial):** Textura de pergaminho classico com tipografia serifada editorial (`Playfair Display`), dados tecnicos monoespacados (`JetBrains Mono`) e carimbos datilografados (`Special Elite`).
-- **Modo Escuro (Pergaminho Noturno):** Superficies escuras de alto contraste com detalhes em dourado ministerial (`#f1c40f`).
-- **Modo Terminal Tatico:** Estetica inspirada em terminais governamentais (`#0B1011`), com bordas chanfradas e acentos em ouro velho (`#D4AF37`) e verde-azulado (`#4A9E8E`).
-
 ---
 
 ## Estrutura de Diretorios
