@@ -1,6 +1,6 @@
 # Guia de Navegacao — Arquivo Geral do Ministerio da Magia
 
-Este guia apresenta instrucoes simples para navegar, filtrar registros, alternar modos visuais e utilizar os recursos do catalogo tanto na versao para computador quanto no aplicativo movel Android.
+Guia de instruções simples para navegar, filtrar registros, alternar modos visuais e utilizar os recursos do catalogo tanto na versão para computador quanto no aplicativo móvel Android.
 
 ---
 
@@ -8,10 +8,10 @@ Este guia apresenta instrucoes simples para navegar, filtrar registros, alternar
 
 O catalogo esta organizado em quatro departamentos ministeriais independentes:
 
-1. **Animais Magicos (D.R.C.C.M.):** 92 especies catalogadas com classificacao de periculosidade (X a XXXXX), licenca exigida, tipo, locomocao, atributos fisicos, habilidades de combate e prontuario veterinario de injurias.
-2. **Feiticos (C.E.F.):** 210 encantamentos organizados por nivel (1 a 7), categoria magica (Charme, Transfiguracao, Azaracao, Maldicao, Contrafeitico, Cura), pericia de conjuracao e condicao aplicada.
-3. **Plantas Magicas (Herbologia):** 44 especies botânicas com indicacao de raridade (Popular ou Dificil de Adquirir), nivel de herbologia (1 a 7), dificuldade de colheita/manejo (CD) e usos alquimicos.
-4. **Pocoes (Alquimia):** 166 receitas de elixires, antidotos, solucoes e venenos com dificuldade de preparo (CD), tempo de fermentacao, duracao e via de administracao.
+1. **Animais Magicos (D.R.C.C.M.):** 92 especies catalogadas
+2. **Feiticos (C.E.F.):** 210 encantamentos organizados por nivel (1 a 7)
+3. **Plantas Magicas (Herbologia):** 44 especies botânicas com indicacao de raridade 
+4. **Pocoes (Alquimia):** 166 receitas de elixires, antidotos, solucoes e venenos com dificuldade de preparo (CD)
 
 ---
 
