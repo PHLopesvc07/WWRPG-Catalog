@@ -101,7 +101,7 @@ function fromFirestoreDoc(docJson) {
     return out;
 }
 
-async function fetchWithTimeout(url, options = {}, timeoutMs = 8000) {
+async function fetchWithTimeout(url, options = {}, timeoutMs = 6000) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
     try {
@@ -331,40 +331,21 @@ function setLocalCacheItem(collectionName, id, data) {
 
 /**
  * 1. CARREGAMENTO RÁPIDO DO ÍNDICE DA COLEÇÃO NO FIRESTORE (Tier 1)
+ * Prioridade obrigatória: Cloud Firestore REST é a fonte primária de verdade.
+ * Fallbacks (cache local e fallback embutido) são estritamente último recurso (offline).
  */
 export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
-    // 1.1 Cache em memória ativa (0ms)
+    // 1.1 Cache em memória ativa na mesma sessão
     if (!forceRefresh && indexMemoryCache.has(collectionName)) {
         return indexMemoryCache.get(collectionName);
     }
 
-    // 1.2 Cache local persistente para inicialização imediata
-    if (!forceRefresh) {
-        const localCached = getLocalCacheIndex(collectionName);
-        if (localCached && localCached.length > 0) {
-            indexMemoryCache.set(collectionName, localCached);
-            // Atualiza em background sem travar o usuário
-            fetchCatalogIndex(collectionName, true).catch(() => {});
-            return localCached;
-        }
-    }
-
-    // 1.3 Se ainda não temos dados e não é refresh forçado, usa o fallback local embutido
-    if (!forceRefresh && FALLBACK_INDEXES && Array.isArray(FALLBACK_INDEXES[collectionName]) && FALLBACK_INDEXES[collectionName].length > 0) {
-        const defaultList = FALLBACK_INDEXES[collectionName].map(item => buildSummaryEntry(collectionName, item));
-        indexMemoryCache.set(collectionName, defaultList);
-        setLocalCacheIndex(collectionName, defaultList);
-        // Sincroniza em background
-        fetchCatalogIndex(collectionName, true).catch(() => {});
-        return defaultList;
-    }
-
     const summaryMap = new Map();
 
+    // 1.2 TENTATIVA PRIMÁRIA OBRIGATÓRIA: Cloud Firestore REST API
     try {
-        // 1.4 Consulta o documento de índice leve no Firestore (_indexes/{collectionName})
         const remoteIdx = await firestoreGetDoc("_indexes", collectionName);
-        if (remoteIdx && Array.isArray(remoteIdx.items)) {
+        if (remoteIdx && Array.isArray(remoteIdx.items) && remoteIdx.items.length > 0) {
             const remoteDeleted = new Set(remoteIdx.deletedIds || []);
             for (const entry of remoteIdx.items) {
                 const summary = buildSummaryEntry(collectionName, entry);
@@ -373,7 +354,7 @@ export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
                 }
             }
         } else {
-            // 1.5 Fallback remoto: se o documento _indexes não existir, lista os documentos da coleção diretamente do Firestore
+            // Fallback remoto: se o índice pré-compilado não existir, lista a coleção direta do Firestore
             const docs = await firestoreListCollection(collectionName);
             for (const doc of docs) {
                 const summary = buildSummaryEntry(collectionName, doc);
@@ -385,10 +366,10 @@ export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
             }
         }
     } catch (err) {
-        console.warn(`[Catalog] Falha ao consultar índice remoto de ${collectionName}:`, err);
+        console.warn(`[Catalog] Conexão com Firestore falhou para ${collectionName}:`, err);
     }
 
-    // Se o Firestore respondeu com itens, salva no cache e atualiza a memória
+    // Se o Firestore respondeu com dados reais, atualiza os caches e retorna
     if (summaryMap.size > 0) {
         const resultList = Array.from(summaryMap.values());
         indexMemoryCache.set(collectionName, resultList);
@@ -396,8 +377,17 @@ export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
         return resultList;
     }
 
-    // Fallback de emergência: se a rede falhou e nada foi baixado, usa o fallback local
-    if (FALLBACK_INDEXES && Array.isArray(FALLBACK_INDEXES[collectionName])) {
+    // 1.3 SEGUNDO RECURSO: Cache local persistente previamente salvo de conexões reais com o Firestore
+    const localCached = getLocalCacheIndex(collectionName);
+    if (localCached && Array.isArray(localCached) && localCached.length > 0) {
+        console.warn(`[Catalog] Firestore indisponível. Utilizando cache persistente para ${collectionName}.`);
+        indexMemoryCache.set(collectionName, localCached);
+        return localCached;
+    }
+
+    // 1.4 ÚLTIMO CASO ESTRITO (EMERGÊNCIA/OFFLINE TOTAL): Fallback local embutido
+    if (FALLBACK_INDEXES && Array.isArray(FALLBACK_INDEXES[collectionName]) && FALLBACK_INDEXES[collectionName].length > 0) {
+        console.warn(`[Catalog] AVISO: Firestore e cache local indisponíveis. Recorrendo ao fallback estático de emergência para ${collectionName}.`);
         const defaultList = FALLBACK_INDEXES[collectionName].map(item => buildSummaryEntry(collectionName, item));
         indexMemoryCache.set(collectionName, defaultList);
         return defaultList;
@@ -408,30 +398,40 @@ export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
 
 /**
  * 2. CARREGAMENTO INDIVIDUAL DE ITEM SOB DEMANDA NO FIRESTORE (Tier 2)
+ * Prioridade obrigatória: Cloud Firestore REST é consultado primeiro.
  */
 export async function fetchItemById(collectionName, id) {
     if (!id) return null;
     const cacheKey = `${collectionName}:${id}`;
 
-    // 1. Cache em memória para acesso repetido instantâneo (0ms)
+    // 2.1 Cache em memória para acesso repetido na mesma sessão
     if (itemMemoryCache.has(cacheKey)) {
         return itemMemoryCache.get(cacheKey);
     }
 
-    // 2. Cache em sessionStorage
-    const sessionCached = getLocalCacheItem(collectionName, id);
-    if (sessionCached) {
-        itemMemoryCache.set(cacheKey, sessionCached);
-        return sessionCached;
-    }
-
-    // 3. Busca documento individual diretamente no Cloud Firestore
+    // 2.2 TENTATIVA PRIMÁRIA: Busca documento individual diretamente no Cloud Firestore
     const remoteDoc = await firestoreGetDoc(collectionName, id);
     if (remoteDoc) {
         const data = { id, ...remoteDoc };
         itemMemoryCache.set(cacheKey, data);
         setLocalCacheItem(collectionName, id, data);
         return data;
+    }
+
+    // 2.3 SEGUNDO RECURSO: Cache persistente em sessionStorage
+    const sessionCached = getLocalCacheItem(collectionName, id);
+    if (sessionCached) {
+        itemMemoryCache.set(cacheKey, sessionCached);
+        return sessionCached;
+    }
+
+    // 2.4 ÚLTIMO CASO ESTRITO: Fallback estático embutido se Firestore falhou e item não está em cache
+    if (FALLBACK_INDEXES && Array.isArray(FALLBACK_INDEXES[collectionName])) {
+        const fallbackItem = FALLBACK_INDEXES[collectionName].find(item => item.id === id);
+        if (fallbackItem) {
+            console.warn(`[Catalog] AVISO: Firestore offline. Detalhe de ${id} obtido via fallback estático de emergência.`);
+            return { ...fallbackItem };
+        }
     }
 
     return null;
