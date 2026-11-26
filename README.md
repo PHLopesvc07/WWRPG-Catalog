@@ -9,7 +9,7 @@ O projeto Arquivo Geral do Ministério da Magia — W&W RPG Catalog foi desenvol
 - Tiago Bondezan Bazani
 - Yuri Shinnishi de Queiroz Rossi
 
-## Guias de Uso e Documentacao
+## Guias de Uso e Documentação
 
 - **[Guia Simples de Navegacao (`NAVIGATION_GUIDE.md`)](./NAVIGATION_GUIDE.md)**: Manual básico de navegação pelo software.
 - **[Guia de Consulta da API (`API_GUIDE.md`)](./API_GUIDE.md)**: Documentacao dos endpoints REST do Cloud Firestore (`_indexes/{colecao}` e `{colecao}/{id}`), funcoes do modulo ES6 (`js/services/database.js`), exemplos em JavaScript/`curl` e esquemas JSON de todas as quatro colecoes.
@@ -18,7 +18,7 @@ O projeto Arquivo Geral do Ministério da Magia — W&W RPG Catalog foi desenvol
 
 ## Como Executar
 
-### Aplicacao Web (React)
+### Aplicação Web (React)
 ```bash
 # Entrar no diretorio web e iniciar o servidor de desenvolvimento
 npm run dev:web
@@ -29,7 +29,7 @@ cd web && npm run dev
 npm run build:web
 ```
 
-### Aplicacao Movel (React Native)
+### Aplicação Móvel (React Native)
 ```bash
 # Iniciar o empacotador Metro do React Native
 npm run start:mobile
@@ -39,14 +39,14 @@ cd mobile-rn && npm start
 
 ---
 
-## Aplicativo Movel Android (.apk)
+## Aplicativo Móvel Android (.apk)
 
-A versao compilada e instalavel para dispositivos Android esta disponivel na release oficial do repositorio com rastreamento automatico de atualizacoes:
+A versão compilada e instalável para dispositivos Android esta disponível na release oficial do repositorio com rastreamento automatico de atualizações:
 
 - **Download Direto (.apk):** [WWcatalog.apk (Release v1.1.0)](https://github.com/PHLopesvc07/WWRPG-Catalog/releases/download/v1.1.0/WWcatalog.apk)
 - **Pagina da Release:** [Release v1.1.0 no GitHub](https://github.com/PHLopesvc07/WWRPG-Catalog/releases/tag/v1.1.0)
 
-A aplicacao mobile oferece:
+A aplicação mobile oferece:
 - Rastreamento automatico de releases via API do GitHub com notificacao e download integrado de novas versoes.
 - Navegacao otimizada nativa com Bottom Navigation Bar e Bottom Sheet modal para fichas.
 - Consulta direta e em tempo real ao Cloud Firestore (`wwcatalog-10546`) com cache multi-camadas offline.
