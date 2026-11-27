@@ -121,6 +121,69 @@ class MainActivity : ComponentActivity() {
                 startActivity(intent)
             } catch (_: Exception) {}
         }
+
+        private fun getApiCacheFolder(): java.io.File {
+            val dir = java.io.File(filesDir, "ww_api_cache")
+            if (!dir.exists()) {
+                dir.mkdirs()
+            }
+            return dir
+        }
+
+        private fun sanitizeCacheKey(key: String): String {
+            return key.replace(Regex("[^a-zA-Z0-9._-]"), "_")
+        }
+
+        @JavascriptInterface
+        fun saveCacheFile(key: String, content: String): Boolean {
+            return try {
+                val file = java.io.File(getApiCacheFolder(), "${sanitizeCacheKey(key)}.json")
+                file.writeText(content, Charsets.UTF_8)
+                true
+            } catch (_: Exception) {
+                false
+            }
+        }
+
+        @JavascriptInterface
+        fun saveCacheBatch(batchJson: String): Boolean {
+            return try {
+                val folder = getApiCacheFolder()
+                val jsonObj = org.json.JSONObject(batchJson)
+                val keys = jsonObj.keys()
+                while (keys.hasNext()) {
+                    val key = keys.next()
+                    val value = jsonObj.optString(key, "")
+                    if (value.isNotEmpty()) {
+                        val file = java.io.File(folder, "${sanitizeCacheKey(key)}.json")
+                        file.writeText(value, Charsets.UTF_8)
+                    }
+                }
+                true
+            } catch (_: Exception) {
+                false
+            }
+        }
+
+        @JavascriptInterface
+        fun readCacheFile(key: String): String? {
+            return try {
+                val file = java.io.File(getApiCacheFolder(), "${sanitizeCacheKey(key)}.json")
+                if (file.exists()) file.readText(Charsets.UTF_8) else null
+            } catch (_: Exception) {
+                null
+            }
+        }
+
+        @JavascriptInterface
+        fun removeCacheFile(key: String): Boolean {
+            return try {
+                val file = java.io.File(getApiCacheFolder(), "${sanitizeCacheKey(key)}.json")
+                if (file.exists()) file.delete() else true
+            } catch (_: Exception) {
+                false
+            }
+        }
     }
 
     override fun onDestroy() {

@@ -43,8 +43,8 @@ cd mobile-rn && npm start
 
 A versão compilada e instalável para dispositivos Android esta disponível na release oficial do repositorio com rastreamento automatico de atualizações:
 
-- **Download Direto (.apk):** [WWcatalog.apk (Release v1.1.0)](https://github.com/PHLopesvc07/WWRPG-Catalog/releases/download/v1.1.0/WWcatalog.apk)
-- **Pagina da Release:** [Release v1.1.0 no GitHub](https://github.com/PHLopesvc07/WWRPG-Catalog/releases/tag/v1.1.0)
+- **Download Direto (.apk):** [WWcatalog.apk (Release v1.2.0)](https://github.com/PHLopesvc07/WWRPG-Catalog/releases/download/v1.2.0/WWcatalog.apk)
+- **Pagina da Release:** [Release v1.2.0 no GitHub](https://github.com/PHLopesvc07/WWRPG-Catalog/releases/tag/v1.2.0)
 
 A aplicação mobile oferece:
 - Rastreamento automatico de releases via API do GitHub com notificacao e download integrado de novas versoes.
@@ -90,14 +90,15 @@ WWcatalog/
 │       └── theme/              # Contexto de temas (Pergaminho, Noturno, Terminal)
 ├── shared/                     # Logica central compartilhada entre Web e Mobile
 │   ├── services/
-│   │   ├── database.js         # Cliente REST Cloud Firestore com cache multi-tier
+│   │   ├── cacheStore.js       # Motor de cache persistente da API (IndexedDB, localStorage, Nativo e AsyncStorage)
+│   │   ├── database.js         # Cliente REST Cloud Firestore com Stale-While-Revalidate
 │   │   ├── firebaseConfig.js   # Configuracao oficial wwcatalog-10546
 │   │   └── updater.js          # Rastreamento de releases na API do GitHub
 │   ├── data/
-│   │   └── fallbackData.js     # 512 registros embutidos para inicializacao instantanea (0ms)
+│   │   └── fallbackData.js     # 512 registros embutidos para contingencia offline estrita
 │   └── utils/
 │       └── helpers.js          # Sanitizacao, Base64 e exportacao JSON
-├── android-app/                # Pacote Android nativo compilado (APK v1.1.0)
+├── android-app/                # Pacote Android nativo compilado (APK v1.2.0)
 ├── assets/                     # Recursos visuais oficiais do Ministerio da Magia
 └── WWcatalog.apk               # Instalador executavel oficial para dispositivos Android
 ```

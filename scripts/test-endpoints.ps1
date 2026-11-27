@@ -16,7 +16,7 @@ function Test-Endpoint {
     $ok = $false
     $details = ""
     try {
-        $res = Invoke-RestMethod -Uri $Url -Method Get -TimeoutSec 15 -Headers @{ "User-Agent" = "WWCatalog-Test/1.1.0" }
+        $res = Invoke-RestMethod -Uri $Url -Method Get -TimeoutSec 15 -Headers @{ "User-Agent" = "WWCatalog-Test/1.2.0" }
         $sw.Stop()
         $status = 200
         if ($Validator) {
@@ -129,7 +129,7 @@ Test-Endpoint "GitHub Releases" "GET releases/latest" "https://api.github.com/re
     $apkAsset = @($assets | Where-Object { $_.name -like "*WWcatalog.apk*" })
     $hasApk = ($apkAsset.Count -gt 0)
     $size = if ($hasApk) { $apkAsset[0].size } else { 0 }
-    @{ Ok = ($tag -eq "v1.1.0" -and $hasApk); Message = "Versao: $tag | APK presente: $hasApk ($size bytes)" }
+    @{ Ok = ($tag -eq "v1.2.0" -and $hasApk); Message = "Versao: $tag | APK presente: $hasApk ($size bytes)" }
 }
 
 Test-Endpoint "GitHub Releases" "GET releases" "https://api.github.com/repos/PHLopesvc07/WWRPG-Catalog/releases" {

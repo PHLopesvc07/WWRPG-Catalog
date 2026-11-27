@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Header from './components/Header.jsx';
 import TabsNav from './components/TabsNav.jsx';
 import CreatureArchive from './components/CreatureArchive.jsx';
@@ -17,7 +17,9 @@ import {
   fetchItemById,
   saveRecord,
   saveBulkRecords,
-  deleteRecord
+  deleteRecord,
+  subscribeToCatalogUpdates,
+  warmUpFullApiCache
 } from '@shared/services/database.js';
 
 export default function App() {
@@ -58,7 +60,12 @@ export default function App() {
     setTheme(prev => (prev === 'terminal' ? 'light' : 'terminal'));
   };
 
-  // Carrega os índices de todas as 4 coleções em paralelo (0ms com fallback offline)
+  const selectedIdRef = useRef(null);
+  useEffect(() => {
+    selectedIdRef.current = selectedId;
+  }, [selectedId]);
+
+  // Carrega os índices de todas as 4 coleções em paralelo (instantâneo via cache da API em aberturas posteriores)
   const loadAllCatalogs = useCallback(async () => {
     try {
       const [cr, sp, pl, po] = await Promise.all([
@@ -73,16 +80,32 @@ export default function App() {
       setPotions(po);
 
       // Seleciona a primeira criatura por padrão se nenhuma estiver selecionada
-      if (cr.length > 0 && !selectedId) {
+      if (cr.length > 0 && !selectedIdRef.current) {
         selectAndLoadItem(COLLECTIONS.CREATURES, cr[0].id);
       }
+
+      // Na primeira interação (ou quando houver atualização remota), baixa o acervo completo para o cache persistente
+      warmUpFullApiCache();
     } catch (err) {
       console.error('[W&W React] Erro ao carregar catálogos:', err);
     }
-  }, [selectedId]);
+  }, []);
 
   useEffect(() => {
     loadAllCatalogs();
+
+    const unsubscribe = subscribeToCatalogUpdates(evt => {
+      if (evt.type === 'index' && Array.isArray(evt.items)) {
+        if (evt.collection === COLLECTIONS.CREATURES) setCreatures(evt.items);
+        else if (evt.collection === COLLECTIONS.SPELLS) setSpells(evt.items);
+        else if (evt.collection === COLLECTIONS.PLANTS) setPlants(evt.items);
+        else if (evt.collection === COLLECTIONS.POTIONS) setPotions(evt.items);
+      } else if (evt.type === 'document' && evt.data && evt.id === selectedIdRef.current) {
+        setSelectedDetail(evt.data);
+      }
+    });
+
+    return () => unsubscribe();
   }, [loadAllCatalogs]);
 
   // Carrega os detalhes do item sob demanda (Tier 2)

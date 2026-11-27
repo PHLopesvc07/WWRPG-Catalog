@@ -9,7 +9,12 @@ import { CreatureController } from "./controllers/CreatureController.js";
 import { SpellController } from "./controllers/SpellController.js";
 import { PlantController } from "./controllers/PlantController.js";
 import { PotionController } from "./controllers/PotionController.js";
-import { initDatabaseConnection } from "./services/database.js";
+import {
+    COLLECTIONS,
+    initDatabaseConnection,
+    subscribeToCatalogUpdates,
+    warmUpFullApiCache
+} from "./services/database.js";
 
 async function startApp() {
     try {
@@ -36,15 +41,51 @@ async function startApp() {
             }
         });
 
+        // Reatividade para revalidacao silenciosa do cache da API em background
+        subscribeToCatalogUpdates(evt => {
+            if (evt.type === "index" && Array.isArray(evt.items)) {
+                if (evt.collection === COLLECTIONS.CREATURES && creatureCtrl.loaded) {
+                    creatureCtrl.indexData = evt.items;
+                    creatureCtrl.updateBadgeCount();
+                    creatureCtrl.applyFilters();
+                } else if (evt.collection === COLLECTIONS.SPELLS && spellCtrl.loaded) {
+                    spellCtrl.indexData = evt.items;
+                    spellCtrl.updateBadgeCount();
+                    spellCtrl.applyFilters();
+                } else if (evt.collection === COLLECTIONS.PLANTS && plantCtrl.loaded) {
+                    plantCtrl.indexData = evt.items;
+                    plantCtrl.updateBadgeCount();
+                    plantCtrl.applyFilters();
+                } else if (evt.collection === COLLECTIONS.POTIONS && potionCtrl.loaded) {
+                    potionCtrl.indexData = evt.items;
+                    potionCtrl.updateBadgeCount();
+                    potionCtrl.applyFilters();
+                }
+            } else if (evt.type === "document" && evt.data) {
+                if (evt.collection === COLLECTIONS.CREATURES && creatureCtrl.activeCreatureId === evt.id) {
+                    creatureCtrl.selectAndLoadCreature(evt.id);
+                } else if (evt.collection === COLLECTIONS.SPELLS && spellCtrl.activeSpellId === evt.id) {
+                    spellCtrl.selectAndLoadSpell(evt.id);
+                } else if (evt.collection === COLLECTIONS.PLANTS && plantCtrl.activePlantId === evt.id) {
+                    plantCtrl.selectAndLoadPlant(evt.id);
+                } else if (evt.collection === COLLECTIONS.POTIONS && potionCtrl.activePotionId === evt.id) {
+                    potionCtrl.selectAndLoadPotion(evt.id);
+                }
+            }
+        });
+
         await initDatabaseConnection();
 
-        // Carregamento paralelo em lote de todos os 4 catálogos imediatamente
+        // Carregamento paralelo de todos os 4 catalogos (instantaneo em aberturas posteriores via cache da API)
         await Promise.allSettled([
             creatureCtrl.ensureLoaded(),
             spellCtrl.ensureLoaded(),
             plantCtrl.ensureLoaded(),
             potionCtrl.ensureLoaded()
         ]);
+
+        // Na primeira interacao, baixa e persiste em segundo plano todas as fichas completas da API
+        warmUpFullApiCache();
     } catch (err) {
         console.error("[W&W Catalog] Erro ao inicializar catálogos:", err);
     }

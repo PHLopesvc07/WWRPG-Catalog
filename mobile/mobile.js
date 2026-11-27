@@ -8,7 +8,9 @@ import {
     COLLECTIONS,
     fetchCatalogIndex,
     fetchItemById,
-    saveRecord
+    saveRecord,
+    subscribeToCatalogUpdates,
+    warmUpFullApiCache
 } from "../js/services/database.js";
 import { escapeHtml } from "../js/utils/helpers.js";
 import { checkForAppUpdates, CURRENT_APP_VERSION } from "../js/services/updater.js";
@@ -16,6 +18,7 @@ import { checkForAppUpdates, CURRENT_APP_VERSION } from "../js/services/updater.
 class MobileCatalogApp {
     constructor() {
         this.activeCategory = "creatures";
+        this.activeSheetItem = null;
         this.data = {
             creatures: [],
             spells: [],
@@ -37,8 +40,45 @@ class MobileCatalogApp {
         this.setupBottomNav();
         this.setupModal();
         this.setupFilters();
+        this.setupCacheReactivity();
         this.checkUpdates();
         await this.loadAllCatalogs();
+        warmUpFullApiCache();
+    }
+
+    setupCacheReactivity() {
+        subscribeToCatalogUpdates(evt => {
+            if (evt.type === "index" && Array.isArray(evt.items)) {
+                if (evt.collection === COLLECTIONS.CREATURES) {
+                    this.data.creatures = evt.items;
+                    this.updateBadge("m-badge-creatures", evt.items.length);
+                    this.applyCreatureFilters();
+                } else if (evt.collection === COLLECTIONS.SPELLS) {
+                    this.data.spells = evt.items;
+                    this.updateBadge("m-badge-spells", evt.items.length);
+                    this.applySpellFilters();
+                } else if (evt.collection === COLLECTIONS.PLANTS) {
+                    this.data.plants = evt.items;
+                    this.updateBadge("m-badge-plants", evt.items.length);
+                    this.applyPlantFilters();
+                } else if (evt.collection === COLLECTIONS.POTIONS) {
+                    this.data.potions = evt.items;
+                    this.updateBadge("m-badge-potions", evt.items.length);
+                    this.applyPotionFilters();
+                }
+            } else if (
+                evt.type === "document" &&
+                evt.data &&
+                this.activeSheetItem &&
+                this.activeSheetItem.category === evt.collection &&
+                this.activeSheetItem.id === evt.id
+            ) {
+                const modal = document.getElementById("mobile-sheet-modal");
+                if (modal && modal.classList.contains("open")) {
+                    this.openDetailSheet(evt.collection, evt.id);
+                }
+            }
+        });
     }
 
     setupTheme() {
@@ -418,6 +458,7 @@ class MobileCatalogApp {
     }
 
     async openDetailSheet(category, id) {
+        this.activeSheetItem = { category, id };
         const modal = document.getElementById("mobile-sheet-modal");
         const body = document.getElementById("mobile-modal-body");
         const title = document.getElementById("mobile-modal-title");

@@ -1,0 +1,71 @@
+name: Build Web & Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build Standalone & Mobile Bundles
+        run: |
+          node scripts/build-bundle.js
+          cp -f js/bundle.js android-app/app/src/main/assets/js/bundle.js
+          cp -f mobile/mobile.bundle.js android-app/app/src/main/assets/mobile/mobile.bundle.js
+          cp -f shared/services/cacheStore.js android-app/app/src/main/assets/shared/services/cacheStore.js
+          cp -f shared/services/database.js android-app/app/src/main/assets/shared/services/database.js
+          cp -f shared/services/updater.js android-app/app/src/main/assets/shared/services/updater.js
+          cp -f js/services/cacheStore.js android-app/app/src/main/assets/js/services/cacheStore.js
+          cp -f js/services/database.js android-app/app/src/main/assets/js/services/database.js
+          cp -f js/services/updater.js android-app/app/src/main/assets/js/services/updater.js
+
+      - name: Build React Web App (Vite)
+        working-directory: web
+        run: |
+          npm ci
+          npm run build
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Assemble Android APK
+        working-directory: android-app
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Prepare WWcatalog.apk
+        run: |
+          cp android-app/app/build/outputs/apk/debug/app-debug.apk WWcatalog.apk
+          ls -lh WWcatalog.apk
+
+      - name: Upload Compiled APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wwcatalog-apk
+          path: WWcatalog.apk
+          if-no-files-found: error
+
+      - name: Upload Web Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wwcatalog-web-dist
+          path: web/dist
+          if-no-files-found: error

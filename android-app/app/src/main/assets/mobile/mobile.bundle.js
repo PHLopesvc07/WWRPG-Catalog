@@ -1,6 +1,6 @@
 ﻿(function() {
     'use strict';
-    console.log('[W&W Catalog Mobile] Inicializando Versão Móvel (Standalone Bundle)...');
+    console.log('[W&W Catalog Mobile] Inicializando Versao Movel (Standalone Bundle)...');
 
     /**
  * UTILITÁRIOS GERAIS — MINISTÉRIO DA MAGIA (W&W RPG)
@@ -88,7 +88,7 @@ function escapeHtml(str) {
 const REPO_OWNER = "PHLopesvc07";
 const REPO_NAME = "WWRPG-Catalog";
 const GITHUB_API_URL = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/releases/latest`;
-const CURRENT_APP_VERSION = "1.1.0";
+const CURRENT_APP_VERSION = "1.2.0";
 
 /**
  * Compara duas versões em formato semver (ex: "v1.0.1" e "v1.0.0")
@@ -5149,14 +5149,648 @@ const FALLBACK_INDEXES = {
 };
 
     /**
- * SERVIÇO DE BANCO DE DADOS E CARREGAMENTO INDIVIDUAL SOB DEMANDA (FIRESTORE)
- * Todos os índices e documentos individuais (incluindo retratos Base64 de criaturas)
- * são consultados diretamente do Cloud Firestore com cache em memória e cache local persistente
- * para proporcionar velocidade instantânea.
+ * MOTOR DE CACHE PERSISTENTE MULTIPLATAFORMA DA API (NAVEGADOR + MOBILE WEBVIEW + ANDROID + REACT NATIVE)
+ *
+ * Responsavel por persistir localmente as informacoes obtidas da API Cloud Firestore logo na
+ * primeira interacao, permitindo exibicao instantanea nas aberturas subsequentes:
+ * - Navegador / PWA / Standalone: localStorage (indices rapidos) + IndexedDB (acervo completo e imagens Base64)
+ * - Aplicativo Android (WebView): Ponte nativa interna (filesDir) + IndexedDB + localStorage
+ * - Aplicativo React Native: Adaptador persistente AsyncStorage injetavel
+ *
+ * Regra de integridade: Apenas dados reais provenientes do Firestore (source === "firestore")
+ * sao gravados neste cache. Dados estaticos de fallback nunca sao persistidos aqui.
+ */
+
+const CACHE_SCHEMA_VERSION = 2;
+const IDB_DATABASE_NAME = "WWCatalogApiCacheDB";
+const IDB_DATABASE_VERSION = 1;
+
+const LS_INDEX_PREFIX = "ww_api_v2_idx_";
+const LS_DOC_PREFIX = "ww_api_v2_doc_";
+const LS_META_PREFIX = "ww_api_v2_meta_";
+const LS_MIGRATION_FLAG = "ww_api_v2_migrated";
+
+const CACHE_GLOBAL_SCOPE = typeof globalThis !== "undefined"
+    ? globalThis
+    : (typeof window !== "undefined" ? window : {});
+
+let customStorageAdapter = null;
+let idbConnectionPromise = null;
+let legacyCleanupDone = false;
+
+function hasWebLocalStorage() {
+    try {
+        return typeof CACHE_GLOBAL_SCOPE.localStorage !== "undefined" && CACHE_GLOBAL_SCOPE.localStorage !== null;
+    } catch {
+        return false;
+    }
+}
+
+function hasWebSessionStorage() {
+    try {
+        return typeof CACHE_GLOBAL_SCOPE.sessionStorage !== "undefined" && CACHE_GLOBAL_SCOPE.sessionStorage !== null;
+    } catch {
+        return false;
+    }
+}
+
+function hasWebIndexedDB() {
+    try {
+        return typeof CACHE_GLOBAL_SCOPE.indexedDB !== "undefined" && CACHE_GLOBAL_SCOPE.indexedDB !== null;
+    } catch {
+        return false;
+    }
+}
+
+function hasNativeAndroidCache() {
+    try {
+        return Boolean(
+            CACHE_GLOBAL_SCOPE.AndroidNative &&
+            typeof CACHE_GLOBAL_SCOPE.AndroidNative.readCacheFile === "function" &&
+            typeof CACHE_GLOBAL_SCOPE.AndroidNative.saveCacheFile === "function"
+        );
+    } catch {
+        return false;
+    }
+}
+
+/**
+ * Remove chaves legadas da v1 que podiam conter dados de fallback misturados
+ */
+function cleanupLegacyCacheKeys() {
+    if (legacyCleanupDone) return;
+    legacyCleanupDone = true;
+
+    if (!hasWebLocalStorage()) return;
+    try {
+        if (CACHE_GLOBAL_SCOPE.localStorage.getItem(LS_MIGRATION_FLAG) === "1") return;
+        const legacyCollections = ["creatures", "spells", "plants", "potions"];
+        for (const col of legacyCollections) {
+            CACHE_GLOBAL_SCOPE.localStorage.removeItem(`ww_idx_${col}`);
+        }
+        CACHE_GLOBAL_SCOPE.localStorage.setItem(LS_MIGRATION_FLAG, "1");
+    } catch {
+        // Ignora restricoes de storage
+    }
+}
+
+/**
+ * Configura adaptador externo de armazenamento persistente (ex: AsyncStorage no React Native)
+ */
+function configurePersistentStorageAdapter(adapter) {
+    if (adapter && typeof adapter.getItem === "function" && typeof adapter.setItem === "function") {
+        customStorageAdapter = adapter;
+    }
+}
+
+/**
+ * Abre conexao unica com IndexedDB no navegador / WebView para suportar dezenas de MBs (incluindo retratos Base64)
+ */
+function openIndexedDbConnection() {
+    if (!hasWebIndexedDB()) return Promise.resolve(null);
+    if (idbConnectionPromise) return idbConnectionPromise;
+
+    idbConnectionPromise = new Promise(resolve => {
+        try {
+            const request = CACHE_GLOBAL_SCOPE.indexedDB.open(IDB_DATABASE_NAME, IDB_DATABASE_VERSION);
+
+            request.onupgradeneeded = event => {
+                const db = event.target.result;
+                if (!db.objectStoreNames.contains("indexes")) {
+                    db.createObjectStore("indexes", { keyPath: "collection" });
+                }
+                if (!db.objectStoreNames.contains("documents")) {
+                    const docStore = db.createObjectStore("documents", { keyPath: "cacheKey" });
+                    docStore.createIndex("by_collection", "collection", { unique: false });
+                }
+                if (!db.objectStoreNames.contains("meta")) {
+                    db.createObjectStore("meta", { keyPath: "key" });
+                }
+            };
+
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => {
+                idbConnectionPromise = null;
+                resolve(null);
+            };
+            request.onblocked = () => resolve(null);
+        } catch {
+            idbConnectionPromise = null;
+            resolve(null);
+        }
+    });
+
+    return idbConnectionPromise;
+}
+
+async function idbGetRecord(storeName, key) {
+    const db = await openIndexedDbConnection();
+    if (!db) return null;
+
+    return new Promise(resolve => {
+        try {
+            const tx = db.transaction(storeName, "readonly");
+            const store = tx.objectStore(storeName);
+            const req = store.get(key);
+            req.onsuccess = () => resolve(req.result || null);
+            req.onerror = () => resolve(null);
+        } catch {
+            resolve(null);
+        }
+    });
+}
+
+async function idbPutRecord(storeName, value) {
+    const db = await openIndexedDbConnection();
+    if (!db) return false;
+
+    return new Promise(resolve => {
+        try {
+            const tx = db.transaction(storeName, "readwrite");
+            const store = tx.objectStore(storeName);
+            store.put(value);
+            tx.oncomplete = () => resolve(true);
+            tx.onerror = () => resolve(false);
+        } catch {
+            resolve(false);
+        }
+    });
+}
+
+async function idbPutDocumentsBatch(records) {
+    if (!Array.isArray(records) || records.length === 0) return true;
+    const db = await openIndexedDbConnection();
+    if (!db) return false;
+
+    return new Promise(resolve => {
+        try {
+            const tx = db.transaction("documents", "readwrite");
+            const store = tx.objectStore("documents");
+            for (const rec of records) {
+                store.put(rec);
+            }
+            tx.oncomplete = () => resolve(true);
+            tx.onerror = () => resolve(false);
+        } catch {
+            resolve(false);
+        }
+    });
+}
+
+async function idbDeleteRecord(storeName, key) {
+    const db = await openIndexedDbConnection();
+    if (!db) return false;
+
+    return new Promise(resolve => {
+        try {
+            const tx = db.transaction(storeName, "readwrite");
+            const store = tx.objectStore(storeName);
+            store.delete(key);
+            tx.oncomplete = () => resolve(true);
+            tx.onerror = () => resolve(false);
+        } catch {
+            resolve(false);
+        }
+    });
+}
+
+function isValidApiIndexPayload(parsed) {
+    return Boolean(
+        parsed &&
+        parsed.schemaVersion === CACHE_SCHEMA_VERSION &&
+        parsed.source === "firestore" &&
+        Array.isArray(parsed.items) &&
+        parsed.items.length > 0
+    );
+}
+
+function isValidApiDocPayload(parsed) {
+    return Boolean(
+        parsed &&
+        parsed.schemaVersion === CACHE_SCHEMA_VERSION &&
+        parsed.source === "firestore" &&
+        parsed.data &&
+        typeof parsed.data === "object"
+    );
+}
+
+/**
+ * Le o indice da colecao previamente baixado da API
+ */
+async function readCachedApiIndex(collectionName) {
+    cleanupLegacyCacheKeys();
+    const storageKey = `${LS_INDEX_PREFIX}${collectionName}`;
+
+    // 1. Caminho ultrarrapido sincrono via localStorage (Navegador e WebView)
+    if (hasWebLocalStorage()) {
+        try {
+            const raw = CACHE_GLOBAL_SCOPE.localStorage.getItem(storageKey);
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                if (isValidApiIndexPayload(parsed)) return parsed;
+            }
+        } catch {
+            // Prossegue para os demais motores de armazenamento
+        }
+    }
+
+    // 2. Armazenamento interno nativo Android (quando em APK WebView)
+    if (hasNativeAndroidCache()) {
+        try {
+            const raw = CACHE_GLOBAL_SCOPE.AndroidNative.readCacheFile(`idx_${collectionName}`);
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                if (isValidApiIndexPayload(parsed)) return parsed;
+            }
+        } catch {
+            // Prossegue
+        }
+    }
+
+    // 3. Adaptador persistente externo (React Native AsyncStorage)
+    if (customStorageAdapter) {
+        try {
+            const raw = await customStorageAdapter.getItem(storageKey);
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                if (isValidApiIndexPayload(parsed)) return parsed;
+            }
+        } catch {
+            // Prossegue
+        }
+    }
+
+    // 4. IndexedDB (alta capacidade no Navegador / WebView)
+    const idbRecord = await idbGetRecord("indexes", collectionName);
+    if (isValidApiIndexPayload(idbRecord)) {
+        if (hasWebLocalStorage()) {
+            try {
+                CACHE_GLOBAL_SCOPE.localStorage.setItem(storageKey, JSON.stringify(idbRecord));
+            } catch {
+                // Ignora quota
+            }
+        }
+        return idbRecord;
+    }
+
+    return null;
+}
+
+/**
+ * Persiste o indice obtido diretamente da API Cloud Firestore
+ */
+async function writeCachedApiIndex(collectionName, items, remoteUpdatedAt = "") {
+    cleanupLegacyCacheKeys();
+    if (!Array.isArray(items) || items.length === 0) return false;
+
+    const payload = {
+        schemaVersion: CACHE_SCHEMA_VERSION,
+        source: "firestore",
+        collection: collectionName,
+        savedAt: Date.now(),
+        remoteUpdatedAt: remoteUpdatedAt || "",
+        count: items.length,
+        items
+    };
+
+    const storageKey = `${LS_INDEX_PREFIX}${collectionName}`;
+    const serialized = JSON.stringify(payload);
+
+    if (hasWebLocalStorage()) {
+        try {
+            CACHE_GLOBAL_SCOPE.localStorage.setItem(storageKey, serialized);
+        } catch {
+            // Quota excedida no localStorage; IndexedDB assumira
+        }
+    }
+
+    if (hasNativeAndroidCache()) {
+        try {
+            CACHE_GLOBAL_SCOPE.AndroidNative.saveCacheFile(`idx_${collectionName}`, serialized);
+        } catch {
+            // Ignora falha nativa
+        }
+    }
+
+    if (customStorageAdapter) {
+        try {
+            await customStorageAdapter.setItem(storageKey, serialized);
+        } catch {
+            // Ignora falha do adaptador
+        }
+    }
+
+    await idbPutRecord("indexes", payload);
+    return true;
+}
+
+/**
+ * Le um documento completo individual previamente baixado da API
+ */
+async function readCachedApiDocument(collectionName, id) {
+    if (!collectionName || !id) return null;
+    const cacheKey = `${collectionName}:${id}`;
+    const storageKey = `${LS_DOC_PREFIX}${cacheKey}`;
+
+    // 1. Armazenamento interno nativo Android
+    if (hasNativeAndroidCache()) {
+        try {
+            const raw = CACHE_GLOBAL_SCOPE.AndroidNative.readCacheFile(`doc_${collectionName}_${id}`);
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                if (isValidApiDocPayload(parsed)) return parsed;
+            }
+        } catch {
+            // Prossegue
+        }
+    }
+
+    // 2. Adaptador persistente externo (React Native AsyncStorage)
+    if (customStorageAdapter) {
+        try {
+            const raw = await customStorageAdapter.getItem(storageKey);
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                if (isValidApiDocPayload(parsed)) return parsed;
+            }
+        } catch {
+            // Prossegue
+        }
+    }
+
+    // 3. IndexedDB (Navegador Desktop, Mobile Browser e WebView)
+    const idbRecord = await idbGetRecord("documents", cacheKey);
+    if (isValidApiDocPayload(idbRecord)) {
+        return idbRecord;
+    }
+
+    // 4. Contingencia em sessionStorage caso IndexedDB esteja bloqueado em modo privado restrito
+    if (hasWebSessionStorage()) {
+        try {
+            const raw = CACHE_GLOBAL_SCOPE.sessionStorage.getItem(storageKey);
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                if (isValidApiDocPayload(parsed)) return parsed;
+            }
+        } catch {
+            // Ignora
+        }
+    }
+
+    return null;
+}
+
+/**
+ * Persiste um documento individual obtido da API Cloud Firestore
+ */
+async function writeCachedApiDocument(collectionName, id, data) {
+    if (!collectionName || !id || !data) return false;
+    const cacheKey = `${collectionName}:${id}`;
+    const storageKey = `${LS_DOC_PREFIX}${cacheKey}`;
+
+    const record = {
+        cacheKey,
+        schemaVersion: CACHE_SCHEMA_VERSION,
+        source: "firestore",
+        collection: collectionName,
+        id,
+        savedAt: Date.now(),
+        data
+    };
+
+    const serialized = JSON.stringify(record);
+
+    if (hasNativeAndroidCache()) {
+        try {
+            CACHE_GLOBAL_SCOPE.AndroidNative.saveCacheFile(`doc_${collectionName}_${id}`, serialized);
+        } catch {
+            // Ignora
+        }
+    }
+
+    if (customStorageAdapter) {
+        try {
+            await customStorageAdapter.setItem(storageKey, serialized);
+        } catch {
+            // Ignora
+        }
+    }
+
+    const storedInIdb = await idbPutRecord("documents", record);
+    if (!storedInIdb && hasWebSessionStorage() && serialized.length < 180000) {
+        try {
+            CACHE_GLOBAL_SCOPE.sessionStorage.setItem(storageKey, serialized);
+        } catch {
+            // Quota excedida
+        }
+    }
+
+    return true;
+}
+
+/**
+ * Persiste em lote dezenas de documentos baixados da API em uma unica transacao rapida
+ */
+async function writeCachedApiDocumentsBatch(collectionName, docsArray) {
+    if (!collectionName || !Array.isArray(docsArray) || docsArray.length === 0) return false;
+
+    const now = Date.now();
+    const records = [];
+
+    for (const doc of docsArray) {
+        if (!doc || !doc.id) continue;
+        records.push({
+            cacheKey: `${collectionName}:${doc.id}`,
+            schemaVersion: CACHE_SCHEMA_VERSION,
+            source: "firestore",
+            collection: collectionName,
+            id: doc.id,
+            savedAt: now,
+            data: doc
+        });
+    }
+
+    if (records.length === 0) return false;
+
+    if (hasNativeAndroidCache()) {
+        try {
+            if (typeof CACHE_GLOBAL_SCOPE.AndroidNative.saveCacheBatch === "function") {
+                const batchMap = {};
+                for (const rec of records) {
+                    batchMap[`doc_${collectionName}_${rec.id}`] = JSON.stringify(rec);
+                }
+                CACHE_GLOBAL_SCOPE.AndroidNative.saveCacheBatch(JSON.stringify(batchMap));
+            } else {
+                for (const rec of records) {
+                    CACHE_GLOBAL_SCOPE.AndroidNative.saveCacheFile(
+                        `doc_${collectionName}_${rec.id}`,
+                        JSON.stringify(rec)
+                    );
+                }
+            }
+        } catch {
+            // Ignora
+        }
+    }
+
+    if (customStorageAdapter) {
+        try {
+            if (typeof customStorageAdapter.multiSet === "function") {
+                const CHUNK = 10;
+                for (let i = 0; i < records.length; i += CHUNK) {
+                    const pairs = records.slice(i, i + CHUNK).map(rec => [
+                        `${LS_DOC_PREFIX}${rec.cacheKey}`,
+                        JSON.stringify(rec)
+                    ]);
+                    await customStorageAdapter.multiSet(pairs);
+                }
+            } else {
+                for (const rec of records) {
+                    await customStorageAdapter.setItem(
+                        `${LS_DOC_PREFIX}${rec.cacheKey}`,
+                        JSON.stringify(rec)
+                    );
+                }
+            }
+        } catch {
+            // Ignora
+        }
+    }
+
+    await idbPutDocumentsBatch(records);
+    return true;
+}
+
+/**
+ * Remove um documento do cache persistente quando excluido pelo usuario
+ */
+async function removeCachedApiDocument(collectionName, id) {
+    if (!collectionName || !id) return false;
+    const cacheKey = `${collectionName}:${id}`;
+    const storageKey = `${LS_DOC_PREFIX}${cacheKey}`;
+
+    if (hasNativeAndroidCache() && typeof CACHE_GLOBAL_SCOPE.AndroidNative.removeCacheFile === "function") {
+        try {
+            CACHE_GLOBAL_SCOPE.AndroidNative.removeCacheFile(`doc_${collectionName}_${id}`);
+        } catch {
+            // Ignora
+        }
+    }
+
+    if (customStorageAdapter && typeof customStorageAdapter.removeItem === "function") {
+        try {
+            await customStorageAdapter.removeItem(storageKey);
+        } catch {
+            // Ignora
+        }
+    }
+
+    if (hasWebSessionStorage()) {
+        try {
+            CACHE_GLOBAL_SCOPE.sessionStorage.removeItem(storageKey);
+        } catch {
+            // Ignora
+        }
+    }
+
+    await idbDeleteRecord("documents", cacheKey);
+    return true;
+}
+
+/**
+ * Le metadados de hidratacao completa do acervo da colecao
+ */
+async function readHydrationMeta(collectionName) {
+    const metaKey = `${LS_META_PREFIX}${collectionName}`;
+
+    if (hasWebLocalStorage()) {
+        try {
+            const raw = CACHE_GLOBAL_SCOPE.localStorage.getItem(metaKey);
+            if (raw) return JSON.parse(raw);
+        } catch {
+            // Prossegue
+        }
+    }
+
+    if (hasNativeAndroidCache()) {
+        try {
+            const raw = CACHE_GLOBAL_SCOPE.AndroidNative.readCacheFile(`meta_${collectionName}`);
+            if (raw) return JSON.parse(raw);
+        } catch {
+            // Prossegue
+        }
+    }
+
+    if (customStorageAdapter) {
+        try {
+            const raw = await customStorageAdapter.getItem(metaKey);
+            if (raw) return JSON.parse(raw);
+        } catch {
+            // Prossegue
+        }
+    }
+
+    return await idbGetRecord("meta", metaKey);
+}
+
+/**
+ * Registra que todos os documentos completos de uma colecao da API ja foram cacheados localmente
+ */
+async function writeHydrationMeta(collectionName, metaObj) {
+    const metaKey = `${LS_META_PREFIX}${collectionName}`;
+    const payload = {
+        key: metaKey,
+        collection: collectionName,
+        ...metaObj
+    };
+    const serialized = JSON.stringify(payload);
+
+    if (hasWebLocalStorage()) {
+        try {
+            CACHE_GLOBAL_SCOPE.localStorage.setItem(metaKey, serialized);
+        } catch {
+            // Ignora
+        }
+    }
+
+    if (hasNativeAndroidCache()) {
+        try {
+            CACHE_GLOBAL_SCOPE.AndroidNative.saveCacheFile(`meta_${collectionName}`, serialized);
+        } catch {
+            // Ignora
+        }
+    }
+
+    if (customStorageAdapter) {
+        try {
+            await customStorageAdapter.setItem(metaKey, serialized);
+        } catch {
+            // Ignora
+        }
+    }
+
+    await idbPutRecord("meta", payload);
+    return true;
+}
+
+    /**
+ * SERVICO DE BANCO DE DADOS, CACHE PERSISTENTE DA API E SINCRONIZACAO (CLOUD FIRESTORE REST)
+ *
+ * Fluxo de operacao:
+ * 1. Primeira interacao: consulta obrigatoriamente a API Cloud Firestore, exibe os dados reais,
+ *    grava os indices e baixa em segundo plano o acervo completo para o cache local persistente
+ *    (Navegador IndexedDB/localStorage, Android Nativo e React Native AsyncStorage).
+ * 2. Aberturas posteriores: exibe instantaneamente os dados do cache previamente baixado da API
+ *    (~0-5ms) e revalida silenciosamente em background com o Firestore (Stale-While-Revalidate).
+ * 3. Contingencia estrita: o fallback estatico embutido (FALLBACK_INDEXES) so e acionado em
+ *    ultimo caso absoluto (dispositivo sem internet na primeira abertura sem cache da API) e
+ *    jamais sobrescreve o cache persistente.
  */
 // [bundled-import]
 // [bundled-import]
 // [bundled-import]
+// [bundled-import]
+// [bundled-export]
 const COLLECTIONS = {
     CREATURES: "creatures",
     SPELLS: "spells",
@@ -5175,10 +5809,42 @@ const PROJECT_ID = DATABASE_CONFIG.projectId || "wwcatalog-10546";
 const FIRESTORE_BASE_URL = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents`;
 const FIRESTORE_COMMIT_URL = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents:commit`;
 
-// Cache em memória para documentos individuais já abertos
+// Cache em memoria ativa da sessao atual
 const itemMemoryCache = new Map();
-// Cache em memória dos índices leves por coleção
 const indexMemoryCache = new Map();
+
+// Deduplicacao de requisicoes simultaneas
+const inflightIndexRequests = new Map();
+const inflightRevalidations = new Map();
+const inflightDocRequests = new Map();
+let warmupPromise = null;
+
+// Inscritos para atualizacoes reativas vindas da revalidacao em segundo plano
+const catalogUpdateListeners = new Set();
+function subscribeToCatalogUpdates(listener) {
+    if (typeof listener !== "function") return () => {};
+    catalogUpdateListeners.add(listener);
+    return () => {
+        catalogUpdateListeners.delete(listener);
+    };
+}
+
+function notifyCatalogListeners(payload) {
+    for (const listener of catalogUpdateListeners) {
+        try {
+            listener(payload);
+        } catch {
+            // Evita interromper outros inscritos
+        }
+    }
+    if (typeof document !== "undefined" && typeof CustomEvent !== "undefined") {
+        try {
+            document.dispatchEvent(new CustomEvent("ww-catalog-updated", { detail: payload }));
+        } catch {
+            // Ignora em ambientes nativos sem DOM
+        }
+    }
+}
 
 /**
  * Converte valores JavaScript para o formato REST do Firestore
@@ -5259,9 +5925,13 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = 6000) {
     }
 }
 
-async function firestoreGetDoc(collectionPath, docId) {
+async function firestoreGetDoc(collectionPath, docId, timeoutMs = 6000) {
     try {
-        const res = await fetchWithTimeout(`${FIRESTORE_BASE_URL}/${collectionPath}/${encodeURIComponent(docId)}`);
+        const res = await fetchWithTimeout(
+            `${FIRESTORE_BASE_URL}/${collectionPath}/${encodeURIComponent(docId)}`,
+            {},
+            timeoutMs
+        );
         if (!res.ok) return null;
         const json = await res.json();
         return fromFirestoreDoc(json);
@@ -5270,26 +5940,46 @@ async function firestoreGetDoc(collectionPath, docId) {
     }
 }
 
-async function firestoreListCollection(collectionPath) {
+async function firestoreListCollection(collectionPath, options = {}) {
+    const pageSize = options.pageSize || (collectionPath === COLLECTIONS.CREATURES ? 25 : 250);
+    const timeoutMs = options.timeoutMs || 18000;
+    const onPage = typeof options.onPage === "function" ? options.onPage : null;
+
     const docs = [];
     let pageToken = "";
+    let completed = false;
+
     try {
         do {
-            const url = `${FIRESTORE_BASE_URL}/${collectionPath}?pageSize=300${pageToken ? `&pageToken=${encodeURIComponent(pageToken)}` : ""}`;
-            const res = await fetchWithTimeout(url, {}, 10000);
-            if (!res.ok) break;
+            const url = `${FIRESTORE_BASE_URL}/${collectionPath}?pageSize=${pageSize}${pageToken ? `&pageToken=${encodeURIComponent(pageToken)}` : ""}`;
+            const res = await fetchWithTimeout(url, {}, timeoutMs);
+            if (!res.ok) {
+                completed = false;
+                break;
+            }
             const json = await res.json();
             const list = json.documents || [];
+            const pageDocs = [];
             for (const docJson of list) {
                 const parsed = fromFirestoreDoc(docJson);
-                if (parsed) docs.push(parsed);
+                if (parsed) {
+                    docs.push(parsed);
+                    pageDocs.push(parsed);
+                }
+            }
+            if (onPage && pageDocs.length > 0) {
+                await onPage(pageDocs);
             }
             pageToken = json.nextPageToken || "";
+            if (!pageToken) {
+                completed = true;
+            }
         } while (pageToken);
     } catch {
-        // Retorna o que foi coletado
+        completed = false;
     }
-    return docs;
+
+    return { docs, completed };
 }
 
 async function firestoreSetDoc(collectionPath, docId, dataObj) {
@@ -5436,61 +6126,17 @@ function extractPlantCd(peculiaridades = "") {
     return m ? Number(m[1]) : 12;
 }
 
-// Auxiliares de cache local no navegador para aceleração máxima
-function getLocalCacheIndex(collectionName) {
-    try {
-        const raw = localStorage.getItem(`ww_idx_${collectionName}`);
-        if (!raw) return null;
-        const parsed = JSON.parse(raw);
-        return Array.isArray(parsed) ? parsed : null;
-    } catch {
-        return null;
-    }
-}
-
-function setLocalCacheIndex(collectionName, list) {
-    try {
-        localStorage.setItem(`ww_idx_${collectionName}`, JSON.stringify(list));
-    } catch {
-        // quota excedida ou inacessível
-    }
-}
-
-function getLocalCacheItem(collectionName, id) {
-    try {
-        const raw = sessionStorage.getItem(`ww_doc_${collectionName}_${id}`);
-        if (!raw) return null;
-        return JSON.parse(raw);
-    } catch {
-        return null;
-    }
-}
-
-function setLocalCacheItem(collectionName, id, data) {
-    try {
-        sessionStorage.setItem(`ww_doc_${collectionName}_${id}`, JSON.stringify(data));
-    } catch {
-        // quota excedida ou inacessível
-    }
-}
-
 /**
- * 1. CARREGAMENTO RÁPIDO DO ÍNDICE DA COLEÇÃO NO FIRESTORE (Tier 1)
- * Prioridade obrigatória: Cloud Firestore REST é a fonte primária de verdade.
- * Fallbacks (cache local e fallback embutido) são estritamente último recurso (offline).
+ * Consulta o indice diretamente na API Cloud Firestore (Tier 1)
  */
-async function fetchCatalogIndex(collectionName, forceRefresh = false) {
-    // 1.1 Cache em memória ativa na mesma sessão
-    if (!forceRefresh && indexMemoryCache.has(collectionName)) {
-        return indexMemoryCache.get(collectionName);
-    }
-
+async function fetchIndexDirectlyFromApi(collectionName) {
     const summaryMap = new Map();
+    let remoteUpdatedAt = "";
 
-    // 1.2 TENTATIVA PRIMÁRIA OBRIGATÓRIA: Cloud Firestore REST API
     try {
         const remoteIdx = await firestoreGetDoc("_indexes", collectionName);
         if (remoteIdx && Array.isArray(remoteIdx.items) && remoteIdx.items.length > 0) {
+            remoteUpdatedAt = remoteIdx.updatedAt || "";
             const remoteDeleted = new Set(remoteIdx.deletedIds || []);
             for (const entry of remoteIdx.items) {
                 const summary = buildSummaryEntry(collectionName, entry);
@@ -5499,87 +6145,243 @@ async function fetchCatalogIndex(collectionName, forceRefresh = false) {
                 }
             }
         } else {
-            // Fallback remoto: se o índice pré-compilado não existir, lista a coleção direta do Firestore
-            const docs = await firestoreListCollection(collectionName);
+            const { docs, completed } = await firestoreListCollection(collectionName, {
+                onPage: async pageDocs => {
+                    const normalized = pageDocs.map(doc => {
+                        const id = buildItemId(collectionName, doc);
+                        const fullDoc = { id, ...doc };
+                        itemMemoryCache.set(`${collectionName}:${id}`, fullDoc);
+                        return fullDoc;
+                    });
+                    await writeCachedApiDocumentsBatch(collectionName, normalized);
+                }
+            });
+
             for (const doc of docs) {
                 const summary = buildSummaryEntry(collectionName, doc);
                 summaryMap.set(summary.id, summary);
-                itemMemoryCache.set(`${collectionName}:${summary.id}`, doc);
             }
+
             if (summaryMap.size > 0) {
-                await syncCollectionIndex(collectionName, Array.from(summaryMap.values())).catch(() => {});
+                remoteUpdatedAt = new Date().toISOString();
+                await syncCollectionIndex(collectionName, Array.from(summaryMap.values()), [], remoteUpdatedAt).catch(() => {});
+                if (completed) {
+                    await writeHydrationMeta(collectionName, {
+                        hydrated: true,
+                        count: summaryMap.size,
+                        remoteUpdatedAt,
+                        hydratedAt: Date.now()
+                    });
+                }
             }
         }
     } catch (err) {
-        console.warn(`[Catalog] Conexão com Firestore falhou para ${collectionName}:`, err);
+        console.warn(`[Catalog] Conexao com Firestore falhou para ${collectionName}:`, err);
     }
 
-    // Se o Firestore respondeu com dados reais, atualiza os caches e retorna
-    if (summaryMap.size > 0) {
-        const resultList = Array.from(summaryMap.values());
-        indexMemoryCache.set(collectionName, resultList);
-        setLocalCacheIndex(collectionName, resultList);
-        return resultList;
+    if (summaryMap.size === 0) {
+        return null;
     }
 
-    // 1.3 SEGUNDO RECURSO: Cache local persistente previamente salvo de conexões reais com o Firestore
-    const localCached = getLocalCacheIndex(collectionName);
-    if (localCached && Array.isArray(localCached) && localCached.length > 0) {
-        console.warn(`[Catalog] Firestore indisponível. Utilizando cache persistente para ${collectionName}.`);
-        indexMemoryCache.set(collectionName, localCached);
-        return localCached;
-    }
-
-    // 1.4 ÚLTIMO CASO ESTRITO (EMERGÊNCIA/OFFLINE TOTAL): Fallback local embutido
-    if (FALLBACK_INDEXES && Array.isArray(FALLBACK_INDEXES[collectionName]) && FALLBACK_INDEXES[collectionName].length > 0) {
-        console.warn(`[Catalog] AVISO: Firestore e cache local indisponíveis. Recorrendo ao fallback estático de emergência para ${collectionName}.`);
-        const defaultList = FALLBACK_INDEXES[collectionName].map(item => buildSummaryEntry(collectionName, item));
-        indexMemoryCache.set(collectionName, defaultList);
-        return defaultList;
-    }
-
-    return [];
+    return {
+        items: Array.from(summaryMap.values()),
+        remoteUpdatedAt
+    };
 }
 
 /**
- * 2. CARREGAMENTO INDIVIDUAL DE ITEM SOB DEMANDA NO FIRESTORE (Tier 2)
- * Prioridade obrigatória: Cloud Firestore REST é consultado primeiro.
+ * Revalida silenciosamente o indice em background contra a API Cloud Firestore
+ * e notifica a UI caso existam novos dados na nuvem.
  */
-async function fetchItemById(collectionName, id) {
-    if (!id) return null;
-    const cacheKey = `${collectionName}:${id}`;
-
-    // 2.1 Cache em memória para acesso repetido na mesma sessão
-    if (itemMemoryCache.has(cacheKey)) {
-        return itemMemoryCache.get(cacheKey);
+async function revalidateIndexFromApi(collectionName, cachedApiIndex) {
+    if (inflightRevalidations.has(collectionName)) {
+        return inflightRevalidations.get(collectionName);
     }
 
-    // 2.2 TENTATIVA PRIMÁRIA: Busca documento individual diretamente no Cloud Firestore
+    const promise = (async () => {
+        const apiResult = await fetchIndexDirectlyFromApi(collectionName);
+        if (!apiResult || apiResult.items.length === 0) return;
+
+        const prevItemsJson = JSON.stringify(cachedApiIndex?.items || []);
+        const nextItemsJson = JSON.stringify(apiResult.items);
+        const hasChanged = prevItemsJson !== nextItemsJson ||
+            Boolean(apiResult.remoteUpdatedAt && apiResult.remoteUpdatedAt !== cachedApiIndex?.remoteUpdatedAt);
+
+        indexMemoryCache.set(collectionName, apiResult.items);
+        await writeCachedApiIndex(collectionName, apiResult.items, apiResult.remoteUpdatedAt);
+
+        if (hasChanged) {
+            notifyCatalogListeners({
+                type: "index",
+                collection: collectionName,
+                items: apiResult.items,
+                remoteUpdatedAt: apiResult.remoteUpdatedAt
+            });
+            hydrateSingleCollectionDocuments(
+                collectionName,
+                apiResult.remoteUpdatedAt,
+                apiResult.items.length,
+                true
+            ).catch(() => {});
+        }
+    })();
+
+    inflightRevalidations.set(collectionName, promise);
+    try {
+        await promise;
+    } finally {
+        inflightRevalidations.delete(collectionName);
+    }
+}
+
+/**
+ * Revalida silenciosamente um documento individual aberto em background
+ */
+async function revalidateDocumentFromApi(collectionName, id, previousData) {
     const remoteDoc = await firestoreGetDoc(collectionName, id);
-    if (remoteDoc) {
-        const data = { id, ...remoteDoc };
-        itemMemoryCache.set(cacheKey, data);
-        setLocalCacheItem(collectionName, id, data);
-        return data;
+    if (!remoteDoc) return;
+
+    const freshData = { id, ...remoteDoc };
+    const cacheKey = `${collectionName}:${id}`;
+    itemMemoryCache.set(cacheKey, freshData);
+    await writeCachedApiDocument(collectionName, id, freshData);
+
+    if (JSON.stringify(previousData) !== JSON.stringify(freshData)) {
+        notifyCatalogListeners({
+            type: "document",
+            collection: collectionName,
+            id,
+            data: freshData
+        });
+    }
+}
+
+/**
+ * 1. CARREGAMENTO DO INDICE DA COLECAO (Tier 1)
+ * - 1a interacao (sem cache da API): baixa diretamente da API Cloud Firestore e salva no cache local.
+ * - Aberturas posteriores: retorna o cache da API instantaneamente (~0-5ms) e revalida em segundo plano.
+ * - Fallback estatico: usado exclusivamente em ultimo caso se dispositivo estiver offline e sem cache da API.
+ */
+async function fetchCatalogIndex(collectionName, forceRefresh = false) {
+    // 1.1 Cache em memoria ativa na mesma sessao
+    if (!forceRefresh && indexMemoryCache.has(collectionName)) {
+        return indexMemoryCache.get(collectionName);
     }
 
-    // 2.3 SEGUNDO RECURSO: Cache persistente em sessionStorage
-    const sessionCached = getLocalCacheItem(collectionName, id);
-    if (sessionCached) {
-        itemMemoryCache.set(cacheKey, sessionCached);
-        return sessionCached;
-    }
-
-    // 2.4 ÚLTIMO CASO ESTRITO: Fallback estático embutido se Firestore falhou e item não está em cache
-    if (FALLBACK_INDEXES && Array.isArray(FALLBACK_INDEXES[collectionName])) {
-        const fallbackItem = FALLBACK_INDEXES[collectionName].find(item => item.id === id);
-        if (fallbackItem) {
-            console.warn(`[Catalog] AVISO: Firestore offline. Detalhe de ${id} obtido via fallback estático de emergência.`);
-            return { ...fallbackItem };
+    // 1.2 Aberturas posteriores: exibe instantaneamente o cache baixado anteriormente da API
+    if (!forceRefresh) {
+        const cachedApiIndex = await readCachedApiIndex(collectionName);
+        if (cachedApiIndex && Array.isArray(cachedApiIndex.items) && cachedApiIndex.items.length > 0) {
+            indexMemoryCache.set(collectionName, cachedApiIndex.items);
+            revalidateIndexFromApi(collectionName, cachedApiIndex).catch(() => {});
+            return cachedApiIndex.items;
         }
     }
 
-    return null;
+    // 1.3 Primeira interacao (ou refresh forcado): requisita diretamente da API Cloud Firestore
+    if (inflightIndexRequests.has(collectionName)) {
+        return inflightIndexRequests.get(collectionName);
+    }
+
+    const requestPromise = (async () => {
+        const apiResult = await fetchIndexDirectlyFromApi(collectionName);
+        if (apiResult && apiResult.items.length > 0) {
+            indexMemoryCache.set(collectionName, apiResult.items);
+            await writeCachedApiIndex(collectionName, apiResult.items, apiResult.remoteUpdatedAt);
+            return apiResult.items;
+        }
+
+        // 1.4 Se um refresh forcado falhar por queda de rede, preserva o cache anterior da API
+        const previousApiCache = await readCachedApiIndex(collectionName);
+        if (previousApiCache && Array.isArray(previousApiCache.items) && previousApiCache.items.length > 0) {
+            console.warn(`[Catalog] Firestore indisponivel no momento. Utilizando cache persistente da API para ${collectionName}.`);
+            indexMemoryCache.set(collectionName, previousApiCache.items);
+            return previousApiCache.items;
+        }
+
+        // 1.5 ULTIMO CASO ESTRITO (EMERGENCIA OFFLINE): Fallback estatico embutido (jamais gravado no cache!)
+        if (FALLBACK_INDEXES && Array.isArray(FALLBACK_INDEXES[collectionName]) && FALLBACK_INDEXES[collectionName].length > 0) {
+            console.warn(`[Catalog] AVISO: Firestore e cache da API indisponiveis. Recorrendo ao fallback estatico de emergencia para ${collectionName}.`);
+            return FALLBACK_INDEXES[collectionName].map(item => buildSummaryEntry(collectionName, item));
+        }
+
+        return [];
+    })();
+
+    inflightIndexRequests.set(collectionName, requestPromise);
+    try {
+        return await requestPromise;
+    } finally {
+        inflightIndexRequests.delete(collectionName);
+    }
+}
+
+/**
+ * 2. CARREGAMENTO INDIVIDUAL DE ITEM SOB DEMANDA (Tier 2)
+ * - Se ja baixado da API no cache persistente, exibe instantaneamente (~1-5ms) e revalida se necessario.
+ * - Caso contrario, baixa da API Cloud Firestore e persiste localmente para os proximos acessos.
+ */
+async function fetchItemById(collectionName, id, forceRefresh = false) {
+    if (!id) return null;
+    const cacheKey = `${collectionName}:${id}`;
+
+    // 2.1 Cache em memoria da sessao ativa
+    if (!forceRefresh && itemMemoryCache.has(cacheKey)) {
+        return itemMemoryCache.get(cacheKey);
+    }
+
+    // 2.2 Cache persistente previamente baixado da API (IndexedDB / Android Nativo / AsyncStorage)
+    if (!forceRefresh) {
+        const cachedRecord = await readCachedApiDocument(collectionName, id);
+        if (cachedRecord && cachedRecord.data) {
+            itemMemoryCache.set(cacheKey, cachedRecord.data);
+            const ageMs = Date.now() - (cachedRecord.savedAt || 0);
+            if (ageMs > 5 * 60 * 1000) {
+                revalidateDocumentFromApi(collectionName, id, cachedRecord.data).catch(() => {});
+            }
+            return cachedRecord.data;
+        }
+    }
+
+    // 2.3 Deduplicacao de requisicao individual para a API Cloud Firestore
+    if (inflightDocRequests.has(cacheKey)) {
+        return inflightDocRequests.get(cacheKey);
+    }
+
+    const docPromise = (async () => {
+        const remoteDoc = await firestoreGetDoc(collectionName, id);
+        if (remoteDoc) {
+            const data = { id, ...remoteDoc };
+            itemMemoryCache.set(cacheKey, data);
+            await writeCachedApiDocument(collectionName, id, data);
+            return data;
+        }
+
+        // 2.4 Contingencia com cache da API caso um forceRefresh tenha falhado offline
+        const cachedRecord = await readCachedApiDocument(collectionName, id);
+        if (cachedRecord && cachedRecord.data) {
+            itemMemoryCache.set(cacheKey, cachedRecord.data);
+            return cachedRecord.data;
+        }
+
+        // 2.5 ULTIMO CASO ESTRITO: Fallback estatico embutido (sem persistir no cache)
+        if (FALLBACK_INDEXES && Array.isArray(FALLBACK_INDEXES[collectionName])) {
+            const fallbackItem = FALLBACK_INDEXES[collectionName].find(item => item.id === id);
+            if (fallbackItem) {
+                console.warn(`[Catalog] AVISO: Firestore e cache da API indisponiveis. Detalhe de ${id} obtido via fallback de emergencia.`);
+                return { ...fallbackItem };
+            }
+        }
+
+        return null;
+    })();
+
+    inflightDocRequests.set(cacheKey, docPromise);
+    try {
+        return await docPromise;
+    } finally {
+        inflightDocRequests.delete(cacheKey);
+    }
 }
 async function fetchItemsByIds(collectionName, ids = []) {
     const promises = ids.map(id => fetchItemById(collectionName, id));
@@ -5587,31 +6389,134 @@ async function fetchItemsByIds(collectionName, ids = []) {
     return results.filter(Boolean);
 }
 
-async function syncCollectionIndex(collectionName, currentSummaryList, deletedIds = []) {
-    await firestoreSetDoc("_indexes", collectionName, {
-        updatedAt: new Date().toISOString(),
+/**
+ * Baixa e armazena em cache persistente todos os documentos completos de uma colecao da API
+ */
+async function hydrateSingleCollectionDocuments(collectionName, expectedUpdatedAt = "", expectedCount = 0, force = false) {
+    if (!force) {
+        const meta = await readHydrationMeta(collectionName);
+        if (
+            meta &&
+            meta.hydrated === true &&
+            (!expectedCount || meta.count >= expectedCount) &&
+            (!expectedUpdatedAt || meta.remoteUpdatedAt === expectedUpdatedAt)
+        ) {
+            return { collection: collectionName, skipped: true, count: meta.count };
+        }
+    }
+
+    let downloadedCount = 0;
+    const { docs, completed } = await firestoreListCollection(collectionName, {
+        pageSize: collectionName === COLLECTIONS.CREATURES ? 25 : 250,
+        timeoutMs: 20000,
+        onPage: async pageDocs => {
+            const normalizedPage = pageDocs.map(doc => {
+                const id = buildItemId(collectionName, doc);
+                const fullDoc = { id, ...doc };
+                itemMemoryCache.set(`${collectionName}:${id}`, fullDoc);
+                return fullDoc;
+            });
+            downloadedCount += normalizedPage.length;
+            await writeCachedApiDocumentsBatch(collectionName, normalizedPage);
+        }
+    });
+
+    if (completed && docs.length > 0) {
+        await writeHydrationMeta(collectionName, {
+            hydrated: true,
+            count: docs.length,
+            remoteUpdatedAt: expectedUpdatedAt || "",
+            hydratedAt: Date.now()
+        });
+        notifyCatalogListeners({
+            type: "warmup",
+            collection: collectionName,
+            count: docs.length,
+            status: "completed"
+        });
+    }
+
+    return { collection: collectionName, skipped: false, count: downloadedCount, completed };
+}
+
+/**
+ * 2.6 PRE-CARREGAMENTO INTEGRAL EM SEGUNDO PLANO NA PRIMEIRA INTERACAO
+ * Garante que logo no primeiro uso (web ou mobile) todo o conteudo retornado pela API
+ * (indices + fichas completas + retratos Base64) seja salvo localmente sem travar a interface.
+ */
+function warmUpFullApiCache(options = { force: false }) {
+    if (warmupPromise) return warmupPromise;
+
+    warmupPromise = (async () => {
+        // Cede prioridade aos quadros iniciais da interface (150ms)
+        await new Promise(resolve => setTimeout(resolve, 150));
+
+        const orderedCollections = [
+            COLLECTIONS.SPELLS,
+            COLLECTIONS.PLANTS,
+            COLLECTIONS.POTIONS,
+            COLLECTIONS.CREATURES
+        ];
+
+        for (const col of orderedCollections) {
+            try {
+                let cachedIdx = await readCachedApiIndex(col);
+                if (!cachedIdx || !Array.isArray(cachedIdx.items) || cachedIdx.items.length === 0) {
+                    const freshItems = await fetchCatalogIndex(col, true);
+                    if (!freshItems || freshItems.length === 0) continue;
+                    cachedIdx = await readCachedApiIndex(col);
+                }
+
+                if (cachedIdx && Array.isArray(cachedIdx.items) && cachedIdx.items.length > 0) {
+                    await hydrateSingleCollectionDocuments(
+                        col,
+                        cachedIdx.remoteUpdatedAt || "",
+                        cachedIdx.items.length,
+                        Boolean(options?.force)
+                    );
+                }
+            } catch (err) {
+                console.warn(`[Catalog] Aviso ao pre-cachear colecao ${col}:`, err);
+            }
+        }
+    })().finally(() => {
+        warmupPromise = null;
+    });
+
+    return warmupPromise;
+}
+
+async function syncCollectionIndex(collectionName, currentSummaryList, deletedIds = [], customUpdatedAt = "") {
+    const updatedAt = customUpdatedAt || new Date().toISOString();
+    const ok = await firestoreSetDoc("_indexes", collectionName, {
+        updatedAt,
         count: currentSummaryList.length,
         items: currentSummaryList,
         deletedIds
     });
+    if (ok) {
+        await writeCachedApiIndex(collectionName, currentSummaryList, updatedAt);
+    }
+    return ok;
 }
 
 /**
- * 3. SALVAR ITEM INDIVIDUAL NO FIRESTORE
+ * 3. SALVAR ITEM INDIVIDUAL NO FIRESTORE E ATUALIZAR CACHE PERSISTENTE
  */
 async function saveRecord(collectionName, dataObject, prefix = "registro", options = { downloadBackup: false }) {
     const id = buildItemId(collectionName, dataObject, prefix);
+    const updatedAt = new Date().toISOString();
     const fullRecord = {
         ...dataObject,
         id,
-        updatedAt: new Date().toISOString()
+        updatedAt
     };
 
     const cacheKey = `${collectionName}:${id}`;
     itemMemoryCache.set(cacheKey, fullRecord);
-    setLocalCacheItem(collectionName, id, fullRecord);
+    await writeCachedApiDocument(collectionName, id, fullRecord);
 
-    const currentIndex = await fetchCatalogIndex(collectionName);
+    const currentIndex = [...(await fetchCatalogIndex(collectionName))];
     const newSummary = buildSummaryEntry(collectionName, fullRecord);
     const existingIdx = currentIndex.findIndex(item => item.id === id);
     if (existingIdx >= 0) {
@@ -5619,13 +6524,21 @@ async function saveRecord(collectionName, dataObject, prefix = "registro", optio
     } else {
         currentIndex.push(newSummary);
     }
+
     indexMemoryCache.set(collectionName, currentIndex);
-    setLocalCacheIndex(collectionName, currentIndex);
+    await writeCachedApiIndex(collectionName, currentIndex, updatedAt);
 
     const savedToCloud = await firestoreSetDoc(collectionName, id, fullRecord);
     if (savedToCloud) {
-        await syncCollectionIndex(collectionName, currentIndex);
+        await syncCollectionIndex(collectionName, currentIndex, [], updatedAt);
     }
+
+    notifyCatalogListeners({
+        type: "index",
+        collection: collectionName,
+        items: currentIndex,
+        remoteUpdatedAt: updatedAt
+    });
 
     if (options.downloadBackup) {
         downloadJsonFile(fullRecord, `${id}.json`);
@@ -5635,13 +6548,14 @@ async function saveRecord(collectionName, dataObject, prefix = "registro", optio
 }
 
 /**
- * 4. SALVAR LOTE DE ITENS EM MASSA NO FIRESTORE
+ * 4. SALVAR LOTE DE ITENS EM MASSA NO FIRESTORE E CACHE PERSISTENTE
  */
 async function saveBulkRecords(collectionName, dataArray, prefix = "item", onProgress = null) {
     if (!Array.isArray(dataArray) || dataArray.length === 0) {
         throw new Error("A lista fornecida para importação em massa está vazia ou é inválida.");
     }
 
+    const updatedAt = new Date().toISOString();
     const currentIndex = await fetchCatalogIndex(collectionName);
     const indexMap = new Map(currentIndex.map(item => [item.id, item]));
     const normalizedRecords = [];
@@ -5651,17 +6565,18 @@ async function saveBulkRecords(collectionName, dataArray, prefix = "item", onPro
         const fullRecord = {
             ...rawItem,
             id,
-            updatedAt: new Date().toISOString()
+            updatedAt
         };
         normalizedRecords.push(fullRecord);
         itemMemoryCache.set(`${collectionName}:${id}`, fullRecord);
-        setLocalCacheItem(collectionName, id, fullRecord);
         indexMap.set(id, buildSummaryEntry(collectionName, fullRecord));
     }
 
+    await writeCachedApiDocumentsBatch(collectionName, normalizedRecords);
+
     const updatedIndexList = Array.from(indexMap.values());
     indexMemoryCache.set(collectionName, updatedIndexList);
-    setLocalCacheIndex(collectionName, updatedIndexList);
+    await writeCachedApiIndex(collectionName, updatedIndexList, updatedAt);
 
     let savedToCloud = true;
     const CHUNK_SIZE = 20;
@@ -5675,8 +6590,15 @@ async function saveBulkRecords(collectionName, dataArray, prefix = "item", onPro
     }
 
     if (savedToCloud) {
-        await syncCollectionIndex(collectionName, updatedIndexList);
+        await syncCollectionIndex(collectionName, updatedIndexList, [], updatedAt);
     }
+
+    notifyCatalogListeners({
+        type: "index",
+        collection: collectionName,
+        items: updatedIndexList,
+        remoteUpdatedAt: updatedAt
+    });
 
     return {
         count: normalizedRecords.length,
@@ -5685,24 +6607,30 @@ async function saveBulkRecords(collectionName, dataArray, prefix = "item", onPro
 }
 
 /**
- * 5. REMOVER ITEM INDIVIDUAL DO FIRESTORE
+ * 5. REMOVER ITEM INDIVIDUAL DO FIRESTORE E DO CACHE PERSISTENTE
  */
 async function deleteRecord(collectionName, id) {
     if (!id) return false;
+    const updatedAt = new Date().toISOString();
+
     itemMemoryCache.delete(`${collectionName}:${id}`);
-    try {
-        sessionStorage.removeItem(`ww_doc_${collectionName}_${id}`);
-    } catch {
-        // Ignora
-    }
+    await removeCachedApiDocument(collectionName, id);
 
     const currentIndex = await fetchCatalogIndex(collectionName);
     const filteredIndex = currentIndex.filter(item => item.id !== id);
     indexMemoryCache.set(collectionName, filteredIndex);
-    setLocalCacheIndex(collectionName, filteredIndex);
+    await writeCachedApiIndex(collectionName, filteredIndex, updatedAt);
 
     await firestoreDeleteDoc(collectionName, id);
-    await syncCollectionIndex(collectionName, filteredIndex);
+    await syncCollectionIndex(collectionName, filteredIndex, [id], updatedAt);
+
+    notifyCatalogListeners({
+        type: "index",
+        collection: collectionName,
+        items: filteredIndex,
+        remoteUpdatedAt: updatedAt
+    });
+
     return true;
 }
 function downloadJsonFile(dataObject, filename = "exportacao_ministerial.json") {
@@ -5731,6 +6659,7 @@ function downloadJsonFile(dataObject, filename = "exportacao_ministerial.json") 
 class MobileCatalogApp {
     constructor() {
         this.activeCategory = "creatures";
+        this.activeSheetItem = null;
         this.data = {
             creatures: [],
             spells: [],
@@ -5752,8 +6681,45 @@ class MobileCatalogApp {
         this.setupBottomNav();
         this.setupModal();
         this.setupFilters();
+        this.setupCacheReactivity();
         this.checkUpdates();
         await this.loadAllCatalogs();
+        warmUpFullApiCache();
+    }
+
+    setupCacheReactivity() {
+        subscribeToCatalogUpdates(evt => {
+            if (evt.type === "index" && Array.isArray(evt.items)) {
+                if (evt.collection === COLLECTIONS.CREATURES) {
+                    this.data.creatures = evt.items;
+                    this.updateBadge("m-badge-creatures", evt.items.length);
+                    this.applyCreatureFilters();
+                } else if (evt.collection === COLLECTIONS.SPELLS) {
+                    this.data.spells = evt.items;
+                    this.updateBadge("m-badge-spells", evt.items.length);
+                    this.applySpellFilters();
+                } else if (evt.collection === COLLECTIONS.PLANTS) {
+                    this.data.plants = evt.items;
+                    this.updateBadge("m-badge-plants", evt.items.length);
+                    this.applyPlantFilters();
+                } else if (evt.collection === COLLECTIONS.POTIONS) {
+                    this.data.potions = evt.items;
+                    this.updateBadge("m-badge-potions", evt.items.length);
+                    this.applyPotionFilters();
+                }
+            } else if (
+                evt.type === "document" &&
+                evt.data &&
+                this.activeSheetItem &&
+                this.activeSheetItem.category === evt.collection &&
+                this.activeSheetItem.id === evt.id
+            ) {
+                const modal = document.getElementById("mobile-sheet-modal");
+                if (modal && modal.classList.contains("open")) {
+                    this.openDetailSheet(evt.collection, evt.id);
+                }
+            }
+        });
     }
 
     setupTheme() {
@@ -6133,6 +7099,7 @@ class MobileCatalogApp {
     }
 
     async openDetailSheet(category, id) {
+        this.activeSheetItem = { category, id };
         const modal = document.getElementById("mobile-sheet-modal");
         const body = document.getElementById("mobile-modal-body");
         const title = document.getElementById("mobile-modal-title");

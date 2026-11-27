@@ -1,13 +1,33 @@
 /**
- * SERVIÇO DE BANCO DE DADOS E CARREGAMENTO INDIVIDUAL SOB DEMANDA (FIRESTORE)
- * Todos os índices e documentos individuais (incluindo retratos Base64 de criaturas)
- * são consultados diretamente do Cloud Firestore com cache em memória e cache local persistente
- * para proporcionar velocidade instantânea.
+ * SERVICO DE BANCO DE DADOS, CACHE PERSISTENTE DA API E SINCRONIZACAO (CLOUD FIRESTORE REST)
+ *
+ * Fluxo de operacao:
+ * 1. Primeira interacao: consulta obrigatoriamente a API Cloud Firestore, exibe os dados reais,
+ *    grava os indices e baixa em segundo plano o acervo completo para o cache local persistente
+ *    (Navegador IndexedDB/localStorage, Android Nativo e React Native AsyncStorage).
+ * 2. Aberturas posteriores: exibe instantaneamente os dados do cache previamente baixado da API
+ *    (~0-5ms) e revalida silenciosamente em background com o Firestore (Stale-While-Revalidate).
+ * 3. Contingencia estrita: o fallback estatico embutido (FALLBACK_INDEXES) so e acionado em
+ *    ultimo caso absoluto (dispositivo sem internet na primeira abertura sem cache da API) e
+ *    jamais sobrescreve o cache persistente.
  */
 
 import { DATABASE_CONFIG } from "./firebaseConfig.js";
 import { sanitizeFilename } from "../utils/helpers.js";
 import { FALLBACK_INDEXES } from "../data/fallbackData.js";
+import {
+    configurePersistentStorageAdapter,
+    readCachedApiIndex,
+    writeCachedApiIndex,
+    readCachedApiDocument,
+    writeCachedApiDocument,
+    writeCachedApiDocumentsBatch,
+    removeCachedApiDocument,
+    readHydrationMeta,
+    writeHydrationMeta
+} from "./cacheStore.js";
+
+export { configurePersistentStorageAdapter };
 
 export const COLLECTIONS = {
     CREATURES: "creatures",
@@ -27,10 +47,43 @@ const PROJECT_ID = DATABASE_CONFIG.projectId || "wwcatalog-10546";
 const FIRESTORE_BASE_URL = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents`;
 const FIRESTORE_COMMIT_URL = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents:commit`;
 
-// Cache em memória para documentos individuais já abertos
+// Cache em memoria ativa da sessao atual
 const itemMemoryCache = new Map();
-// Cache em memória dos índices leves por coleção
 const indexMemoryCache = new Map();
+
+// Deduplicacao de requisicoes simultaneas
+const inflightIndexRequests = new Map();
+const inflightRevalidations = new Map();
+const inflightDocRequests = new Map();
+let warmupPromise = null;
+
+// Inscritos para atualizacoes reativas vindas da revalidacao em segundo plano
+const catalogUpdateListeners = new Set();
+
+export function subscribeToCatalogUpdates(listener) {
+    if (typeof listener !== "function") return () => {};
+    catalogUpdateListeners.add(listener);
+    return () => {
+        catalogUpdateListeners.delete(listener);
+    };
+}
+
+function notifyCatalogListeners(payload) {
+    for (const listener of catalogUpdateListeners) {
+        try {
+            listener(payload);
+        } catch {
+            // Evita interromper outros inscritos
+        }
+    }
+    if (typeof document !== "undefined" && typeof CustomEvent !== "undefined") {
+        try {
+            document.dispatchEvent(new CustomEvent("ww-catalog-updated", { detail: payload }));
+        } catch {
+            // Ignora em ambientes nativos sem DOM
+        }
+    }
+}
 
 /**
  * Converte valores JavaScript para o formato REST do Firestore
@@ -111,9 +164,13 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = 6000) {
     }
 }
 
-async function firestoreGetDoc(collectionPath, docId) {
+async function firestoreGetDoc(collectionPath, docId, timeoutMs = 6000) {
     try {
-        const res = await fetchWithTimeout(`${FIRESTORE_BASE_URL}/${collectionPath}/${encodeURIComponent(docId)}`);
+        const res = await fetchWithTimeout(
+            `${FIRESTORE_BASE_URL}/${collectionPath}/${encodeURIComponent(docId)}`,
+            {},
+            timeoutMs
+        );
         if (!res.ok) return null;
         const json = await res.json();
         return fromFirestoreDoc(json);
@@ -122,26 +179,46 @@ async function firestoreGetDoc(collectionPath, docId) {
     }
 }
 
-async function firestoreListCollection(collectionPath) {
+async function firestoreListCollection(collectionPath, options = {}) {
+    const pageSize = options.pageSize || (collectionPath === COLLECTIONS.CREATURES ? 25 : 250);
+    const timeoutMs = options.timeoutMs || 18000;
+    const onPage = typeof options.onPage === "function" ? options.onPage : null;
+
     const docs = [];
     let pageToken = "";
+    let completed = false;
+
     try {
         do {
-            const url = `${FIRESTORE_BASE_URL}/${collectionPath}?pageSize=300${pageToken ? `&pageToken=${encodeURIComponent(pageToken)}` : ""}`;
-            const res = await fetchWithTimeout(url, {}, 10000);
-            if (!res.ok) break;
+            const url = `${FIRESTORE_BASE_URL}/${collectionPath}?pageSize=${pageSize}${pageToken ? `&pageToken=${encodeURIComponent(pageToken)}` : ""}`;
+            const res = await fetchWithTimeout(url, {}, timeoutMs);
+            if (!res.ok) {
+                completed = false;
+                break;
+            }
             const json = await res.json();
             const list = json.documents || [];
+            const pageDocs = [];
             for (const docJson of list) {
                 const parsed = fromFirestoreDoc(docJson);
-                if (parsed) docs.push(parsed);
+                if (parsed) {
+                    docs.push(parsed);
+                    pageDocs.push(parsed);
+                }
+            }
+            if (onPage && pageDocs.length > 0) {
+                await onPage(pageDocs);
             }
             pageToken = json.nextPageToken || "";
+            if (!pageToken) {
+                completed = true;
+            }
         } while (pageToken);
     } catch {
-        // Retorna o que foi coletado
+        completed = false;
     }
-    return docs;
+
+    return { docs, completed };
 }
 
 async function firestoreSetDoc(collectionPath, docId, dataObj) {
@@ -291,61 +368,17 @@ function extractPlantCd(peculiaridades = "") {
     return m ? Number(m[1]) : 12;
 }
 
-// Auxiliares de cache local no navegador para aceleração máxima
-function getLocalCacheIndex(collectionName) {
-    try {
-        const raw = localStorage.getItem(`ww_idx_${collectionName}`);
-        if (!raw) return null;
-        const parsed = JSON.parse(raw);
-        return Array.isArray(parsed) ? parsed : null;
-    } catch {
-        return null;
-    }
-}
-
-function setLocalCacheIndex(collectionName, list) {
-    try {
-        localStorage.setItem(`ww_idx_${collectionName}`, JSON.stringify(list));
-    } catch {
-        // quota excedida ou inacessível
-    }
-}
-
-function getLocalCacheItem(collectionName, id) {
-    try {
-        const raw = sessionStorage.getItem(`ww_doc_${collectionName}_${id}`);
-        if (!raw) return null;
-        return JSON.parse(raw);
-    } catch {
-        return null;
-    }
-}
-
-function setLocalCacheItem(collectionName, id, data) {
-    try {
-        sessionStorage.setItem(`ww_doc_${collectionName}_${id}`, JSON.stringify(data));
-    } catch {
-        // quota excedida ou inacessível
-    }
-}
-
 /**
- * 1. CARREGAMENTO RÁPIDO DO ÍNDICE DA COLEÇÃO NO FIRESTORE (Tier 1)
- * Prioridade obrigatória: Cloud Firestore REST é a fonte primária de verdade.
- * Fallbacks (cache local e fallback embutido) são estritamente último recurso (offline).
+ * Consulta o indice diretamente na API Cloud Firestore (Tier 1)
  */
-export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
-    // 1.1 Cache em memória ativa na mesma sessão
-    if (!forceRefresh && indexMemoryCache.has(collectionName)) {
-        return indexMemoryCache.get(collectionName);
-    }
-
+async function fetchIndexDirectlyFromApi(collectionName) {
     const summaryMap = new Map();
+    let remoteUpdatedAt = "";
 
-    // 1.2 TENTATIVA PRIMÁRIA OBRIGATÓRIA: Cloud Firestore REST API
     try {
         const remoteIdx = await firestoreGetDoc("_indexes", collectionName);
         if (remoteIdx && Array.isArray(remoteIdx.items) && remoteIdx.items.length > 0) {
+            remoteUpdatedAt = remoteIdx.updatedAt || "";
             const remoteDeleted = new Set(remoteIdx.deletedIds || []);
             for (const entry of remoteIdx.items) {
                 const summary = buildSummaryEntry(collectionName, entry);
@@ -354,87 +387,243 @@ export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
                 }
             }
         } else {
-            // Fallback remoto: se o índice pré-compilado não existir, lista a coleção direta do Firestore
-            const docs = await firestoreListCollection(collectionName);
+            const { docs, completed } = await firestoreListCollection(collectionName, {
+                onPage: async pageDocs => {
+                    const normalized = pageDocs.map(doc => {
+                        const id = buildItemId(collectionName, doc);
+                        const fullDoc = { id, ...doc };
+                        itemMemoryCache.set(`${collectionName}:${id}`, fullDoc);
+                        return fullDoc;
+                    });
+                    await writeCachedApiDocumentsBatch(collectionName, normalized);
+                }
+            });
+
             for (const doc of docs) {
                 const summary = buildSummaryEntry(collectionName, doc);
                 summaryMap.set(summary.id, summary);
-                itemMemoryCache.set(`${collectionName}:${summary.id}`, doc);
             }
+
             if (summaryMap.size > 0) {
-                await syncCollectionIndex(collectionName, Array.from(summaryMap.values())).catch(() => {});
+                remoteUpdatedAt = new Date().toISOString();
+                await syncCollectionIndex(collectionName, Array.from(summaryMap.values()), [], remoteUpdatedAt).catch(() => {});
+                if (completed) {
+                    await writeHydrationMeta(collectionName, {
+                        hydrated: true,
+                        count: summaryMap.size,
+                        remoteUpdatedAt,
+                        hydratedAt: Date.now()
+                    });
+                }
             }
         }
     } catch (err) {
-        console.warn(`[Catalog] Conexão com Firestore falhou para ${collectionName}:`, err);
+        console.warn(`[Catalog] Conexao com Firestore falhou para ${collectionName}:`, err);
     }
 
-    // Se o Firestore respondeu com dados reais, atualiza os caches e retorna
-    if (summaryMap.size > 0) {
-        const resultList = Array.from(summaryMap.values());
-        indexMemoryCache.set(collectionName, resultList);
-        setLocalCacheIndex(collectionName, resultList);
-        return resultList;
+    if (summaryMap.size === 0) {
+        return null;
     }
 
-    // 1.3 SEGUNDO RECURSO: Cache local persistente previamente salvo de conexões reais com o Firestore
-    const localCached = getLocalCacheIndex(collectionName);
-    if (localCached && Array.isArray(localCached) && localCached.length > 0) {
-        console.warn(`[Catalog] Firestore indisponível. Utilizando cache persistente para ${collectionName}.`);
-        indexMemoryCache.set(collectionName, localCached);
-        return localCached;
-    }
-
-    // 1.4 ÚLTIMO CASO ESTRITO (EMERGÊNCIA/OFFLINE TOTAL): Fallback local embutido
-    if (FALLBACK_INDEXES && Array.isArray(FALLBACK_INDEXES[collectionName]) && FALLBACK_INDEXES[collectionName].length > 0) {
-        console.warn(`[Catalog] AVISO: Firestore e cache local indisponíveis. Recorrendo ao fallback estático de emergência para ${collectionName}.`);
-        const defaultList = FALLBACK_INDEXES[collectionName].map(item => buildSummaryEntry(collectionName, item));
-        indexMemoryCache.set(collectionName, defaultList);
-        return defaultList;
-    }
-
-    return [];
+    return {
+        items: Array.from(summaryMap.values()),
+        remoteUpdatedAt
+    };
 }
 
 /**
- * 2. CARREGAMENTO INDIVIDUAL DE ITEM SOB DEMANDA NO FIRESTORE (Tier 2)
- * Prioridade obrigatória: Cloud Firestore REST é consultado primeiro.
+ * Revalida silenciosamente o indice em background contra a API Cloud Firestore
+ * e notifica a UI caso existam novos dados na nuvem.
  */
-export async function fetchItemById(collectionName, id) {
-    if (!id) return null;
-    const cacheKey = `${collectionName}:${id}`;
-
-    // 2.1 Cache em memória para acesso repetido na mesma sessão
-    if (itemMemoryCache.has(cacheKey)) {
-        return itemMemoryCache.get(cacheKey);
+async function revalidateIndexFromApi(collectionName, cachedApiIndex) {
+    if (inflightRevalidations.has(collectionName)) {
+        return inflightRevalidations.get(collectionName);
     }
 
-    // 2.2 TENTATIVA PRIMÁRIA: Busca documento individual diretamente no Cloud Firestore
+    const promise = (async () => {
+        const apiResult = await fetchIndexDirectlyFromApi(collectionName);
+        if (!apiResult || apiResult.items.length === 0) return;
+
+        const prevItemsJson = JSON.stringify(cachedApiIndex?.items || []);
+        const nextItemsJson = JSON.stringify(apiResult.items);
+        const hasChanged = prevItemsJson !== nextItemsJson ||
+            Boolean(apiResult.remoteUpdatedAt && apiResult.remoteUpdatedAt !== cachedApiIndex?.remoteUpdatedAt);
+
+        indexMemoryCache.set(collectionName, apiResult.items);
+        await writeCachedApiIndex(collectionName, apiResult.items, apiResult.remoteUpdatedAt);
+
+        if (hasChanged) {
+            notifyCatalogListeners({
+                type: "index",
+                collection: collectionName,
+                items: apiResult.items,
+                remoteUpdatedAt: apiResult.remoteUpdatedAt
+            });
+            hydrateSingleCollectionDocuments(
+                collectionName,
+                apiResult.remoteUpdatedAt,
+                apiResult.items.length,
+                true
+            ).catch(() => {});
+        }
+    })();
+
+    inflightRevalidations.set(collectionName, promise);
+    try {
+        await promise;
+    } finally {
+        inflightRevalidations.delete(collectionName);
+    }
+}
+
+/**
+ * Revalida silenciosamente um documento individual aberto em background
+ */
+async function revalidateDocumentFromApi(collectionName, id, previousData) {
     const remoteDoc = await firestoreGetDoc(collectionName, id);
-    if (remoteDoc) {
-        const data = { id, ...remoteDoc };
-        itemMemoryCache.set(cacheKey, data);
-        setLocalCacheItem(collectionName, id, data);
-        return data;
+    if (!remoteDoc) return;
+
+    const freshData = { id, ...remoteDoc };
+    const cacheKey = `${collectionName}:${id}`;
+    itemMemoryCache.set(cacheKey, freshData);
+    await writeCachedApiDocument(collectionName, id, freshData);
+
+    if (JSON.stringify(previousData) !== JSON.stringify(freshData)) {
+        notifyCatalogListeners({
+            type: "document",
+            collection: collectionName,
+            id,
+            data: freshData
+        });
+    }
+}
+
+/**
+ * 1. CARREGAMENTO DO INDICE DA COLECAO (Tier 1)
+ * - 1a interacao (sem cache da API): baixa diretamente da API Cloud Firestore e salva no cache local.
+ * - Aberturas posteriores: retorna o cache da API instantaneamente (~0-5ms) e revalida em segundo plano.
+ * - Fallback estatico: usado exclusivamente em ultimo caso se dispositivo estiver offline e sem cache da API.
+ */
+export async function fetchCatalogIndex(collectionName, forceRefresh = false) {
+    // 1.1 Cache em memoria ativa na mesma sessao
+    if (!forceRefresh && indexMemoryCache.has(collectionName)) {
+        return indexMemoryCache.get(collectionName);
     }
 
-    // 2.3 SEGUNDO RECURSO: Cache persistente em sessionStorage
-    const sessionCached = getLocalCacheItem(collectionName, id);
-    if (sessionCached) {
-        itemMemoryCache.set(cacheKey, sessionCached);
-        return sessionCached;
-    }
-
-    // 2.4 ÚLTIMO CASO ESTRITO: Fallback estático embutido se Firestore falhou e item não está em cache
-    if (FALLBACK_INDEXES && Array.isArray(FALLBACK_INDEXES[collectionName])) {
-        const fallbackItem = FALLBACK_INDEXES[collectionName].find(item => item.id === id);
-        if (fallbackItem) {
-            console.warn(`[Catalog] AVISO: Firestore offline. Detalhe de ${id} obtido via fallback estático de emergência.`);
-            return { ...fallbackItem };
+    // 1.2 Aberturas posteriores: exibe instantaneamente o cache baixado anteriormente da API
+    if (!forceRefresh) {
+        const cachedApiIndex = await readCachedApiIndex(collectionName);
+        if (cachedApiIndex && Array.isArray(cachedApiIndex.items) && cachedApiIndex.items.length > 0) {
+            indexMemoryCache.set(collectionName, cachedApiIndex.items);
+            revalidateIndexFromApi(collectionName, cachedApiIndex).catch(() => {});
+            return cachedApiIndex.items;
         }
     }
 
-    return null;
+    // 1.3 Primeira interacao (ou refresh forcado): requisita diretamente da API Cloud Firestore
+    if (inflightIndexRequests.has(collectionName)) {
+        return inflightIndexRequests.get(collectionName);
+    }
+
+    const requestPromise = (async () => {
+        const apiResult = await fetchIndexDirectlyFromApi(collectionName);
+        if (apiResult && apiResult.items.length > 0) {
+            indexMemoryCache.set(collectionName, apiResult.items);
+            await writeCachedApiIndex(collectionName, apiResult.items, apiResult.remoteUpdatedAt);
+            return apiResult.items;
+        }
+
+        // 1.4 Se um refresh forcado falhar por queda de rede, preserva o cache anterior da API
+        const previousApiCache = await readCachedApiIndex(collectionName);
+        if (previousApiCache && Array.isArray(previousApiCache.items) && previousApiCache.items.length > 0) {
+            console.warn(`[Catalog] Firestore indisponivel no momento. Utilizando cache persistente da API para ${collectionName}.`);
+            indexMemoryCache.set(collectionName, previousApiCache.items);
+            return previousApiCache.items;
+        }
+
+        // 1.5 ULTIMO CASO ESTRITO (EMERGENCIA OFFLINE): Fallback estatico embutido (jamais gravado no cache!)
+        if (FALLBACK_INDEXES && Array.isArray(FALLBACK_INDEXES[collectionName]) && FALLBACK_INDEXES[collectionName].length > 0) {
+            console.warn(`[Catalog] AVISO: Firestore e cache da API indisponiveis. Recorrendo ao fallback estatico de emergencia para ${collectionName}.`);
+            return FALLBACK_INDEXES[collectionName].map(item => buildSummaryEntry(collectionName, item));
+        }
+
+        return [];
+    })();
+
+    inflightIndexRequests.set(collectionName, requestPromise);
+    try {
+        return await requestPromise;
+    } finally {
+        inflightIndexRequests.delete(collectionName);
+    }
+}
+
+/**
+ * 2. CARREGAMENTO INDIVIDUAL DE ITEM SOB DEMANDA (Tier 2)
+ * - Se ja baixado da API no cache persistente, exibe instantaneamente (~1-5ms) e revalida se necessario.
+ * - Caso contrario, baixa da API Cloud Firestore e persiste localmente para os proximos acessos.
+ */
+export async function fetchItemById(collectionName, id, forceRefresh = false) {
+    if (!id) return null;
+    const cacheKey = `${collectionName}:${id}`;
+
+    // 2.1 Cache em memoria da sessao ativa
+    if (!forceRefresh && itemMemoryCache.has(cacheKey)) {
+        return itemMemoryCache.get(cacheKey);
+    }
+
+    // 2.2 Cache persistente previamente baixado da API (IndexedDB / Android Nativo / AsyncStorage)
+    if (!forceRefresh) {
+        const cachedRecord = await readCachedApiDocument(collectionName, id);
+        if (cachedRecord && cachedRecord.data) {
+            itemMemoryCache.set(cacheKey, cachedRecord.data);
+            const ageMs = Date.now() - (cachedRecord.savedAt || 0);
+            if (ageMs > 5 * 60 * 1000) {
+                revalidateDocumentFromApi(collectionName, id, cachedRecord.data).catch(() => {});
+            }
+            return cachedRecord.data;
+        }
+    }
+
+    // 2.3 Deduplicacao de requisicao individual para a API Cloud Firestore
+    if (inflightDocRequests.has(cacheKey)) {
+        return inflightDocRequests.get(cacheKey);
+    }
+
+    const docPromise = (async () => {
+        const remoteDoc = await firestoreGetDoc(collectionName, id);
+        if (remoteDoc) {
+            const data = { id, ...remoteDoc };
+            itemMemoryCache.set(cacheKey, data);
+            await writeCachedApiDocument(collectionName, id, data);
+            return data;
+        }
+
+        // 2.4 Contingencia com cache da API caso um forceRefresh tenha falhado offline
+        const cachedRecord = await readCachedApiDocument(collectionName, id);
+        if (cachedRecord && cachedRecord.data) {
+            itemMemoryCache.set(cacheKey, cachedRecord.data);
+            return cachedRecord.data;
+        }
+
+        // 2.5 ULTIMO CASO ESTRITO: Fallback estatico embutido (sem persistir no cache)
+        if (FALLBACK_INDEXES && Array.isArray(FALLBACK_INDEXES[collectionName])) {
+            const fallbackItem = FALLBACK_INDEXES[collectionName].find(item => item.id === id);
+            if (fallbackItem) {
+                console.warn(`[Catalog] AVISO: Firestore e cache da API indisponiveis. Detalhe de ${id} obtido via fallback de emergencia.`);
+                return { ...fallbackItem };
+            }
+        }
+
+        return null;
+    })();
+
+    inflightDocRequests.set(cacheKey, docPromise);
+    try {
+        return await docPromise;
+    } finally {
+        inflightDocRequests.delete(cacheKey);
+    }
 }
 
 export async function fetchItemsByIds(collectionName, ids = []) {
@@ -443,31 +632,134 @@ export async function fetchItemsByIds(collectionName, ids = []) {
     return results.filter(Boolean);
 }
 
-async function syncCollectionIndex(collectionName, currentSummaryList, deletedIds = []) {
-    await firestoreSetDoc("_indexes", collectionName, {
-        updatedAt: new Date().toISOString(),
+/**
+ * Baixa e armazena em cache persistente todos os documentos completos de uma colecao da API
+ */
+async function hydrateSingleCollectionDocuments(collectionName, expectedUpdatedAt = "", expectedCount = 0, force = false) {
+    if (!force) {
+        const meta = await readHydrationMeta(collectionName);
+        if (
+            meta &&
+            meta.hydrated === true &&
+            (!expectedCount || meta.count >= expectedCount) &&
+            (!expectedUpdatedAt || meta.remoteUpdatedAt === expectedUpdatedAt)
+        ) {
+            return { collection: collectionName, skipped: true, count: meta.count };
+        }
+    }
+
+    let downloadedCount = 0;
+    const { docs, completed } = await firestoreListCollection(collectionName, {
+        pageSize: collectionName === COLLECTIONS.CREATURES ? 25 : 250,
+        timeoutMs: 20000,
+        onPage: async pageDocs => {
+            const normalizedPage = pageDocs.map(doc => {
+                const id = buildItemId(collectionName, doc);
+                const fullDoc = { id, ...doc };
+                itemMemoryCache.set(`${collectionName}:${id}`, fullDoc);
+                return fullDoc;
+            });
+            downloadedCount += normalizedPage.length;
+            await writeCachedApiDocumentsBatch(collectionName, normalizedPage);
+        }
+    });
+
+    if (completed && docs.length > 0) {
+        await writeHydrationMeta(collectionName, {
+            hydrated: true,
+            count: docs.length,
+            remoteUpdatedAt: expectedUpdatedAt || "",
+            hydratedAt: Date.now()
+        });
+        notifyCatalogListeners({
+            type: "warmup",
+            collection: collectionName,
+            count: docs.length,
+            status: "completed"
+        });
+    }
+
+    return { collection: collectionName, skipped: false, count: downloadedCount, completed };
+}
+
+/**
+ * 2.6 PRE-CARREGAMENTO INTEGRAL EM SEGUNDO PLANO NA PRIMEIRA INTERACAO
+ * Garante que logo no primeiro uso (web ou mobile) todo o conteudo retornado pela API
+ * (indices + fichas completas + retratos Base64) seja salvo localmente sem travar a interface.
+ */
+export function warmUpFullApiCache(options = { force: false }) {
+    if (warmupPromise) return warmupPromise;
+
+    warmupPromise = (async () => {
+        // Cede prioridade aos quadros iniciais da interface (150ms)
+        await new Promise(resolve => setTimeout(resolve, 150));
+
+        const orderedCollections = [
+            COLLECTIONS.SPELLS,
+            COLLECTIONS.PLANTS,
+            COLLECTIONS.POTIONS,
+            COLLECTIONS.CREATURES
+        ];
+
+        for (const col of orderedCollections) {
+            try {
+                let cachedIdx = await readCachedApiIndex(col);
+                if (!cachedIdx || !Array.isArray(cachedIdx.items) || cachedIdx.items.length === 0) {
+                    const freshItems = await fetchCatalogIndex(col, true);
+                    if (!freshItems || freshItems.length === 0) continue;
+                    cachedIdx = await readCachedApiIndex(col);
+                }
+
+                if (cachedIdx && Array.isArray(cachedIdx.items) && cachedIdx.items.length > 0) {
+                    await hydrateSingleCollectionDocuments(
+                        col,
+                        cachedIdx.remoteUpdatedAt || "",
+                        cachedIdx.items.length,
+                        Boolean(options?.force)
+                    );
+                }
+            } catch (err) {
+                console.warn(`[Catalog] Aviso ao pre-cachear colecao ${col}:`, err);
+            }
+        }
+    })().finally(() => {
+        warmupPromise = null;
+    });
+
+    return warmupPromise;
+}
+
+async function syncCollectionIndex(collectionName, currentSummaryList, deletedIds = [], customUpdatedAt = "") {
+    const updatedAt = customUpdatedAt || new Date().toISOString();
+    const ok = await firestoreSetDoc("_indexes", collectionName, {
+        updatedAt,
         count: currentSummaryList.length,
         items: currentSummaryList,
         deletedIds
     });
+    if (ok) {
+        await writeCachedApiIndex(collectionName, currentSummaryList, updatedAt);
+    }
+    return ok;
 }
 
 /**
- * 3. SALVAR ITEM INDIVIDUAL NO FIRESTORE
+ * 3. SALVAR ITEM INDIVIDUAL NO FIRESTORE E ATUALIZAR CACHE PERSISTENTE
  */
 export async function saveRecord(collectionName, dataObject, prefix = "registro", options = { downloadBackup: false }) {
     const id = buildItemId(collectionName, dataObject, prefix);
+    const updatedAt = new Date().toISOString();
     const fullRecord = {
         ...dataObject,
         id,
-        updatedAt: new Date().toISOString()
+        updatedAt
     };
 
     const cacheKey = `${collectionName}:${id}`;
     itemMemoryCache.set(cacheKey, fullRecord);
-    setLocalCacheItem(collectionName, id, fullRecord);
+    await writeCachedApiDocument(collectionName, id, fullRecord);
 
-    const currentIndex = await fetchCatalogIndex(collectionName);
+    const currentIndex = [...(await fetchCatalogIndex(collectionName))];
     const newSummary = buildSummaryEntry(collectionName, fullRecord);
     const existingIdx = currentIndex.findIndex(item => item.id === id);
     if (existingIdx >= 0) {
@@ -475,13 +767,21 @@ export async function saveRecord(collectionName, dataObject, prefix = "registro"
     } else {
         currentIndex.push(newSummary);
     }
+
     indexMemoryCache.set(collectionName, currentIndex);
-    setLocalCacheIndex(collectionName, currentIndex);
+    await writeCachedApiIndex(collectionName, currentIndex, updatedAt);
 
     const savedToCloud = await firestoreSetDoc(collectionName, id, fullRecord);
     if (savedToCloud) {
-        await syncCollectionIndex(collectionName, currentIndex);
+        await syncCollectionIndex(collectionName, currentIndex, [], updatedAt);
     }
+
+    notifyCatalogListeners({
+        type: "index",
+        collection: collectionName,
+        items: currentIndex,
+        remoteUpdatedAt: updatedAt
+    });
 
     if (options.downloadBackup) {
         downloadJsonFile(fullRecord, `${id}.json`);
@@ -491,13 +791,14 @@ export async function saveRecord(collectionName, dataObject, prefix = "registro"
 }
 
 /**
- * 4. SALVAR LOTE DE ITENS EM MASSA NO FIRESTORE
+ * 4. SALVAR LOTE DE ITENS EM MASSA NO FIRESTORE E CACHE PERSISTENTE
  */
 export async function saveBulkRecords(collectionName, dataArray, prefix = "item", onProgress = null) {
     if (!Array.isArray(dataArray) || dataArray.length === 0) {
         throw new Error("A lista fornecida para importação em massa está vazia ou é inválida.");
     }
 
+    const updatedAt = new Date().toISOString();
     const currentIndex = await fetchCatalogIndex(collectionName);
     const indexMap = new Map(currentIndex.map(item => [item.id, item]));
     const normalizedRecords = [];
@@ -507,17 +808,18 @@ export async function saveBulkRecords(collectionName, dataArray, prefix = "item"
         const fullRecord = {
             ...rawItem,
             id,
-            updatedAt: new Date().toISOString()
+            updatedAt
         };
         normalizedRecords.push(fullRecord);
         itemMemoryCache.set(`${collectionName}:${id}`, fullRecord);
-        setLocalCacheItem(collectionName, id, fullRecord);
         indexMap.set(id, buildSummaryEntry(collectionName, fullRecord));
     }
 
+    await writeCachedApiDocumentsBatch(collectionName, normalizedRecords);
+
     const updatedIndexList = Array.from(indexMap.values());
     indexMemoryCache.set(collectionName, updatedIndexList);
-    setLocalCacheIndex(collectionName, updatedIndexList);
+    await writeCachedApiIndex(collectionName, updatedIndexList, updatedAt);
 
     let savedToCloud = true;
     const CHUNK_SIZE = 20;
@@ -531,8 +833,15 @@ export async function saveBulkRecords(collectionName, dataArray, prefix = "item"
     }
 
     if (savedToCloud) {
-        await syncCollectionIndex(collectionName, updatedIndexList);
+        await syncCollectionIndex(collectionName, updatedIndexList, [], updatedAt);
     }
+
+    notifyCatalogListeners({
+        type: "index",
+        collection: collectionName,
+        items: updatedIndexList,
+        remoteUpdatedAt: updatedAt
+    });
 
     return {
         count: normalizedRecords.length,
@@ -541,24 +850,30 @@ export async function saveBulkRecords(collectionName, dataArray, prefix = "item"
 }
 
 /**
- * 5. REMOVER ITEM INDIVIDUAL DO FIRESTORE
+ * 5. REMOVER ITEM INDIVIDUAL DO FIRESTORE E DO CACHE PERSISTENTE
  */
 export async function deleteRecord(collectionName, id) {
     if (!id) return false;
+    const updatedAt = new Date().toISOString();
+
     itemMemoryCache.delete(`${collectionName}:${id}`);
-    try {
-        sessionStorage.removeItem(`ww_doc_${collectionName}_${id}`);
-    } catch {
-        // Ignora
-    }
+    await removeCachedApiDocument(collectionName, id);
 
     const currentIndex = await fetchCatalogIndex(collectionName);
     const filteredIndex = currentIndex.filter(item => item.id !== id);
     indexMemoryCache.set(collectionName, filteredIndex);
-    setLocalCacheIndex(collectionName, filteredIndex);
+    await writeCachedApiIndex(collectionName, filteredIndex, updatedAt);
 
     await firestoreDeleteDoc(collectionName, id);
-    await syncCollectionIndex(collectionName, filteredIndex);
+    await syncCollectionIndex(collectionName, filteredIndex, [id], updatedAt);
+
+    notifyCatalogListeners({
+        type: "index",
+        collection: collectionName,
+        items: filteredIndex,
+        remoteUpdatedAt: updatedAt
+    });
+
     return true;
 }
 

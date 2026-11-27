@@ -1,6 +1,6 @@
 {
   "name": "wwcatalog",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Arquivo Geral do Ministério da Magia — W&W RPG Catalog (React & React Native)",
   "scripts": {
     "dev:web": "npm --prefix web run dev",

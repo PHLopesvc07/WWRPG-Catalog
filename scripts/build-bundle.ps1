@@ -15,6 +15,7 @@ $helpers = Get-Content (Join-Path $rootDir "js\utils\helpers.js") -Raw -Encoding
 $updater = Get-Content (Join-Path $rootDir "js\services\updater.js") -Raw -Encoding UTF8
 $firebaseConfig = Get-Content (Join-Path $rootDir "js\services\firebaseConfig.js") -Raw -Encoding UTF8
 $fallbackData = Get-Content (Join-Path $rootDir "js\data\fallbackData.js") -Raw -Encoding UTF8
+$cacheStore = Get-Content (Join-Path $rootDir "js\services\cacheStore.js") -Raw -Encoding UTF8
 $database = Get-Content (Join-Path $rootDir "js\services\database.js") -Raw -Encoding UTF8
 $tabCtrl = Get-Content (Join-Path $rootDir "js\controllers\TabController.js") -Raw -Encoding UTF8
 $creatureCtrl = Get-Content (Join-Path $rootDir "js\controllers\CreatureController.js") -Raw -Encoding UTF8
@@ -26,12 +27,13 @@ $main = Get-Content (Join-Path $rootDir "js\main.js") -Raw -Encoding UTF8
 $desktopBundle = @"
 (function() {
     'use strict';
-    console.log('[W&W Catalog] Inicializando Catálogo Ministerial (Standalone Bundle)...');
+    console.log('[W&W Catalog] Inicializando Catalogo Ministerial (Standalone Bundle)...');
 
     $(Strip-ModuleSyntax $helpers)
     $(Strip-ModuleSyntax $updater)
     $(Strip-ModuleSyntax $firebaseConfig)
     $(Strip-ModuleSyntax $fallbackData)
+    $(Strip-ModuleSyntax $cacheStore)
     $(Strip-ModuleSyntax $database)
     $(Strip-ModuleSyntax $tabCtrl)
     $(Strip-ModuleSyntax $creatureCtrl)
@@ -51,12 +53,13 @@ $mobileMain = Get-Content (Join-Path $rootDir "mobile\mobile.js") -Raw -Encoding
 $mobileBundle = @"
 (function() {
     'use strict';
-    console.log('[W&W Catalog Mobile] Inicializando Versão Móvel (Standalone Bundle)...');
+    console.log('[W&W Catalog Mobile] Inicializando Versao Movel (Standalone Bundle)...');
 
     $(Strip-ModuleSyntax $helpers)
     $(Strip-ModuleSyntax $updater)
     $(Strip-ModuleSyntax $firebaseConfig)
     $(Strip-ModuleSyntax $fallbackData)
+    $(Strip-ModuleSyntax $cacheStore)
     $(Strip-ModuleSyntax $database)
     $(Strip-ModuleSyntax $mobileMain)
 })();
@@ -65,8 +68,14 @@ $mobileBundle = @"
 Set-Content -Path (Join-Path $rootDir "mobile\mobile.bundle.js") -Value $mobileBundle -Encoding UTF8
 Set-Content -Path (Join-Path $rootDir "android-app\app\src\main\assets\mobile\mobile.bundle.js") -Value $mobileBundle -Encoding UTF8
 
-# Sincroniza arquivos compartilhados para os assets do Android
+# Sincroniza arquivos compartilhados e servicos para os assets do Android
+Copy-Item -Path (Join-Path $rootDir "shared\services\cacheStore.js") -Destination (Join-Path $rootDir "android-app\app\src\main\assets\shared\services\cacheStore.js") -Force
 Copy-Item -Path (Join-Path $rootDir "shared\services\database.js") -Destination (Join-Path $rootDir "android-app\app\src\main\assets\shared\services\database.js") -Force
+Copy-Item -Path (Join-Path $rootDir "shared\services\updater.js") -Destination (Join-Path $rootDir "android-app\app\src\main\assets\shared\services\updater.js") -Force
+Copy-Item -Path (Join-Path $rootDir "js\services\cacheStore.js") -Destination (Join-Path $rootDir "android-app\app\src\main\assets\js\services\cacheStore.js") -Force
 Copy-Item -Path (Join-Path $rootDir "js\services\database.js") -Destination (Join-Path $rootDir "android-app\app\src\main\assets\js\services\database.js") -Force
+Copy-Item -Path (Join-Path $rootDir "js\services\updater.js") -Destination (Join-Path $rootDir "android-app\app\src\main\assets\js\services\updater.js") -Force
+Copy-Item -Path (Join-Path $rootDir "js\main.js") -Destination (Join-Path $rootDir "android-app\app\src\main\assets\js\main.js") -Force
+Copy-Item -Path (Join-Path $rootDir "mobile\mobile.js") -Destination (Join-Path $rootDir "android-app\app\src\main\assets\mobile\mobile.js") -Force
 
 Write-Host "[Bundle] Todos os bundles gerados e sincronizados com sucesso!"

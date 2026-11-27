@@ -18,13 +18,19 @@ import SpellsScreen from './screens/SpellsScreen';
 import PlantsScreen from './screens/PlantsScreen';
 import PotionsScreen from './screens/PotionsScreen';
 
-// Módulos de dados compartilhados com resiliência offline e Firestore REST
+// Módulos de dados compartilhados com cache persistente da API e Firestore REST
 import {
   COLLECTIONS,
   fetchCatalogIndex,
-  fetchItemById
+  fetchItemById,
+  subscribeToCatalogUpdates,
+  warmUpFullApiCache
 } from '../../shared/services/database.js';
 import { checkForAppUpdates, CURRENT_APP_VERSION } from '../../shared/services/updater.js';
+import { initMobilePersistentCache } from './services/nativeCacheAdapter';
+
+// Registra o adaptador AsyncStorage antes da primeira leitura
+initMobilePersistentCache();
 
 function MainApp() {
   const { theme, mode, toggleTheme } = useTheme();
@@ -45,7 +51,7 @@ function MainApp() {
   // Banner de Atualizações
   const [updateInfo, setUpdateInfo] = useState(null);
 
-  // Carrega catálogos na inicialização
+  // Carrega catálogos na inicialização (instantâneo via cache da API em aberturas posteriores)
   const loadData = useCallback(async () => {
     try {
       const [cr, sp, pl, po] = await Promise.all([
@@ -58,6 +64,9 @@ function MainApp() {
       setSpells(sp);
       setPlants(pl);
       setPotions(po);
+
+      // Na primeira interação (ou quando houver novos registros), baixa e cacheia o acervo completo em background
+      warmUpFullApiCache();
     } catch (e) {
       console.warn('[RN App] Erro ao carregar dados:', e);
     } finally {
@@ -68,12 +77,26 @@ function MainApp() {
   useEffect(() => {
     loadData();
 
+    // Inscreve para atualizações silenciosas vindas da revalidação com a API Firestore
+    const unsubscribe = subscribeToCatalogUpdates(evt => {
+      if (evt.type === 'index' && Array.isArray(evt.items)) {
+        if (evt.collection === COLLECTIONS.CREATURES) setCreatures(evt.items);
+        else if (evt.collection === COLLECTIONS.SPELLS) setSpells(evt.items);
+        else if (evt.collection === COLLECTIONS.PLANTS) setPlants(evt.items);
+        else if (evt.collection === COLLECTIONS.POTIONS) setPotions(evt.items);
+      } else if (evt.type === 'document' && evt.data) {
+        setSelectedDetail(prev => (prev && prev.id === evt.id ? evt.data : prev));
+      }
+    });
+
     // Checa updates no GitHub releases
     checkForAppUpdates(CURRENT_APP_VERSION).then(info => {
       if (info?.hasUpdate) {
         setUpdateInfo(info);
       }
     });
+
+    return () => unsubscribe();
   }, [loadData]);
 
   // Ao tocar em um item, consulta a ficha detalhada individual
